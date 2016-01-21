@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2245405804">
+    <data-source source="LOCAL" name="PostgreSQL - qna_thinknetica_development@localhost" uuid="4caa8ba9-c75d-4331-b320-4d3fa0975acf">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/qna_thinknetica_development</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - qna_thinknetica_test@localhost" uuid="6e45c607-c060-46b2-b1dc-aa8cced80cb2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/qna_thinknetica_test</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
