@@ -1,0 +1,40 @@
+AllCops:
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'lib/**/*.rake'
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'db/*.rb'
+    - 'bin/**/*'
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  StyleGuideCopsOnly: true
+  TargetRubyVersion: 2.2
+
+Style/Documentation:
+  Exclude:
+    - 'lib/**/version.rb'
+
+Style/Encoding:
+  EnforcedStyle: always
+  SupportedStyles:
+    - when_needed
+    - always
+  AutoCorrectEncodingComment: '# encoding: utf-8'
+
+Metrics/LineLength:
+  Max: 120
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+
+Metrics/MethodLength:
+  Max: 15
+
+Rails:
+  Enabled: true
