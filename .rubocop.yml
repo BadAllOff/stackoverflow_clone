@@ -25,6 +25,9 @@ Style/Encoding:
     - always
   AutoCorrectEncodingComment: '# encoding: utf-8'
 
+Style/NumericLiterals:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 120
   AllowHeredoc: true
