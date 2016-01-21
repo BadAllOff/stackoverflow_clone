@@ -1,4 +1,4 @@
 class Question < ActiveRecord::Base
   has_many :answers
-  validates_presence_of :title, :body
+  validates :title, :body, presence: true
 end
