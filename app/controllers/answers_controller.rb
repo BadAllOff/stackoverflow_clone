@@ -4,6 +4,11 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.create(answer_params)
+    if @answer.errors.any?
+      flash[:error] = 'Answer not created'
+    else
+      flash[:success] = 'Answer successfully created'
+    end
     redirect_to question_path(@question)
   end
 

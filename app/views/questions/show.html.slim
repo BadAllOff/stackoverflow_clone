@@ -4,3 +4,7 @@
   hr.colorgraph
   p
     = @question.body
+  p
+    = render partial: 'answers/form', locals: {question: @question}
+  .answers
+    = render partial: 'answers/answers', locals: {question: @question}

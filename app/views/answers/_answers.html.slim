@@ -1,0 +1,8 @@
+- if !@question.answers.nil?
+  - @question.answers.each do |answer|
+    - if !answer.body.blank?
+      .media
+        .media-left
+          = icon('comment-o')
+        .media-body
+          =answer.body

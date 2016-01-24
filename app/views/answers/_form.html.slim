@@ -1,0 +1,6 @@
+= form_for [question, @answer] do |f|
+  .form-group
+    = f.label :body, 'Write your answer'
+    .answer-errors.text-danger
+    = f.text_area :body, class: 'form-control answer_body'
+  =f.submit 'Create answer', class: 'btn btn-default'
