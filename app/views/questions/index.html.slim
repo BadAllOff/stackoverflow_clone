@@ -1,11 +1,15 @@
 h1
   | This is Question index page
+hr.colorgraph
 .row
+  = link_to 'Ask Question', new_question_path, class: 'btn btn-large btn-default'
   - if @questions
      - @questions.each do |question|
       .media
         .media-left
           = icon('question', class: 'fa-3x')
+          =link_to question_path(question), method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: "Are you sure?"} do
+            = icon('trash')
         .media-body
           h4.media-heading
             =link_to question_path question

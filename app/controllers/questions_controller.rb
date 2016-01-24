@@ -20,22 +20,27 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
+      flash[:success] = 'Question successfully created'
       redirect_to @question
     else
+      flash[:error] = 'Question not created'
       render :new
     end
   end
 
   def update
     if @question.update(question_params)
+      flash[:success] = 'Question successfully updated'
       redirect_to @question
     else
+      flash[:error] = 'Question not updated'
       render :edit
     end
   end
 
   def destroy
     @question.destroy
+    flash[:success] = 'Question successfully deleted'
     redirect_to questions_path
   end
 
