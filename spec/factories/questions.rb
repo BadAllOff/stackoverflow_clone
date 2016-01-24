@@ -1,7 +1,12 @@
 FactoryGirl.define do
   factory :question do
-    title "This is Question title"
-    body "This is Question body"
+    title 'This is Question title'
+    body 'This is Question body'
+  end
+
+  factory :invalid_question, class: 'Question' do
+    title nil
+    body nil
   end
 
 end

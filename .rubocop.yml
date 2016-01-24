@@ -4,10 +4,10 @@ AllCops:
     - 'config/**/*.rb'
     - 'lib/**/*.rb'
     - 'lib/**/*.rake'
-  Exclude:
-    - 'vendor/**/*'
     - 'spec/**/*'
     - 'db/*.rb'
+  Exclude:
+    - 'vendor/**/*'
     - 'bin/**/*'
   DisplayCopNames: true
   DisplayStyleGuide: true
@@ -26,6 +26,11 @@ Style/Encoding:
   AutoCorrectEncodingComment: '# encoding: utf-8'
 
 Style/NumericLiterals:
+  Enabled: false
+
+Style/BlockComments:
+  Description: 'Do not use block comments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-block-comments'
   Enabled: false
 
 Metrics/LineLength:
