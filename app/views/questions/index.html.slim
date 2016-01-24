@@ -1,5 +1,13 @@
 h1
   | This is Question index page
-= icon('flag', class: 'strong fa-4x')
-'
-= icon "camera-retro fa-3x", text: "Take a photo"
+.row
+  - if @questions
+     - @questions.each do |question|
+      .media
+        .media-left
+          = icon('question', class: 'fa-3x')
+        .media-body
+          h4.media-heading
+            =link_to question_path question
+              = question.title
+          =question.body
