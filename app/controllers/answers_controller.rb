@@ -28,12 +28,22 @@ class AnswersController < ApplicationController
   end
 
   def load_question
+
     @question = Question.find(params[:question_id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Question is not found'
+    redirect_to questions_path
+
   end
 
   def load_answer
+
     @answer = Answer.find(params[:id])
     @question = @answer.question
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'Answer is not found'
+    redirect_to questions_path
+
   end
 
 end
