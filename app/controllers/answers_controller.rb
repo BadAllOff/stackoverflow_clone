@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
     else
       flash[:success] = 'Answer successfully created'
     end
-    redirect_to question_path(@question)
+    redirect_to @question
   end
 
   private
