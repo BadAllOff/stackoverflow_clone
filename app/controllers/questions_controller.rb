@@ -48,12 +48,10 @@ class QuestionsController < ApplicationController
   private
 
   def load_question
-
     @question = Question.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'Question is not found'
     redirect_to questions_path
-
   end
 
   def question_params
