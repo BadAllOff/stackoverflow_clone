@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
 
   before_action :load_question, only: [:show, :edit, :update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def index
     @questions = Question.all
   end
@@ -49,12 +51,14 @@ class QuestionsController < ApplicationController
 
   def load_question
     @question = Question.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Question is not found'
-    redirect_to questions_path
   end
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def record_not_found
+    flash[:error] = 'Record not found'
+    redirect_to questions_path
   end
 end

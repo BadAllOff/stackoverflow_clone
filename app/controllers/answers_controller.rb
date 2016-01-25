@@ -2,6 +2,8 @@ class AnswersController < ApplicationController
   before_action :load_question
   before_action :load_answer, except: [:create]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def create
     @answer = @question.answers.create(answer_params)
     if @answer.errors.any?
@@ -29,17 +31,16 @@ class AnswersController < ApplicationController
 
   def load_question
     @question = Question.find(params[:question_id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Question is not found'
-    redirect_to questions_path
   end
 
   def load_answer
     @answer = Answer.find(params[:id])
     @question = @answer.question
-  rescue ActiveRecord::RecordNotFound
-    flash[:error] = 'Answer is not found'
-    redirect_to questions_path
+  end
+
+  def record_not_found
+    flash[:error] = 'Record not found'
+    redirect_to @question
   end
 
 end
