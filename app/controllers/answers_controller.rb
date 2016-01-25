@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :load_question, only: [:create]
+  before_action :load_question
   before_action :load_answer, except: [:create]
 
   def create
@@ -8,6 +8,15 @@ class AnswersController < ApplicationController
       flash[:error] = 'Answer not created'
     else
       flash[:success] = 'Answer successfully created'
+    end
+    redirect_to @question
+  end
+
+  def destroy
+    if @question.answers.destroy(@answer)
+      flash[:success] = 'Answer successfully destroyed'
+    else
+      flash[:error] = 'Answer is not destroyed'
     end
     redirect_to @question
   end
