@@ -2,5 +2,7 @@
   .media
     .media-left
       = icon('comment-o')
+      =link_to [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
+        = icon('trash')
     .media-body
       =answer.body
