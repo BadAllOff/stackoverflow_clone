@@ -6,12 +6,13 @@ feature 'Register', %q(
   I want be able to sign in
  ) do
 
-  scenario 'Registered user try to sign in' do
-    User.create!(email: 'good@user.com', password: 'goodpassword')
+  given(:user) { create(:user) }
 
+  scenario 'Registered user try to sign in' do
     visit new_user_session_path
-    fill_in 'Email', with: 'good@user.com'
-    fill_in 'Password', with: 'goodpassword'
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Log in'
 
     expect(page).to have_content 'Signed in successfully.'
