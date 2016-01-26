@@ -1,8 +1,9 @@
 class AnswersController < ApplicationController
-  before_action :load_question
-  before_action :load_answer, except: [:create]
+  before_action :authenticate_user!
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  before_action :load_question
+  before_action :load_answer, except: [:create]
 
   def create
     @answer = @question.answers.create(answer_params)

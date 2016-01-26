@@ -25,12 +25,10 @@ feature 'Create Question', %q(
 
   scenario 'Non-authenticated user try to create question' do
     visit questions_path
+    # Можно и убрать это. но оставим как замануха для пользователя зарегистрироваться Ж)
     click_on 'Ask Question'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
-
-
-
 
 end

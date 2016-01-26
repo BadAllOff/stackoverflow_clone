@@ -4,7 +4,9 @@
   hr.colorgraph
   p
     = @question.body
-  p
-    = render partial: 'answers/form', locals: {question: @question}
+  - if user_signed_in?
+    p
+      = render partial: 'answers/form', locals: {question: @question}
+
   .answers
     = render @question.answers, locals: {question: @question}
