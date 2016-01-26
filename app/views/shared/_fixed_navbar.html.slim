@@ -38,7 +38,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
                 | One more separated test link
       ul.nav.navbar-nav.navbar-right
         li.active
-          a[href="./"]
-            | Active
-            span.sr-only
-              | (current)
+          -if user_signed_in?
+            =link_to 'Sign out', destroy_user_session_path, method: :delete
+          -else
+            =link_to 'Sign in', new_user_session_path

@@ -28,6 +28,4 @@ feature 'Create Answer', %q(
     expect(page).to_not have_selector(:link_or_button, 'Create answer')
   end
 
-
-
 end
