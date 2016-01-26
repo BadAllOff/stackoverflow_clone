@@ -5,6 +5,7 @@ RSpec.describe AnswersController, type: :controller do
   let(:answer) { create(:answer, question: question) }
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'saves new answer in the database' do
         expect{ post :create, answer: attributes_for(:answer), question_id: question }.to change(question.answers, :count).by(1)
@@ -27,6 +28,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    sign_in_user
     before { answer }
     it 'deletes answer' do
       expect { delete :destroy, question_id: question, id: answer  }.to change(Answer, :count).by(-1)
