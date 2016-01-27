@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:user) { create(:user) }
-  let(:question) { create(:question) }
+  let(:question) { create(:question, user: user) }
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2) }
@@ -158,11 +158,13 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'Authenticated user' do
       sign_in_user
-
+      before { question }
       context 'operates with his own question' do
+        let!(:question) { create(:question, user: @user) }
 
         it 'deletes his own question' do
           puts user.id
+          puts @user.id
           puts question.user_id
           expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
         end

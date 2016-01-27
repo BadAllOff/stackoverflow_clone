@@ -17,9 +17,9 @@ class AnswersController < ApplicationController
 
   def destroy
     if @question.answers.destroy(@answer)
-      flash[:success] = 'Answer successfully destroyed'
+      flash[:success] = 'Answer successfully deleted'
     else
-      flash[:error] = 'Answer is not destroyed'
+      flash[:error] = 'Answer is not deleted'
     end
     redirect_to @question
   end
