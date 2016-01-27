@@ -22,6 +22,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.user_id = current_user.id
 
     if @question.save
       flash[:success] = 'Question successfully created'
@@ -43,9 +44,14 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    flash[:success] = 'Question successfully deleted'
-    redirect_to questions_path
+    if @question.user_id == current_user.id
+      @question.destroy
+      flash[:success] = 'Your question successfully deleted.'
+      redirect_to questions_path
+    else
+      flash[:error] = 'You cant delete this question. You are not the owner.'
+      redirect_to @question
+    end
   end
 
   private

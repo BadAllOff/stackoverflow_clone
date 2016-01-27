@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
+  let(:user) { create(:user) }
   let(:question) { create(:question) }
 
   describe 'GET #index' do
@@ -154,18 +155,39 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+
     context 'Authenticated user' do
       sign_in_user
-      before { question }
 
-      it 'deletes question' do
-        expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+      context 'operates with his own question' do
+
+        it 'deletes his own question' do
+          puts user.id
+          puts question.user_id
+          expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+        end
+
+        it 'redirect to index view' do
+          delete :destroy, id: question
+          expect(response).to redirect_to questions_path
+        end
       end
 
-      it 'redirect to index view' do
-        delete :destroy, id: question
-        expect(response).to redirect_to questions_path
+      context "operates with other user's question" do
+        sign_in_another_user
+        before { question }
+
+        it "deletes other user's question" do
+          expect { delete :destroy, id: question }.to_not change(Question, :count)
+        end
+
+        it 'redirect to question view' do
+          delete :destroy, id: question
+          expect(response).to redirect_to question_path(question)
+        end
+
       end
+
     end
 
     context 'Non-authenticated user' do

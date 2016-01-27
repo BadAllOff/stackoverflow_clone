@@ -19,4 +19,16 @@ feature 'Delete Question', %q(
     expect(current_path).to eq questions_path
   end
 
+  scenario 'Authenticated user delete other users question' do
+    sign_in(another_user)
+
+    visit question_path(question)
+    click_on 'Delete question'
+
+    expect(page).to have_content 'You cant delete this question. You are not the owner.'
+    expect(page).to have_content question.title
+    expect(current_path).to eq question_path(question)
+  end
+
+
 end
