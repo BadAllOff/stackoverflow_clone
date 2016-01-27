@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:question) { create(:question) }
-  let(:answer) { create(:answer, question: question) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -40,20 +41,39 @@ RSpec.describe AnswersController, type: :controller do
     context 'Authenticated user' do
       sign_in_user
       before { answer }
-      it 'deletes answer' do
-        expect { delete :destroy, question_id: question, id: answer  }.to change(Answer, :count).by(-1)
+
+      context 'operates with his own answer' do
+        let!(:answer) { create(:answer, question: question, user: @user) }
+
+        it 'deletes his own answer' do
+          expect {delete :destroy, question_id: question, id: answer }.to change(@user.answers, :count).by(-1)
+        end
+
+        it 'redirect to question view' do
+          delete :destroy, question_id: question, id: answer
+          expect(response).to redirect_to question_path(question)
+        end
       end
 
-      it 'redirect to question view' do
-        delete :destroy, question_id: question, id: answer
-        expect(response).to redirect_to question_path(question)
-      end
+      # context "operates with other user's question" do
+      #   sign_in_another_user
+      #   before { question }
+      #
+      #   it 'deletes answer' do
+      #     expect { delete :destroy, question_id: question, id: answer  }.to change(Answer, :count).by(-1)
+      #   end
+      #
+      #   it 'redirect to question view' do
+      #     delete :destroy, question_id: question, id: answer
+      #     expect(response).to redirect_to question_path(question)
+      #   end
+      # end
     end
 
     context 'Non-authenticated user try to delete answer' do
       before { answer }
       it 'redirects to login page' do
-        expect { delete :destroy, question_id: question, id: answer  }.to_not change(Answer, :count)
+        expect { delete :destroy, question_id: question, id: answer }.to_not change(Answer, :count)
         expect(response).to redirect_to new_user_session_path
       end
     end
