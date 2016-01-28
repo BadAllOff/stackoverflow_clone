@@ -18,9 +18,22 @@ feature 'Edit Question', %q(
   end
 
   scenario 'Authenticated user edits own question' do
+    sign_in(user)
+    visit edit_question_path(question)
+
+    fill_in 'Title', with: 'Edited question title'
+    fill_in 'Body', with: 'Edited question body'
+    click_on 'Update Question'
+
+    expect(current_path).to eq question_path(question)
+    expect(page).to have_content('Edited question title')
+    expect(page).to have_content('Edited question body')
   end
 
   scenario 'Authenticated user cant see Question control buttons of other user question' do
+    sign_in(another_user)
+    visit question_path(question)
+    expect(page).to_not have_css('div.question_control_btns')
   end
 
   scenario "Non-authenticated user can't see Question control buttons at all" do
