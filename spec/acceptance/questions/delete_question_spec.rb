@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 feature 'Delete Question', %q(
-        Only owner can remove the question
+        In order to not look like a spammer
+        As an authenticated user
+        I want be able to delete my irrelevant question
   ) do
 
   given(:user) { create(:user) }
@@ -31,6 +33,5 @@ feature 'Delete Question', %q(
     visit question_path(question)
     expect(page).to_not have_css('p.question_control_btns')
   end
-
 
 end

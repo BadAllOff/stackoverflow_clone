@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Delete Answer', %q(
-        In order to correct my answer to question
+        In order to delete my answer to question
         As an authenticated user
         I want be able delete answer
   ) do
