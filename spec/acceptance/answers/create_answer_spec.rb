@@ -25,7 +25,7 @@ feature 'Create Answer', %q(
   scenario "Non-authenticated user can't see button to create answer " do
     visit question_path(question)
 
-    expect(page).to_not have_selector(:link_or_button, 'Create answer')
+    expect(page).to_not have_css(:link_or_button, 'Create answer')
   end
 
 end

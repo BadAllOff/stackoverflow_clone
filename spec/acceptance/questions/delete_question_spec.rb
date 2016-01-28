@@ -19,15 +19,15 @@ feature 'Delete Question', %q(
     expect(current_path).to eq questions_path
   end
 
-  scenario 'Authenticated user cant see delete button of other user question' do
+  scenario 'Authenticated user cant see Question control buttons of other user question' do
     sign_in(another_user)
 
     visit question_path(question)
 
-    within('p.question_control_btns') { expect(page).to_not have_selector(:link_or_button, 'Delete question') }
+    expect(page).to_not have_css('p.question_control_btns')
   end
 
-  scenario "Non-authenticated user can't see Question controll buttons button " do
+  scenario "Non-authenticated user can't see Question control buttons at all" do
     visit question_path(question)
     expect(page).to_not have_css('p.question_control_btns')
   end

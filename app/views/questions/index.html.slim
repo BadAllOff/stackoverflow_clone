@@ -8,8 +8,9 @@ hr.colorgraph
       .media
         .media-left
           = icon('question', class: 'fa-3x')
-          =link_to question_path(question), method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: "Are you sure?"} do
-            = icon('trash')
+          - if user_signed_in? && current_user.author_of?(question)
+            =link_to question_path(question), method: :delete, class: 'btn btn-xs btn-danger', data: {confirm: "Are you sure?"} do
+              = icon('trash')
         .media-body
           h4.media-heading
             =link_to question_path question

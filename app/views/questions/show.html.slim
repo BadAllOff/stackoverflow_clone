@@ -5,14 +5,14 @@
   p
     = @question.body
   - if user_signed_in?
-    p.question_control_btns
-    - if @question.user_id == current_user.id
-      =link_to @question, method: :delete do
-        = icon('trash')
-        |&nbspDelete question
+    - if current_user.author_of?(@question)
+      p.question_control_btns
+          =link_to @question, method: :delete do
+            = icon('trash')
+            |&nbspDelete question
 
-    p
-      = render partial: 'answers/form', locals: {question: @question}
+  p
+    = render partial: 'answers/form', locals: {question: @question}
 
   .answers
     = render @question.answers, locals: {question: @question}

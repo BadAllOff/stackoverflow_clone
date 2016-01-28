@@ -28,14 +28,14 @@ feature 'Delete Answer', %q(
   end
 
 
-  scenario "Authenticated user can't see Answer controll buttons for other users answer" do
+  scenario "Authenticated user can't see Answer control buttons for other users answer" do
     sign_in(another_user)
     visit question_path(question)
     expect(page).to_not have_css('p.answer_control_btns')
   end
 
 
-  scenario "Non-authenticated user can't see Answer controll buttons button " do
+  scenario "Non-authenticated user can't see Answer control buttons at all " do
     visit question_path(question)
     expect(page).to_not have_css('p.answer_control_btns')
   end

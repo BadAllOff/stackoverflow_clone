@@ -163,10 +163,7 @@ RSpec.describe QuestionsController, type: :controller do
         let!(:question) { create(:question, user: @user) }
 
         it 'deletes his own question' do
-          puts user.id
-          puts @user.id
-          puts question.user_id
-          expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+          expect { delete :destroy, id: question }.to change(@user.questions, :count).by(-1)
         end
 
         it 'redirect to index view' do
@@ -180,7 +177,7 @@ RSpec.describe QuestionsController, type: :controller do
         before { question }
 
         it "deletes other user's question" do
-          expect { delete :destroy, id: question }.to_not change(Question, :count)
+          expect { delete :destroy, id: question }.to_not change(@user.questions, :count)
         end
 
         it 'redirect to question view' do
