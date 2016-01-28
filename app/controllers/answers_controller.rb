@@ -6,20 +6,29 @@ class AnswersController < ApplicationController
   before_action :load_answer, except: [:create]
 
   def create
-    @answer = @question.answers.create(answer_params)
+
+    @answer = @question.answers.build(answer_params)
+
     if @answer.errors.any?
-      flash[:error] = 'Answer not created'
+      flash[:error] = 'Answer not created. Please correct your input'
     else
-      flash[:success] = 'Answer successfully created'
+      @answer.user_id = current_user.id
+      if @answer.save
+        flash[:success] = 'Answer successfully created'
+      else
+        flash[:error] = 'Answer not created'
+      end
     end
+
     redirect_to @question
   end
 
   def destroy
-    if @question.answers.destroy(@answer)
+    if @answer.user_id == current_user.id
+      @answer.destroy
       flash[:success] = 'Answer successfully deleted'
     else
-      flash[:error] = 'Answer is not deleted'
+      flash[:error] = "You can't delete the answer. You are not the owner."
     end
     redirect_to @question
   end

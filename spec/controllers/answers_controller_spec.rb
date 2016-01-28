@@ -55,19 +55,19 @@ RSpec.describe AnswersController, type: :controller do
         end
       end
 
-      # context "operates with other user's question" do
-      #   sign_in_another_user
-      #   before { question }
-      #
-      #   it 'deletes answer' do
-      #     expect { delete :destroy, question_id: question, id: answer  }.to change(Answer, :count).by(-1)
-      #   end
-      #
-      #   it 'redirect to question view' do
-      #     delete :destroy, question_id: question, id: answer
-      #     expect(response).to redirect_to question_path(question)
-      #   end
-      # end
+      context "operates with other user's question" do
+        sign_in_another_user
+        let!(:answer) { create(:answer, question: question, user: @user) }
+
+        it "can't delete answer" do
+          expect { delete :destroy, question_id: question, id: answer  }.to_not change(@user.answers, :count)
+        end
+
+        it 'redirect to question view' do
+          delete :destroy, question_id: question, id: answer
+          expect(response).to redirect_to question_path(question)
+        end
+      end
     end
 
     context 'Non-authenticated user try to delete answer' do

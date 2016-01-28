@@ -21,8 +21,7 @@ feature 'Delete Answer', %q(
     sign_in(user)
     visit question_path(question)
 
-    fill_in 'Write your answer', with: 'My answer to question'
-    click_on 'Delete answer'
+    within('p.answer_control_btns') { click_on 'Delete answer' }
 
     expect(page).to have_content 'Answer successfully deleted'
     expect(page).to_not have_content answer.body
@@ -36,11 +35,9 @@ feature 'Delete Answer', %q(
   end
 
 
-  scenario "Non-authenticated user can't see 'Delete answer' button " do
+  scenario "Non-authenticated user can't see Answer controll buttons button " do
     visit question_path(question)
-    within('p.answer_control_btns') { expect(page).to_not have_selector(:link_or_button, 'Delete answer') }
+    expect(page).to_not have_css ('p.answer_control_btns')
   end
-
-
 
 end

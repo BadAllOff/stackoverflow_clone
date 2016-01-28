@@ -4,11 +4,13 @@
   hr.colorgraph
   p
     = @question.body
-  .question_control_buttons
-    =link_to @question, method: :delete do
-      = icon('trash')
-      |&nbspDelete question
   - if user_signed_in?
+    p.question_control_btns
+    - if @question.user_id == current_user.id
+      =link_to @question, method: :delete do
+        = icon('trash')
+        |&nbspDelete question
+
     p
       = render partial: 'answers/form', locals: {question: @question}
 
