@@ -28,16 +28,16 @@ feature 'Delete Answer', %q(
   end
 
 
-  scenario "Authenticated user can't see delete btn for other users answer" do
+  scenario "Authenticated user can't see Answer controll buttons for other users answer" do
     sign_in(another_user)
     visit question_path(question)
-    within('p.answer_control_btns') { expect(page).to_not have_selector(:link_or_button, 'Delete answer') }
+    expect(page).to_not have_css('p.answer_control_btns')
   end
 
 
   scenario "Non-authenticated user can't see Answer controll buttons button " do
     visit question_path(question)
-    expect(page).to_not have_css ('p.answer_control_btns')
+    expect(page).to_not have_css('p.answer_control_btns')
   end
 
 end

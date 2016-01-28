@@ -7,4 +7,13 @@ class User < ActiveRecord::Base
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+
+  def author_of?(object)
+    id == object.user_id
+  end
+
+  def non_author_of?(object)
+    !author_of?(object)
+  end
+
 end

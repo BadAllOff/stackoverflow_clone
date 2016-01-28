@@ -4,9 +4,8 @@
       = icon('comment-o')
     .media-body
       =answer.body
-      -if user_signed_in?
+      -if user_signed_in? && current_user.author_of?(answer)
         p.answer_control_btns
-          -if answer.user_id == current_user.id
-            =link_to [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
-              = icon('trash')
-              ' Delete answer
+          =link_to [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
+            = icon('trash')
+            ' Delete answer
