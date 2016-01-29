@@ -19,6 +19,13 @@ feature 'Edit Answer', %q(
   end
 
   scenario 'Authenticated user edits his own answer to the given question' do
+    sign_in(user)
+    visit edit_question_answer_path(id: answer, question_id: question)
+    fill_in 'Answer body', with: 'Edited answer body'
+    click_on 'Update Answer'
+
+    expect(current_path).to eq question_path(question)
+    expect(page).to have_content('Edited answer body')
   end
 
 

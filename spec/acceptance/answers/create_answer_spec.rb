@@ -14,8 +14,8 @@ feature 'Create Answer', %q(
     sign_in(user)
     visit question_path(question)
 
-    fill_in 'Write your answer', with: 'My answer to question'
-    click_on 'Create answer'
+    fill_in 'Answer body', with: 'My answer to question'
+    click_on 'Create Answer'
 
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Answer successfully created'
@@ -25,7 +25,7 @@ feature 'Create Answer', %q(
   scenario "Non-authenticated user can't see button to create answer " do
     visit question_path(question)
 
-    expect(page).to_not have_css(:link_or_button, 'Create answer')
+    expect(page).to_not have_css(:link_or_button, 'Create Answer')
   end
 
 end

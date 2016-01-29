@@ -181,9 +181,7 @@ RSpec.describe QuestionsController, type: :controller do
           delete :destroy, id: question
           expect(response).to redirect_to question_path(question)
         end
-
       end
-
     end
 
     context 'Non-authenticated user' do

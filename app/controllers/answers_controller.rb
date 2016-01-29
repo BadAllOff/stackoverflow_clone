@@ -7,15 +7,39 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    @answer.save
 
-    if @answer.errors.any?
-      flash[:error] = 'Answer not created. Please correct your input'
-    else
+    if @answer.save
       flash[:success] = 'Answer successfully created'
+    else
+      flash[:error] = 'Answer not created. Please correct your input'
     end
 
     redirect_to @question
+  end
+
+  def edit
+    if current_user.author_of?(@answer)
+      render :edit
+    else
+      flash[:error] = "You can't edit the answer. You are not the owner."
+      redirect_to @question
+    end
+  end
+
+  def update
+    if current_user.author_of?(@answer)
+      # тут пока канкан-а нет без вложенности кажется никак
+      if @answer.update(answer_params)
+        flash[:success] = 'Answer successfully updated'
+        redirect_to @question
+      else
+        flash[:error] = 'Answer not updated'
+        render :edit
+      end
+    else
+      flash[:error] = "Answer can't update the answer. You are not the owner."
+      redirect_to @question
+    end
   end
 
   def destroy

@@ -1,15 +1,25 @@
 - if !answer.body.blank?
-  .media
-    .media-left
-      = icon('comment-o')
-    .media-body
-      =answer.body
-      -if user_signed_in? && current_user.author_of?(answer)
-        div.answer_control_btns
-          .btn-group.btn-group-xs
-            =link_to [@question, answer], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
-              = icon('trash')
-              ' Delete answer
-            =link_to [@question, answer], class: 'btn btn-warning' do
-              = icon('pencil')
-              '  Edit answer
+  li.list-group-item
+    .row
+      .col-xs-2.col-md-1
+        img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
+      .col-xs-10.col-md-11
+        div
+          a[href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html"]
+            |  Google Style Login Page Design Using Bootstrap
+          .mic-info
+            |  By:
+            a[href="#"]
+              | Bhaumik Patel
+            |  on 2 Aug 2013
+        .comment-text
+          =answer.body
+        -if user_signed_in? && current_user.author_of?(answer)
+          .action.answer_control_btns
+            .btn-group.btn-group-xs
+              =link_to [@question, answer], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+                = icon('trash')
+                '  Delete answer
+              =link_to edit_question_answer_path(@question, answer), class: 'btn btn-warning' do
+                = icon('pencil')
+                '  Edit answer
