@@ -1,23 +1,18 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :load_question
   before_action :load_answer, except: [:create]
 
   def create
-
     @answer = @question.answers.build(answer_params)
+    @answer.user = current_user
+    @answer.save
 
     if @answer.errors.any?
       flash[:error] = 'Answer not created. Please correct your input'
     else
-      @answer.user_id = current_user.id
-      if @answer.save
-        flash[:success] = 'Answer successfully created'
-      else
-        flash[:error] = 'Answer not created'
-      end
+      flash[:success] = 'Answer successfully created'
     end
 
     redirect_to @question
@@ -46,11 +41,6 @@ class AnswersController < ApplicationController
   def load_answer
     @answer = Answer.find(params[:id])
     @question = @answer.question
-  end
-
-  def record_not_found
-    flash[:error] = 'Record not found'
-    redirect_to @question
   end
 
 end

@@ -10,7 +10,7 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
       context 'with valid attributes' do
         it 'saves new answer in the database' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question }.to change(question.answers, :count).by(1)
+          expect{ post :create, answer: attributes_for(:answer), question_id: question }.to change(@user.answers, :count).by(1)
         end
         it 'redirect back to Question' do
           post :create, answer: attributes_for(:answer), question_id: question
@@ -49,18 +49,18 @@ RSpec.describe AnswersController, type: :controller do
           expect {delete :destroy, question_id: question, id: answer }.to change(@user.answers, :count).by(-1)
         end
 
-        it 'redirect to question view' do
+        it 'redirect to answer view' do
           delete :destroy, question_id: question, id: answer
           expect(response).to redirect_to question_path(question)
         end
       end
 
-      context "operates with other user's question" do
+      context "operates with other user's answer" do
         sign_in_another_user
         let!(:answer) { create(:answer, question: question, user: @user) }
 
         it "can't delete answer" do
-          expect { delete :destroy, question_id: question, id: answer  }.to_not change(@user.answers, :count)
+          expect { delete :destroy, question_id: question, id: answer  }.to_not change(Answer, :count)
         end
 
         it 'redirect to question view' do

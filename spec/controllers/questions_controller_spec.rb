@@ -62,10 +62,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       context 'with valid attributes' do
         it 'saves new question in the DB' do
-          # old_count = Question.count
-          # post :create, question: attributes_for(:question)
-          # expect (Question.count).to eq old_count + 1
-          expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+          expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
         end
 
         it 'redirects to show view' do
@@ -177,7 +174,7 @@ RSpec.describe QuestionsController, type: :controller do
         before { question }
 
         it "deletes other user's question" do
-          expect { delete :destroy, id: question }.to_not change(@user.questions, :count)
+          expect { delete :destroy, id: question }.to_not change(Question, :count)
         end
 
         it 'redirect to question view' do

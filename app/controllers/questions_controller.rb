@@ -3,8 +3,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   def index
     @questions = Question.all
   end
@@ -22,7 +20,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    @question.user_id = current_user.id
+    @question.user = current_user
 
     if @question.save
       flash[:success] = 'Question successfully created'
@@ -44,7 +42,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.user_id == current_user.id
+    if current_user.author_of?(@question)
       @question.destroy
       flash[:success] = 'Your question successfully deleted.'
       redirect_to questions_path
@@ -64,8 +62,4 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :body)
   end
 
-  def record_not_found
-    flash[:error] = 'Record not found'
-    redirect_to questions_path
-  end
 end

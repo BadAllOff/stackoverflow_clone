@@ -12,6 +12,10 @@ feature 'Edit Answer', %q(
   given!(:answer) { create(:answer, question: question, user: user) }
 
   scenario 'Authenticated user see "Edit" control buttons for his own answer' do
+    sign_in(user)
+    visit question_path(question)
+    expect(page).to have_css('div.answer_control_btns')
+    within('div.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
   end
 
   scenario 'Authenticated user edits his own answer to the given question' do
@@ -24,7 +28,7 @@ feature 'Edit Answer', %q(
 
   scenario "Non-authenticated user can't see Answer control buttons at all " do
     visit question_path(question)
-    expect(page).to_not have_css('p.answer_control_btns')
+    expect(page).to_not have_css('div.answer_control_btns')
   end
 
 end

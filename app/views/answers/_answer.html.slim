@@ -5,7 +5,11 @@
     .media-body
       =answer.body
       -if user_signed_in? && current_user.author_of?(answer)
-        p.answer_control_btns.well.well-sm
-          =link_to [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
-            = icon('trash')
-            ' Delete answer
+        div.answer_control_btns
+          .btn-group.btn-group-xs
+            =link_to [@question, answer], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+              = icon('trash')
+              ' Delete answer
+            =link_to [@question, answer], class: 'btn btn-warning' do
+              = icon('pencil')
+              '  Edit answer
