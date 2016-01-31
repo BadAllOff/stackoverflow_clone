@@ -47,6 +47,7 @@ feature 'Register', %q(
     click_on 'Sign in'
     click_on 'Sign up'
 
+    fill_in 'Username', with: 'New u2ername'
     fill_in 'Email', with: 'new@user.com'
     fill_in 'Password', with: '12345678'
     fill_in 'Password confirmation', with: '12345678'
