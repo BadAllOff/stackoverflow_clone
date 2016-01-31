@@ -5,13 +5,14 @@
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
       .col-xs-10.col-md-11
         div
-          a[href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html"]
-            |  Google Style Login Page Design Using Bootstrap
+          a[href="#link_to_somewhere"]
+            |  Google Style comment with bootstrap
           .mic-info
             |  By:
             a[href="#"]
-              | Bhaumik Patel
-            |  on 2 Aug 2013
+              = answer.user.username
+            '
+            = answer.created_at
         .comment-text
           =answer.body
         -if user_signed_in? && current_user.author_of?(answer)

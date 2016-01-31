@@ -14,8 +14,8 @@
           =link_to edit_question_path(@question), class: 'btn btn-warning' do
             = icon('pencil')
             '  Edit question
-  p
-    = render partial: 'answers/form', locals: {question: @question}
+    p
+      = render partial: 'answers/form', locals: {question: @question}
   .row.answers
     .panel.panel-default.widget
       .panel-heading
