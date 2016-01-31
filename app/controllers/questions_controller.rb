@@ -26,18 +26,23 @@ class QuestionsController < ApplicationController
       flash[:success] = 'Question successfully created'
       redirect_to @question
     else
-      flash[:error] = 'Question not created'
+      flash[:error] = 'Question is not created'
       render :new
     end
   end
 
   def update
-    if @question.update(question_params)
-      flash[:success] = 'Question successfully updated'
-      redirect_to @question
+    if current_user.author_of?(@question)
+      if @question.update(question_params)
+        flash[:success] = 'Question successfully updated'
+        redirect_to @question
+      else
+        flash[:error] = 'Question is not updated'
+        render :edit
+      end
     else
-      flash[:error] = 'Question not updated'
-      render :edit
+      flash[:error] = "You can't update the question. You are not the owner."
+      redirect_to @question
     end
   end
 

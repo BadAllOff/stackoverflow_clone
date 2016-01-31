@@ -37,7 +37,7 @@ class AnswersController < ApplicationController
         render :edit
       end
     else
-      flash[:error] = "Answer can't update the answer. You are not the owner."
+      flash[:error] = "You can't update the answer. You are not the owner."
       redirect_to @question
     end
   end
