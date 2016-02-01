@@ -1,10 +1,10 @@
 $('.answer-messages').empty();
 $('.flash-messages').empty();
 <% if @answer.errors.present? %>
-$('.flash-messages').html('<div class="alert alert-danger fade in"><button class="close" data-dismiss="alert">x</button><i class="glyphicon glyphicon-remove-circle"></i><%= flash[:error] %></div>');
-$('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
+  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+  $('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
 <% else %>
-$('.flash-messages').html('<div class="alert alert-success fade in"><button class="close" data-dismiss="alert">x</button><i class="glyphicon glyphicon-ok-circle"></i><%= flash[:success] %></div>');
-$('.answers').find('ul.answers_list').prepend('<%= j render @answer %>');
-$('#answer_body').val('');
+  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  $('.answers').find('ul.answers_list').prepend('<%= j render @answer %>');
+  $('#answer_body').val('');
 <% end %>
