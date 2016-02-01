@@ -9,6 +9,7 @@ html
     = render partial: 'shared/fixed_navbar'
     .container
       .row
-        = flash_messages
+        .flash-messages
+          = flash_messages
         = yield
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
