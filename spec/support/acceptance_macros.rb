@@ -1,4 +1,4 @@
-module AcceptanceHelper
+module AcceptanceMacros
   # метод происходит на уровне сценария а не класса
   def sign_in(user)
     visit new_user_session_path
