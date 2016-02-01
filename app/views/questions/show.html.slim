@@ -16,17 +16,5 @@
             '  Edit question
     p
       = render partial: 'answers/form', locals: {question: @question}
-  .row.answers
-    .panel.panel-default.widget
-      .panel-heading
-        span.glyphicon.glyphicon-comment
-        h3.panel-title
-          |  Recent Comments
-        span.label.label-info
-          |  78
-      .panel-body
-        ul.list-group
-          = render @question.answers, locals: {question: @question}
-        a.btn.btn-primary.btn-sm.btn-block[href="#" role="button"]
-          span.glyphicon.glyphicon-refresh
-          |  More
+  .container.answers
+    = render partial: 'answers/answers', locals: {question: @question}

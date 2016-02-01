@@ -14,7 +14,6 @@ class AnswersController < ApplicationController
       flash[:error] = 'Answer not created. Please correct your input'
     end
 
-    redirect_to @question
   end
 
   def edit

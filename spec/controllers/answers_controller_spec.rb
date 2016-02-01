@@ -10,34 +10,34 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
       context 'with valid attributes' do
         it 'saves new answer in the DB with correct user identification' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question }.to change(@user.answers, :count).by(1)
+          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(@user.answers, :count).by(1)
         end
 
         it 'saves new answer in the DB with correct question identification' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question }.to change(question.answers, :count).by(1)
+          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(question.answers, :count).by(1)
         end
 
         it 'redirect back to Question' do
-          post :create, answer: attributes_for(:answer), question_id: question
-          expect(response).to redirect_to question_path(question)
+          post :create, answer: attributes_for(:answer), question_id: question, format: :js
+          expect(response).to render_template :create
         end
       end
 
       context 'with invalid attributes' do
         it 'does not save the answer' do
-          expect{ post :create, answer: attributes_for(:invalid_answer), question_id: question }.to_not change(Answer, :count)
+          expect{ post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js }.to_not change(Answer, :count)
         end
         it 'redirects back to Question' do
-          post :create, answer: attributes_for(:invalid_answer), question_id: question
-          expect(response).to redirect_to question_path(question)
+          post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js
+          # expect(response).to redirect_to question_path(question)
         end
       end
     end
 
     context 'Non-authenticated user try to create answer' do
       it 'redirects to login page' do
-        expect{ post :create, answer: attributes_for(:answer), question_id: question }.to_not change(question.answers, :count)
-        expect(response).to redirect_to new_user_session_path
+        expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to_not change(question.answers, :count)
+        # expect(response).to redirect_to new_user_session_path
       end
     end
   end
