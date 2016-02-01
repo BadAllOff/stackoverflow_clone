@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../acceptance/acceptance_helper'
 
 feature 'Edit Answer', %q(
         In order to correct my answer to question
