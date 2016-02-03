@@ -13,19 +13,17 @@ class AnswersController < ApplicationController
     else
       flash[:error] = 'Answer not created. Please correct your input'
     end
-
+    respond_to do |format|
+      format.html { redirect_to @question }
+      format.js
+    end
   end
 
   def edit
     if current_user.author_of?(@answer)
       respond_to do |format|
-        format.html do
-          render :edit
-        end
-
-        format.js do
-        end
-
+        format.html { render :edit }
+        format.js
       end
     else
       flash[:error] = "You can't edit the answer. You are not the owner."
@@ -38,25 +36,18 @@ class AnswersController < ApplicationController
       # тут пока канкан-а нет без вложенности кажется никак
       if @answer.update(answer_params)
         flash[:success] = 'Answer successfully updated'
-        respond_to do |format|
-          format.html do
-            redirect_to @question
-          end
 
-          format.js do
-          end
+        respond_to do |format|
+          format.html { redirect_to @question }
+          format.js
         end
 
       else
         flash[:error] = 'Answer not updated'
-        respond_to do |format|
-          format.html do
-            render :edit
-          end
 
-          format.js do
-            render :'answers/update', status: 400
-          end
+        respond_to do |format|
+          format.html { render :edit }
+          format.js { render :'answers/update', status: 400 }
         end
 
       end
@@ -75,12 +66,8 @@ class AnswersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html do
-        redirect_to @question
-      end
-
-      format.js do
-      end
+      format.html { redirect_to @question }
+      format.js
     end
   end
 
