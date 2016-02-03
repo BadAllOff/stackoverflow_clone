@@ -132,7 +132,11 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'Non-authenticated' do
-
+      before { answer }
+      it 'redirects to login page' do
+        patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }
+        expect(response).to redirect_to new_user_session_path
+      end
     end
 
   end
