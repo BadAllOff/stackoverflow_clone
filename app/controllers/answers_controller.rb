@@ -18,7 +18,15 @@ class AnswersController < ApplicationController
 
   def edit
     if current_user.author_of?(@answer)
-      render :edit
+      respond_to do |format|
+        format.html do
+          render :edit
+        end
+
+        format.js do
+        end
+
+      end
     else
       flash[:error] = "You can't edit the answer. You are not the owner."
       redirect_to @question
@@ -30,10 +38,27 @@ class AnswersController < ApplicationController
       # тут пока канкан-а нет без вложенности кажется никак
       if @answer.update(answer_params)
         flash[:success] = 'Answer successfully updated'
-        redirect_to @question
+        respond_to do |format|
+          format.html do
+            redirect_to @question
+          end
+
+          format.js do
+          end
+        end
+
       else
         flash[:error] = 'Answer not updated'
-        render :edit
+        respond_to do |format|
+          format.html do
+            render :edit
+          end
+
+          format.js do
+            render :'answers/update', status: 400
+          end
+        end
+
       end
     else
       flash[:error] = "You can't update the answer. You are not the owner."

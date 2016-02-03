@@ -1,0 +1,10 @@
+$('.answer-messages').empty();
+$('.flash-messages').empty();
+$('li#answer-<%= @answer.id %>').find('.answer-messages');
+<% if @answer.errors.present? %>
+  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+  $('li#answer-<%= @answer.id %>').find('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
+<% else %>
+  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  $('li#answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
+<% end %>
