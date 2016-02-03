@@ -12,7 +12,7 @@ feature 'Edit Answer', %q(
   given!(:answer) { create(:answer, question: question, user: user) }
 
   describe 'Authenticated user' do
-    describe 'operates his own answer' do
+    context 'operates his own answer' do
       before do
         sign_in user
         visit question_path(question)
@@ -23,18 +23,32 @@ feature 'Edit Answer', %q(
         within('div.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
       end
 
-      scenario 'edits his own answer to the given question' do
-        click_on 'Edit answer'
-        fill_in 'Answer body', with: 'Edited answer body'
-        click_on 'Update Answer'
+      context 'edit his own answer to the given question' do
+        scenario 'with valid attributes', js: true do
+          click_on 'Edit answer'
+          within("div.form_for_answer-#{answer.id}") do
+            fill_in 'Answer body', with: 'Edited answer body'
+            click_on 'Update Answer'
+          end
+          expect(current_path).to eq question_path(question)
+          expect(page).to have_content('Edited answer body')
+          expect(page).to have_content('Answer successfully updated')
+        end
 
-        expect(current_path).to eq question_path(question)
-        expect(page).to have_content('Edited answer body')
+        scenario 'with invalid attributes', js: true do
+          click_on 'Edit answer'
+          within("div.form_for_answer-#{answer.id}") do
+            fill_in 'Answer body', with: nil
+            click_on 'Update Answer'
+          end
+          expect(current_path).to eq question_path(question)
+          expect(page).to have_content('Answer not updated')
+        end
       end
 
     end
 
-    describe 'operates other user answer' do
+    context 'operates other user answer' do
       scenario "can't see Answer control buttons for other users answer" do
         sign_in(another_user)
         expect(page).to_not have_css('div.answer_control_btns')

@@ -1,0 +1,5 @@
+$('.answer-messages').empty();
+$('.flash-messages').empty();
+$('li#answer-<%= @answer.id %>').find('a.btn-warning').hide();
+$('li#answer-<%= @answer.id %> div.form_for_answer-<%= @answer.id %>').html('<%= j render partial: 'answers/form', locals: {question: @question} %>');
+
