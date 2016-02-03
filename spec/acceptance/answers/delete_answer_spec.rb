@@ -35,7 +35,7 @@ feature 'Delete Answer', %q(
   end
 
 
-  scenario "Non-authenticated user can't see Answer control buttons at all " do
+  scenario "Non-authenticated user can't see Answer control buttons at all" do
     visit question_path(question)
     expect(page).to_not have_css('div.answer_control_btns')
   end

@@ -11,25 +11,35 @@ feature 'Edit Answer', %q(
   given(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
-  scenario 'Authenticated user see "Edit" control buttons for his own answer' do
-    sign_in(user)
-    visit question_path(question)
-    expect(page).to have_css('div.answer_control_btns')
-    within('div.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
-  end
+  describe 'Authenticated user' do
+    describe 'operates his own answer' do
+      before do
+        sign_in user
+        visit question_path(question)
+      end
 
-  scenario 'Authenticated user edits his own answer to the given question' do
-    sign_in(user)
-    visit edit_question_answer_path(id: answer, question_id: question)
-    fill_in 'Answer body', with: 'Edited answer body'
-    click_on 'Update Answer'
+      scenario 'see "Edit" control buttons for his own answer' do
+        expect(page).to have_css('div.answer_control_btns')
+        within('div.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
+      end
 
-    expect(current_path).to eq question_path(question)
-    expect(page).to have_content('Edited answer body')
-  end
+      scenario 'edits his own answer to the given question' do
+        click_on 'Edit answer'
+        fill_in 'Answer body', with: 'Edited answer body'
+        click_on 'Update Answer'
 
+        expect(current_path).to eq question_path(question)
+        expect(page).to have_content('Edited answer body')
+      end
 
-  scenario "Authenticated user can't see Answer control buttons for other users answer" do
+    end
+
+    describe 'operates other user answer' do
+      scenario "can't see Answer control buttons for other users answer" do
+        sign_in(another_user)
+        expect(page).to_not have_css('div.answer_control_btns')
+      end
+    end
   end
 
 
