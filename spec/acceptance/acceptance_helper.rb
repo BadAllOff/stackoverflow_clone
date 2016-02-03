@@ -23,6 +23,8 @@ RSpec.configure do |config|
 
   Capybara.javascript_driver = :webkit
 
+  Capybara.default_wait_time = 5
+
   config.use_transactional_fixtures = false
 
   config.before(:suite) do

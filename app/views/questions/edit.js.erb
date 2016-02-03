@@ -1,0 +1,3 @@
+$('div#question_container').find('a.btn-edit-question').hide();
+$('div.form_for_question-<%= @question.id %>').html('<%= j render partial: 'questions/form', locals: { question: @question } %>');
+$('form#edit_question_<%= @question.id %>').data('remote', 'true');

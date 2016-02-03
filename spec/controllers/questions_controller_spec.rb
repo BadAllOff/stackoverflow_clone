@@ -45,7 +45,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #edit' do
     sign_in_user
-    before { get :edit, id: question}
+    before { get :edit, id: question, format: :js}
 
     it 'assigns the requested question to @question' do
       expect(assigns(:question)).to eq question
@@ -100,31 +100,31 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'PATCH #update' do
     context 'Authenticated user' do
       sign_in_user
-      context 'operates with his own question' do
+      context 'operates with his own question via ajax' do
         let!(:question) { create(:question, user: @user) }
 
         context 'with valid attributes' do
 
           it 'assigns the requested question to @question' do
-            patch :update, id: question, question: attributes_for(:question)
+            patch :update, id: question, question: attributes_for(:question), format: :js
             expect(assigns(:question)).to eq question
           end
 
           it 'changes question attributes' do
-            patch :update, id: question, question: { title: 'New Title', body: 'New Body' }
+            patch :update, id: question, question: { title: 'New Title', body: 'New Body' }, format: :js
             question.reload
             expect(question.title).to eq 'New Title'
             expect(question.body).to eq 'New Body'
           end
 
           it 'redirects to updated question' do
-            patch :update, id: question, question: attributes_for(:question)
-            expect(response).to redirect_to question
+            patch :update, id: question, question: attributes_for(:question), format: :js
+            expect(response).to have_http_status(:success)
           end
         end
 
         context 'with invalid attributes' do
-          before { patch :update, id: question, question: { title: 'New Title', body: nil } }
+          before { patch :update, id: question, question: { title: 'New Title', body: nil }, format: :js }
           it 'does not change question attributes' do
             question.reload
             expect(question.title).to eq 'This is Question title'
@@ -132,7 +132,7 @@ RSpec.describe QuestionsController, type: :controller do
           end
 
           it 're-renders edit view' do
-            expect(response).to render_template :edit
+            expect(response).to have_http_status(:bad_request)
           end
 
         end
