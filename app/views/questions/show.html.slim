@@ -1,9 +1,8 @@
 - if @question
-  = render partial: 'questions/question'
-  br
-  br
+  .row.top-buffer
+    = render partial: 'questions/question'
   - if user_signed_in?
-    .row
+    .row.top-buffer
       = render partial: 'answers/form', locals: { question: @question }
-  .container.answers
+  .row.top-buffer.answers
     = render partial: 'answers/answers'

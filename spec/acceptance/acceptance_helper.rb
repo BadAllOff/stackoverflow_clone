@@ -12,7 +12,7 @@ RSpec.configure do |config|
     # Allow pages to make requests to any URL without issuing a warning.
 
     # Allow a specifc domain without issuing a warning.
-    config.allow_url("placehold.it")
+    config.allow_url('placehold.it')
 
     # Timeout if requests take longer than 5 seconds
     config.timeout = 10
@@ -23,7 +23,7 @@ RSpec.configure do |config|
 
   Capybara.javascript_driver = :webkit
 
-  Capybara.default_wait_time = 5
+  Capybara.default_max_wait_time = 5
 
   config.use_transactional_fixtures = false
 

@@ -47,6 +47,8 @@ body{
   @extend .has-error;
 }
 
+.top-buffer { margin-top:20px; }
+
 .widget .panel-body { padding:0px; }
 .widget .list-group { margin-bottom: 0; }
 .widget .panel-title { display:inline }

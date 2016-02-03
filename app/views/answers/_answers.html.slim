@@ -1,14 +1,13 @@
-.row
-  .panel.panel-default.widget
-    .panel-heading
-      span.glyphicon.glyphicon-comment
-      h3.panel-title
-        |  Recent Comments
-      span.label.label-info
-        |  78
-    .panel-body
-      ul.list-group.answers_list
-        = render @question.answers
-      a.btn.btn-primary.btn-sm.btn-block[href="#" role="button"]
-        span.glyphicon.glyphicon-refresh
-        |  More
+.panel.panel-default.widget
+  .panel-heading
+    span.glyphicon.glyphicon-comment
+    h3.panel-title
+      |  Recent Comments
+    span.label.label-info
+      |  78
+  .panel-body
+    ul.list-group.answers_list
+      = render @question.answers
+    a.btn.btn-primary.btn-sm.btn-block[href="#" role="button"]
+      span.glyphicon.glyphicon-refresh
+      |  More
