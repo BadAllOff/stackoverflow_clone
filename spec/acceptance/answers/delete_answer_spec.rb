@@ -17,7 +17,7 @@ feature 'Delete Answer', %q(
     within('div.answer_control_btns') { expect(page).to have_selector(:link_or_button, 'Delete answer') }
   end
 
-  scenario 'Authenticated user deletes his own answer to the given question' do
+  scenario 'Authenticated user deletes his own answer to the given question', js: true do
     sign_in(user)
     visit question_path(question)
 
