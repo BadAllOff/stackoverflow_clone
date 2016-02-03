@@ -73,7 +73,15 @@ class AnswersController < ApplicationController
     else
       flash[:error] = "You can't delete the answer. You are not the owner."
     end
-    redirect_to @question
+
+    respond_to do |format|
+      format.html do
+        redirect_to @question
+      end
+
+      format.js do
+      end
+    end
   end
 
   private

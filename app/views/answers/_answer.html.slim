@@ -18,7 +18,7 @@
         -if user_signed_in? && current_user.author_of?(answer)
           .action.answer_control_btns
             .btn-group.btn-group-xs
-              =link_to [@question, answer], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+              =link_to [@question, answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
                 = icon('trash')
                 '  Delete answer
               =link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-warning' do
