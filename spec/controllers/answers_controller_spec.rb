@@ -47,7 +47,7 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
       context 'operates with his own answer' do
         let!(:answer) { create(:answer, question: question, user: @user) }
-        before { get :edit, question_id: question, id: answer}
+        before { get :edit, question_id: question, id: answer, format: :js}
 
         it 'assigns the requested answer to @answer' do
           expect(assigns(:answer)).to eq answer
@@ -55,6 +55,7 @@ RSpec.describe AnswersController, type: :controller do
 
         it 'renders edit view' do
           expect(response).to render_template :edit
+          # expect(response).to render_template :edit
         end
       end
 
