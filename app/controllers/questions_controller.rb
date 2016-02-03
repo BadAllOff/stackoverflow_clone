@@ -16,6 +16,10 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -35,10 +39,18 @@ class QuestionsController < ApplicationController
     if current_user.author_of?(@question)
       if @question.update(question_params)
         flash[:success] = 'Question successfully updated'
-        redirect_to @question
+
+        respond_to do |format|
+          format.html { redirect_to @question }
+          format.js
+        end
       else
         flash[:error] = 'Question is not updated'
-        render :edit
+
+        respond_to do |format|
+          format.html { render :edit }
+          format.js { render 'questions/update', status: 400}
+        end
       end
     else
       flash[:error] = "You can't update the question. You are not the owner."

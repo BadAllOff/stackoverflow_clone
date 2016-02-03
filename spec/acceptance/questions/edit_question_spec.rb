@@ -17,13 +17,16 @@ feature 'Edit Question', %q(
     within('div.question_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit question') }
   end
 
-  scenario 'Authenticated user edits own question' do
+  scenario 'Authenticated user edits own question', js: true do
     sign_in(user)
-    visit edit_question_path(question)
+    visit question_path(question)
+    click_on 'Edit question'
 
-    fill_in 'Title', with: 'Edited question title'
-    fill_in 'Body', with: 'Edited question body'
-    click_on 'Update Question'
+    within("div.form_for_question-#{question.id}") do
+      fill_in 'Title', with: 'Edited question title'
+      fill_in 'Body', with: 'Edited question body'
+      click_on 'Update Question'
+    end
 
     expect(current_path).to eq question_path(question)
     expect(page).to have_content('Edited question title')
