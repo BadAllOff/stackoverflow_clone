@@ -1,4 +1,4 @@
-= form_for @question, remote: true do |f|
+= form_for @question do |f|
   .question-messages
     - if @question.errors.any?
       = render 'shared/errors', object: @question
@@ -15,4 +15,3 @@
       = f.label :body
       = f.text_area :body, class: 'form-control'
     = f.submit class: 'btn btn-default'
-hr.colorgraph

@@ -4,13 +4,13 @@ div id='question_container'
   hr.colorgraph
   p
     = @question.body
-  div class="form_for_question-#{@question.id}"
   - if user_signed_in? && current_user.author_of?(@question)
     div.question_control_btns
       .btn-group.btn-group-xs
         =link_to @question, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } do
           = icon('trash')
           '  Delete question
-        =link_to edit_question_path(@question), remote: true, class: 'btn btn-warning btn-edit-question' do
+        =link_to edit_question_path(@question), remote: true, class: 'btn btn-warning btn-question-edit' do
           = icon('pencil')
           '  Edit question
+    div class="form_for_question-#{@question.id} top-buffer"

@@ -2,8 +2,13 @@
   .answer-messages
     - if @answer.errors.any?
       = render 'shared/errors', object: @answer
-  .form-group
-    = f.label :body, 'Answer body'
-    .answer-errors.text-danger
-    = f.text_area :body, id: 'answer_body', class: 'form-control'
-  =f.submit class: 'btn btn-default'
+  fieldset
+    legend
+      - if @answer.new_record?
+        | Write your answer
+      -else
+        | Edit answer
+    .form-group
+      = f.label :body, 'Answer body'
+      = f.text_area :body, id: 'answer_body', class: 'form-control'
+    =f.submit class: 'btn btn-default'
