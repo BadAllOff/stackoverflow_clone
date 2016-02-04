@@ -1,8 +1,8 @@
 $('.answer-messages').empty();
 $('.flash-messages').empty();
-$('li#answer-<%= @answer.id %>').find('a.btn-warning').hide();
+$('li#answer-<%= @answer.id %>').find('a.btn-answer-edit').hide();
 $('li#answer-<%= @answer.id %> div.form_for_answer-<%= @answer.id %>').html('<%= j render partial: 'answers/form', locals: {question: @question} %>');
-$('form#edit_answer_<%= @answer.id %>').append('&nbsp<input name="commit" value="Cancel update" class="btn btn-info cancel_update" type="submit">');
+$('form#edit_answer_<%= @answer.id %> fieldset').append('&nbsp<input name="commit" value="Cancel update" class="btn btn-info cancel_update" type="submit">');
 $('form#edit_answer_<%= @answer.id %>').find('input[type="submit"]:nth-child(2)').click(function(){
   $('form#edit_answer_<%= @answer.id %>').hide();
   $('li#answer-<%= @answer.id %>').find('a.btn-warning').show();

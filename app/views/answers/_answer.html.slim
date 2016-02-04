@@ -21,7 +21,7 @@
               =link_to [@question, answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
                 = icon('trash')
                 '  Delete answer
-              =link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-warning' do
+              =link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-warning btn-answer-edit' do
                 = icon('pencil')
                 '  Edit answer
     div class="form_for_answer-#{answer.id}"
