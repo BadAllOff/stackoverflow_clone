@@ -14,6 +14,7 @@ feature 'Delete Answer', %q(
   scenario 'Authenticated user see delete btn for his own answer' do
     sign_in(user)
     visit question_path(question)
+
     within('div.answer_control_btns') { expect(page).to have_selector(:link_or_button, 'Delete answer') }
   end
 
@@ -22,7 +23,6 @@ feature 'Delete Answer', %q(
     visit question_path(question)
 
     within('div.answer_control_btns') { click_on 'Delete answer' }
-
     expect(page).to have_content 'Answer successfully deleted'
     expect(page).to_not have_content answer.body
   end
@@ -31,12 +31,14 @@ feature 'Delete Answer', %q(
   scenario "Authenticated user can't see Answer control buttons for other users answer" do
     sign_in(another_user)
     visit question_path(question)
+
     expect(page).to_not have_css('div.answer_control_btns')
   end
 
 
   scenario "Non-authenticated user can't see Answer control buttons at all" do
     visit question_path(question)
+
     expect(page).to_not have_css('div.answer_control_btns')
   end
 
