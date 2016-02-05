@@ -1,9 +1,32 @@
 - if answer.persisted?
   li.list-group-item data= {answer_id:"#{answer.id}"} id="answer-#{answer.id}"
     .row
+      .col-xs-2.col-md-2.vote
+        ul.list-group
+          li.list-group-item.text-center
+            a[href='#']
+              =icon('chevron-up')
+              |  Vote up
+          li.list-group-item.text-center
+            span.label.label-default 10
+          li.list-group-item.text-center
+            a[href='#']
+              =icon('chevron-down')
+              |  Vote down
+
+          -if answer.best_answer
+            li.list-group-item.text-center.text-success
+              =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-on' do
+                =icon('star')
+                |  Best Answer
+          -else
+            li.list-group-item.text-center
+              =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-off'do
+                =icon('check')
+                |  Accept
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
-      .col-xs-10.col-md-11
+      .col-xs-8.col-md-9
         div
           a[href="#link_to_somewhere"]
             |  Google Style comment with bootstrap

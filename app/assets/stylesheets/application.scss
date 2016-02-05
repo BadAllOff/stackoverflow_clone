@@ -59,3 +59,12 @@ body{
 .widget .action { margin-top:5px; }
 .widget .comment-text { font-size: 12px; }
 .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+
+.vote-accepted-off{
+  color: grey;
+  font-weight: normal;
+}
+.vote-accepted-on{
+  color: green;
+  font-weight: bold;
+}

@@ -142,6 +142,80 @@ RSpec.describe AnswersController, type: :controller do
   end
 
 
+
+
+
+
+
+
+
+
+
+  describe 'PATCH #set_best' do
+    context 'Authenticated user' do
+      sign_in_user
+      context 'operates with his own question answers' do
+        let!(:question) { create(:question, user: @user) }
+        let!(:answer) { create(:answer, question: question, user: user) }
+        let!(:another_answer) { create(:answer, question: question, user: user) }
+
+        it 'assigns the requested answer to @answer' do
+          patch :set_best, question_id: question, id: answer
+          expect(assigns(:answer)).to eq answer
+        end
+
+        it "set's best answer" do
+          patch :set_best, question_id: question, id: answer
+          answer.reload
+          expect(answer.best_answer).to eq true
+        end
+
+        it 'best answer can be only one' do
+          patch :set_best, question_id: question, id: another_answer
+          answer.reload
+          another_answer.reload
+          expect(answer.best_answer).to eq false
+          expect(another_answer.best_answer).to eq true
+        end
+
+        it 're-renders answer as best' do
+          patch :set_best, question_id: question, id: answer
+          expect(response).to redirect_to question
+        end
+      end
+
+
+      context 'operates with another users question answer' do
+        sign_in_another_user
+        let!(:question) { create(:question, user: user) }
+        let!(:answer) { create(:answer, question: question, user: user) }
+
+        before { patch :set_best, question_id: question , id: answer }
+        it 'redirects to question view' do
+          expect(response).to redirect_to question
+        end
+
+        it 'does not change answer attributes' do
+          answer.reload
+          expect(answer.best_answer).to eq false
+        end
+      end
+    end
+
+    context 'Non-authenticated' do
+      before { answer }
+      it 'redirects to login page' do
+        patch :set_best, id: answer, question_id: question
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+  end
+
+
+
+
+
   describe 'DELETE #destroy' do
     context 'Authenticated user' do
       sign_in_user
@@ -183,5 +257,7 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+
 
 end

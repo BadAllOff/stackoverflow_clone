@@ -57,6 +57,21 @@ class AnswersController < ApplicationController
     end
   end
 
+  def set_best
+    if current_user.author_of?(@question)
+      @question.answers.update_all(best_answer: false)
+      @answer.update(best_answer: true)
+
+      respond_to do |format|
+        format.html { redirect_to @question }
+        format.js
+      end
+    else
+      flash[:error] = "You can't choose best answer. You are not the owner of the question."
+      redirect_to @question
+    end
+  end
+
   def destroy
     if current_user.author_of?(@answer)
       @answer.destroy
