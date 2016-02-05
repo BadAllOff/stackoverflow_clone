@@ -151,13 +151,13 @@ RSpec.describe AnswersController, type: :controller do
         let!(:another_answer) { create(:answer, question: question, user: user) }
 
         it "set's best answer" do
-          patch :set_best, question_id: question, id: answer
+          patch :set_best, question_id: question, id: answer, format: :js
           answer.reload
           expect(answer.best_answer).to eq true
         end
 
         it 'best answer can be only one' do
-          patch :set_best, question_id: question, id: another_answer
+          patch :set_best, question_id: question, id: another_answer, format: :js
           answer.reload
           another_answer.reload
           expect(answer.best_answer).to eq false
@@ -176,7 +176,7 @@ RSpec.describe AnswersController, type: :controller do
         let!(:question) { create(:question, user: user) }
         let!(:answer) { create(:answer, question: question, user: user) }
 
-        before { patch :set_best, question_id: question , id: answer }
+        before { patch :set_best, question_id: question , id: answer, format: :js }
         it 'redirects to question view' do
           expect(response).to redirect_to question
         end
@@ -190,9 +190,9 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'Non-authenticated' do
       before { answer }
-      it 'redirects to login page' do
-        patch :set_best, id: answer, question_id: question
-        expect(response).to redirect_to new_user_session_path
+      it 'unauthorized' do
+        patch :set_best, id: answer, question_id: question, format: :js
+        expect(response.status).to eq (401)
       end
     end
 
