@@ -13,17 +13,23 @@
             a[href='#']
               =icon('chevron-down')
               |  Vote down
-
-          -if answer.best_answer
-            li.list-group-item.text-center.text-success
-              =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-on' do
-                =icon('star')
-                |  Best Answer
+          -if user_signed_in? && current_user.author_of?(@question)
+            -if answer.best_answer
+              li.list-group-item.text-center.text-success
+                =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-on' do
+                  =icon('star')
+                  |  Best answer
+            -else
+              li.list-group-item.text-center
+                =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-off'do
+                  =icon('check')
+                  |  Accept answer
           -else
-            li.list-group-item.text-center
-              =link_to set_best_question_answer_path(@question, answer), method: :patch, class: 'vote-accepted-off'do
-                =icon('check')
-                |  Accept
+            -if answer.best_answer
+              li.list-group-item.text-center.text-success
+                span
+                  =icon('star')
+                  |  Best Answer
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
       .col-xs-8.col-md-9

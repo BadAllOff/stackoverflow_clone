@@ -142,15 +142,6 @@ RSpec.describe AnswersController, type: :controller do
   end
 
 
-
-
-
-
-
-
-
-
-
   describe 'PATCH #set_best' do
     context 'Authenticated user' do
       sign_in_user
@@ -158,11 +149,6 @@ RSpec.describe AnswersController, type: :controller do
         let!(:question) { create(:question, user: @user) }
         let!(:answer) { create(:answer, question: question, user: user) }
         let!(:another_answer) { create(:answer, question: question, user: user) }
-
-        it 'assigns the requested answer to @answer' do
-          patch :set_best, question_id: question, id: answer
-          expect(assigns(:answer)).to eq answer
-        end
 
         it "set's best answer" do
           patch :set_best, question_id: question, id: answer
