@@ -1,5 +1,8 @@
 $('.answer-messages').empty();
 $('.flash-messages').empty();
+<% if flash[:error].present? %>
+  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+<% end %>
 $('li#answer-<%= @answer.id %>').find('a.btn-answer-edit').hide();
 $('li#answer-<%= @answer.id %> div.form_for_answer-<%= @answer.id %>').html('<%= j render partial: 'answers/form', locals: {question: @question} %>');
 $('form#edit_answer_<%= @answer.id %> fieldset').append('&nbsp<input name="commit" value="Cancel update" class="btn btn-info cancel_update" type="submit">');

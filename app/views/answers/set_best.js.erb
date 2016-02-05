@@ -1,0 +1,8 @@
+old_best_answer = $('li.list-group-item.text-center').find('a.vote-accepted-on');
+old_best_answer.removeClass('vote-accepted-on').addClass('vote-accepted-off');
+old_best_answer.html('<%= icon('check')%> Accept answer');
+<% if @answer.best_answer %>
+  new_best_answer = $('li.best-answer-vote-link-id-<%= @answer.id %>').find('a.vote-accepted-off');
+  new_best_answer.removeClass('vote-accepted-off').addClass('vote-accepted-on');
+  new_best_answer.html('<%= icon('star')%> Best answer');
+<% end %>
