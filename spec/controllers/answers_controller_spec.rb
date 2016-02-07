@@ -27,9 +27,9 @@ RSpec.describe AnswersController, type: :controller do
         it 'does not save the answer' do
           expect{ post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js }.to_not change(Answer, :count)
         end
-        it 'sends back status bad_request ' do
+        it 'renders create partial' do
           post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js
-          expect(response.status).to eq 400
+          expect(response).to render_template :create
         end
       end
     end
