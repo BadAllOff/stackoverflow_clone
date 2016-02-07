@@ -42,6 +42,7 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
+
   describe 'GET #edit' do
     context 'Authenticated user' do
       sign_in_user
@@ -189,9 +190,6 @@ RSpec.describe AnswersController, type: :controller do
   end
 
 
-
-
-
   describe 'DELETE #destroy' do
     context 'Authenticated user' do
       sign_in_user
@@ -218,10 +216,6 @@ RSpec.describe AnswersController, type: :controller do
           expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
         end
 
-        it 'unauthorized' do
-          delete :destroy, question_id: question, id: answer, format: :js
-          expect(response.status).to eq 401
-        end
       end
     end
 
