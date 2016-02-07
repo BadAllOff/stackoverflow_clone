@@ -10,18 +10,8 @@ class AnswersController < ApplicationController
 
     if @answer.save
       flash[:success] = 'Answer successfully created'
-
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/create', status: 200 }
-      end
     else
       flash[:error] = 'Answer not created. Please correct your input'
-
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/create', status: 400 }
-      end
     end
   end
 
