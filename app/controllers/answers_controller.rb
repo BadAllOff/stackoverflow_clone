@@ -23,23 +23,10 @@ class AnswersController < ApplicationController
       # тут пока канкан-а нет без вложенности кажется никак
       if @answer.update(answer_params)
         flash[:success] = 'Answer successfully updated'
-
-        respond_to do |format|
-          format.html { redirect_to @question }
-          format.js
-        end
       else
         flash[:error] = 'Answer not updated'
-
-        respond_to do |format|
-          format.html { render :edit }
-          format.js { render 'answers/edit', status: 400 }
-        end
+        render :edit
       end
-    else
-      flash[:error] = "You can't update the answer. You are not the owner."
-
-      redirect_to @question
     end
   end
 
