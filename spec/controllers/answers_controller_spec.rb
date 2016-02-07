@@ -108,10 +108,7 @@ RSpec.describe AnswersController, type: :controller do
       context 'operates with another user answer' do
         sign_in_another_user
         let!(:answer) { create(:answer, question: question, user: @user) }
-        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' } }
-        it 'redirects to question view' do
-          expect(response).to redirect_to question_path(question)
-        end
+        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :js }
 
         it 'does not change answer attributes' do
           answer.reload
@@ -121,10 +118,9 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'Non-authenticated' do
-      sign_in_user
       it 'redirects to question path' do
         patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :js
-        expect(response).to redirect_to question_path(question)
+        expect(response.status).to eq 401
       end
     end
 
