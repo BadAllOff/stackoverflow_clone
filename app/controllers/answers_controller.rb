@@ -20,7 +20,6 @@ class AnswersController < ApplicationController
 
   def update
     if current_user.author_of?(@answer)
-      # тут пока канкан-а нет без вложенности кажется никак
       if @answer.update(answer_params)
         flash[:success] = 'Answer successfully updated'
       else
@@ -54,20 +53,9 @@ class AnswersController < ApplicationController
     if current_user.author_of?(@answer)
       @answer.destroy
       flash[:success] = 'Answer successfully deleted'
-
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/destroy', status: 200 }
-      end
     else
       flash[:error] = "You can't delete the answer. You are not the owner."
-
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/destroy', status: 401 }
-      end
     end
-
   end
 
   private
