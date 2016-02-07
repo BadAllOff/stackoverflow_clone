@@ -31,21 +31,9 @@ class AnswersController < ApplicationController
 
   def set_best
     if current_user.author_of?(@question)
-      if @answer.best_answer
-        @answer.update(best_answer: false)
-      else
-        @question.answers.update_all(best_answer: false)
-        @answer.update(best_answer: true)
-      end
-
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/set_best', status: 200 }
-      end
+      @answer.set_best
     else
-      flash[:error] = "You can't choose best answer. You are not the owner of the question."
-
-      redirect_to @question
+      flash[:error] = "You can't choose best answer. You are not the owner of this question."
     end
   end
 
@@ -54,7 +42,7 @@ class AnswersController < ApplicationController
       @answer.destroy
       flash[:success] = 'Answer successfully deleted'
     else
-      flash[:error] = "You can't delete the answer. You are not the owner."
+      flash[:error] = "You can't delete the answer. You are not the owner of this answer."
     end
   end
 

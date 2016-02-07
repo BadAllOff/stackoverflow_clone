@@ -6,4 +6,10 @@ class Answer < ActiveRecord::Base
 
   validates :body, :user, :question, presence: true
 
+  def set_best
+    ActiveRecord::Base.transaction do
+      question.answers.update_all(best_answer: false)
+      best_answer ? update!(best_answer: false) : update!(best_answer: true)
+    end
+  end
 end

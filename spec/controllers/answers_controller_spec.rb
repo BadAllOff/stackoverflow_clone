@@ -155,9 +155,9 @@ RSpec.describe AnswersController, type: :controller do
           expect(another_answer.best_answer).to eq true
         end
 
-        it 're-renders answer as best' do
-          patch :set_best, question_id: question, id: answer
-          expect(response).to redirect_to question
+        it 're-renders answer set_best view' do
+          patch :set_best, question_id: question, id: answer, format: :js
+          expect(response).to render_template 'set_best'
         end
       end
 
@@ -168,9 +168,6 @@ RSpec.describe AnswersController, type: :controller do
         let!(:answer) { create(:answer, question: question, user: user) }
 
         before { patch :set_best, question_id: question , id: answer, format: :js }
-        it 'redirects to question view' do
-          expect(response).to redirect_to question
-        end
 
         it 'does not change answer attributes' do
           answer.reload
