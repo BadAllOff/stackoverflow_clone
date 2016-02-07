@@ -16,18 +16,6 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    if current_user.author_of?(@answer)
-      respond_to do |format|
-        format.html { render :edit }
-        format.js { render 'answers/edit', status: 200 }
-      end
-    else
-      flash[:error] = "You can't edit the answer. You are not the owner."
-      respond_to do |format|
-        format.html { redirect_to @question }
-        format.js { render 'answers/update', status: 401 }
-      end
-    end
   end
 
   def update

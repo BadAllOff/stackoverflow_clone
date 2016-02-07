@@ -43,6 +43,7 @@ feature 'Edit Answer', %q(
           end
           expect(current_path).to eq question_path(question)
           expect(page).to have_content('Answer not updated')
+          expect(answer.body).to eq answer.body
         end
       end
 
