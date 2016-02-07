@@ -45,27 +45,16 @@ RSpec.describe AnswersController, type: :controller do
   describe 'GET #edit' do
     context 'Authenticated user' do
       sign_in_user
-      context 'operates with his own answer' do
-        let!(:answer) { create(:answer, question: question, user: @user) }
-        before { get :edit, question_id: question, id: answer, format: :js}
 
-        it 'assigns the requested answer to @answer' do
-          expect(assigns(:answer)).to eq answer
-        end
+      let!(:answer) { create(:answer, question: question, user: @user) }
+      before { get :edit, question_id: question, id: answer, format: :js}
 
-        it 'renders edit view' do
-          expect(response).to render_template :edit
-        end
+      it 'assigns the requested answer to @answer' do
+        expect(assigns(:answer)).to eq answer
       end
 
-      context 'operates with other user answer' do
-        sign_in_another_user
-        let!(:answer) { create(:answer, question: question, user: @user) }
-
-        it 'sends back status unauthorized' do
-          get :edit, question_id: question, id: answer, format: :js
-          expect(response.status).to eq(401)
-        end
+      it 'renders edit view' do
+        expect(response).to render_template :edit
       end
     end
 
