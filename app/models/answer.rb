@@ -8,7 +8,7 @@ class Answer < ActiveRecord::Base
 
   def set_best
     ActiveRecord::Base.transaction do
-      question.answers.update_all(best_answer: false)
+      question.answers.update_all best_answer: false
       best_answer ? update!(best_answer: false) : update!(best_answer: true)
     end
   end
