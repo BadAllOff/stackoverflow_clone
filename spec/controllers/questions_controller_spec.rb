@@ -132,7 +132,7 @@ RSpec.describe QuestionsController, type: :controller do
           end
 
           it 're-renders edit view' do
-            expect(response).to have_http_status(:bad_request)
+            expect(response).to render_template(:edit)
           end
 
         end
@@ -140,10 +140,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       context 'operates with another user question' do
         sign_in_another_user
-        before { patch :update, id: question, question: { title: 'Update Title', body: 'Update Body' } }
-        it 'redirects to question view' do
-          expect(response).to redirect_to question_path(question)
-        end
+        before { patch :update, id: question, question: { title: 'Update Title', body: 'Update Body' }, format: :js  }
 
         it 'does not change question attributes' do
           question.reload
@@ -157,14 +154,14 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'Non-authenticated user' do
       it 'fails to update question attributes' do
-        patch :update, id: question, question: { title: 'New Title', body: 'New Body' }
+        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
         question.reload
         expect(question.title).to_not eq 'New Title'
         expect(question.body).to_not eq 'New Body'
       end
 
       it 'redirects to sign in page' do
-        patch :update, id: question, question: { title: 'New Title', body: 'New Body' }
+        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
         expect(response).to redirect_to new_user_session_path
       end
     end
