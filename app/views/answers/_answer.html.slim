@@ -16,12 +16,12 @@
           -if user_signed_in? && current_user.author_of?(@question)
             -if answer.best_answer
               li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
-                =link_to set_best_question_answer_path(@question, answer), method: :patch, remote: true, class: 'vote-accepted-on' do
+                =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-on' do
                   =icon('star')
                   |  Best answer
             -else
               li.list-group-item.text-center class="best-answer-vote-link-id-#{answer.id}"
-                =link_to set_best_question_answer_path(@question, answer), method: :patch, remote: true, class: 'vote-accepted-off'do
+                =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-off'do
                   =icon('check')
                   |  Accept answer
           -else
@@ -47,10 +47,10 @@
         -if user_signed_in? && current_user.author_of?(answer)
           .action.answer_control_btns
             .btn-group.btn-group-xs
-              =link_to [@question, answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
+              =link_to [answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
                 = icon('trash')
                 '  Delete answer
-              =link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-warning btn-answer-edit' do
+              =link_to edit_answer_path(answer, question_id: @question), remote: true, class: 'btn btn-warning btn-answer-edit' do
                 = icon('pencil')
                 '  Edit answer
           div class="form_for_answer-#{answer.id}"
