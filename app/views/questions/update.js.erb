@@ -5,5 +5,5 @@ $('.flash-messages').empty();
   $('#question_container').find('.question-messages').html('<%= j render 'shared/errors', object: @question %>');
 <% else %>
   $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
-  $('#question_container').replaceWith('<%= j render 'questions/question', locals: { question: @question } %>');
+  $('#question_container').replaceWith('<%= j render @question %>');
 <% end %>

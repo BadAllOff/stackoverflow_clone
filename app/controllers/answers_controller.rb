@@ -29,20 +29,20 @@ class AnswersController < ApplicationController
     end
   end
 
-  def set_best
-    if current_user.author_of?(@question)
-      @answer.set_best
-    else
-      flash[:error] = "You can't choose best answer. You are not the owner of this question."
-    end
-  end
-
   def destroy
     if current_user.author_of?(@answer)
       @answer.destroy
       flash[:success] = 'Answer successfully deleted'
     else
       flash[:error] = "You can't delete the answer. You are not the owner of this answer."
+    end
+  end
+
+  def set_best
+    if current_user.author_of?(@question)
+      @answer.set_best
+    else
+      flash[:error] = "You can't choose best answer. You are not the owner of this question."
     end
   end
 
