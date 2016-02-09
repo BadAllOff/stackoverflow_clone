@@ -13,8 +13,9 @@ RSpec.describe Answer, type: :model do
   end
 
   describe 'Validations' do
-     it { should validate_presence_of :body }
-   end
+    it { should validate_presence_of :body }
+     it { should accept_nested_attributes_for :attachments }
+  end
 
   describe '#set_best' do
     it 'sets #best to true' do

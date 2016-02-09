@@ -1,4 +1,4 @@
-= form_for @question do |f|
+= form_for @question, html: { multipart: true } do |f|
   .question-messages
     - if @question.errors.any?
       = render 'shared/errors', object: @question
@@ -20,4 +20,5 @@
           .form-group
             = a.label :file
             = a.file_field :file
+            = a.hidden_field :file_cache
     = f.submit class: 'btn btn-default'
