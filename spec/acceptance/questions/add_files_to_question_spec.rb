@@ -14,10 +14,10 @@ feature 'Add files to question', %q{
 
   scenario 'User adds file when asks question' do
     fill_in 'Title', with: 'Test question'
-    fill_in 'Text', with: 'text text text'
+    fill_in 'Body', with: 'Test question body'
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on 'Create'
 
-    expect(page).to have_ontent 'spec_helper.rb'
+    expect(page).to have_content 'spec_helper.rb'
   end
 end
