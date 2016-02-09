@@ -1,4 +1,4 @@
-= form_for (@answer.persisted? ? @answer : [@question, @answer]), remote: true do |f|
+= form_for (@answer.persisted? ? @answer : [@question, @answer]), html: { multipart: true }, remote: true do |f|
   .answer-messages
     - if @answer.errors.any?
       = render 'shared/errors', object: @answer
@@ -11,4 +11,9 @@
     .form-group
       = f.label :body, 'Answer body'
       = f.text_area :body, id: 'answer_body', class: 'form-control'
+    = f.fields_for :attachments, class: 'form-control' do |a|
+      .form-group
+        = a.label :file
+        = a.file_field :file
+        = a.hidden_field :file_cache
     =f.submit class: 'btn btn-default'

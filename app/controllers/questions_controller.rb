@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.build
+    @answer.attachments.build
   end
 
   def new
@@ -58,12 +59,13 @@ class QuestionsController < ApplicationController
 
   private
 
-  def load_question
-    @question = Question.find(params[:id])
-  end
-
   def question_params
     params.require(:question).permit(:title, :body, attachments_attributes: [:file])
+  end
+
+  def load_question
+    # @question = Question.find(params[:id])
+    @question = Question.includes(:attachments, answers: [:attachments]).find(params[:id])
   end
 
 end
