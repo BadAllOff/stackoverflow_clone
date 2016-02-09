@@ -1,4 +1,5 @@
 class Answer < ActiveRecord::Base
+  has_many :attachments, dependent: :destroy, as: :attachable
   belongs_to :question
   belongs_to :user
 
