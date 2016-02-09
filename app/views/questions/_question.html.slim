@@ -4,6 +4,13 @@ div id='question_container'
   hr.colorgraph
   p
     = @question.body
+  p
+    | Attachments
+    ul
+      - @question.attachments.each do |a|
+        li
+          = a.file.file.filename
+    = @question.body
   - if user_signed_in? && current_user.author_of?(@question)
     div.question_control_btns
       .btn-group.btn-group-xs
