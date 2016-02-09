@@ -10,4 +10,4 @@ $('form#edit_answer_<%= @answer.id %>').find('input[type="submit"]:nth-child(2)'
   $('form#edit_answer_<%= @answer.id %>').hide();
   $('li#answer-<%= @answer.id %>').find('a.btn-warning').show();
 });
-
+<% flash.discard %>

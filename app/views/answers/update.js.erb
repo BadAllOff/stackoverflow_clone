@@ -8,3 +8,4 @@ $('li#answer-<%= @answer.id %>').find('.answer-messages');
   $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
   $('li#answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
 <% end %>
+<% flash.discard %>

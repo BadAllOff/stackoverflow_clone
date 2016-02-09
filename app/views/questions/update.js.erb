@@ -7,3 +7,4 @@ $('.flash-messages').empty();
   $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
   $('#question_container').replaceWith('<%= j render @question %>');
 <% end %>
+<% flash.discard %>

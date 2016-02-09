@@ -11,9 +11,5 @@
     .form-group
       = f.label :body, 'Answer body'
       = f.text_area :body, id: 'answer_body', class: 'form-control'
-    = f.fields_for :attachments, class: 'form-control' do |a|
-      .form-group
-        = a.label :file
-        = a.file_field :file
-        = a.hidden_field :file_cache
+    = render 'attachments/add_attachment', f: f
     =f.submit class: 'btn btn-default'

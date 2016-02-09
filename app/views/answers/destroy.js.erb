@@ -5,3 +5,4 @@ $('.flash-messages').empty();
   $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
   $('li#answer-<%= @answer.id %>').remove();
 <% end %>
+<% flash.discard %>
