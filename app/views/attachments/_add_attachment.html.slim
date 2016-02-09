@@ -1,0 +1,7 @@
+h5
+  | Attachments
+= f.fields_for :attachments do |a|
+.links.top-buffer
+  = link_to_add_association 'Add file', f, :attachments,
+                            partial: 'attachments/attachment_fields',
+                            class: 'btn btn-black btn-xs'
