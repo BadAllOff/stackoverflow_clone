@@ -9,7 +9,7 @@ div id='question_container'
     ul
       - @question.attachments.each do |a|
         li
-          = a.file.file.filename
+          = link_to a.file.filename, a.file.url
     = @question.body
   - if user_signed_in? && current_user.author_of?(@question)
     div.question_control_btns
