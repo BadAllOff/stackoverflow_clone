@@ -9,11 +9,12 @@ RSpec.describe Answer, type: :model do
   describe 'Associations' do
     it { should belong_to(:question) }
     it { should belong_to(:user) }
+    it { should have_many(:attachments).dependent(:destroy) }
   end
 
   describe 'Validations' do
-    it { should validate_presence_of :body }
-  end
+     it { should validate_presence_of :body }
+   end
 
   describe '#set_best' do
     it 'sets #best to true' do
