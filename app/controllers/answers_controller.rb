@@ -13,6 +13,10 @@ class AnswersController < ApplicationController
     else
       flash[:error] = 'Answer not created. Please correct your input'
     end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit

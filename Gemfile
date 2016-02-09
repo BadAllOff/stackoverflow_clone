@@ -41,6 +41,7 @@ gem 'devise', '~> 3.5.5'
 gem 'activerecord-session_store'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.2'
+gem "cocoon"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
