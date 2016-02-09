@@ -16,3 +16,7 @@ config/secrets.yml
 /.idea
 TODO.txt
 public/uploads
+public/spec
+public/tmp
+public/system
+.DB_store
