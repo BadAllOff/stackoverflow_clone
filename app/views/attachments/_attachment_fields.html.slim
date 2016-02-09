@@ -1,0 +1,6 @@
+.nested-fields
+  .form-group.top-buffer
+    = f.label :file
+    = f.file_field :file
+    = f.hidden_field :file_cache
+  = link_to_remove_association 'Remove file', f
