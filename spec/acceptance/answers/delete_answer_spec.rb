@@ -10,36 +10,46 @@ feature 'Delete Answer', %q(
   given(:another_user) { create(:user) }
   given(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
+  describe 'Authenticated user' do
 
-  scenario 'Authenticated user see delete btn for his own answer' do
-    sign_in(user)
-    visit question_path(question)
+    context 'operates his own answer' do
+      before do
+        sign_in(user)
+        visit question_path(question)
+      end
 
-    within('div.answer_control_btns') { expect(page).to have_selector(:link_or_button, 'Delete answer') }
+      scenario '- sees delete btn for his own answer' do
+        within('.answer_control_btns') { expect(page).to have_selector(:link_or_button, 'Delete answer') }
+      end
+
+      scenario '- deletes his own answer to the given question', js: true do
+        within('.answer_control_btns') { click_on 'Delete answer' }
+
+        expect(page).to have_content 'Answer successfully deleted'
+        expect(page).to_not have_content answer.body
+      end
+    end
+
+    context 'operates other user answer' do
+      before do
+        sign_in(another_user)
+        visit questions_path
+      end
+
+      scenario "- can't see control buttons for other users answer" do
+        expect(page).to_not have_css('.answer_control_btns')
+      end
+    end
+
   end
 
-  scenario 'Authenticated user deletes his own answer to the given question', js: true do
-    sign_in(user)
-    visit question_path(question)
 
-    within('div.answer_control_btns') { click_on 'Delete answer' }
-    expect(page).to have_content 'Answer successfully deleted'
-    expect(page).to_not have_content answer.body
-  end
+  describe 'Non-Authenticated user' do
+    before { visit questions_path }
 
-
-  scenario "Authenticated user can't see Answer control buttons for other users answer" do
-    sign_in(another_user)
-    visit question_path(question)
-
-    expect(page).to_not have_css('div.answer_control_btns')
-  end
-
-
-  scenario "Non-authenticated user can't see Answer control buttons at all" do
-    visit question_path(question)
-
-    expect(page).to_not have_css('div.answer_control_btns')
+    scenario "- can't see control buttons for answer at all" do
+      expect(page).to_not have_css('.answer_control_btns')
+    end
   end
 
 end
