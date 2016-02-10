@@ -17,7 +17,6 @@ feature 'Update answer attachments', %q{
       before do
         sign_in(user)
         visit question_path(question)
-        answer
       end
 
       scenario '- add additional files to answer and update', js: true do
