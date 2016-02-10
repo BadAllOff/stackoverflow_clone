@@ -30,6 +30,21 @@ feature 'Add files to answer', %q{
         end
       end
 
+      scenario '- with attachment, but changes his mind, deletes file field from form', js: true do
+        within 'form#new_answer' do
+          fill_in 'Answer body', with: 'Test answer with attachment'
+          click_on 'Add file'
+          attach_file 'File', "#{Rails.root}/spec/fixtures/10x10.jpg"
+          click_on 'Remove file'
+          click_on 'Create Answer'
+        end
+
+        within '.answers' do
+          expect(page).to have_content 'Test answer with attachment'
+          expect(page).to_not have_link '10x10.jpg', href: '/uploads/attachment/file/1/10x10.jpg'
+        end
+      end
+
       scenario '- with several files attached', js: true do
         within 'form#new_answer' do
           fill_in 'Answer body', with: 'Test answer with attachments'

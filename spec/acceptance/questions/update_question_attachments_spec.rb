@@ -28,6 +28,19 @@ feature 'Update question attachments', %q{
 
         expect(page).to have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg'
       end
+
+      scenario '- add additional files to question, but changes his mind, deletes file field from form', js: true do
+        within('div#question_container') do
+          click_on 'Edit question'
+          click_on 'Add file'
+          attach_file 'File', "#{Rails.root}/spec/fixtures/20x20.jpg"
+          click_on 'Remove file'
+          click_on 'Update Question'
+        end
+
+        expect(page).to_not have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg'
+      end
+
     end
 
     context "- can't operate other users question" do
