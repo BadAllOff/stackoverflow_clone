@@ -1,0 +1,6 @@
+$('.flash-messages').empty();
+<% if flash[:success].present? %>
+  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+<% end %>
+$('li#attachment-<%= @attachment.id %>').remove();
+<% flash.discard %>
