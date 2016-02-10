@@ -17,9 +17,10 @@ feature 'Update answer attachments', %q{
       before do
         sign_in(user)
         visit question_path(question)
+        answer
       end
 
-      scenario '- add additional files to question and update', js: true do
+      scenario '- add additional files to answer and update', js: true do
         within("li#answer-#{answer.id}") do
           click_on 'Edit answer'
           click_on 'Add file'
@@ -30,6 +31,17 @@ feature 'Update answer attachments', %q{
         within("li#answer-#{answer.id}") { expect(page).to have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg' }
       end
 
+      scenario '- add additional files to answer, changes his mind, removes attachment field', js: true do
+        within("li#answer-#{answer.id}") do
+          click_on 'Edit answer'
+          click_on 'Add file'
+          attach_file 'File', "#{Rails.root}/spec/fixtures/20x20.jpg"
+          click_on 'Remove file'
+          click_on 'Update Answer'
+        end
+
+        within("li#answer-#{answer.id}") { expect(page).to_not have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg' }
+      end
     end
 
     context 'operates with other users answers' do
