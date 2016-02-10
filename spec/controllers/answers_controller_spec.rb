@@ -48,20 +48,20 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
 
       let!(:answer) { create(:answer, question: question, user: @user) }
-      before { get :edit, question_id: question, id: answer, format: :js}
+      before { get :edit, question_id: question.id, id: answer, format: :js}
 
-      it 'assigns the requested answer to @answer' do
+      it '- assigns the requested answer to @answer' do
         expect(assigns(:answer)).to eq answer
       end
 
-      it 'renders edit view' do
+      it '- renders edit view' do
         expect(response).to render_template :edit
       end
     end
 
     context 'Non-authenticated user try to edit answer' do
       before { answer }
-      it 'sends back status unauthorized' do
+      it '- sends back status unauthorized' do
         get :edit, question_id: question, id: answer, format: :js
         expect(response.status).to eq(401)
       end
@@ -75,18 +75,18 @@ RSpec.describe AnswersController, type: :controller do
       context 'operates with his own answer' do
         let!(:answer) { create(:answer, question: question, user: @user) }
         context 'with valid attributes' do
-          it 'assigns the requested answer to @answer' do
+          it '- assigns the requested answer to @answer' do
             patch :update, question_id: question, id: answer, answer: attributes_for(:answer), format: :js
             expect(assigns(:answer)).to eq answer
           end
 
-          it 'changes answer attributes' do
+          it '- changes answer attributes' do
             patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :js
             answer.reload
             expect(answer.body).to eq 'This is updated answer'
           end
 
-          it 'sends back status ok and renders update partial' do
+          it '- sends back status ok and renders update partial' do
             patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :js
             expect(response.status).to eq 200
             expect(response).to render_template 'answers/update'
@@ -95,12 +95,12 @@ RSpec.describe AnswersController, type: :controller do
 
         context 'with invalid attributes' do
           before { patch :update, question_id: question, id: answer, answer: { body: nil }, format: :js }
-          it 'does not change answer attributes' do
+          it '- does not change answer attributes' do
             answer.reload
             expect(answer.body).to eq 'This is the Answer body'
           end
 
-          it 're-renders edit view' do
+          it '- re-renders edit view' do
             expect(response).to render_template 'answers/edit'
           end
         end
@@ -111,7 +111,7 @@ RSpec.describe AnswersController, type: :controller do
         let!(:answer) { create(:answer, question: question, user: @user) }
         before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :js }
 
-        it 'does not change answer attributes' do
+        it '- does not change answer attributes' do
           answer.reload
           expect(answer.body).to eq 'This is the Answer body'
         end
@@ -119,7 +119,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'Non-authenticated' do
-      it 'redirects to question path' do
+      it '- redirects to question path' do
         patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :js
         expect(response.status).to eq 401
       end
@@ -136,27 +136,27 @@ RSpec.describe AnswersController, type: :controller do
         let!(:answer) { create(:answer, question: question, user: user) }
         let!(:another_answer) { create(:answer, question: question, user: user) }
 
-        it 'assigns the requested answer to @answer' do
-          patch :set_best, question_id: question, id: answer, format: :js
+        it '- assigns the requested answer to @answer' do
+          patch :set_best, question_id: question.id, id: answer, format: :js
           expect(assigns(:answer)).to eq answer
         end
 
         it "set's best answer" do
-          patch :set_best, question_id: question, id: answer, format: :js
+          patch :set_best, question_id: question.id, id: answer, format: :js
           answer.reload
           expect(answer.best_answer).to eq true
         end
 
-        it 'best answer can be only one' do
-          patch :set_best, question_id: question, id: another_answer, format: :js
+        it '- best answer can be only one' do
+          patch :set_best, question_id: question.id, id: another_answer, format: :js
           answer.reload
           another_answer.reload
           expect(answer.best_answer).to eq false
           expect(another_answer.best_answer).to eq true
         end
 
-        it 're-renders answer set_best view' do
-          patch :set_best, question_id: question, id: answer, format: :js
+        it '- re-renders answer set_best view' do
+          patch :set_best, question_id: question.id, id: answer, format: :js
           expect(response).to render_template 'set_best'
         end
       end
@@ -167,9 +167,9 @@ RSpec.describe AnswersController, type: :controller do
         let!(:question) { create(:question, user: user) }
         let!(:answer) { create(:answer, question: question, user: user) }
 
-        before { patch :set_best, question_id: question , id: answer, format: :js }
+        before { patch :set_best, question_id: question.id , id: answer, format: :js }
 
-        it 'does not change answer attributes' do
+        it '- does not change answer attributes' do
           answer.reload
           expect(answer.best_answer).to eq false
         end
@@ -178,7 +178,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'Non-authenticated' do
       before { answer }
-      it 'unauthorized' do
+      it '- unauthorized' do
         patch :set_best, id: answer, question_id: question, format: :js
         expect(response.status).to eq(401)
       end
@@ -195,11 +195,11 @@ RSpec.describe AnswersController, type: :controller do
       context 'operates with his own answer' do
         let!(:answer) { create(:answer, question: question, user: @user) }
 
-        it 'deletes his own answer' do
+        it '- deletes his own answer' do
           expect {delete :destroy, question_id: question, id: answer, format: :js }.to change(@user.answers, :count).by(-1)
         end
 
-        it 'gets status ok to answer view' do
+        it '- gets status ok to answer view' do
           delete :destroy, question_id: question, id: answer, format: :js
           expect(response.status).to eq 200
         end
@@ -218,7 +218,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'Non-authenticated user try to delete answer' do
       before { answer }
-      it 'unauthorized' do
+      it '- unauthorized' do
         expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
         expect(response.status).to eq 401
       end
