@@ -42,7 +42,6 @@ RSpec.describe AttachmentsController, type: :controller do
       end
     end
 
-
   end
 
 end
