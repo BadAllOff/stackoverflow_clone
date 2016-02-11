@@ -12,7 +12,6 @@ feature 'Delete Question', %q(
 
   scenario 'Authenticated user delete own question' do
     sign_in(user)
-
     visit question_path(question)
     click_on 'Delete question'
 
@@ -23,7 +22,6 @@ feature 'Delete Question', %q(
 
   scenario 'Authenticated user cant see Question control buttons of other user question' do
     sign_in(another_user)
-
     visit question_path(question)
 
     expect(page).to_not have_css('p.question_control_btns')
