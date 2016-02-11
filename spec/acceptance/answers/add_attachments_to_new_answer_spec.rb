@@ -8,8 +8,8 @@ feature 'Add files to answer', %q{
 
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
-  describe 'Authenticated user' do
 
+  describe 'Authenticated user' do
     context 'creates new answer' do
       before do
         sign_in(user)
@@ -67,8 +67,9 @@ feature 'Add files to answer', %q{
   end
 
   describe 'Non-Authenticated user' do
+    before { visit question_path(question) }
+
     scenario "- can't see button to create answer " do
-      visit question_path(question)
       expect(page).to_not have_selector(:link_or_button, 'Create Answer')
     end
   end

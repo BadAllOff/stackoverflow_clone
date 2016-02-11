@@ -7,7 +7,6 @@ feature 'Add files to question', %q{
 
   given(:user) { create(:user) }
   describe 'Authenticated user' do
-
     context 'creates new question' do
       before do
         sign_in(user)
@@ -52,8 +51,8 @@ feature 'Add files to question', %q{
 
         expect(page).to have_link('20x20.jpg', count: 2)
       end
-
     end
+
   end
 
   describe 'Non-Authenticated user' do

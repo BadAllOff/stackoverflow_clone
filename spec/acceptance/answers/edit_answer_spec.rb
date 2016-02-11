@@ -12,7 +12,6 @@ feature 'Edit Answer', %q(
   given!(:answer) { create(:answer, question: question, user: user) }
 
   describe 'Authenticated user' do
-
     context 'operates with his own answer' do
       before do
         sign_in user
@@ -50,7 +49,6 @@ feature 'Edit Answer', %q(
           expect(answer.body).to eq answer.body
         end
       end
-
     end
 
     context "operates with other user's answer" do
@@ -60,6 +58,7 @@ feature 'Edit Answer', %q(
         expect(page).to_not have_css('div.answer_control_btns')
       end
     end
+
   end
 
   describe 'Non-Authenticated user' do
