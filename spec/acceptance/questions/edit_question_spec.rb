@@ -11,7 +11,6 @@ feature 'Edit Question', %q(
   given(:question) { create(:question, user: user) }
 
   describe 'Authenticated user' do
-
     context 'operates with his own question' do
       before do
         sign_in(user)

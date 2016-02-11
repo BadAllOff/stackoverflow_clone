@@ -50,7 +50,15 @@ feature 'Best Answer', %q(
       scenario "- can't see 'Best answer' button" do
         expect(page).to_not have_selector(:link_or_button, 'Accept answer')
       end
+    end
 
+  end
+
+  describe 'Non-Authenticated user' do
+    before { visit question_path(question) }
+
+    scenario "- can't see 'Best answer' button" do
+      expect(page).to_not have_selector(:link_or_button, 'Accept answer')
     end
   end
 

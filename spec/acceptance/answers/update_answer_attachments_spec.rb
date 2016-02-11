@@ -1,4 +1,5 @@
 require_relative '../../acceptance/acceptance_helper'
+
 feature 'Update answer attachments', %q{
   In order to illustrate better my answer
   As an answers's author
@@ -12,7 +13,6 @@ feature 'Update answer attachments', %q{
   given!(:attachment) { create(:attachment, attachable: answer) }
 
   describe 'Authenticated user' do
-
     context 'operates with his own answer' do
       before do
         sign_in(user)
@@ -43,17 +43,6 @@ feature 'Update answer attachments', %q{
       end
     end
 
-    context 'operates with other users answers' do
-      before  do
-        sign_in(another_user)
-        visit question_path(question)
-      end
-
-      scenario "- can't see control buttons for other users answer" do
-        expect(page).to_not have_css('div.answer_control_btns')
-      end
-    end
-
   end
 
   describe 'Non-Authenticated user' do
@@ -61,6 +50,7 @@ feature 'Update answer attachments', %q{
 
     scenario "- can't see control buttons at all " do
       expect(page).to_not have_css('div.answer_control_btns')
+      expect(page).to_not have_link('Remove attachment')
     end
   end
 
