@@ -10,8 +10,8 @@ feature 'Delete Answer', %q(
   given(:another_user) { create(:user) }
   given(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
-  describe 'Authenticated user' do
 
+  describe 'Authenticated user' do
     context 'operates his own answer' do
       before do
         sign_in(user)

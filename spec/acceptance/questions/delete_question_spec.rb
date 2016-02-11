@@ -9,8 +9,8 @@ feature 'Delete Question', %q(
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }
   given(:question) { create(:question, user: user) }
-  describe 'Authenticated user' do
 
+  describe 'Authenticated user' do
     context 'operates his own question' do
       before do
         sign_in(user)
@@ -42,6 +42,7 @@ feature 'Delete Question', %q(
 
   describe 'Non-Authenticated user' do
     before { visit question_path(question) }
+
     scenario "- can't see question control buttons at all" do
       expect(page).to_not have_css('.question_control_btns')
     end

@@ -8,7 +8,6 @@ feature 'Create Question', %q(
 
   given(:user) { create(:user) }
   describe 'Authenticated user' do
-
     before do
       sign_in(user)
       visit questions_path
