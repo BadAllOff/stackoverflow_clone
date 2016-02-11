@@ -11,7 +11,6 @@ feature 'Update question attachments', %q{
   given!(:attachment) { create(:attachment, attachable: question) }
 
   describe 'Authenticated user' do
-
     context 'operates with his own answer' do
       before do
         sign_in(user)
@@ -40,26 +39,17 @@ feature 'Update question attachments', %q{
 
         expect(page).to_not have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg'
       end
-
     end
 
-    context "- can't operate other users question" do
-      before  do
-        sign_in(another_user)
-        visit question_path(question)
-      end
-
-      scenario "- can't see control buttons for other users question" do
-        expect(page).to_not have_css('div.question_control_btns')
-      end
-    end
   end
 
 
   describe 'Non-Authenticated user' do
+    before { visit question_path(question) }
+
     scenario "- can't see control buttons at all " do
-      visit question_path(question)
       expect(page).to_not have_css('div.question_control_btns')
+      expect(page).to_not have_link('Remove attachment')
     end
   end
 
