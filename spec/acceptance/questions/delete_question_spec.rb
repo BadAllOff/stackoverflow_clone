@@ -10,7 +10,6 @@ feature 'Delete Question', %q(
   given(:another_user) { create(:user) }
   given(:question) { create(:question, user: user) }
 
-
   describe 'Authenticated user' do
     context 'operates his own question' do
       before do
@@ -26,6 +25,7 @@ feature 'Delete Question', %q(
         expect(current_path).to eq questions_path
       end
     end
+
 
     context 'operates other user answer' do
       before do
