@@ -1,3 +1,5 @@
+require_relative '../../acceptance/acceptance_helper'
+
 feature 'Remove attachment from Question', %q(
         In order to update my question
         As an authenticated user
