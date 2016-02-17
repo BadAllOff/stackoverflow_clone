@@ -8,8 +8,8 @@ html
     = csrf_meta_tags
   body
     = render partial: 'shared/fixed_navbar'
+    .flash-messages
+      = flash_messages
     .container
       .row
-        .flash-messages
-          = flash_messages
         = yield
