@@ -68,3 +68,12 @@ body{
   color: green;
   font-weight: bold;
 }
+
+.alert{
+  @extend .alert;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  text-align: center;
+}
