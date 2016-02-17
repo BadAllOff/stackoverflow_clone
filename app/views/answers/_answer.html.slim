@@ -3,16 +3,14 @@
     .row
       .col-xs-2.col-md-2.vote
         ul.list-group
-          li.list-group-item.text-center
-            a[href='#']
-              =icon('chevron-up')
-              |  Vote up
-          li.list-group-item.text-center
-            span.label.label-default 10
-          li.list-group-item.text-center
-            a[href='#']
-              =icon('chevron-down')
-              |  Vote down
+          li.list-group-item.text-center.votes_answer
+            .btn-group
+              a.btn.btn-info.vote_answer_up
+                =icon('thumbs-o-up')
+              a.btn.btn-disabled.vote_answer_result
+                | 10
+              a.btn.btn-danger.vote_answer_down
+                =icon('thumbs-o-down fa-flip-horizontal')
           -if user_signed_in? && current_user.author_of?(@question)
             -if answer.best_answer
               li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
@@ -30,12 +28,8 @@
                 span
                   =icon('star')
                   |  Best Answer
-      .col-xs-2.col-md-1
-        img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
       .col-xs-8.col-md-9
         div
-          a[href="#link_to_somewhere"]
-            |  Google Style comment with bootstrap
           .mic-info
             |  By:
             a[href="#"]
@@ -56,3 +50,5 @@
                 = icon('pencil')
                 '  Edit answer
           div class="form_for_answer-#{answer.id}"
+      .col-xs-2.col-md-1
+        img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
