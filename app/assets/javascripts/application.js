@@ -17,3 +17,18 @@
 //= require bootstrap
 //= require cocoon
 //= require_tree .
+
+var ready;
+
+ready = function() {
+    setTimeout(function(){
+        $('.flash-messages > .alert').fadeOut('slow', function(){
+            //$(this).remove();
+        });
+    }, 5500);
+};
+
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('page:update', ready);
