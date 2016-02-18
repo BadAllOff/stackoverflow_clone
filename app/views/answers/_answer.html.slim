@@ -4,13 +4,15 @@
       .col-xs-2.col-md-2.vote
         ul.list-group
           li.list-group-item.text-center.votes_answer
-            .btn-group
+            .btn-group-vertical
               a.btn.btn-info.vote_answer_up
                 =icon('thumbs-o-up')
+                |  Up
               a.btn.btn-disabled.vote_answer_result
                 | 10
               a.btn.btn-danger.vote_answer_down
                 =icon('thumbs-o-down fa-flip-horizontal')
+                |  Down
           -if user_signed_in? && current_user.author_of?(@question)
             -if answer.best_answer
               li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
