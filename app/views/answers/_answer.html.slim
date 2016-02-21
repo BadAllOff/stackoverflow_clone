@@ -3,33 +3,8 @@
     .row
       .col-xs-2.col-md-2.vote
         ul.list-group
-          li.list-group-item.text-center.votes_answer
-            .btn-group-vertical
-              a.btn.btn-info.vote_answer_up
-                =icon('thumbs-o-up')
-                |  Up
-              a.btn.btn-disabled.vote_answer_result
-                | 10
-              a.btn.btn-danger.vote_answer_down
-                =icon('thumbs-o-down fa-flip-horizontal')
-                |  Down
-          -if user_signed_in? && current_user.author_of?(@question)
-            -if answer.best_answer
-              li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
-                =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-on' do
-                  =icon('star')
-                  |  Best answer
-            -else
-              li.list-group-item.text-center class="best-answer-vote-link-id-#{answer.id}"
-                =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-off'do
-                  =icon('check')
-                  |  Accept answer
-          -else
-            -if answer.best_answer
-              li.list-group-item.text-center.text-success
-                span
-                  =icon('star')
-                  |  Best Answer
+          = render partial: 'answers/vote_buttons', locals: {answer: answer}
+          = render partial: 'answers/best_answer', locals: {answer: answer}
       .col-xs-8.col-md-9
         div
           .mic-info
@@ -42,15 +17,6 @@
           =answer.body
         .answer_attachments
           = render 'attachments/attachments', attachable: answer
-        -if user_signed_in? && current_user.author_of?(answer)
-          .action.answer_control_btns
-            .btn-group.btn-group-xs
-              =link_to [answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
-                = icon('trash')
-                '  Delete answer
-              =link_to edit_answer_path(answer, question_id: @question), remote: true, class: 'btn btn-warning btn-answer-edit' do
-                = icon('pencil')
-                '  Edit answer
-          div class="form_for_answer-#{answer.id}"
+        = render partial: 'answers/control_buttons', locals: {answer: answer}
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
