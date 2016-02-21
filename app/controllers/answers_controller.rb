@@ -41,6 +41,7 @@ class AnswersController < ApplicationController
   def set_best
     if current_user.author_of?(@question)
       @answer.set_best
+      flash[:success] = 'Success'
     else
       flash[:error] = "You can't choose best answer. You are not the owner of this question."
     end
