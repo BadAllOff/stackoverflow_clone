@@ -43,4 +43,11 @@ RSpec.describe User do
     end
   end
 
+  describe 'voted_for?' do
+    it 'voted_for? answer ' do
+      user.vote_for(answer, 1)
+      expect(user.voted_for?(answer)).to be_truthy
+    end
+  end
+
 end

@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     vote.save
   end
 
+  def voted_for?(votable)
+    votes.where(votable: votable).any?
+  end
+
 end

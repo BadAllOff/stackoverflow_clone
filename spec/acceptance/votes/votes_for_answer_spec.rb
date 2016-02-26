@@ -57,15 +57,27 @@ feature 'Votes for answer', %q{
           expect(page).to have_content('You have successfully voted down for answer')
         end
 
-        scenario "- user can't vote twice positivele or negativly for one answer" do
+        scenario "- user can't vote twice positivele for one answer", js: true do
+          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
+          sleep 1
+          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
+
+          expect(page).to have_content('You already voted up for this answer')
+        end
+
+        scenario "- user can't vote twice negativly for one answer", js: true do
+          within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
+          sleep 1
+          within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
+
+          expect(page).to have_content('You already voted down for this answer')
+        end
+
+        scenario '- user can cancel his vote and re-vote', js: true do
 
         end
 
-        scenario '- user can cancel his vote and re-vote' do
-
-        end
-
-        scenario '- the user sees the result of their vote in the form of answers ranking' do
+        scenario '- the user sees the result of their vote in the form of answers ranking', js: true do
 
         end
       end

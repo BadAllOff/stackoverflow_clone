@@ -10,8 +10,12 @@ module Voted
     if current_user.author_of?(@votable)
       flash[:error] = "You can't vote for your own answer"
     else
-      flash[:success] = 'You have successfully voted up for answer'
-      current_user.vote_for(@votable, 1)
+      if current_user.voted_for?(@votable)
+        flash[:error] = 'You already voted up for this answer'
+      else
+        flash[:success] = 'You have successfully voted up for answer'
+        current_user.vote_for(@votable, 1)
+      end
     end
 
     render 'vote'
@@ -22,8 +26,12 @@ module Voted
     if current_user.author_of?(@votable)
       flash[:error] = "You can't vote for your own answer"
     else
-      flash[:success] = 'You have successfully voted down for answer'
-      current_user.vote_for(@votable, -1)
+      if current_user.voted_for?(@votable)
+        flash[:error] = 'You already voted down for this answer'
+      else
+        flash[:success] = 'You have successfully voted down for answer'
+        current_user.vote_for(@votable, -1)
+      end
     end
 
     render 'vote'
