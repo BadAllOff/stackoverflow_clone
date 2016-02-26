@@ -22,7 +22,7 @@ feature 'Add files to question', %q{
           click_on 'Create Question'
         end
 
-        expect(page).to have_link '10x10.jpg', href: '/uploads/attachment/file/1/10x10.jpg'
+        expect(page).to have_link '10x10.jpg'
       end
 
       scenario '- adds attachment when asks question, but changes his mind, deletes file field from form', js: true do
@@ -35,7 +35,7 @@ feature 'Add files to question', %q{
           click_on 'Create Question'
         end
 
-        expect(page).to_not have_link '10x10.jpg', href: '/uploads/attachment/file/1/10x10.jpg'
+        expect(page).to_not have_link '10x10.jpg'
       end
 
       scenario '- could add several files when asks question', js: true do

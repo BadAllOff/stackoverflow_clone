@@ -27,7 +27,7 @@ feature 'Update answer attachments', %q{
           click_on 'Update Answer'
         end
 
-        within("li#answer-#{answer.id}") { expect(page).to have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg' }
+        within("li#answer-#{answer.id}") { expect(page).to have_link '20x20.jpg' }
       end
 
       scenario '- add additional files to answer, changes his mind, removes attachment field', js: true do
@@ -39,7 +39,7 @@ feature 'Update answer attachments', %q{
           click_on 'Update Answer'
         end
 
-        within("li#answer-#{answer.id}") { expect(page).to_not have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg' }
+        within("li#answer-#{answer.id}") { expect(page).to_not have_link '20x20.jpg' }
       end
     end
 
