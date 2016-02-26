@@ -16,4 +16,25 @@ RSpec.describe User do
     it { should validate_uniqueness_of(:username) }
   end
 
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
+  let(:attachment) { create(:attachment, attachable: question) }
+
+  describe 'author_of?' do
+
+    it 'question author_of?' do
+      expect(user.author_of?(question)).to be_truthy
+    end
+
+    it 'answer author_of?' do
+      expect(user.author_of?(answer)).to be_truthy
+    end
+
+    it 'attachment author_of?' do
+      expect(user.author_of?(attachment.attachable)).to be_truthy
+    end
+
+  end
+
 end
