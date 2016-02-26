@@ -1,6 +1,6 @@
 li.list-group-item.text-center.votes_answer
   .btn-group-vertical
-    a.btn.btn-info.vote_answer_up
+    =link_to upvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-info vote_answer_up' do
       =icon('thumbs-o-up')
       |  Vote Up
     a.btn.btn-disabled.vote_answer_result

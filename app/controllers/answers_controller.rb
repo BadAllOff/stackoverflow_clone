@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-
-  before_action :load_question, except: [:update, :destroy]
+  before_action :load_question, only: [:create, :edit, :set_best]
   before_action :load_answer, except: [:create]
+  include Voted
 
   def create
     @answer = @question.answers.build(answer_params)
