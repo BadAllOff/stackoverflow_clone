@@ -7,6 +7,13 @@ module Voted
 
 
   def upvote
+    if current_user.author_of?(@votable)
+      flash[:error] = "You can't vote for your own answer"
+    else
+      flash[:success] = 'You have successfully voted up for answer'
+      current_user.vote_for(@votable, 1)
+    end
+
     render 'vote'
   end
 

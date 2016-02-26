@@ -9,6 +9,6 @@
     new_best_answer.removeClass('vote-accepted-off').addClass('vote-accepted-on');
     new_best_answer.html('<%= icon('star')%> Best answer');
   <% end %>
-$('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
 <% end %>
 <% flash.discard %>

@@ -37,4 +37,10 @@ RSpec.describe User do
 
   end
 
+  describe '#upvote_for answer' do
+    it 'upvote by 1' do
+      expect{ user.vote_for(answer, 1) }.to change(answer.votes.upvotes, :count).by(1)
+    end
+  end
+
 end

@@ -1,0 +1,6 @@
+<% if flash[:error].present? %>
+$('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+<% else %>
+$('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+<% end %>
+<% flash.discard %>

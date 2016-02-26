@@ -19,4 +19,9 @@ class User < ActiveRecord::Base
     !author_of?(object)
   end
 
+  def vote_for(votable, value)
+    vote = votes.new(votable: votable, value: value)
+    vote.save
+  end
+
 end
