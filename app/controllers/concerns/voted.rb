@@ -17,6 +17,18 @@ module Voted
     render 'vote'
   end
 
+
+  def downvote
+    if current_user.author_of?(@votable)
+      flash[:error] = "You can't vote for your own answer"
+    else
+      flash[:success] = 'You have successfully voted down for answer'
+      current_user.vote_for(@votable, -1)
+    end
+
+    render 'vote'
+  end
+
   private
 
   def model_klass
