@@ -19,7 +19,13 @@ feature 'Votes for answer', %q{
           visit question_path(question)
         end
 
-        scenario "- can see vote btn for his own answer but can't vote for it", js: true do
+        scenario "- can see vote btn for his own answer but can't upvote for it", js: true do
+          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
+
+          expect(page).to have_content("You can't vote for your own answer")
+        end
+
+        scenario "- can see vote btn for his own answer but can't downvote for it", js: true do
           within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
 
           expect(page).to have_content("You can't vote for your own answer")
@@ -33,7 +39,10 @@ feature 'Votes for answer', %q{
         end
 
         scenario '- sees vote btn for other user answer' do
-          within("#answer-#{answer.id}") { expect(page).to have_content('Vote Up') }
+          within("#answer-#{answer.id}") do
+            expect(page).to have_content('Vote Up')
+            expect(page).to have_content('Vote Down')
+          end
         end
 
         scenario "- vote's positively for answer of other user", js: true  do
@@ -43,7 +52,9 @@ feature 'Votes for answer', %q{
         end
 
         scenario "- vote's negatively for answer of other user", js: true  do
+          within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
 
+          expect(page).to have_content('You have successfully voted down for answer')
         end
 
         scenario "- user can't vote twice positivele or negativly for one answer" do

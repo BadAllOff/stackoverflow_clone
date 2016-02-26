@@ -9,5 +9,6 @@ class Vote < ActiveRecord::Base
 
 
   # TODO: - how to test this scope?
-  scope :upvotes,   -> { where(value: 1) }
+  scope :upvotes,     -> { where(value: 1) }
+  scope :downvotes,   -> { where(value: -1) }
 end

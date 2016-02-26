@@ -5,6 +5,6 @@ li.list-group-item.text-center.votes_answer
       |  Vote Up
     a.btn.btn-disabled.vote_answer_result
       | 10
-    a.btn.btn-danger.vote_answer_down
+    =link_to downvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-danger vote_answer_down' do
       =icon('thumbs-o-down fa-flip-horizontal')
       |  Vote Down
