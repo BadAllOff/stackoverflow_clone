@@ -25,7 +25,7 @@ feature 'Update question attachments', %q{
           click_on 'Update Question'
         end
 
-        expect(page).to have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg'
+        expect(page).to have_link '20x20.jpg'
       end
 
       scenario '- add additional files to question, but changes his mind, deletes file field from form', js: true do
@@ -37,7 +37,7 @@ feature 'Update question attachments', %q{
           click_on 'Update Question'
         end
 
-        expect(page).to_not have_link '20x20.jpg', href: '/uploads/attachment/file/2/20x20.jpg'
+        expect(page).to_not have_link '20x20.jpg'
       end
     end
 
