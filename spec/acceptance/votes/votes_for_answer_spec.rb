@@ -13,29 +13,36 @@ feature 'Votes for answer', %q{
     given!(:another_answer) { create(:answer, question: question, user: user) }
 
     describe 'Authenticated User' do
-      before do
-        sign_in(user)
-        visit question_path(question)
-      end
-
       context 'votes for his answer' do
-        scenario "- can see vote btn for his own answer but can't vote for it" do
+        before do
+          sign_in(user)
+          visit question_path(question)
+        end
+
+        scenario "- can see vote btn for his own answer but can't vote for it", js: true do
           within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
 
-          expect(page).to have_content("You can't vote for your answer")
+          expect(page).to have_content("You can't vote for your own answer")
         end
       end
 
       context "votes for other user's answer" do
+        before do
+          sign_in(another_user)
+          visit question_path(question)
+        end
+
         scenario '- sees vote btn for other user answer' do
-
+          within("#answer-#{answer.id}") { expect(page).to have_content('Vote Up') }
         end
 
-        scenario "- vote's positively for answer of other user" do
+        scenario "- vote's positively for answer of other user", js: true  do
+          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
 
+          expect(page).to have_content('You have successfully voted up for answer')
         end
 
-        scenario "- vote's negatively for answer of other user" do
+        scenario "- vote's negatively for answer of other user", js: true  do
 
         end
 
