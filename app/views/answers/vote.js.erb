@@ -2,5 +2,6 @@
 $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
 <% else %>
 $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+$('#answer-<%= @votable.id %>').find('.votes_answer').replaceWith('<%= j render partial: 'answers/vote_buttons', locals: {answer: @votable} %>');
 <% end %>
 <% flash.discard %>
