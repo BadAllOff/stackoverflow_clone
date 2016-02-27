@@ -21,7 +21,7 @@ RSpec.describe User do
   let(:answer) { create(:answer, question: question, user: user) }
   let(:attachment) { create(:attachment, attachable: question) }
 
-  describe 'author_of?' do
+  describe '#author_of?' do
 
     it 'question author_of?' do
       expect(user.author_of?(question)).to be_truthy
@@ -43,10 +43,18 @@ RSpec.describe User do
     end
   end
 
-  describe 'voted_for?' do
+  describe '#voted_for?' do
     it 'voted_for? answer ' do
       user.vote_for(answer, 1)
       expect(user.voted_for?(answer)).to be_truthy
+    end
+  end
+
+
+  describe '#unvote_for' do
+    it 'resets vote for answer' do
+      user.vote_for(answer, 1)
+      expect{ user.unvote_for(answer) }.to change(answer.votes.upvotes, :count).by(-1)
     end
   end
 

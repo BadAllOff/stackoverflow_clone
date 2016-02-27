@@ -7,6 +7,7 @@ RSpec.describe Vote, type: :model do
   end
 
   describe 'Validations' do
+    # it { should validate_uniqueness_of(:user_id).scoped_to([:votable_type, :votable_id]) }
     it { should validate_presence_of :value }
   end
 end

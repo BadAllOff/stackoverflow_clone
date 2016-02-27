@@ -37,6 +37,21 @@ module Voted
     render 'vote'
   end
 
+  def unvote
+    if current_user.author_of?(@votable)
+      flash[:error] = "You can't vote for your own answer"
+    else
+      if current_user.voted_for?(@votable)
+        flash[:success] = 'Your vote has been deleted. You can revote now'
+        current_user.unvote_for(@votable)
+      else
+        flash[:error] = "You didn't yet vote for answer. There is nothing to reset"
+      end
+    end
+
+    render 'vote'
+  end
+
   private
 
   def model_klass

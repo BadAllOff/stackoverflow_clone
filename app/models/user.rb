@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
     votes.where(votable: votable).any?
   end
 
+
+  def unvote_for(votable)
+    votes.where(votable: votable).delete_all
+  end
+
 end
