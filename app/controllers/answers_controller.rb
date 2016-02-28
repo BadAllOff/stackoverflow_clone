@@ -58,7 +58,7 @@ class AnswersController < ApplicationController
   end
 
   def load_answer
-    @answer = Answer.find(params[:id])
+    @answer = Answer.includes(:attachments, :votes).find(params[:id])
     @question = @answer.question
   end
 
