@@ -13,6 +13,9 @@
  * require_tree .
  * require_self
  */
+//= require peek
+//= require peek/views/performance_bar
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
@@ -21,6 +24,15 @@
 body{
   min-height: 2000px;
   padding-top: 70px;
+
+  #peek{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 999;
+    //top: 51px;
+  }
 }
 
 .colorgraph {

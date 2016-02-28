@@ -47,4 +47,10 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'peek'
+  gem 'peek-git'
+  gem 'peek-pg'
+  gem 'peek-alt-routes'
+  gem 'peek-performance_bar'
+  gem 'bullet'
 end
