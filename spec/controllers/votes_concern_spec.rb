@@ -11,6 +11,7 @@ describe AnswersController do
       before { sign_in(user) }
       it '- does not keep the vote' do
         expect { patch :upvote, id: answer, format: :js }.to_not change(answer.votes.upvotes, :count)
+        expect { patch :upvote, id: answer, format: :js }.to_not change(answer.votes.upvotes, :size)
       end
     end
 

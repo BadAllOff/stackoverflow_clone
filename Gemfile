@@ -36,6 +36,12 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'database_cleaner'
   gem 'capybara-webkit'
+  gem 'peek'
+  gem 'peek-git'
+  gem 'peek-performance_bar'
+  gem 'peek-pg'
+  gem 'peek-rblineprof'
+  gem 'pygments.rb', :require => false
 end
 
 group :test do
@@ -47,10 +53,5 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'peek'
-  gem 'peek-git'
-  gem 'peek-pg'
-  gem 'peek-alt-routes'
-  gem 'peek-performance_bar'
   gem 'bullet'
 end
