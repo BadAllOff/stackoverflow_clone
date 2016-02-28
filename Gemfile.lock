@@ -85,6 +85,7 @@ GEM
     daemons (1.2.3)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    debugger-ruby_core_source (1.3.8)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -144,8 +145,6 @@ GEM
     peek (0.1.10)
       atomic (>= 1.0.0)
       railties (>= 3.0.0)
-    peek-alt-routes (1.0.0)
-      peek
     peek-git (1.0.2)
       peek
     peek-performance_bar (1.2.0)
@@ -154,8 +153,15 @@ GEM
       atomic (>= 1.0.0)
       peek
       pg
+    peek-rblineprof (0.1.2)
+      peek
+      rblineprof
     pg (0.18.4)
+    posix-spawn (0.3.11)
     powerpack (0.1.1)
+    pygments.rb (0.6.3)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.2.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -187,6 +193,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (10.5.0)
+    rblineprof (0.3.6)
+      debugger-ruby_core_source (~> 1.3)
     rdoc (4.2.2)
       json (~> 1.4)
     remotipart (1.2.1)
@@ -279,6 +287,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
@@ -303,11 +312,12 @@ DEPENDENCIES
   launchy
   mailcatcher
   peek
-  peek-alt-routes
   peek-git
   peek-performance_bar
   peek-pg
+  peek-rblineprof
   pg (~> 0.15)
+  pygments.rb
   rails (= 4.2.5)
   remotipart (~> 1.2)
   rspec-rails

@@ -15,4 +15,8 @@ class Answer < ActiveRecord::Base
       best_answer ? update!(best_answer: false) : update!(best_answer: true)
     end
   end
+
+  def rating(sum)
+    update!(rating_index: sum)
+  end
 end
