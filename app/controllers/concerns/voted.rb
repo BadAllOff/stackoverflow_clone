@@ -15,10 +15,10 @@ module Voted
       else
         flash[:success] = 'You have successfully voted up for answer'
         current_user.vote_for(@votable, 1)
-        @votable.rating(@votable.votes.rating)
       end
     end
 
+    update_rating
     render 'vote'
   end
 
@@ -32,10 +32,10 @@ module Voted
       else
         flash[:success] = 'You have successfully voted down for answer'
         current_user.vote_for(@votable, -1)
-        @votable.rating(@votable.votes.rating)
       end
     end
 
+    update_rating
     render 'vote'
   end
 
@@ -46,12 +46,12 @@ module Voted
       if current_user.voted_for?(@votable)
         flash[:success] = 'Your vote has been deleted. You can revote now'
         current_user.unvote_for(@votable)
-        @votable.rating(@votable.votes.rating)
       else
         flash[:error] = "You didn't yet vote for answer. There is nothing to reset"
       end
     end
 
+    update_rating
     render 'vote'
   end
 
@@ -64,6 +64,10 @@ module Voted
   def set_vote
     @votable = model_klass.find(params[:id])
     instance_variable_set("@#{controller_name.singularize}", @votable)
+  end
+
+  def update_rating
+    @votable.rating(@votable.votes.rating)
   end
 
 end
