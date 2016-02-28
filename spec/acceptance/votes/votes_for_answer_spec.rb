@@ -49,31 +49,35 @@ feature 'Votes for answer', %q{
           within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
 
           expect(page).to have_content('You have successfully voted up for answer')
-          expect(page).to     have_selector(:link_or_button, 'Unvote')
+          expect(page).to have_selector(:link_or_button, 'Unvote')
+          expect(page).to have_content(1)
         end
 
         scenario "- vote's negatively for answer of other user", js: true  do
           within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
 
           expect(page).to have_content('You have successfully voted down for answer')
-          expect(page).to     have_selector(:link_or_button, 'Unvote')
+          expect(page).to have_selector(:link_or_button, 'Unvote')
+          expect(page).to have_content(-1)
         end
 
-        scenario "- user can't vote twice positivele for one answer", js: true do
+        scenario "- user can't vote twice positively for one answer", js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_answer_up').click
 
             expect(page).to_not have_selector(:link_or_button, 'Vote Up')
             expect(page).to     have_selector(:link_or_button, 'Unvote')
+            expect(page).to     have_content(1)
           end
         end
 
-        scenario "- user can't vote twice negativly for one answer", js: true do
+        scenario "- user can't vote twice negatively for one answer", js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_answer_down').click
 
             expect(page).to_not have_selector(:link_or_button, 'Vote Up')
             expect(page).to     have_selector(:link_or_button, 'Unvote')
+            expect(page).to     have_content(-1)
           end
         end
 
@@ -85,23 +89,39 @@ feature 'Votes for answer', %q{
           end
 
           expect(page).to have_content('Your vote has been deleted. You can revote now')
-          expect(page).to     have_selector(:link_or_button, 'Vote Up')
-          expect(page).to     have_selector(:link_or_button, 'Vote Down')
+          within("#answer-#{answer.id}") do
+            expect(page).to have_selector(:link_or_button, 'Vote Up')
+            expect(page).to have_selector(:link_or_button, 'Vote Down')
+            expect(page).to have_content(0)
+          end
         end
 
         scenario '- the user sees the result of their vote in the form of answers ranking', js: true do
+          within("#answer-#{answer.id}") do
+            find('a.vote_answer_down').click
 
+            expect(page).to     have_selector(:link_or_button, 'Unvote')
+            expect(page).to     have_content(-1)
+          end
         end
       end
+
     end
 
     describe 'Non-Authenticated user' do
-      scenario "- can't see vote btns at all" do
+      before do
+        visit question_path(question)
+      end
 
+      scenario "- can't see vote btns at all" do
+        expect(page).to_not have_selector(:link_or_button, 'Vote Up')
+        expect(page).to_not have_selector(:link_or_button, 'Vote Down')
       end
 
       scenario '- can see answer rating' do
-
+        within("#answer-#{answer.id}") do
+          expect(page).to     have_content(0)
+        end
       end
     end
 

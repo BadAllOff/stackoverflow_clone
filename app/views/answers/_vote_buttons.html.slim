@@ -1,21 +1,23 @@
 li.list-group-item.text-center.votes_answer
-  .btn-group-vertical
-    - if user_signed_in? && current_user.voted_for?(answer)
-      a.btn.btn-disabled.vote_answer_result
-        | 10
-      =link_to unvote_answer_path(answer),
-               method: :patch,
-               remote: true,
-               class: 'btn btn-warning vote_answer_unvote',
-               data: { confirm: 'Are you sure?' } do
-        =icon('history')
-        |  Unvote
-    -else
-      =link_to upvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-info vote_answer_up' do
-        =icon('thumbs-o-up')
-        |  Vote Up
-      a.btn.btn-disabled.vote_answer_result
-        | 10
-      =link_to downvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-danger vote_answer_down' do
-        =icon('thumbs-o-down fa-flip-horizontal')
-        |  Vote Down
+  span.text-primary
+    = answer.votes.rating
+    '
+    =icon('star-half-o')
+  hr
+  - if user_signed_in?
+    .btn-group-vertical
+      - if current_user.voted_for?(answer)
+        =link_to unvote_answer_path(answer),
+                 method: :patch,
+                 remote: true,
+                 class: 'btn btn-warning vote_answer_unvote',
+                 data: { confirm: 'Are you sure?' } do
+          =icon('history')
+          |  Unvote
+      -else
+        =link_to upvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-info vote_answer_up' do
+          =icon('thumbs-o-up')
+          |  Vote Up
+        =link_to downvote_answer_path(answer), method: :patch, remote: true, class: 'btn btn-danger vote_answer_down' do
+          =icon('thumbs-o-down fa-flip-horizontal')
+          |  Vote Down
