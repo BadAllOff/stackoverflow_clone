@@ -27,6 +27,7 @@ gem 'activerecord-session_store'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.2'
 gem 'cocoon'
+gem 'annotate'
 
 group :development, :test do
   gem 'byebug'
@@ -53,5 +54,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry-rails'
   gem 'bullet'
+  gem 'quiet_assets'
 end
