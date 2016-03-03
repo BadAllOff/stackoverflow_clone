@@ -19,7 +19,10 @@ module Voted
     end
 
     update_rating
-    render 'vote'
+
+    respond_to do |format|
+      format.json { render 'vote' }
+    end
   end
 
 
@@ -36,7 +39,10 @@ module Voted
     end
 
     update_rating
-    render 'vote'
+
+    respond_to do |format|
+      format.json { render 'vote' }
+    end
   end
 
   def unvote
@@ -52,7 +58,10 @@ module Voted
     end
 
     update_rating
-    render 'vote'
+
+    respond_to do |format|
+      format.json { render 'vote' }
+    end
   end
 
   private
