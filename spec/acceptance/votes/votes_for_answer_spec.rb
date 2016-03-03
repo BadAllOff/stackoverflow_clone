@@ -19,16 +19,16 @@ feature 'Votes for answer', %q{
           visit question_path(question)
         end
 
-        scenario "- can see vote btn for his own answer but can't upvote for it", js: true do
-          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
-
-          expect(page).to have_content("You can't vote for your own answer")
+        scenario "- can's see vote btn for his own answer and can't upvote for it", js: true do
+          within("#answer-#{answer.id}") do
+            expect(page).to_not have_selector(:link_or_button,  'Vote Up')
+          end
         end
 
-        scenario "- can see vote btn for his own answer but can't downvote for it", js: true do
-          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
-
-          expect(page).to have_content("You can't vote for your own answer")
+        scenario "- can't see vote btn for his own answer but can't downvote for it", js: true do
+          within("#answer-#{answer.id}") do
+            expect(page).to_not have_selector(:link_or_button,  'Vote Down')
+          end
         end
       end
 
