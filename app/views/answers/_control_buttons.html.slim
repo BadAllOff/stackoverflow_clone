@@ -4,7 +4,7 @@
       =link_to [answer], method: :delete, remote: true, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}
         = icon('trash')
         '  Delete answer
-      =link_to edit_answer_path(answer, question_id: @question), remote: true, class: 'btn btn-warning btn-answer-edit' do
+      =link_to edit_answer_path(answer, question_id: @question), remote: true, data: { disable_with: "Loading..." }, class: 'btn btn-warning btn-answer-edit' do
         = icon('pencil')
         '  Edit answer
   div class="form_for_answer-#{answer.id}"

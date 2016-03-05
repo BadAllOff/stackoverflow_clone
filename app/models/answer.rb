@@ -21,7 +21,7 @@ class Answer < ActiveRecord::Base
 
   validates :body, :user, :question, presence: true
 
-  default_scope { order(best_answer: :desc).order(created_at: :desc) }
+  default_scope -> { order(best_answer: :desc).order(created_at: :desc) }
 
   def set_best
     ActiveRecord::Base.transaction do

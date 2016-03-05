@@ -3,7 +3,7 @@
     button class="close" data-dismiss="alert"
       | x
     i class="glyphicon glyphicon-ok-circle"
-    |  
+    |
     = @object.ok_msg
 - if @object.error_msg
   div class="alert alert-danger fade in"
