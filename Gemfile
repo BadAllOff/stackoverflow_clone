@@ -29,6 +29,7 @@ gem 'remotipart', '~> 1.2'
 gem 'cocoon'
 gem 'annotate'
 gem 'skim'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug'
@@ -58,4 +59,5 @@ group :development do
   gem 'pry-rails'
   gem 'bullet'
   gem 'quiet_assets'
+  gem 'derailed'
 end

@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  # gives ability to use flash helper methods
+  add_flash_types :success, :error
+
   protected
 
   def configure_permitted_parameters

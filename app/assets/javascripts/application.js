@@ -19,6 +19,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require cocoon
+//= require jquery-ui
 //= require_tree .
 
 var ready;
@@ -30,7 +31,6 @@ ready = function() {
         });
     }, 5500);
 };
-
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
