@@ -19,7 +19,7 @@ feature 'Votes for answer', %q{
           visit question_path(question)
         end
 
-        scenario "- can's see vote btn for his own answer and can't upvote for it", js: true do
+        scenario "- can's see vote btn for his own Answer and can't upvote for it", js: true do
           within("#answer-#{answer.id}") do
             expect(page).to_not have_selector(:link_or_button,  'Vote Up')
           end
@@ -48,7 +48,7 @@ feature 'Votes for answer', %q{
         scenario "- vote's positively for answer of other user", js: true  do
           within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
 
-          expect(page).to have_content('You have successfully voted up for answer')
+          expect(page).to have_content('You have successfully voted up for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
           expect(page).to have_content(1)
         end
@@ -56,7 +56,7 @@ feature 'Votes for answer', %q{
         scenario "- vote's negatively for answer of other user", js: true  do
           within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
 
-          expect(page).to have_content('You have successfully voted down for answer')
+          expect(page).to have_content('You have successfully voted down for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
           expect(page).to have_content(-1)
         end
@@ -88,7 +88,7 @@ feature 'Votes for answer', %q{
             find('a.vote_answer_unvote').click
           end
 
-          expect(page).to have_content('Your vote has been deleted. You can revote now')
+          expect(page).to have_content('Your vote has been deleted. You can re-vote now')
           within("#answer-#{answer.id}") do
             expect(page).to have_selector(:link_or_button, 'Vote Up')
             expect(page).to have_selector(:link_or_button, 'Vote Down')
