@@ -30,6 +30,19 @@ ready = function() {
             //$(this).remove();
         });
     }, 5500);
+
+  $(function() {
+    return $('#answers').bind('ajax:success', function(e, data, status, xhr) {
+      var answer;
+      answer = $.parseJSON(xhr.responseText);
+      $("#answer-" + answer.id + " .votes_answer").html(JST["templates/votes"]({
+        object: answer
+      }));
+      return $('.flash-messages').append(JST["templates/msg"]({
+        object: answer
+      }));
+    });
+  });
 };
 
 $(document).ready(ready);
