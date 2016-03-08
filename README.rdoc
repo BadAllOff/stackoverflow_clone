@@ -1,5 +1,9 @@
 == README
 
+[![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
+
+[![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

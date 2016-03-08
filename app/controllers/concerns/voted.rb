@@ -1,10 +1,10 @@
+# Ability to vote for something
 module Voted
   extend ActiveSupport::Concern
 
   included do
     before_action :set_vote, only: [:upvote, :downvote, :unvote]
   end
-
 
   def upvote
     if current_user.author_of?(@votable)
@@ -24,7 +24,6 @@ module Voted
       format.json { render 'vote' }
     end
   end
-
 
   def downvote
     if current_user.author_of?(@votable)
