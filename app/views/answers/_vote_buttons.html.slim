@@ -1,6 +1,6 @@
 li.list-group-item.text-center.votes_answer
   span.text-primary
-    = answer.rating_index
+    = answer.votes.rating
     '
     =icon('star-half-o')
   hr
@@ -12,13 +12,13 @@ li.list-group-item.text-center.votes_answer
                    method: :patch,
                    remote: true,
                    data: { format: :json },
-                   class: 'btn btn-warning vote_answer_unvote' do
+                   class: 'btn btn-warning vote_unvote' do
             =icon('history')
             |  Unvote
         -else
-          =link_to upvote_answer_path(answer), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-info vote_answer_up' do
+          =link_to upvote_answer_path(answer), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-info vote_up' do
             =icon('thumbs-o-up')
             |  Vote Up
-          =link_to downvote_answer_path(answer), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-danger vote_answer_down' do
+          =link_to downvote_answer_path(answer), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-danger vote_down' do
             =icon('thumbs-o-down fa-flip-horizontal')
             |  Vote Down
