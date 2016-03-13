@@ -2,9 +2,9 @@ $('.question-messages').empty();
 $('.flash-messages').empty();
 <% if @question.errors.present? %>
   $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
-  $('#question_container').find('.question-messages').html('<%= j render 'shared/errors', object: @question %>');
+  $('#question-<%= @question.id %>').find('.question-messages').html('<%= j render 'shared/errors', object: @question %>');
 <% else %>
   $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
-  $('#question_container').replaceWith('<%= j render @question %>');
+  $('#question-<%= @question.id %>').replaceWith('<%= j render @question %>');
 <% end %>
 <% flash.discard %>

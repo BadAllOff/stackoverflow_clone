@@ -1,0 +1,25 @@
+ul.list-group
+  li.list-group-item.text-center.votes_question
+    span.text-primary
+      | 10
+      '
+      =icon('star-half-o')
+    hr
+    - if user_signed_in?
+      - if !current_user.author_of?(@question)
+        .btn-group-vertical
+          - if current_user.voted_for?(@question)
+            =link_to unvote_question_path(@question),
+                     method: :patch,
+                     remote: true,
+                     data:  { format: :json },
+                     class: 'btn btn-warning vote_question_unvote' do
+              =icon('history')
+              |  Unvote
+          -else
+            =link_to upvote_question_path(@question), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-info vote_question_up' do
+              =icon('thumbs-o-up')
+              |  Vote Up
+            =link_to downvote_question_path(@question), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-danger vote_question_down' do
+              =icon('thumbs-o-down fa-flip-horizontal')
+              |  Vote Down
