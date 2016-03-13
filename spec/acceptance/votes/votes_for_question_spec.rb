@@ -70,6 +70,39 @@ feature 'Votes for question', %q{
           end
         end
 
+        scenario "- user can't vote twice negatively for one question", js: true do
+          within("#question-#{question.id}") do
+            find('a.vote_down').click
+
+            expect(page).to_not have_selector(:link_or_button, 'Vote Up')
+            expect(page).to     have_selector(:link_or_button, 'Unvote')
+            expect(page).to     have_content(-1)
+          end
+        end
+
+        scenario '- user can cancel his vote and re-vote', js: true do
+          within("#question-#{question.id}") do
+            find('a.vote_down').click
+            sleep 1
+            find('a.vote_unvote').click
+          end
+
+          expect(page).to have_content('Your vote has been deleted. You can re-vote now')
+          within("#question-#{question.id}") do
+            expect(page).to have_selector(:link_or_button, 'Vote Up')
+            expect(page).to have_selector(:link_or_button, 'Vote Down')
+            expect(page).to have_content(0)
+          end
+        end
+
+        scenario '- the user sees the result of their vote in the form of question ranking', js: true do
+          within("#question-#{question.id}") do
+            find('a.vote_down').click
+
+            expect(page).to     have_selector(:link_or_button, 'Unvote')
+            expect(page).to     have_content(-1)
+          end
+        end
       end
     end
 
