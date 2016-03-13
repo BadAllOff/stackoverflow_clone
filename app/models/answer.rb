@@ -30,7 +30,4 @@ class Answer < ActiveRecord::Base
     end
   end
 
-  def rating(sum)
-    update!(rating_index: sum)
-  end
 end

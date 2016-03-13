@@ -18,8 +18,6 @@ module Voted
       end
     end
 
-    update_rating
-
     render 'vote'
   end
 
@@ -34,8 +32,6 @@ module Voted
         current_user.vote_for(@votable, -1)
       end
     end
-
-    update_rating
 
     render 'vote'
   end
@@ -52,8 +48,6 @@ module Voted
       end
     end
 
-    update_rating
-
     render 'vote'
   end
 
@@ -66,10 +60,6 @@ module Voted
   def set_vote
     @votable = model_klass.find(params[:id])
     instance_variable_set("@#{controller_name.singularize}", @votable)
-  end
-
-  def update_rating
-    @votable.rating(@votable.votes.rating)
   end
 
 end

@@ -46,7 +46,7 @@ feature 'Votes for answer', %q{
         end
 
         scenario "- vote's positively for answer of other user", js: true  do
-          within("#answer-#{answer.id}") { find('a.vote_answer_up').click }
+          within("#answer-#{answer.id}") { find('a.vote_up').click }
 
           expect(page).to have_content('You have successfully voted up for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
@@ -54,7 +54,7 @@ feature 'Votes for answer', %q{
         end
 
         scenario "- vote's negatively for answer of other user", js: true  do
-          within("#answer-#{answer.id}") { find('a.vote_answer_down').click }
+          within("#answer-#{answer.id}") { find('a.vote_down').click }
 
           expect(page).to have_content('You have successfully voted down for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
@@ -63,7 +63,7 @@ feature 'Votes for answer', %q{
 
         scenario "- user can't vote twice positively for one answer", js: true do
           within("#answer-#{answer.id}") do
-            find('a.vote_answer_up').click
+            find('a.vote_up').click
 
             expect(page).to_not have_selector(:link_or_button, 'Vote Up')
             expect(page).to     have_selector(:link_or_button, 'Unvote')
@@ -73,7 +73,7 @@ feature 'Votes for answer', %q{
 
         scenario "- user can't vote twice negatively for one answer", js: true do
           within("#answer-#{answer.id}") do
-            find('a.vote_answer_down').click
+            find('a.vote_down').click
 
             expect(page).to_not have_selector(:link_or_button, 'Vote Up')
             expect(page).to     have_selector(:link_or_button, 'Unvote')
@@ -83,9 +83,9 @@ feature 'Votes for answer', %q{
 
         scenario '- user can cancel his vote and re-vote', js: true do
           within("#answer-#{answer.id}") do
-            find('a.vote_answer_down').click
+            find('a.vote_down').click
             sleep 1
-            find('a.vote_answer_unvote').click
+            find('a.vote_unvote').click
           end
 
           expect(page).to have_content('Your vote has been deleted. You can re-vote now')
@@ -98,7 +98,7 @@ feature 'Votes for answer', %q{
 
         scenario '- the user sees the result of their vote in the form of answers ranking', js: true do
           within("#answer-#{answer.id}") do
-            find('a.vote_answer_down').click
+            find('a.vote_down').click
 
             expect(page).to     have_selector(:link_or_button, 'Unvote')
             expect(page).to     have_content(-1)

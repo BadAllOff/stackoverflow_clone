@@ -43,6 +43,19 @@ ready = function() {
       }));
     });
   });
+
+  $(function() {
+    return $('#question').bind('ajax:success', function(e, data, status, xhr) {
+      var question;
+      question = $.parseJSON(xhr.responseText);
+      $("#question-" + question.id + " .votes_question").html(JST["templates/votes"]({
+        object: question
+      }));
+      return $('.flash-messages').append(JST["templates/msg"]({
+        object: question
+      }));
+    });
+  });
 };
 
 $(document).ready(ready);

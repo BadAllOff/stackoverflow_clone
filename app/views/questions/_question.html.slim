@@ -2,8 +2,9 @@ div class='question_container' id="question-#{@question.id}"
   h1
     = @question.title
   hr.colorgraph
-  div.col-xs-2
-    =render 'vote_buttons'
+  div.col-xs-2 id='question'
+    ul.list-group
+      =render 'vote_buttons'
   div.col-xs-10
     p
       = @question.body
