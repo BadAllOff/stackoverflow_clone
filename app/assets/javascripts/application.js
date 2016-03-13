@@ -29,7 +29,7 @@ ready = function() {
         $('.flash-messages > .alert').fadeOut('slow', function(){
             //$(this).remove();
         });
-    }, 5500);
+    }, 3500);
 
   $(function() {
     return $('#answers').bind('ajax:success', function(e, data, status, xhr) {

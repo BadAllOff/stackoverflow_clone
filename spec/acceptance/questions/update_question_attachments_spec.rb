@@ -18,7 +18,7 @@ feature 'Update question attachments', %q{
       end
 
       scenario '- add additional files to question and update', js: true do
-        within('div#question_container') do
+        within("div#question-#{question.id}") do
           click_on 'Edit question'
           click_on 'Add file'
           attach_file 'File', "#{Rails.root}/spec/fixtures/20x20.jpg"
@@ -29,7 +29,7 @@ feature 'Update question attachments', %q{
       end
 
       scenario '- add additional files to question, but changes his mind, deletes file field from form', js: true do
-        within('div#question_container') do
+        within("div#question-#{question.id}") do
           click_on 'Edit question'
           click_on 'Add file'
           attach_file 'File', "#{Rails.root}/spec/fixtures/20x20.jpg"
