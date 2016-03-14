@@ -1,14 +1,9 @@
 .panel.panel-default.widget
   .panel-heading
     span.glyphicon.glyphicon-comment
-    h3.panel-title
-      |  Recent Comments
-    span.label.label-info
-      / TODO count answers
-      |  number
+    h3.panel-title Recent Comments
+    span.label.label-info = @question.answers.count
   .panel-body
-    ul.list-group.answers_list id='answers'
-      = render @question.answers
+    ul.list-group.answers_list id='answers' = render @question.answers
     a.btn.btn-primary.btn-sm.btn-block[href="#" role="button"]
-      span.glyphicon.glyphicon-refresh
-      |  More
+      span.glyphicon.glyphicon-refresh More

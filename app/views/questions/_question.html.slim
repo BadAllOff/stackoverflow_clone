@@ -3,20 +3,22 @@ div class='question_container' id="question-#{@question.id}"
     = @question.title
   hr.colorgraph
   div.col-xs-2 id='question'
-    ul.list-group
-      =render 'vote_buttons'
+    ul.list-group =render 'vote_buttons'
   div.col-xs-10
-    p
-      = @question.body
-    .question_attachments
-      = render 'attachments/attachments', attachable: @question
+    p = @question.body
+    .question_attachments = render 'attachments/attachments', attachable: @question
     - if user_signed_in? && current_user.author_of?(@question)
       div.question_control_btns
         .btn-group.btn-group-xs
-          =link_to @question, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } do
+          =link_to @question,
+                   method: :delete,
+                   class: 'btn btn-danger',
+                   data: { confirm: 'Are you sure?' }
             = icon('trash')
             '  Delete question
-          =link_to edit_question_path(@question), remote: true, class: 'btn btn-warning btn-question-edit' do
+          =link_to edit_question_path(@question),
+                   remote: true,
+                   class: 'btn btn-warning btn-question-edit'
             = icon('pencil')
             '  Edit question
       div class="form_for_question-#{@question.id} top-buffer"

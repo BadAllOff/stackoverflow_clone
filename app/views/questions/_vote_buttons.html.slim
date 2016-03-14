@@ -12,13 +12,21 @@ li.list-group-item.text-center.votes_question
                    method: :patch,
                    remote: true,
                    data:  { format: :json },
-                   class: 'btn btn-warning vote_unvote' do
+                   class: 'btn btn-warning vote_unvote'
             =icon('history')
             |  Unvote
         -else
-          =link_to upvote_question_path(@question), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-info vote_up' do
+          =link_to upvote_question_path(@question),
+                   method: :patch,
+                   remote: true,
+                   data: { format: :json },
+                   class: 'btn btn-info vote_up'
             =icon('thumbs-o-up')
             |  Vote Up
-          =link_to downvote_question_path(@question), method: :patch, remote: true, data: { format: :json }, class: 'btn btn-danger vote_down' do
+          =link_to downvote_question_path(@question),
+                   method: :patch,
+                   remote: true,
+                   data: { format: :json },
+                   class: 'btn btn-danger vote_down'
             =icon('thumbs-o-down fa-flip-horizontal')
             |  Vote Down

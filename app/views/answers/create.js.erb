@@ -1,10 +1,13 @@
-$('.answer-messages').empty();
-$('.flash-messages').empty();
+var flashMessages = $('.flash-messages');
+var answerMessages = $('.answer-messages');
+answerMessages.empty();
+flashMessages.empty();
+
 <% if @answer.errors.present? %>
-  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
-  $('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
+  flashMessages.html('<%= flash_messages(flash[:error]) %>');
+  answerMessages.html('<%= j render 'shared/errors', object: @answer %>');
 <% else %>
-  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  flashMessages.html('<%= flash_messages(flash[:success]) %>');
   $('.answers').find('ul.answers_list').prepend('<%= j render @answer %>');
   $('#answer-<%= @answer.id %>').effect('highlight', {duration: '2000', color: '#dff0d8' });
   $('#answer_body').val('');

@@ -6,17 +6,9 @@
           = render partial: 'answers/vote_buttons', locals: {answer: answer}
           = render partial: 'answers/best_answer', locals: {answer: answer}
       .col-xs-8.col-md-9
-        div
-          .mic-info
-            |  By:
-            a[href="#"]
-              = answer.user.username
-            '
-            = answer.created_at
-        .comment-text
-          =answer.body
-        .answer_attachments
-          = render 'attachments/attachments', attachable: answer
+        div = render partial: 'answers/meta', locals: { answer: answer }
+        .comment-text = answer.body
+        .answer_attachments = render 'attachments/attachments', attachable: answer
         = render partial: 'answers/control_buttons', locals: {answer: answer}
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]

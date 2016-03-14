@@ -1,5 +1,7 @@
+var flashMessages = $('.flash-messages');
+
 <% if flash[:error].present? %>
-  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+  flashMessages.html('<%= flash_messages(flash[:error]) %>');
 <% else %>
   old_best_answer = $('li.list-group-item.text-center').find('a.vote-accepted-on');
   old_best_answer.removeClass('vote-accepted-on').addClass('vote-accepted-off');
@@ -9,6 +11,6 @@
     new_best_answer.removeClass('vote-accepted-off').addClass('vote-accepted-on');
     new_best_answer.html('<%= icon('star')%> Best answer');
   <% end %>
-  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  flashMessages.html('<%= flash_messages(flash[:success]) %>');
 <% end %>
 <% flash.discard %>
