@@ -1,12 +1,18 @@
 -if user_signed_in? && current_user.author_of?(@question)
   -if answer.best_answer
     li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
-      =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-on' do
+      =link_to set_best_answer_path(answer, question_id: @question),
+               method: :patch,
+               remote: true,
+               class: 'vote-accepted-on'
         =icon('star')
         |  Best answer
   -else
     li.list-group-item.text-center class="best-answer-vote-link-id-#{answer.id}"
-      =link_to set_best_answer_path(answer, question_id: @question), method: :patch, remote: true, class: 'vote-accepted-off'do
+      =link_to set_best_answer_path(answer, question_id: @question),
+               method: :patch,
+               remote: true,
+               class: 'vote-accepted-off'
         =icon('check')
         |  Accept answer
 -else

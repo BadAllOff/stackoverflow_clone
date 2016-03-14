@@ -1,10 +1,14 @@
-$('.question-messages').empty();
-$('.flash-messages').empty();
+var flashMessages = $('.flash-messages');
+var questionMessages = $('.question-messages');
+
+questionMessages.empty();
+flashMessages.empty();
+
 <% if @question.errors.present? %>
-  $('.flash-messages').html('<%= flash_messages(flash[:error]) %>');
+  flashMessages.html('<%= flash_messages(flash[:error]) %>');
   $('#question-<%= @question.id %>').find('.question-messages').html('<%= j render 'shared/errors', object: @question %>');
 <% else %>
-  $('.flash-messages').html('<%= flash_messages(flash[:success]) %>');
+  flashMessages.html('<%= flash_messages(flash[:success]) %>');
   $('#question-<%= @question.id %>').replaceWith('<%= j render @question %>');
 <% end %>
 <% flash.discard %>
