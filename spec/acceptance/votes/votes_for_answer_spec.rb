@@ -48,7 +48,7 @@ feature 'Votes for answer', %q{
         scenario "- vote's positively for answer of other user", js: true  do
           within("#answer-#{answer.id}") { find('a.vote_up').click }
 
-          expect(page).to have_content('You have successfully voted up for Answer')
+          expect(page).to have_content('You have successfully voted for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
           expect(page).to have_content(1)
         end
@@ -56,7 +56,7 @@ feature 'Votes for answer', %q{
         scenario "- vote's negatively for answer of other user", js: true  do
           within("#answer-#{answer.id}") { find('a.vote_down').click }
 
-          expect(page).to have_content('You have successfully voted down for Answer')
+          expect(page).to have_content('You have successfully voted for Answer')
           expect(page).to have_selector(:link_or_button, 'Unvote')
           expect(page).to have_content(-1)
         end
