@@ -17,34 +17,34 @@ RSpec.describe User do
   end
 
   let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
-  let(:attachment) { create(:attachment, attachable: question) }
 
   describe '#author_of?' do
 
-    it 'question author_of?' do
-      expect(user.author_of?(question)).to be_truthy
-    end
-
-    it 'answer author_of?' do
+    it '- author_of? returns true if author' do
       expect(user.author_of?(answer)).to be_truthy
     end
 
-    it 'attachment author_of?' do
-      expect(user.author_of?(attachment.attachable)).to be_truthy
+    it '- author_of? returns false if not an author' do
+      expect(another_user.author_of?(answer)).to be_falsey
     end
 
   end
 
   describe '#upvote_for answer' do
-    it 'upvote by 1' do
+    it '- upvote by 1' do
       expect{ user.vote_for(answer, 1) }.to change(answer.votes.upvotes, :count).by(1)
     end
   end
 
   describe '#voted_for?' do
-    it 'voted_for? answer ' do
+    it '- voted_for? returns false if not voted ' do
+      expect(user.voted_for?(answer)).to be_falsey
+    end
+
+    it '- voted_for? returns true if voted ' do
       user.vote_for(answer, 1)
       expect(user.voted_for?(answer)).to be_truthy
     end
@@ -52,7 +52,7 @@ RSpec.describe User do
 
 
   describe '#unvote_for' do
-    it 'resets vote for answer' do
+    it '- resets vote for answer' do
       user.vote_for(answer, 1)
       expect{ user.unvote_for(answer) }.to change(answer.votes.upvotes, :count).by(-1)
     end

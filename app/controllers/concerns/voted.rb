@@ -19,10 +19,6 @@ module Voted
   end
 
   def unvote
-    if current_user.voted_for?(@votable)
-
-    else
-    end
     current_user.unvote_for(@votable)
     render 'vote'
   end
