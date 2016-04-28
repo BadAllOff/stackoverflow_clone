@@ -18,6 +18,7 @@ feature 'Remove attachment from Question', %q(
         sign_in(user)
         visit question_path(question)
         attachment
+        sleep 2
       end
 
       scenario '- sees remove button for answer attachments' do
