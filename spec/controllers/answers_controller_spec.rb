@@ -24,25 +24,25 @@ RSpec.describe AnswersController, type: :controller do
     context 'Authenticated user' do
       sign_in_user
       context 'with valid attributes' do
-        it 'saves new answer in the DB with correct user identification' do
+        it '- saves new answer in the DB with correct user identification' do
           expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(@user.answers, :count).by(1)
         end
 
-        it 'saves new answer in the DB with correct question identification' do
+        it '- saves new answer in the DB with correct question identification' do
           expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(question.answers, :count).by(1)
         end
 
-        it 'renders create partial' do
+        it '- renders create partial' do
           post :create, answer: attributes_for(:answer), question_id: question, format: :js
           expect(response).to render_template :create
         end
       end
 
       context 'with invalid attributes' do
-        it 'does not save the answer' do
+        it '- does not save the answer' do
           expect{ post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js }.to_not change(Answer, :count)
         end
-        it 'renders create partial' do
+        it '- renders create partial' do
           post :create, answer: attributes_for(:invalid_answer), question_id: question, format: :js
           expect(response).to render_template :create
         end
@@ -50,7 +50,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'Non-authenticated user try to create answer' do
-      it 'sends back status unauthorized' do
+      it '- sends back status unauthorized' do
         expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to_not change(question.answers, :count)
         expect(response.status).to eq 401
       end
@@ -153,7 +153,7 @@ RSpec.describe AnswersController, type: :controller do
           expect(assigns(:answer)).to eq answer
         end
 
-        it "set's best answer" do
+        it "- set's best answer" do
           patch :set_best, question_id: question.id, id: answer, format: :js
           answer.reload
           expect(answer.best_answer).to eq true
@@ -220,7 +220,7 @@ RSpec.describe AnswersController, type: :controller do
         sign_in_another_user
         let!(:answer) { create(:answer, question: question, user: @user) }
 
-        it "can't delete answer" do
+        it "- can't delete answer" do
           expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
         end
 
