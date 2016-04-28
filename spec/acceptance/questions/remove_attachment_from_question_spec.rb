@@ -25,6 +25,7 @@ feature 'Remove attachment from Question', %q(
       end
 
       scenario '- removes attachment from his question', js: true do
+        sleep 2
         within('.question_attachments') do
           click_on 'Remove attachment'
         end
