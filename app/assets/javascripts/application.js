@@ -16,6 +16,7 @@
 //= require peek/views/performance_bar
 //= require peek/views/rblineprof
 //= require jquery.remotipart
+//= require private_pub
 //= require turbolinks
 //= require bootstrap
 //= require cocoon
