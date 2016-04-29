@@ -1,0 +1,49 @@
+li.list-group-item id="answer-#{@object.id}"
+  .row
+    .col-xs-2.col-md-2.vote
+      ul.list-group
+        li.list-group-item.text-center.votes_answer
+          span.text-primary
+            = @object.vote.rating
+            '
+            i class="fa fa-star-half-o"
+          hr
+          .btn-group-vertical
+            - if @object.author.author_id == @object.currentUserId
+            -else
+              - if @object.vote.voted
+                a.vote_unvote.btn.btn-warning href=@object.vote.unvote_url data-method="patch" data-remote="true" data-format="json"
+                  i.fa.fa-history
+                  | Unvote
+              - else
+                a.vote_up.btn.btn-info href=@object.vote.upvote_url data-method="patch" data-remote="true" data-format="json"
+                  i.fa.fa-thumbs-o-up
+                  |  Vote Up
+                a.vote_down.btn.btn-danger href=@object.vote.downvote_url data-method="patch" data-remote="true" data-format="json"
+                  i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                  |  Vote Down
+        li.list-group-item.text-center class="best-answer-vote-link-id-#{@object.id}"
+          a.vote-accepted-off href="/answers/#{@object.id}/set_best?question_id=#{@object.parentQuestionId}" data-method="patch" data-remote="true" rel="nofollow"
+            i class="fa fa-check"
+            | Accept answer
+    .col-xs-8.col-md-9
+      div
+        .mic-info
+          |  By:
+          a[href="#"]
+            = @object.author.author_name
+          '
+          = @object.created_at
+      .comment-text
+        = @object.body
+      - if @object.author.author_id == @object.currentUserId
+        div.action.answer_control_btns
+          div.btn-group.btn-group-xs
+            a.btn.btn-danger data-confirm="Are you sure?" data-remote="true" rel="nofollow" data-method="delete" href="/answers/#{@object.id}"
+              i.fa.fa-trash
+              | Delete answer
+            a.btn.btn-warning.btn-answer-edit href="/answers/#{@object.id}/edit?question_id=#{@object.parentQuestionId}" data-remote="true"
+              i.fa.fa-pencil
+              | Edit answer
+    .col-xs-2.col-md-1
+      img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]

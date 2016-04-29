@@ -22,11 +22,19 @@ class AnswersController < ApplicationController
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
 
-    if @answer.save
-      flash[:success] = 'Answer successfully created'
-    else
-      flash[:error] = 'Answer not created. Please correct your input'
+    respond_to do |format|
+      if @answer.save
+        format.json do
+          flash[:success] = 'Answer successfully created'
+          # PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'answer.json.jbuilder'}
+        end
+      else
+        format.js do
+          flash[:error] = 'Answer not created. Please correct your input'
+        end
+      end
     end
+
   end
 
   def edit
