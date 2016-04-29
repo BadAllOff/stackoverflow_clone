@@ -1,14 +1,14 @@
-- if @object.ok_msg
+- if @object.msgs.ok_msg
   div class="alert alert-success fade in"
     button class="close" data-dismiss="alert"
       | x
     i class="glyphicon glyphicon-ok-circle"
     |
-    = @object.ok_msg
-- if @object.error_msg
+    = @object.msgs.ok_msg
+- if @object.msgs.error_msg
   div class="alert alert-danger fade in"
     button class="close" data-dismiss="alert"
       | x
     i class="glyphicon glyphicon-remove-circle"
     |
-    = @object.error_msg
+    = @object.msgs.error_msg

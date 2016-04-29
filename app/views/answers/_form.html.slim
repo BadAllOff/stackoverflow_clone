@@ -1,4 +1,4 @@
-= form_for (@answer.persisted? ? @answer : [@question, @answer]), html: { multipart: true }, remote: true do |f|
+= form_for (@answer.persisted? ? @answer : [@question, @answer]), html: { data_type: 'json', multipart: true }, remote: true do |f|
   .answer-messages
     - if @answer.errors.any?
       = render 'shared/errors', object: @answer
@@ -12,4 +12,4 @@
       = f.label :body, 'Answer body'
       = f.text_area :body, id: 'answer_body', class: 'form-control'
     = render 'attachments/add_attachment', f: f
-    =f.submit class: 'btn btn-default', data: { disable_with: "Saving..." }
+    =f.submit class: 'btn btn-default'
