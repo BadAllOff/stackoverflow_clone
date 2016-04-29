@@ -9,6 +9,7 @@
         div = render partial: 'answers/meta', locals: { answer: answer }
         .comment-text = answer.body
         .answer_attachments = render 'attachments/attachments', attachable: answer
-        = render partial: 'answers/control_buttons', locals: {answer: answer}
+        - if user_signed_in? && current_user.author_of?(answer)
+          = render partial: 'answers/control_buttons', locals: {answer: answer}
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]
