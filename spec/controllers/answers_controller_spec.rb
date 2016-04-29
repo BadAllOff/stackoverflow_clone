@@ -25,16 +25,16 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
       context 'with valid attributes' do
         it '- saves new answer in the DB with correct user identification' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(@user.answers, :count).by(1)
+          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(@user.answers, :count).by(1)
         end
 
         it '- saves new answer in the DB with correct question identification' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :js }.to change(question.answers, :count).by(1)
+          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(question.answers, :count).by(1)
         end
 
-        it '- renders create partial' do
-          post :create, answer: attributes_for(:answer), question_id: question, format: :js
-          expect(response).to render_template :create
+        it '- returns OK status' do
+          post :create, answer: attributes_for(:answer), question_id: question, format: :json
+          expect(response.status).to eq 200
         end
       end
 

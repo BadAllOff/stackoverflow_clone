@@ -6,13 +6,5 @@ flashMessages.empty();
 <% if @answer.errors.present? %>
   flashMessages.html('<%= flash_messages(flash[:error]) %>');
   answerMessages.html('<%= j render 'shared/errors', object: @answer %>');
-<% else %>
-  flashMessages.html('<%= flash_messages(flash[:success]) %>');
-  <% publish_to "/questions/#{@question.id}/answers" do %>
-    $('.answers').find('ul.answers_list').prepend('<%= j render @answer %>');
-  <% end %>
-  // $('.answers').find('ul.answers_list').prepend('<%= j render @answer %>');
-  $('#answer-<%= @answer.id %>').effect('highlight', {duration: '2000', color: '#dff0d8' });
-  $('#answer_body').val('');
 <% end %>
 <% flash.discard %>
