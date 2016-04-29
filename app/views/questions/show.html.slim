@@ -4,3 +4,4 @@
     .row.top-buffer.new-answer-form = render partial: 'answers/form', locals: { question: @question }
   .row.top-buffer.answers id='answers'
     = render partial: 'answers/answers'
+  = subscribe_to "/questions/#{@question.id}/answers"

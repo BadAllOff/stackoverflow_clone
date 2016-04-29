@@ -30,6 +30,8 @@ gem 'cocoon'
 gem 'annotate'
 gem 'skim'
 gem 'jquery-ui-rails'
+gem 'private_pub'
+gem 'thin'
 
 group :development, :test do
   gem 'byebug'
