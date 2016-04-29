@@ -5,6 +5,6 @@ flashMessages.empty();
   flashMessages.html('<%= flash_messages(flash[:error]) %>');
 <% else %>
   flashMessages.html('<%= flash_messages(flash[:success]) %>');
-  $('li#answer-<%= @answer.id %>').fadeOut('1000')
+  $('li#answer-<%= @answer.id %>').fadeOut('1000');
 <% end %>
 <% flash.discard %>

@@ -1,17 +1,17 @@
 span.text-primary
-  = @object.rating
+  = @object.vote.rating
   '
   i class="fa fa-star-half-o"
 hr
 .btn-group-vertical
-  - if @object.voted
-    a.vote_unvote.btn.btn-warning href=@object.unvote_url data-method="patch" data-remote="true" data-format="json"
+  - if @object.vote.voted
+    a.vote_unvote.btn.btn-warning href=@object.vote.unvote_url data-method="patch" data-remote="true" data-format="json"
       i.fa.fa-history
       | Unvote
   - else
-    a.vote_up.btn.btn-info href=@object.upvote_url data-method="patch" data-remote="true" data-format="json"
+    a.vote_up.btn.btn-info href=@object.vote.upvote_url data-method="patch" data-remote="true" data-format="json"
       i.fa.fa-thumbs-o-up
       |  Vote Up
-    a.vote_down.btn.btn-danger href=@object.downvote_url data-method="patch" data-remote="true" data-format="json"
+    a.vote_down.btn.btn-danger href=@object.vote.downvote_url data-method="patch" data-remote="true" data-format="json"
       i.fa.fa-thumbs-o-down.fa-flip-horizontal
       |  Vote Down

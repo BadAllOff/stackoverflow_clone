@@ -9,7 +9,8 @@ li.list-group-item id="answer-#{@object.id}"
             i class="fa fa-star-half-o"
           hr
           .btn-group-vertical
-            - if @object.author.author_id == @object.currentUserId
+            - if @object.currentUserIsAuthor
+              | fuck
             -else
               - if @object.vote.voted
                 a.vote_unvote.btn.btn-warning href=@object.vote.unvote_url data-method="patch" data-remote="true" data-format="json"
@@ -36,7 +37,7 @@ li.list-group-item id="answer-#{@object.id}"
           = @object.created_at
       .comment-text
         = @object.body
-      - if @object.author.author_id == @object.currentUserId
+      - if @object.currentUserIsAuthor
         div.action.answer_control_btns
           div.btn-group.btn-group-xs
             a.btn.btn-danger data-confirm="Are you sure?" data-remote="true" rel="nofollow" data-method="delete" href="/answers/#{@object.id}"
@@ -45,5 +46,6 @@ li.list-group-item id="answer-#{@object.id}"
             a.btn.btn-warning.btn-answer-edit href="/answers/#{@object.id}/edit?question_id=#{@object.parentQuestionId}" data-remote="true"
               i.fa.fa-pencil
               | Edit answer
+          div class="form_for_answer-#{@object.id}"
     .col-xs-2.col-md-1
       img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]

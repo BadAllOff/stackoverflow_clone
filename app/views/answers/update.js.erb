@@ -1,15 +1,16 @@
 var flashMessages = $('.flash-messages');
 var answerMessages = $('.answer-messages');
+var liAnswerId = $('li#answer-<%= @answer.id %>');
 
 flashMessages.empty();
 answerMessages.empty();
 
-$('li#answer-<%= @answer.id %>').find('.answer-messages');
+liAnswerId.find('.answer-messages');
 <% if @answer.errors.present? %>
   flashMessages.html('<%= flash_messages(flash[:error]) %>');
-  $('li#answer-<%= @answer.id %>').find('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
+  liAnswerId.find('.answer-messages').html('<%= j render 'shared/errors', object: @answer %>');
 <% else %>
   flashMessages.html('<%= flash_messages(flash[:success]) %>');
-  $('li#answer-<%= @answer.id %>').replaceWith('<%= j render @answer %>');
+  liAnswerId.replaceWith('<%= j render @answer %>');
 <% end %>
 <% flash.discard %>
