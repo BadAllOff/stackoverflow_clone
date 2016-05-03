@@ -26,12 +26,12 @@ class AnswersController < ApplicationController
       if @answer.save
         format.json do
           flash[:success] = 'Answer successfully created'
-          # PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'answer.json.jbuilder'}
+          PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
         end
       else
         format.js do
           flash[:error] = 'Answer not created. Please correct your input'
-          render 'answers/create', status: :bad_request
+          render 'errors.json.jbuilder', status: :bad_request
         end
       end
     end

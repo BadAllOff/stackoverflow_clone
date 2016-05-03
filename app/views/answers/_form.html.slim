@@ -1,4 +1,4 @@
-= form_for (@answer.persisted? ? @answer : [@question, @answer]), html: { data_type: 'json', multipart: true }, remote: true do |f|
+= form_for (@answer.persisted? ? @answer : [@question, @answer]), data: {type: :json}, html: { multipart: true }, remote: true do |f|
   .answer-messages
     - if @answer.errors.any?
       = render 'shared/errors', object: @answer
