@@ -32,6 +32,7 @@ gem 'skim'
 gem 'jquery-ui-rails'
 gem 'private_pub'
 gem 'thin'
+gem 'rack-mini-profiler'
 
 group :development, :test do
   gem 'byebug'
@@ -41,12 +42,6 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'database_cleaner'
   gem 'capybara-webkit'
-  gem 'peek'
-  gem 'peek-git'
-  gem 'peek-performance_bar'
-  gem 'peek-pg'
-  gem 'peek-rblineprof'
-  gem 'pygments.rb', :require => false
 end
 
 group :test do

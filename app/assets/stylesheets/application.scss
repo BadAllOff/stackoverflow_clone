@@ -13,11 +13,6 @@
  * require_tree .
  * require_self
  */
-//= require peek
-//= require peek/views/performance_bar
-//= require peek/views/rblineprof
-//= require peek/views/rblineprof/pygments
-
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -28,15 +23,6 @@
 body{
   min-height: 2000px;
   padding-top: 70px;
-
-  #peek{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    z-index: 999;
-    //top: 51px;
-  }
 }
 
 .colorgraph {
