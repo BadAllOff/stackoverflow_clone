@@ -15,13 +15,13 @@ ready = function() {
 
   $(function() {
     return $(document).bind('ajax:success', function(e, data, status, xhr) {
-      if (e.target.className == "btn btn-warning vote_unvote" || "btn btn-info vote_up" || "btn btn-danger vote_down" ) {
+      if (e.target.className == "btn btn-warning vote_unvote" || e.target.className == "btn btn-info vote_up" || e.target.className == "btn btn-danger vote_down" ) {
         var answer;
         answer = $.parseJSON(xhr.responseText);
         $("#answer-" + answer.id + " .votes_answer").html(JST["templates/votes"]({
           object: answer
         }));
-        return $('.flash-messages').append(JST["templates/msg"]({
+        return $('.flash-messages').append(JST["templates/shared/msg"]({
           object: answer
         }));
       }
@@ -38,17 +38,25 @@ ready = function() {
         answerMessages.empty();
 
         answer = $.parseJSON(xhr.responseText);
+        console.log(answer);
         if (answer.author.author_id == userId) {
           answer.currentUserIsAuthor = true;
         }else{
           answer.currentUserIsAuthor = false;
         }
 
+        if (answer.parentQuestionAuthorId == userId) {
+          answer.currentUserIsAuthorOfQuestion = true;
+        }else{
+          answer.currentUserIsAuthorOfQuestion = false;
+        }
+
         console.log(answer.currentUserIsAuthor);
         console.log(answer.author.author_id);
-        newAnswerDiv = JST["templates/answer"]({object: answer});
+        newAnswerDiv = JST["templates/answers/answer"]({object: answer});
         $('.answers').find('ul.answers_list').prepend(newAnswerDiv);
-        return $('.flash-messages').append(JST["templates/msg"]({
+        $('#answer_body').val('');
+        return $('.flash-messages').append(JST["templates/shared/msg"]({
           object: answer
         }));
       }
