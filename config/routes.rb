@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount Peek::Railtie => '/peek'
 
   concern :votable do
     member do

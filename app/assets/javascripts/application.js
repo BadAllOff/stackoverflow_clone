@@ -12,9 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require peek
-//= require peek/views/performance_bar
-//= require peek/views/rblineprof
 //= require jquery.remotipart
 //= require private_pub
 //= require turbolinks
