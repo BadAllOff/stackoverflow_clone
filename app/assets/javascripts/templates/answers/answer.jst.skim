@@ -8,10 +8,8 @@ li.list-group-item id="answer-#{@object.id}"
             '
             i class="fa fa-star-half-o"
           hr
-          .btn-group-vertical
-            - if @object.currentUserIsAuthor
-              | fuck
-            -else
+          - if !@object.currentUserIsAuthor
+            .btn-group-vertical
               - if @object.vote.voted
                 a.vote_unvote.btn.btn-warning href=@object.vote.unvote_url data-method="patch" data-remote="true" data-format="json"
                   i.fa.fa-history
@@ -37,6 +35,14 @@ li.list-group-item id="answer-#{@object.id}"
           = @object.created_at
       .comment-text
         = @object.body
+      - if @object.attachments.length >= 1
+        p Attachments:
+        ul
+          - for attachment in @object.attachments
+            li
+              a href=attachment.url
+                = attachment.filename
+        hr
       - if @object.currentUserIsAuthor
         div.action.answer_control_btns
           div.btn-group.btn-group-xs
