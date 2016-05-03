@@ -27,6 +27,7 @@ json.msgs do
 end
 
 json.attachments @answer.attachments do |attachment|
+  json.id                     attachment.id
   json.filename               attachment.file.filename
-  json.url                    url_for(attachment)
+  json.url                    attachment.file.url
 end

@@ -1,0 +1,13 @@
+div id="error_explanation"
+  h3
+    - if @object.msgs.full_messages.length == 1
+      |  1 error prohibited this &nbsp
+    - else
+      = @object.msgs.full_messages.length
+      |  errors prohibited this &nbsp
+    = @object.obj_name
+    |  from being saved:
+  ul
+    - for error in @object.msgs.full_messages
+      li.text-danger
+        = error.message

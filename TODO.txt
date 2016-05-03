@@ -1,2 +1,4 @@
 # Styles for Devise views
 # Автор может удалить свой вопрос или ответ, но не может удалить чужой вопрос/ответ
+# edit form for answer doesn't work - only after reload page
+# errors for form doesnt showun

@@ -21,10 +21,11 @@ li.list-group-item id="answer-#{@object.id}"
                 a.vote_down.btn.btn-danger href=@object.vote.downvote_url data-method="patch" data-remote="true" data-format="json"
                   i.fa.fa-thumbs-o-down.fa-flip-horizontal
                   |  Vote Down
-        li.list-group-item.text-center class="best-answer-vote-link-id-#{@object.id}"
-          a.vote-accepted-off href="/answers/#{@object.id}/set_best?question_id=#{@object.parentQuestionId}" data-method="patch" data-remote="true" rel="nofollow"
-            i class="fa fa-check"
-            | Accept answer
+        - if @object.currentUserIsAuthorOfQuestion
+          li.list-group-item.text-center class="best-answer-vote-link-id-#{@object.id}"
+            a.vote-accepted-off href="/answers/#{@object.id}/set_best?question_id=#{@object.parentQuestionId}" data-method="patch" data-remote="true" rel="nofollow"
+              i class="fa fa-check"
+              | Accept answer
     .col-xs-8.col-md-9
       div
         .mic-info
@@ -36,12 +37,16 @@ li.list-group-item id="answer-#{@object.id}"
       .comment-text
         = @object.body
       - if @object.attachments.length >= 1
-        p Attachments:
-        ul
-          - for attachment in @object.attachments
-            li
-              a href=attachment.url
-                = attachment.filename
+        p.text-info
+          | Attachments
+          ul.list-group
+            - for attachment in @object.attachments
+              li.list-group-item id="attachment-#{attachment.id}"
+                a href=attachment.url
+                  = attachment.filename
+                - if @object.currentUserIsAuthor
+                  a class="btn btn-danger btn-xs" id="#{attachment.id}" data-remote="true" rel="nofollow" data-method="delete" href="/attachments/#{attachment.id}"
+                    | Remove attachment
         hr
       - if @object.currentUserIsAuthor
         div.action.answer_control_btns
