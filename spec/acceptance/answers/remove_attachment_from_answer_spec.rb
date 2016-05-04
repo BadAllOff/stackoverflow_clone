@@ -6,8 +6,8 @@ feature 'Remove attachment from Question', %q(
         I want be able to remove attachment from my question
   ) do
 
-  given(:user) { create(:user) }
-  given(:another_user) { create(:user) }
+  given!(:user) { create(:user) }
+  given!(:another_user) { create(:user) }
   given!(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
   given!(:attachment) { create(:attachment, attachable: answer) }
@@ -16,6 +16,7 @@ feature 'Remove attachment from Question', %q(
     context 'operates with own question' do
       before do
         sign_in(user)
+        question
         attachment
         visit question_path(question)
       end
@@ -25,6 +26,7 @@ feature 'Remove attachment from Question', %q(
       end
 
       scenario '- removes attachment from his answer', js: true do
+        sleep 2
         within('.answer_attachments') do
           click_on 'Remove attachment'
         end

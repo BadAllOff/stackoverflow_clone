@@ -29,9 +29,9 @@ class AnswersController < ApplicationController
           PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
         end
       else
-        format.js do
+        format.json do
           flash[:error] = 'Answer not created. Please correct your input'
-          render 'errors.json.jbuilder', status: :bad_request
+          render 'errors.json.jbuilder', status: 400
         end
       end
     end
