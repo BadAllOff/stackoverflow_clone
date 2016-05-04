@@ -38,9 +38,6 @@ class AnswersController < ApplicationController
 
   end
 
-  def edit
-  end
-
   def update
     if current_user.author_of?(@answer)
       if @answer.update(answer_params)

@@ -34,7 +34,7 @@ li.list-group-item id="answer-#{@object.id}"
             = @object.author.author_name
           '
           = @object.created_at
-      .comment-text
+      p.answer-body
         = @object.body
       - if @object.attachments.length >= 1
         p.text-info

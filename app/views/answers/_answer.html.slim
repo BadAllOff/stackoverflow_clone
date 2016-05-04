@@ -7,7 +7,7 @@
           = render partial: 'answers/best_answer', locals: {answer: answer}
       .col-xs-8.col-md-9
         div = render partial: 'answers/meta', locals: { answer: answer }
-        .comment-text = answer.body
+        p.answer-body = answer.body
         - if answer.attachments.any?
           .answer_attachments = render 'attachments/attachments', attachable: answer
         - if user_signed_in? && current_user.author_of?(answer)
