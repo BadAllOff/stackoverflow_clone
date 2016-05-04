@@ -3,9 +3,20 @@ var ready;
 ready = function() {
   var userId;
   var questionId;
+  var csrfToken = $("meta[name='csrf-token']").attr('content');
 
   userId = $('#current_user_meta').data('userId');
   questionId = $('#answers').data('questionId');
+
+  $(function() {
+    $('.cancel_update').bind('click', function(e) {
+      e.preventDefault();
+      var answerId = $(this).data('answerId');
+
+      $('.form_for_answer-' + answerId).hide();
+      $('li#answer-'+ answerId +'btn-answer-edit').show();
+    });
+  });
 
   $(function() {
     return $('.votes_answer').bind('ajax:success', function(e, data, status, xhr) {

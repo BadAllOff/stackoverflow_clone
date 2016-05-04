@@ -25,6 +25,10 @@ body{
   padding-top: 70px;
 }
 
+div[class^='form_for_answer-'], div[class*=' form_for_answer-']{
+  padding-top: 20px;
+}
+
 .colorgraph {
   height: 5px;
   border-top: 0;

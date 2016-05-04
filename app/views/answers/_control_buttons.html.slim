@@ -8,9 +8,8 @@
                data: { confirm: 'Are you sure?'}
         = icon('trash')
         '  Delete answer
-      =link_to edit_answer_path(answer, question_id: @question),
-               remote: true,
-               data: { disable_with: "Loading..." },
+      =link_to '#',
+               data: { disable_with: "editing...", answer_id: answer.id },
                class: 'btn btn-warning btn-answer-edit'
         = icon('pencil')
         '  Edit answer
