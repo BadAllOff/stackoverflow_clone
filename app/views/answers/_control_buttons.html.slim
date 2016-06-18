@@ -9,8 +9,9 @@
         = icon('trash')
         '  Delete answer
       =link_to '#',
-               data: { disable_with: "editing...", answer_id: answer.id },
+               data: { answer_id: answer.id },
                class: 'btn btn-warning btn-answer-edit'
         = icon('pencil')
         '  Edit answer
   div class="form_for_answer-#{answer.id}"
+    = render 'answers/form', answer: answer

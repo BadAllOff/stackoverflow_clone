@@ -1,10 +1,10 @@
-= form_for (@answer.persisted? ? @answer : [@question, @answer]), data: {type: :json}, html: { multipart: true }, remote: true do |f|
+= form_for (answer.persisted? ? answer : [@question, answer]), data: {type: :json}, html: { multipart: true }, remote: true do |f|
   .answer-messages
-    - if @answer.errors.any?
-      = render 'shared/errors', object: @answer
+    - if answer.errors.any?
+      = render 'shared/errors', object: answer
   fieldset
     legend
-      - if @answer.new_record?
+      - if answer.new_record?
         | Write your answer
       -else
         | Edit answer
@@ -12,4 +12,5 @@
       = f.label :body, 'Answer body'
       = f.text_area :body, id: 'answer_body', class: 'form-control'
     = render 'attachments/add_attachment', f: f
-    =f.submit class: 'btn btn-default'
+    =f.submit class: 'btn btn-info', data: {answer_id: answer.id}
+    =f.submit class: 'btn btn-default cancel_update', value: 'Cancel update', data: {answer_id: answer.id} if answer.persisted?

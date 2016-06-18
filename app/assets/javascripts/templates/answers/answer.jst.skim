@@ -54,9 +54,32 @@ li.list-group-item id="answer-#{@object.id}"
             a.btn.btn-danger data-confirm="Are you sure?" data-remote="true" rel="nofollow" data-method="delete" href="/answers/#{@object.id}"
               i.fa.fa-trash
               | Delete answer
-            a.btn.btn-warning.btn-answer-edit href="/answers/#{@object.id}/edit?question_id=#{@object.parentQuestionId}" data-remote="true"
+            a.btn.btn-warning.btn-answer-edit data-answer-id='#{@object.id}' href="#"
               i.fa.fa-pencil
               | Edit answer
           div class="form_for_answer-#{@object.id}"
+            form class="edit_answer" id="edit_answer_#{@object.id}" data-type="*" enctype="multipart/form-data" action="/answers/#{@object.id}" accept-charset="UTF-8" data-remote="true" method="patch"
+              input name="utf8" type="hidden" value="✓"
+              input type="hidden" name="_method" value="patch"
+              div class="answer-messages"
+              fieldset
+                legend
+                  | Edit answer
+              div.form-group
+                label for="answer_body"
+                  | Answer body
+                textarea id="answer_body" class="form-control" name="answer[body]"
+                  = @object.body
+              h5
+                | Attachments
+              div class="links top-buffer"
+                a class="btn btn-black btn-xs add_fields" data-association="attachment" data-associations="attachments" data-association-insertion-template="<div class=nested-fields > \
+                 <div class=form-group top-buffer> \
+                   <label for=answer_attachments_attributes_new_attachments_file>File</label><input type=file name=answer[attachments_attributes][new_attachments][file] id=answer_attachments_attributes_new_attachments_file /> \
+                 </div>" href="#"
+                  | Add file
+              div.btn-group
+                input type="submit" name="commit" data-answer-id="#{@object.id}" value="Update Answer" class="btn btn-info"
+                input type="submit" name="commit" data-answer-id="#{@object.id}" value="Cancel update" class="btn btn-default cancel_update"
     .col-xs-2.col-md-1
       img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]

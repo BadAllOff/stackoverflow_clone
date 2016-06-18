@@ -1,7 +1,7 @@
 - if @question
   .row.top-buffer = render partial: 'questions/question'
   - if user_signed_in?
-    .row.top-buffer.new-answer-form = render partial: 'answers/form', locals: { question: @question }
+    .row.top-buffer.new-answer-form = render partial: 'answers/form', locals: { answer: @answer, question: @question }
   .row.top-buffer.answers id='answers' data={question_id: "#{@question.id}"}
     = render partial: 'answers/answers'
   = subscribe_to "/questions/#{@question.id}/answers"
