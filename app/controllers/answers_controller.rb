@@ -35,7 +35,6 @@ class AnswersController < ApplicationController
         end
       end
     end
-
   end
 
   def update

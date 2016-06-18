@@ -49,6 +49,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'fuubar'
 end
 
 group :development do

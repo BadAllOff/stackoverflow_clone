@@ -14,83 +14,83 @@
 ActiveRecord::Schema.define(version: 20160313210039) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'answers', force: :cascade do |t|
-    t.text     'body'
-    t.datetime 'created_at',                  null: false
-    t.datetime 'updated_at',                  null: false
-    t.integer  'question_id'
-    t.integer  'user_id'
-    t.boolean  'best_answer', default: false
+  create_table "answers", force: :cascade do |t|
+    t.text     "body"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.boolean  "best_answer", default: false
   end
 
-  add_index 'answers', ['question_id'], name: 'index_answers_on_question_id', using: :btree
-  add_index 'answers', ['user_id'], name: 'index_answers_on_user_id', using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
-  create_table 'attachments', force: :cascade do |t|
-    t.string   'file'
-    t.datetime 'created_at',      null: false
-    t.datetime 'updated_at',      null: false
-    t.integer  'attachable_id'
-    t.string   'attachable_type'
+  create_table "attachments", force: :cascade do |t|
+    t.string   "file"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
   end
 
-  add_index 'attachments', ['attachable_id', 'attachable_type'], name: 'index_attachments_on_attachable_id_and_attachable_type', using: :btree
+  add_index "attachments", ["attachable_id", "attachable_type"], name: "index_attachments_on_attachable_id_and_attachable_type", using: :btree
 
-  create_table 'questions', force: :cascade do |t|
-    t.string   'title'
-    t.text     'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer  'user_id'
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
-  add_index 'questions', ['user_id'], name: 'index_questions_on_user_id', using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
-  create_table 'sessions', force: :cascade do |t|
-    t.string   'session_id', null: false
-    t.text     'data'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index 'sessions', ['session_id'], name: 'index_sessions_on_session_id', unique: true, using: :btree
-  add_index 'sessions', ['updated_at'], name: 'index_sessions_on_updated_at', using: :btree
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table 'users', force: :cascade do |t|
-    t.datetime 'created_at',                          null: false
-    t.datetime 'updated_at',                          null: false
-    t.string   'email',                  default: '', null: false
-    t.string   'encrypted_password',     default: '', null: false
-    t.string   'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.integer  'sign_in_count',          default: 0,  null: false
-    t.datetime 'current_sign_in_at'
-    t.datetime 'last_sign_in_at'
-    t.inet     'current_sign_in_ip'
-    t.inet     'last_sign_in_ip'
-    t.string   'username'
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "username"
   end
 
-  add_index 'users', ['email'], name: 'index_users_on_email', unique: true, using: :btree
-  add_index 'users', ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table 'votes', force: :cascade do |t|
-    t.integer  'user_id'
-    t.integer  'value'
-    t.datetime 'created_at',   null: false
-    t.datetime 'updated_at',   null: false
-    t.string   'votable_type'
-    t.integer  'votable_id'
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "value"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "votable_type"
+    t.integer  "votable_id"
   end
 
-  add_index 'votes', ['user_id'], name: 'index_votes_on_user_id', using: :btree
-  add_index 'votes', ['votable_type', 'votable_id'], name: 'index_votes_on_votable_type_and_votable_id', using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
 
-  add_foreign_key 'answers', 'questions'
-  add_foreign_key 'answers', 'users'
-  add_foreign_key 'questions', 'users'
-  add_foreign_key 'votes', 'users'
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "questions", "users"
+  add_foreign_key "votes", "users"
 end
