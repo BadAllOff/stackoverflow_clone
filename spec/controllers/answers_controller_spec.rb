@@ -90,32 +90,31 @@ RSpec.describe AnswersController, type: :controller do
         let!(:answer) { create(:answer, question: question, user: @user) }
         context 'with valid attributes' do
           it '- assigns the requested answer to @answer' do
-            patch :update, question_id: question, id: answer, answer: attributes_for(:answer), format: :js
+            patch :update, question_id: question, id: answer, answer: attributes_for(:answer), format: :json
             expect(assigns(:answer)).to eq answer
           end
 
           it '- changes answer attributes' do
-            patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :js
+            patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :json
             answer.reload
             expect(answer.body).to eq 'This is updated answer'
           end
 
-          it '- sends back status ok and renders update partial' do
-            patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :js
+          it '- sends back status ok' do
+            patch :update, question_id: question, id: answer, answer: { body: 'This is updated answer' }, format: :json
             expect(response.status).to eq 200
-            expect(response).to render_template 'answers/update'
           end
         end
 
         context 'with invalid attributes' do
-          before { patch :update, question_id: question, id: answer, answer: { body: nil }, format: :js }
+          before { patch :update, question_id: question, id: answer, answer: { body: nil }, format: :json }
           it '- does not change answer attributes' do
             answer.reload
             expect(answer.body).to eq 'This is the Answer body'
           end
 
-          it '- re-renders edit view' do
-            expect(response).to render_template 'answers/edit'
+          it '- shows errors on page' do
+            expect(response).to render_template 'answers/errors.json.jbuilder'
           end
         end
       end
@@ -123,7 +122,7 @@ RSpec.describe AnswersController, type: :controller do
       context 'operates with another user answer' do
         sign_in_another_user
         let!(:answer) { create(:answer, question: question, user: @user) }
-        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :js }
+        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :jsons }
 
         it '- does not change answer attributes' do
           answer.reload
@@ -134,7 +133,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'Non-authenticated' do
       it '- redirects to question path' do
-        patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :js
+        patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :json
         expect(response.status).to eq 401
       end
     end

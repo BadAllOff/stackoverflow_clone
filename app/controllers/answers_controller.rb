@@ -39,11 +39,18 @@ class AnswersController < ApplicationController
 
   def update
     if current_user.author_of?(@answer)
-      if @answer.update(answer_params)
-        flash[:success] = 'Answer successfully updated'
-      else
-        flash[:error] = 'Answer not updated'
-        render :edit
+      respond_to do |format|
+        if @answer.update(answer_params)
+          format.json do
+            flash[:success] = 'Answer successfully updated'
+            PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
+          end
+        else
+          format.json do
+            flash[:error] = 'Answer not updated'
+            render 'errors.json.jbuilder', status: 400
+          end
+        end
       end
     end
   end

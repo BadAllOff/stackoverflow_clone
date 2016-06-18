@@ -1,6 +1,6 @@
 json.extract! @answer, :id
 
-json.is_new                   true
+json.is_new                   false
 json.parentQuestionId         @answer.question.id
 json.parentQuestionAuthorId   @answer.question.user.id
 json.body                     @answer.body
