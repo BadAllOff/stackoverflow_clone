@@ -1,0 +1,5 @@
+.col-xs-12.media id="comment-#{@object.id}"
+  .media-heading
+    p.text-muted = @object.created_at
+  .media-body
+    p = @object.content

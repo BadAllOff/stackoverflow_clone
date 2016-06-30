@@ -12,25 +12,23 @@ feature 'Add comment question' do
         visit question_path(question)
       end
 
-      scenario "create comment", js: true do
+      scenario "show form comment", js: true do
         within ".question_comments" do
+          expect(page).to_not have_selector :css, 'form.new_comment'
           click_on "add a comment"
-          within 'form#new_comment' do
-            fill_in 'Comment content', with: 'Test question comments'
-            click_on 'Create comment'
-          end
-
-          expect(page).to have_content 'Test question comments'
+          expect(page).to have_selector :css, 'form.new_comment'
         end
       end
 
-      scenario "show/hide form comment", js: true do
+      scenario "create comment", js: true do
         within ".question_comments" do
-          expect(page).to_not have_selector :css, 'form#new_comment'
           click_on "add a comment"
-          expect(page).to have_selector :css, 'form#new_comment'
-          click_on  "hide comment form"
-          expect(page).to_not have_selector :css, 'form#new_comment'
+          within 'form.new_comment' do
+            fill_in 'write your comment', with: 'Test question comments'
+            click_on 'Create Comment'
+          end
+
+          expect(page).to have_content 'Test question comments'
         end
       end
 

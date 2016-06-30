@@ -2,7 +2,7 @@ json.extract! @answer, :id
 
 json.author do
   json.author_id @answer.user_id
-  json.author_name @answer.user_id
+  json.author_name @answer.user.username
 end
 
 json.vote do
