@@ -4,7 +4,6 @@ RSpec.describe CommentsController, type: :controller do
   let!(:user)             { create(:user) }
   let!(:question)         { create(:question, user: user) }
   let!(:comment)          { create(:comment, commentable: question, user: user ) }
-  let!(:invalid_comment)  { create(:comment, commentable: question, user: user, content: '' ) }
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -26,7 +25,7 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       context 'with invalid attributes' do
-        it '- does not save the answer' do
+        it '- does not save the comment' do
           expect{ post :create, comment: attributes_for(:invalid_comment), question_id: question, format: :json }.to_not change(Comment, :count)
         end
         it '- returns errors in json format' do
@@ -39,7 +38,7 @@ RSpec.describe CommentsController, type: :controller do
 
     context 'Non-authenticated user try to create answer' do
       it '- sends back status unauthorized' do
-        expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to_not change(question.answers, :count)
+        expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to_not change(Comment, :count)
         expect(response.status).to eq 401
       end
     end

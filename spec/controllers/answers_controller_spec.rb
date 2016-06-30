@@ -18,7 +18,7 @@ RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
   let(:another_user) { create :user }
   let(:question) { create(:question, user: user) }
-  let(:answer) { create(:answer, question: question) }
+  let(:answer) { create(:answer, question: question, user: user) }
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -240,7 +240,9 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #upvote' do
     context 'votes up for his own answer' do
-      before { sign_in(user) }
+      before do
+        sign_in(user)
+      end
       it '- does not keep the vote' do
         expect { patch :upvote, id: answer, format: :json }.to_not change(answer.votes.upvotes, :count)
       end

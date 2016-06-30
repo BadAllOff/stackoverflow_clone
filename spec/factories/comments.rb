@@ -3,4 +3,9 @@ FactoryGirl.define do
     user
     content "MyText"
   end
+
+  factory :invalid_comment, class: 'Comment'do
+    user
+    content nil
+  end
 end
