@@ -1,23 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
+  let!(:user)      { create(:user) }
+  let!(:question)  { create(:question, user: user) }
+  let!(:comment)   { create(:comment, commentable: question, user: user ) }
 
   describe 'POST #create' do
     context 'Authenticated user' do
       sign_in_user
       context 'with valid attributes' do
-        it '- creates new comment' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(@user.answers, :count).by(1)
+
+        it '- saves new comment in the DB with correct question identification' do
+          expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to change(question.comments, :count).by(1)
         end
 
-        it '- saves new answer in the DB with correct question identification' do
-          expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(question.answers, :count).by(1)
+        it '- saves new comment in the DB with correct user identification' do
+          expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to change(@user.comments, :count).by(1)
         end
 
         it '- returns OK status' do
-          post :create, answer: attributes_for(:answer), question_id: question, format: :json
+          post :create, comment: attributes_for(:comment), question_id: question, format: :json
           expect(response.status).to eq 200
         end
       end
