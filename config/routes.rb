@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :questions, concerns: :votable do
+    resources :comments, only: :create
     resources :answers, concerns: :votable, shallow: true do
+      resources :comments, only: :create
       patch :set_best, on: :member
     end
   end

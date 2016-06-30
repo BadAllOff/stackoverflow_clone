@@ -7,22 +7,26 @@ div class='question_container' id="question-#{@question.id}"
   div.col-xs-10
     p = @question.body
     .question_attachments = render 'attachments/attachments', attachable: @question
-    - if user_signed_in? && current_user.author_of?(@question)
-      div.question_control_btns
-        .btn-group.btn-group-xs
-          =link_to @question,
-                   method: :delete,
-                   class: 'btn btn-danger',
-                   data: { confirm: 'Are you sure?' }
-            = icon('trash')
-            '  Delete question
-          =link_to edit_question_path(@question),
-                   remote: true,
-                   class: 'btn btn-warning btn-question-edit'
-            = icon('pencil')
-            '  Edit question
-      div class="form_for_question-#{@question.id} top-buffer"
-    .question_comments.col-xs-12
-      a.btn.btn-block href='#' add a comment
-      .col-xs-12
+    - if user_signed_in?
+      - if current_user.author_of?(@question)
+        div.question_control_btns
+          .btn-group.btn-group-xs
+            =link_to @question,
+                     method: :delete,
+                     class: 'btn btn-danger',
+                     data: { confirm: 'Are you sure?' }
+              = icon('trash')
+              '  Delete question
+            =link_to edit_question_path(@question),
+                     remote: true,
+                     class: 'btn btn-warning btn-question-edit'
+              = icon('pencil')
+              '  Edit question
+        div class="form_for_question-#{@question.id} top-buffer"
+      .question_comments.col-xs-12
+        =link_to 'add a comment', '#question_comment_form', class: 'btn btn-block', data: {toggle: 'collapse'}
+        .col-xs-12.collapse#question_comment_form
+          = render partial: 'comments/form', locals: {commentable: @question, comment: @question.comments.new }
+        - @question.comments.each do |comment|
+          = render partial: 'comments/show', locals: {comment: comment}
 
