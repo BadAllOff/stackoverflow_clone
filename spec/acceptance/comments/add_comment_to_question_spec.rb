@@ -12,7 +12,7 @@ feature 'Add comment question' do
         visit question_path(question)
       end
 
-      scenario "show form comment", js: true do
+      scenario "- show form comment", js: true do
         within ".question_comments" do
           expect(page).to_not have_selector :css, 'form.new_comment'
           click_on "add a comment"
@@ -20,7 +20,7 @@ feature 'Add comment question' do
         end
       end
 
-      scenario "create comment", js: true do
+      scenario "- create comment", js: true do
         within ".question_comments" do
           click_on "add a comment"
           within 'form.new_comment_form_for_Question' do
