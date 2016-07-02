@@ -20,36 +20,40 @@ ready = function() {
       }));
     });
   });
+
+  $(function() {
+    return $('.new_comment_form_for_Question').unbind().bind('ajax:success', function(e, data, status, xhr) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+
+      newCommentDiv = JST["templates/comments/comment"]({object: comment});
+      $(this).find('.commentMessages').html('');
+      $(this)[0].reset();
+
+      $('.question_comments').append(newCommentDiv);
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
+
+  $(function() {
+    return $('.new_comment_form_for_Question').bind('ajax:error', function(e, xhr, status, error) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+
+      errorsDiv = JST["templates/shared/errors"]({object: comment});
+      $(this).find('.commentMessages').html(errorsDiv);
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
+
+
 };
-
-$(function() {
-  return $('.new_comment_form_for_Question').bind('ajax:success', function(e, data, status, xhr) {
-    var comment;
-    comment = $.parseJSON(xhr.responseText);
-
-    newCommentDiv = JST["templates/comments/comment"]({object: comment});
-    $(this).find('.commentMessages').html('');
-    $(this)[0].reset();
-
-    $('.question_comments').append(newCommentDiv);
-
-    alert (comment.id);
-  });
-});
-
-$(function() {
-  return $('.new_comment_form_for_Question').bind('ajax:error', function(e, xhr, status, error) {
-    var comment;
-    comment = $.parseJSON(xhr.responseText);
-    
-    errorsDiv = JST["templates/shared/errors"]({object: comment});
-    $(this).find('.commentMessages').html(errorsDiv);
-
-    return $('.flash-messages').append(JST["templates/shared/msg"]({
-      object: comment
-    }));
-  });
-});
 
 
 
