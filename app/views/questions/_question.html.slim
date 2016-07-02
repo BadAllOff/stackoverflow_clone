@@ -23,10 +23,5 @@ div class='question_container' id="question-#{@question.id}"
               = icon('pencil')
               '  Edit question
         div class="form_for_question-#{@question.id} top-buffer"
-      .question_comments.col-xs-12
-        =link_to 'add a comment', '#question_comment_form', class: 'btn btn-block', data: {toggle: 'collapse'}
-        .col-xs-12.collapse#question_comment_form
-          = render partial: 'comments/form', locals: {commentable: @question, comment: @question.comments.new }
-        - @question.comments.each do |comment|
-          = render partial: 'comments/show', locals: {comment: comment}
+      = render partial: 'question_comments', locals: {question: @question}
 
