@@ -20,7 +20,6 @@ class Vote < ActiveRecord::Base
   # TODO: - how to test this scope?
   validates :user_id, uniqueness: { scope: [:votable_type, :votable_id] }
 
-
   # TODO: - how to test this scope?
   scope :upvotes,   -> { where(value: 1) }
   scope :downvotes, -> { where(value: -1) }

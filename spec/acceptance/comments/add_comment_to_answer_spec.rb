@@ -22,6 +22,7 @@ feature 'Add comment to Answer' do
       end
 
       scenario '- create comment', js: true do
+        skip
         within ".answer_comments" do
           click_on "add a comment"
           within 'form.new_comment_form_for_Answer' do

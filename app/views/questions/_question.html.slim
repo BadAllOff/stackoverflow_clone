@@ -23,5 +23,5 @@ div class='question_container' id="question-#{@question.id}"
               = icon('pencil')
               '  Edit question
         div class="form_for_question-#{@question.id} top-buffer"
-      = render partial: 'question_comments', locals: {question: @question}
+      = render partial: 'question_comments', locals: {commentable: @question}
 

@@ -9,5 +9,7 @@ RSpec.describe Comment, type: :model do
   describe 'Validations' do
     it { should validate_presence_of :content }
     it { should validate_presence_of(:user_id) }
+    it { should validate_presence_of(:commentable_type) }
+    it { should validate_presence_of(:commentable_id) }
   end
 end

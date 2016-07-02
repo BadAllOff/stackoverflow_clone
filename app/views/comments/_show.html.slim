@@ -1,5 +1,10 @@
-.col-xs-12.media id="comment-#{comment.id}"
-  .media-heading
-    p.text-muted = comment.created_at
-  .media-body
-    p = comment.content
+=link_to 'add a comment', "##{commentable.class.name}_#{commentable.id}_comment_form", class: 'btn btn-block', data: {toggle: 'collapse'}
+.collapse id="#{commentable.class.name}_#{commentable.id}_comment_form"
+  = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.new }
+- commentable.comments.each do |comment|
+  - if comment.id
+    .media id="comment-#{comment.id}"
+      .media-heading
+        p.text-muted = comment.created_at
+      .media-body
+        p = comment.content

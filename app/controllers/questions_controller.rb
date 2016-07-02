@@ -34,8 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user = current_user
+    @question = current_user.questions.new(question_params)
 
     if @question.save
       flash[:success] = 'Question successfully created'
@@ -78,7 +77,7 @@ class QuestionsController < ApplicationController
 
   def load_question
     # @question = Question.find(params[:id])
-    @question = Question.includes(:attachments, answers: [:attachments, :user] ).with_comments.find(params[:id])
+    @question = Question.includes(:attachments, :comments, answers: [:attachments, :user, :comments]).find(params[:id])
   end
 
 end
