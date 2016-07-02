@@ -10,7 +10,9 @@
         p.answer-body = answer.body
         - if answer.attachments.any?
           .answer_attachments = render 'attachments/attachments', attachable: answer
-        - if user_signed_in? && current_user.author_of?(answer)
-          = render partial: 'answers/control_buttons', locals: {answer: answer}
+        - if user_signed_in?
+          - if current_user.author_of?(answer)
+            = render partial: 'answers/control_buttons', locals: {answer: answer}
+          = render partial: 'answers/answers_comments', locals: {commentable: answer}
       .col-xs-2.col-md-1
         img.img-circle.img-responsive[src="http://placehold.it/80" alt=""]

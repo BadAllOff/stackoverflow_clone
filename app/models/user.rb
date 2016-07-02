@@ -24,13 +24,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :username, presence: true, uniqueness: true, length: { maximum: 40, minimum: 1 },
-            format: { with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/, message: 'only allows letters and 1 space between' }
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  validates :username, presence: true, uniqueness: true, length: { maximum: 40, minimum: 1 },
+            format: { with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/, message: 'only allows letters and 1 space between' }
 
   def author_of?(object)
     id == object.user_id
@@ -45,13 +46,12 @@ class User < ActiveRecord::Base
     vote.save
   end
 
-  def voted_for?(votable)
-    votes.where(votable: votable).any?
-  end
-
-
   def unvote_for(votable)
     votes.where(votable: votable).delete_all
+  end
+
+  def voted_for?(votable)
+    votes.where(votable: votable).any?
   end
 
 end

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable, only: :create
-  after_action :discard_flash
+  after_action  :discard_flash
 
   def create
     @comment = @commentable.comments.new(comment_params)
