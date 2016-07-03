@@ -8,6 +8,7 @@ feature 'Add comment to Answer' do
 
   describe 'Authenticated user' do
     context 'creates new comment' do
+
       before do
         sign_in(user)
         visit question_path(question)
@@ -22,7 +23,6 @@ feature 'Add comment to Answer' do
       end
 
       scenario '- create comment', js: true do
-        skip
         within ".answer_comments" do
           click_on "add a comment"
           within 'form.new_comment_form_for_Answer' do
@@ -33,6 +33,18 @@ feature 'Add comment to Answer' do
           expect(page).to have_content 'Test answer comments'
         end
       end
+
+      scenario '- with no content', js: true do
+        within ".answer_comments" do
+          click_on "add a comment"
+          within 'form.new_comment_form_for_Answer' do
+            click_on 'Create Comment'
+          end
+
+          expect(page).to have_content "Content can't be blank"
+        end
+      end
+
     end
   end
 

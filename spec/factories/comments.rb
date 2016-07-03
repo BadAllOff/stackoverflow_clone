@@ -6,6 +6,7 @@ FactoryGirl.define do
 
   factory :invalid_comment, class: 'Comment'do
     user
+    question
     content nil
   end
 end

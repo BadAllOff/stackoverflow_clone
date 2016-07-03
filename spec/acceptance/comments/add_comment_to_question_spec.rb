@@ -6,11 +6,11 @@ feature 'Add comment question' do
   given(:question) { create(:question, user: user) }
 
   describe 'Authenticated user' do
+    before do
+      sign_in(user)
+      visit question_path(question)
+    end
     context 'creates new comment' do
-      before do
-        sign_in(user)
-        visit question_path(question)
-      end
 
       scenario "- show form comment", js: true do
         within ".question_comments" do
@@ -29,6 +29,17 @@ feature 'Add comment question' do
           end
 
           expect(page).to have_content 'Test question comments'
+        end
+      end
+
+      scenario '- with no content', js: true do
+        within ".question_comments" do
+          click_on "add a comment"
+          within 'form.new_comment_form_for_Question' do
+            click_on 'Create Comment'
+          end
+
+          expect(page).to have_content "Content can't be blank"
         end
       end
 
