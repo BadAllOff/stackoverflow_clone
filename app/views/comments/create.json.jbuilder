@@ -1,5 +1,6 @@
 json.extract! @comment, :id
 
+json.parent_id  @comment.commentable_id
 json.created_at @comment.created_at.strftime('%H:%M:%S %Y-%m-%d %Z')
 
 json.author do
