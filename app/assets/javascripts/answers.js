@@ -109,6 +109,13 @@ ready = function() {
 
         $("#answer_"+comment.parent_id+"_comments").append(newCommentDiv);
 
+        if (comment.author.author_id == userId) {
+          comment.currentUserIsAuthor = true;
+          $('#answer_body').val('');
+        }else{
+          comment.currentUserIsAuthor = false;
+        }
+
         return $('.flash-messages').append(JST["templates/shared/msg"]({
           object: comment
         }));
@@ -129,6 +136,30 @@ ready = function() {
       });
     });
 
+  $(function() {
+    return $('.delete_answer_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+      $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
+        $(this).remove();
+      });
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
+
+  $(function() {
+    return $('.delete_answer_comment').bind('ajax:error', function(e, xhr, status, error) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
 
 
 
