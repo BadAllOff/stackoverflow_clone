@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :comment do
     user
-    content "MyText"
+    content "My comment text"
   end
 
   factory :invalid_comment, class: 'Comment'do

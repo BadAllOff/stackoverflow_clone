@@ -1,4 +1,4 @@
-json.extract! @comment
+json.extract! @comment, :id
 json.obj_name               'Comment'
 
 json.msgs do

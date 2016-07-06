@@ -52,6 +52,31 @@ ready = function() {
     });
   });
 
+  $(function() {
+    return $('.delete_question_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+      $(this).closest('#comment-'+comment.id).fadeOut('slow', function(){
+        $(this).remove();
+      });
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
+
+  $(function() {
+    return $('.delete_question_comment').bind('ajax:error', function(e, xhr, status, error) {
+      var comment;
+      comment = $.parseJSON(xhr.responseText);
+
+      return $('.flash-messages').append(JST["templates/shared/msg"]({
+        object: comment
+      }));
+    });
+  });
+
 
 };
 
