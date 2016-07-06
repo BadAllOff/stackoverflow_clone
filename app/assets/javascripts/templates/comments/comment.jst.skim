@@ -3,3 +3,9 @@
     p.text-muted = @object.created_at
   .media-body
     p = @object.content
+  - if !@object.currentUserIsAuthor
+    .media-footer
+      .btn-group.btn-group-xs
+        a.btn.btn-danger.delete_answer_comment data-remote="true" rel="nofollow" data-format="json" data-method="delete" href="/comments/#{@object.id}"
+          i.fa.fa-trash
+          | Delete comment

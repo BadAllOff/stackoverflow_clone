@@ -1,6 +1,8 @@
 var ready;
 
 ready = function() {
+  var userId;
+  userId = $('#current_user_meta').data('userId');
 
   setTimeout(function(){
     $('.flash-messages > .alert').fadeOut('slow', function(){
@@ -32,6 +34,12 @@ ready = function() {
 
       $('.question_comments').append(newCommentDiv);
 
+      if (comment.author.author_id == userId) {
+        comment.currentUserIsAuthor = true;
+      }else{
+        comment.currentUserIsAuthor = false;
+      }
+
       return $('.flash-messages').append(JST["templates/shared/msg"]({
         object: comment
       }));
@@ -56,7 +64,7 @@ ready = function() {
     return $('.delete_question_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
       var comment;
       comment = $.parseJSON(xhr.responseText);
-      $(this).closest('#comment-'+comment.id).fadeOut('slow', function(){
+      $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
         $(this).remove();
       });
 
