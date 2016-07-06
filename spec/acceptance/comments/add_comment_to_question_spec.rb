@@ -4,6 +4,7 @@ feature 'Add comment question' do
 
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
+  given(:comment) { create(:comment, user: user, question: question) }
 
   describe 'Authenticated user' do
     before do
@@ -41,6 +42,21 @@ feature 'Add comment question' do
 
           expect(page).to have_content "Content can't be blank"
         end
+      end
+
+    end
+
+    context 'remove comment' do
+
+      scenario '- destroy own comment' do
+        within ".question_comments" do
+          click_on "Delete comment"
+          expect(page).to_not have_content "My comment text"
+        end
+      end
+
+      scenario '- destroy other user\'s comment' do
+        skip
       end
 
     end

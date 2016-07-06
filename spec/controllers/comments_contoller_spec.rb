@@ -44,4 +44,26 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
+
+  describe 'DELETE #destroy' do
+    context 'Authenticated user' do
+      sign_in_user
+      before { comment }
+
+      context 'operates with his own comment' do
+        let!(:comment) { create(:comment, question: question, user: @user) }
+
+        it '- deletes his own answer' do
+          expect {delete :destroy, question_id: question, id: comment, format: :json }.to change(@user.comments, :count).by(-1)
+        end
+
+        it '- gets status ok to answer view' do
+          delete :destroy, question_id: question, id: answer, format: :json
+          expect(response.status).to eq 200
+        end
+      end
+
+    end
+  end
+
 end

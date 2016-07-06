@@ -8,12 +8,14 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :commentable do
+    resources :comments, only: [:create, :destroy]
+  end
+
 
   devise_for :users
-  resources :questions, concerns: :votable do
-    resources :comments, only: :create
-    resources :answers, concerns: :votable, shallow: true do
-      resources :comments, only: :create
+  resources :questions, concerns: [:votable, :commentable], shallow: true do
+    resources :answers, concerns: [:votable, :commentable], shallow: true do
       patch :set_best, on: :member
     end
   end
