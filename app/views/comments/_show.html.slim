@@ -3,7 +3,7 @@
   = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.new }
 - commentable.comments.each do |comment|
   - if comment.id
-    .media id="comment-#{comment.id}"
+    .media id="#{commentable.class.name.downcase}_comment_#{comment.id}"
       .media-heading
         p.text-muted = comment.created_at
       .media-body

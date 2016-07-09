@@ -2,7 +2,10 @@ var ready;
 
 ready = function() {
   var userId;
+  var questionId;
   userId = $('#current_user_meta').data('userId');
+  questionId = $('#answers').data('questionId');
+
 
   setTimeout(function(){
     $('.flash-messages > .alert').fadeOut('slow', function(){
@@ -22,30 +25,7 @@ ready = function() {
       }));
     });
   });
-
-  $(function() {
-    return $('.new_comment_form_for_Question').unbind().bind('ajax:success', function(e, data, status, xhr) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
-
-      newCommentDiv = JST["templates/comments/comment"]({object: comment});
-      $(this).find('.commentMessages').html('');
-      $(this)[0].reset();
-
-      $('.question_comments').append(newCommentDiv);
-
-      if (comment.author.author_id == userId) {
-        comment.currentUserIsAuthor = true;
-      }else{
-        comment.currentUserIsAuthor = false;
-      }
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
-    });
-  });
-
+  
   $(function() {
     return $('.new_comment_form_for_Question').bind('ajax:error', function(e, xhr, status, error) {
       var comment;
@@ -61,17 +41,17 @@ ready = function() {
   });
 
   $(function() {
-    return $('.delete_question_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
-      $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
-        $(this).remove();
-      });
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
-    });
+    // return $('.delete_question_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
+    //   var comment;
+    //   comment = $.parseJSON(xhr.responseText);
+    //   $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
+    //     $(this).remove();
+    //   });
+    //
+    //   return $('.flash-messages').append(JST["templates/shared/msg"]({
+    //     object: comment
+    //   }));
+    // });
   });
 
   $(function() {
@@ -84,7 +64,6 @@ ready = function() {
       }));
     });
   });
-
 
 };
 

@@ -5,3 +5,7 @@
   .row.top-buffer.answers id='answers' data={question_id: "#{@question.id}"}
     = render partial: 'answers/answers'
   = subscribe_to "/questions/#{@question.id}/answers"
+  = subscribe_to "/questions/#{@question.id}/comments/create"
+  = subscribe_to "/questions/#{@question.id}/comments/destroy"
+  = subscribe_to "/answers/#{@question.id}/comments/create"
+  = subscribe_to "/answers/#{@question.id}/comments/destroy"
