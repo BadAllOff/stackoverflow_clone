@@ -6,6 +6,8 @@
   .commentMessages
   .form-group
     = f.label :content, 'write your comment'
-    = f.text_area :content, class: 'form-control'
+    = f.text_area :content, class: "form-control #{commentable.class.name}_#{commentable.id}_comment_content"
   = f.submit class: "btn btn-default"
-  = link_to "Hide form", "##{commentable.class.name}_#{commentable.id}_comment_form", class: "hide-comment btn btn-default", data: {commentable: commentable.id, toggle: 'collapse'}
+  = link_to "Hide form", "##{commentable.class.name}_#{commentable.id}_comment_form",
+          class: "hide-comment btn btn-default",
+          data: {commentable: commentable.id, toggle: 'collapse'}

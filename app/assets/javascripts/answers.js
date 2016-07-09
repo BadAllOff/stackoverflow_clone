@@ -26,7 +26,6 @@ ready = function() {
         });
     });
 
-
     $(function() {
         return $('.votes_answer').bind('ajax:success', function(e, data, status, xhr) {
             var answer;
@@ -43,8 +42,6 @@ ready = function() {
             }));
         });
     });
-
-
 
     $(function() {
         return $('#new_answer').unbind().bind('ajax:error', function(e, data, status, xhr) {
@@ -100,25 +97,25 @@ ready = function() {
 
     $(function() {
       return $('.new_comment_form_for_Answer').unbind().bind('ajax:success', function(e, data, status, xhr) {
-        var comment;
-        comment = $.parseJSON(xhr.responseText);
-
-        newCommentDiv = JST["templates/comments/comment"]({object: comment});
-        $(this).find('.commentMessages').html('');
-        $(this)[0].reset();
-
-        $("#answer_"+comment.parent_id+"_comments").append(newCommentDiv);
-
-        if (comment.author.author_id == userId) {
-          comment.currentUserIsAuthor = true;
-          $('#answer_body').val('');
-        }else{
-          comment.currentUserIsAuthor = false;
-        }
-
-        return $('.flash-messages').append(JST["templates/shared/msg"]({
-          object: comment
-        }));
+        // var comment;
+        // comment = $.parseJSON(xhr.responseText);
+        //
+        // newCommentDiv = JST["templates/comments/comment"]({object: comment});
+        // $(this).find('.commentMessages').html('');
+        // $(this)[0].reset();
+        //
+        // $("#answer_"+comment.parent_id+"_comments").append(newCommentDiv);
+        //
+        // if (comment.author.author_id == userId) {
+        //   comment.currentUserIsAuthor = true;
+        //   $('#answer_body').val('');
+        // }else{
+        //   comment.currentUserIsAuthor = false;
+        // }
+        //
+        // return $('.flash-messages').append(JST["templates/shared/msg"]({
+        //   object: comment
+        // }));
       });
     });
 
@@ -136,86 +133,85 @@ ready = function() {
       });
     });
 
-  $(function() {
-    return $('.delete_answer_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
-      $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
-        $(this).remove();
+    $(function() {
+      return $('.delete_answer_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
+        var comment;
+        comment = $.parseJSON(xhr.responseText);
+        $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
+          $(this).remove();
+        });
+
+        return $('.flash-messages').append(JST["templates/shared/msg"]({
+          object: comment
+        }));
       });
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
     });
-  });
 
-  $(function() {
-    return $('.delete_answer_comment').bind('ajax:error', function(e, xhr, status, error) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
+    $(function() {
+      return $('.delete_answer_comment').bind('ajax:error', function(e, xhr, status, error) {
+        var comment;
+        comment = $.parseJSON(xhr.responseText);
 
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
+        return $('.flash-messages').append(JST["templates/shared/msg"]({
+          object: comment
+        }));
+      });
     });
-  });
-
-
 
     PrivatePub.subscribe('/questions/' + questionId + '/answers', function(data, channel) {
 
-        var answer;
-        var newAnswerDiv;
-        var answerMessages = $('.answer-messages');
+          var answer;
+          var newAnswerDiv;
+          var answerMessages = $('.answer-messages');
 
-        answerMessages.empty();
+          answerMessages.empty();
 
-        answer = $.parseJSON(data['answer']);
-        if (answer.author.author_id == userId) {
-            answer.currentUserIsAuthor = true;
-            $('#answer_body').val('');
-        }else{
-            answer.currentUserIsAuthor = false;
-        }
+          answer = $.parseJSON(data['answer']);
+          if (answer.author.author_id == userId) {
+              answer.currentUserIsAuthor = true;
+              $('#answer_body').val('');
+          }else{
+              answer.currentUserIsAuthor = false;
+          }
 
-        if (answer.parentQuestionAuthorId == userId) {
-            answer.currentUserIsAuthorOfQuestion = true;
-        }else{
-            answer.currentUserIsAuthorOfQuestion = false;
-        }
+          if (answer.parentQuestionAuthorId == userId) {
+              answer.currentUserIsAuthorOfQuestion = true;
+          }else{
+              answer.currentUserIsAuthorOfQuestion = false;
+          }
 
 
-        if (answer.is_new) {
-            newAnswerDiv = JST["templates/answers/answer"]({object: answer});
-            $('.answers').find('ul.answers_list').prepend(newAnswerDiv);
+          if (answer.is_new) {
+              newAnswerDiv = JST["templates/answers/answer"]({object: answer});
+              $('.answers').find('ul.answers_list').prepend(newAnswerDiv);
 
-            setTimeout(function(){
-                $('.flash-messages > .alert').fadeOut('slow', function(){
-                    $(this).remove();
-                });
-            }, 3500);
+              setTimeout(function(){
+                  $('.flash-messages > .alert').fadeOut('slow', function(){
+                      $(this).remove();
+                  });
+              }, 3500);
 
-            if (!answer.currentUserIsAuthor){
-                answer.msgs.ok_msg = null;
-                answer.msgs.notice = " New answer was added";
-            }
-        }else{
-            updatedAnswerDiv = JST["templates/answers/answer"]({object: answer});
-            var liAnswerId = $('li#answer-'+answer.id);
-            liAnswerId.replaceWith(updatedAnswerDiv);
+              if (!answer.currentUserIsAuthor){
+                  answer.msgs.ok_msg = null;
+                  answer.msgs.notice = " New answer was added";
+              }
+          }else{
+              updatedAnswerDiv = JST["templates/answers/answer"]({object: answer});
+              var liAnswerId = $('li#answer-'+answer.id);
+              liAnswerId.replaceWith(updatedAnswerDiv);
 
-            if (!answer.currentUserIsAuthor){
-                answer.msgs.ok_msg = null;
-                answer.msgs.notice = " Answer was updated";
-                $('li#answer-'+answer.id).find('.answer-body').addClass('bg-info');
-            }
-        }
+              if (!answer.currentUserIsAuthor){
+                  answer.msgs.ok_msg = null;
+                  answer.msgs.notice = " Answer was updated";
+                  $('li#answer-'+answer.id).find('.answer-body').addClass('bg-info');
+              }
+          }
 
-        return $('.flash-messages').append(JST["templates/shared/msg"]({
-            object: answer
-        }));
-    });
+          return $('.flash-messages').append(JST["templates/shared/msg"]({
+              object: answer
+          }));
+      });
+
 };
 
 $(document).ready(ready);
