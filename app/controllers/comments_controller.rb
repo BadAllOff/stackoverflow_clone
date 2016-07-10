@@ -34,7 +34,12 @@ class CommentsController < ApplicationController
         @comment.destroy
         format.json do
           flash['success'] = 'Comment deleted'
-          PrivatePub.publish_to "/questions/#{@comment.commentable_id}/comments/destroy", comment: render {template 'create.json.jbuilder'}
+          if @comment.commentable_type == 'Question'
+            PrivatePub.publish_to "/questions/#{@comment.commentable_id}/comments/destroy", comment: render {template 'destroy.json.jbuilder'}
+          end
+          if @comment.commentable_type == 'Answer'
+            PrivatePub.publish_to "/answers/#{@comment.commentable.question_id}/comments/destroy", comment: render {template 'destroy.json.jbuilder'}
+          end
         end
       else
         format.json do

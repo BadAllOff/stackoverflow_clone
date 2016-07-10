@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  let!(:user)             { create(:user) }
-  let!(:question)         { create(:question, user: user) }
-  let!(:comment)          { create(:comment, commentable: question, user: user ) }
+  let(:user)          { create(:user) }
+  let(:question)      { create(:question, user: user) }
+  let(:comment)       { create(:comment, commentable: question, user: user ) }
+  let(:another_user)  { create :user }
+
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -47,10 +49,9 @@ RSpec.describe CommentsController, type: :controller do
   describe 'DELETE #destroy' do
     context 'Authenticated user' do
       sign_in_user
-      before { comment }
-
       context 'operates with his own comment' do
-        let!(:comment) { create(:comment, commentable: question, user: user) }
+        let!(:comment) { create(:comment, commentable: question, user: @user) }
+        before { comment }
 
         it '- deletes his own comment' do
           expect{ delete :destroy, id: comment, format: :json }.to change(Comment, :count).by(-1)
@@ -60,6 +61,16 @@ RSpec.describe CommentsController, type: :controller do
           delete :destroy, id: comment, format: :json
           expect(response.status).to eq 200
         end
+      end
+
+      context 'operates with other user comment' do
+        sign_in_another_user
+        let!(:comment) { create(:comment, commentable: question, user: another_user) }
+
+        it "- can't delete comment" do
+          expect { delete :destroy, id: comment, format: :json }.to_not change(Comment, :count)
+        end
+
       end
 
     end

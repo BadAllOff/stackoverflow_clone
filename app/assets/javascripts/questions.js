@@ -25,7 +25,7 @@ ready = function() {
       }));
     });
   });
-  
+
   $(function() {
     return $('.new_comment_form_for_Question').bind('ajax:error', function(e, xhr, status, error) {
       var comment;
@@ -38,20 +38,6 @@ ready = function() {
         object: comment
       }));
     });
-  });
-
-  $(function() {
-    // return $('.delete_question_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
-    //   var comment;
-    //   comment = $.parseJSON(xhr.responseText);
-    //   $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
-    //     $(this).remove();
-    //   });
-    //
-    //   return $('.flash-messages').append(JST["templates/shared/msg"]({
-    //     object: comment
-    //   }));
-    // });
   });
 
   $(function() {
