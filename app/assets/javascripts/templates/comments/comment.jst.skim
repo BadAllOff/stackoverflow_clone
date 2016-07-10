@@ -6,6 +6,6 @@
   - if @object.currentUserIsAuthor
     .media-footer
       .btn-group.btn-group-xs
-        a.btn.btn-danger.delete_answer_comment data-remote="true" rel="nofollow" data-format="json" data-method="delete" href="/comments/#{@object.id}"
+        a.btn.btn-danger data-remote="true" rel="nofollow" data-format="json" data-method="delete" class="delete_#{@object.parent_type}_comment" href="/comments/#{@object.id}" title="Delete comment"
           i.fa.fa-trash
           | Delete comment

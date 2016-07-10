@@ -15,10 +15,10 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:user) { create(:user) }
-  let(:another_user) { create :user }
-  let(:question) { create(:question, user: user) }
-  let(:answer) { create(:answer, question: question, user: user) }
+  let(:user)          { create(:user) }
+  let(:question)      { create(:question, user: user) }
+  let(:answer)        { create(:answer, question: question, user: user) }
+  let(:another_user)  { create :user }
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -54,31 +54,6 @@ RSpec.describe AnswersController, type: :controller do
       it '- sends back status unauthorized' do
         expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to_not change(question.answers, :count)
         expect(response.status).to eq 401
-      end
-    end
-  end
-
-  describe 'GET #edit' do
-    context 'Authenticated user' do
-      sign_in_user
-
-      let!(:answer) { create(:answer, question: question, user: @user) }
-      before { get :edit, question_id: question.id, id: answer, format: :js}
-
-      it '- assigns the requested answer to @answer' do
-        expect(assigns(:answer)).to eq answer
-      end
-
-      it '- renders edit view' do
-        expect(response).to render_template :edit
-      end
-    end
-
-    context 'Non-authenticated user try to edit answer' do
-      before { answer }
-      it '- sends back status unauthorized' do
-        get :edit, question_id: question, id: answer, format: :js
-        expect(response.status).to eq(401)
       end
     end
   end
