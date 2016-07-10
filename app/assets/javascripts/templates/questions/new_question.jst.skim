@@ -1,0 +1,12 @@
+.media
+  .media-left
+    i class="fa fa-question fa-3x"
+    - if @object.currentUserIsAuthor
+      a class="btn btn-xs btn-danger" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/questions/#{@object.id}"
+        i class="fa fa-trash"
+  .media-body
+    h4.media-heading
+      a href="/questions/#{@object.id}"
+        = @object.title
+    p
+      =@object.body
