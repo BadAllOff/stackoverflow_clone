@@ -51,6 +51,16 @@ ready = function() {
     });
   });
 
+  PrivatePub.subscribe("/questions", function(data, channel) {
+    var question;
+    question = $.parseJSON(data.question);
+    cUr = $.parseJSON(data.current_user);
+
+    question.user_id == userId ? question.currentUserIsAuthor = true : question.currentUserIsAuthor = false;
+    newQuestionDiv = JST["templates/questions/new_question"]({object: question});
+    $('.questions_list').prepend(newQuestionDiv);
+  });
+
 };
 
 
