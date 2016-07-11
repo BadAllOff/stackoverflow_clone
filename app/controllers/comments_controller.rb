@@ -12,12 +12,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.json do
           flash[:success] = 'Comment successfully created'
-          if @comment.commentable_type == 'Question'
-            PrivatePub.publish_to "/questions/#{@comment.commentable_id}/comments/create", comment: render {template 'create.json.jbuilder'}
-          end
-          if @comment.commentable_type == 'Answer'
-            PrivatePub.publish_to "/answers/#{@comment.commentable.question_id}/comments/create", comment: render {template 'create.json.jbuilder'}
-          end
+          PrivatePub.publish_to set_chanel(@comment, 'create'), comment: render {template 'create.json.jbuilder'}
         end
       else
         format.json do
@@ -34,12 +29,7 @@ class CommentsController < ApplicationController
         @comment.destroy
         format.json do
           flash['success'] = 'Comment deleted'
-          if @comment.commentable_type == 'Question'
-            PrivatePub.publish_to "/questions/#{@comment.commentable_id}/comments/destroy", comment: render {template 'destroy.json.jbuilder'}
-          end
-          if @comment.commentable_type == 'Answer'
-            PrivatePub.publish_to "/answers/#{@comment.commentable.question_id}/comments/destroy", comment: render {template 'destroy.json.jbuilder'}
-          end
+          PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}
         end
       else
         format.json do
@@ -52,6 +42,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_chanel(comment, method)
+    if comment.commentable_type == 'Question'
+      "/questions/#{@comment.commentable_id}/comments/#{method}"
+    elsif comment.commentable_type == 'Answer'
+      "/answers/#{@comment.commentable.question_id}/comments/#{method}"
+    end
+  end
 
   def set_commentable
     params.each do |name, value|
