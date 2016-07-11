@@ -21,3 +21,6 @@ public/tmp
 public/system
 .DB_store
 /.vagrant
+coverage
+coverage/
+spec/views/
