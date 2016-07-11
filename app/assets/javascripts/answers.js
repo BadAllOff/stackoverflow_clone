@@ -1,3 +1,11 @@
+$(document).on('click', '.cancel_update', function(e) {
+  e.preventDefault();
+  var answerId = $(this).data('answerId');
+
+  $('.form_for_answer-' + answerId).hide();
+  $('li#answer-'+ answerId).find('.btn-answer-edit').show();
+});
+
 var ready;
 
 ready = function() {
@@ -15,16 +23,6 @@ ready = function() {
             });
         }, 3500);
     }
-
-    $(function() {
-        $('.cancel_update').bind('click', function(e) {
-            e.preventDefault();
-            var answerId = $(this).data('answerId');
-
-            $('.form_for_answer-' + answerId).hide();
-            $('li#answer-'+ answerId).find('.btn-answer-edit').show();
-        });
-    });
 
     $(function() {
         return $('.votes_answer').bind('ajax:success', function(e, data, status, xhr) {
@@ -68,8 +66,11 @@ ready = function() {
     $(function() {
         return $('.edit_answer').unbind().bind('ajax:error', function(e, data, status, xhr) {
             var answer_id;
-            answer_id = $(this).find('.btn-info').data('answerId');
+            var answer;
             var answerMessages = $(this).find('.answer-messages');
+            var errorsDiv;
+
+            answer_id = $(this).find('.btn-info').data('answerId');
             answerMessages.empty();
             answer = $.parseJSON(data.responseText);
 
@@ -98,6 +99,7 @@ ready = function() {
     $(function() {
       return $('.new_comment_form_for_Answer').bind('ajax:error', function(e, xhr, status, error) {
         var comment;
+        var errorsDiv;
         comment = $.parseJSON(xhr.responseText);
 
         errorsDiv = JST["templates/shared/errors"]({object: comment});
@@ -138,6 +140,7 @@ ready = function() {
 
           var answer;
           var newAnswerDiv;
+          var updatedAnswerDiv;
           var answerMessages = $('.answer-messages');
 
           answerMessages.empty();
