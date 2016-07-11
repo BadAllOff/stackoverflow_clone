@@ -42,6 +42,9 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'database_cleaner'
   gem 'capybara-webkit'
+
+  gem "codeclimate-test-reporter", require: nil
+
 end
 
 group :test do
