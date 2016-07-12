@@ -228,6 +228,11 @@ RSpec.describe AnswersController, type: :controller do
       it "- keep's the vote" do
         expect { patch :upvote, id: answer, format: :json }.to change(answer.votes.upvotes, :count).by 1
       end
+
+      it "- can't vote twice" do
+        patch :upvote, id: answer, format: :json
+        expect { patch :upvote, id: answer, format: :json }.to_not change(answer.votes.upvotes, :count)
+      end
     end
   end
 
@@ -244,6 +249,11 @@ RSpec.describe AnswersController, type: :controller do
       it "- keep's the vote" do
         expect { patch :downvote, id: answer, format: :json }.to change(answer.votes.downvotes, :count).by 1
       end
+
+      it "- can't downvote twice" do
+        patch :downvote, id: answer, format: :json
+        expect { patch :downvote, id: answer, format: :json }.to_not change(answer.votes.upvotes, :count)
+      end
     end
   end
 
@@ -256,6 +266,12 @@ RSpec.describe AnswersController, type: :controller do
     it '- deletes vote for votable object (answer)' do
       expect { patch :unvote, id: answer, format: :json }.to change(answer.votes, :count).by(-1)
     end
+
+    it "- if not voted, can\'t delete vote for votable object (answer)" do
+      patch :unvote, id: answer, format: :json
+      expect { patch :unvote, id: answer, format: :json }.to_not change(answer.votes, :count)
+    end
+
   end
 
 end
