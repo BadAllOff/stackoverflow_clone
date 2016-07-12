@@ -1,8 +1,7 @@
 == README
 
-[![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
-
-[![Issue Count](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/issue_count.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
+{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone]
+{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage]
 
 
 
