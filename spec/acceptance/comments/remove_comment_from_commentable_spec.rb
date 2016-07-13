@@ -22,7 +22,6 @@ feature 'Add comment question' do
 
       scenario '- destroy own comment', js: true do
         # skip 'Capybara problem with pub\sub and Commet' do
-          # TODO Capybara problem with pub\sub and Commet
           within('.question_comments') { click_on 'Delete comment' }
           page.evaluate_script 'window.location.reload()'
           expect(page).to_not have_content comment.content

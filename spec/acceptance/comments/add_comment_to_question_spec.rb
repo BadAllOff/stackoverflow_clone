@@ -15,14 +15,14 @@ feature 'Add comment question' do
         within "#question_#{question.id}_comments" do
           expect(page).to_not have_selector :css, 'form.new_comment'
           click_on "add a comment"
-          expect(page).to have_selector :css, 'form.new_comment_form_for_Question'
+          expect(page).to have_selector :css, 'form.new_comment_form_for_question'
         end
       end
 
       scenario "- create comment", js: true do
         within "#question_#{question.id}_comments" do
           click_on "add a comment"
-          within 'form.new_comment_form_for_Question' do
+          within 'form.new_comment_form_for_question' do
             fill_in 'write your comment', with: 'Test question comments'
             click_on 'Create Comment'
           end
@@ -40,7 +40,7 @@ feature 'Add comment question' do
       scenario '- with no content', js: true do
         within "#question_#{question.id}_comments" do
           click_on "add a comment"
-          within 'form.new_comment_form_for_Question' do
+          within 'form.new_comment_form_for_question' do
             click_on 'Create Comment'
           end
           expect(page).to have_content "Content can't be blank"

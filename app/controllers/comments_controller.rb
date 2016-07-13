@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
     if comment.commentable_type == 'Question'
       "/questions/#{@comment.commentable_id}/comments/#{method}"
     elsif comment.commentable_type == 'Answer'
-      "/answers/#{@comment.commentable.question_id}/comments/#{method}"
+      "/questions/#{@comment.commentable.question_id}/comments/#{method}"
     end
   end
 

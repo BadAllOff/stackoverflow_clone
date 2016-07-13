@@ -18,14 +18,14 @@ feature 'Add comment to Answer' do
         within "#answer_#{answer.id}_comments" do
           expect(page).to_not have_selector :css, 'form.new_comment'
           click_on 'add a comment'
-          expect(page).to have_selector :css, 'form.new_comment_form_for_Answer'
+          expect(page).to have_selector :css, 'form.new_comment_form_for_answer'
         end
       end
 
       scenario '- create comment', js: true do
         within "#answer_#{answer.id}_comments" do
           click_on "add a comment"
-          within 'form.new_comment_form_for_Answer' do
+          within 'form.new_comment_form_for_answer' do
             fill_in 'write your comment', with: 'Test answer comments'
             click_on 'Create Comment'
           end
@@ -38,7 +38,7 @@ feature 'Add comment to Answer' do
       scenario '- with no content', js: true do
         within "#answer_#{answer.id}_comments" do
           click_on "add a comment"
-          within 'form.new_comment_form_for_Answer' do
+          within 'form.new_comment_form_for_answer' do
             click_on 'Create Comment'
           end
 

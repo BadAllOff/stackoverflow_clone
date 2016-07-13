@@ -60,20 +60,8 @@ ready = function() {
     return addCommentToCommentable(data);
   });
 
-  // answer comment create
-  PrivatePub.subscribe('/answers/' + questionId + '/comments/create', function(data, channel) {
-    return addCommentToCommentable(data);
-  });
-  
-
   // question comment destroy
   PrivatePub.subscribe('/questions/' + questionId + '/comments/destroy', function(data, channel) {
-    return removeCommentFromCommentable(data);
-  });
-
-
-  // answer comment destroy
-  PrivatePub.subscribe('/answers/' + questionId + '/comments/destroy', function(data, channel) {
     return removeCommentFromCommentable(data);
   });
 
