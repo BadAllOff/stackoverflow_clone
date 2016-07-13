@@ -79,14 +79,7 @@ ready = function() {
 
 
   $(function() {
-    $('.new_comment_form_for_question').bind('ajax:error', function(e, xhr, status, error) {
-      return showCommentValidationErrors(xhr.responseText, $(this));
-    });
-  });
-
-
-  $(function() {
-    $('.new_comment_form_for_answer').bind('ajax:error', function(e, xhr, status, error) {
+    $('.new_comment_form_for_question, .new_comment_form_for_answer').bind('ajax:error', function(e, xhr, status, error) {
       return showCommentValidationErrors(xhr.responseText, $(this));
     });
   });
