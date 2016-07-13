@@ -1,5 +1,5 @@
 json.extract! @comment, :id
-json.obj_name               'Comment'
+json.obj_name               'comment'
 
 json.msgs do
   json.error_msg              flash['error']

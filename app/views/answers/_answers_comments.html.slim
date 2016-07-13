@@ -1,7 +1,0 @@
-.col-xs-12 id="answer_#{commentable.id}_comments"
-  - if user_signed_in?
-    =link_to 'add a comment', "##{commentable.class.name}_#{commentable.id}_comment_form", class: 'btn btn-block', data: {toggle: 'collapse'}
-    .collapse id="#{commentable.class.name}_#{commentable.id}_comment_form"
-      = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.new }
-  .answer_comments.col-xs-12.top-buffer
-    = render partial: 'comments/show', locals: {commentable: commentable}

@@ -25,21 +25,7 @@ ready = function() {
       }));
     });
   });
-
-  $(function() {
-    return $('.new_comment_form_for_Question').bind('ajax:error', function(e, xhr, status, error) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
-
-      errorsDiv = JST["templates/shared/errors"]({object: comment});
-      $(this).find('.commentMessages').html(errorsDiv);
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
-    });
-  });
-
+  
   $(function() {
     return $('.delete_question_comment').bind('ajax:error', function(e, xhr, status, error) {
       var comment;

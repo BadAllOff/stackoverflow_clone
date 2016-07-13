@@ -96,46 +96,6 @@ ready = function() {
     }
     show_edit_answer_form();
 
-    $(function() {
-      return $('.new_comment_form_for_Answer').bind('ajax:error', function(e, xhr, status, error) {
-        var comment;
-        var errorsDiv;
-        comment = $.parseJSON(xhr.responseText);
-
-        errorsDiv = JST["templates/shared/errors"]({object: comment});
-        $(this).find('.commentMessages').html(errorsDiv);
-
-        return $('.flash-messages').append(JST["templates/shared/msg"]({
-          object: comment
-        }));
-      });
-    });
-
-    $(function() {
-      return $('.delete_answer_comment').unbind().bind('ajax:success', function(e, data, status, xhr) {
-        var comment;
-        comment = $.parseJSON(xhr.responseText);
-        $(this).closest('#comment-'+comment.id).fadeOut('fast', function(){
-          $(this).remove();
-        });
-
-        return $('.flash-messages').append(JST["templates/shared/msg"]({
-          object: comment
-        }));
-      });
-    });
-
-    $(function() {
-      return $('.delete_answer_comment').bind('ajax:error', function(e, xhr, status, error) {
-        var comment;
-        comment = $.parseJSON(xhr.responseText);
-
-        return $('.flash-messages').append(JST["templates/shared/msg"]({
-          object: comment
-        }));
-      });
-    });
-
     PrivatePub.subscribe('/questions/' + questionId + '/answers', function(data, channel) {
 
           var answer;
