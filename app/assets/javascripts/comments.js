@@ -1,18 +1,18 @@
 var ready;
 
 ready = function() {
-
   var userId = $('#current_user_meta').data('userId');
   var questionId = $('#answers').data('questionId');
 
+  
   function addCommentToCommentable(data){
-
     var comment = $.parseJSON(data['comment']);
     var parentType = comment.relationships.commentable.commentable_type
     var parentId = comment.relationships.commentable.commentable_id
     var authorId = comment.relationships.author.author_id
     var CommentsDiv = $('#'+parentType+'_'+parentId+'_comments');
     authorId == userId ? comment.currentUserIsAuthor = true : comment.currentUserIsAuthor = false;
+
     newCommentDiv = JST["templates/comments/comment"]({object: comment});
     CommentsDiv.find('.'+parentType+'_comments').prepend(newCommentDiv);
     CommentsDiv.find('.commentMessages').html('');
@@ -27,7 +27,6 @@ ready = function() {
         object: comment
       }));
     }
-
   }
 
 
@@ -42,7 +41,6 @@ ready = function() {
     });
 
     if (comment.currentUserIsAuthor) {
-
       setTimeout(function(){
         $('.flash-messages > .alert').fadeOut('slow', function(){
           $(this).remove();
@@ -60,6 +58,7 @@ ready = function() {
     return addCommentToCommentable(data);
   });
 
+
   // question comment destroy
   PrivatePub.subscribe('/questions/' + questionId + '/comments/destroy', function(data, channel) {
     return removeCommentFromCommentable(data);
@@ -67,33 +66,28 @@ ready = function() {
 
 
   // ERROR handlers
+  function showCommentValidationErrors(data, bindedElement) {
+    var comment = $.parseJSON(data);
+    var errorsDiv = JST["templates/shared/errors"]({object: comment});
+
+    bindedElement.find('.commentMessages').html(errorsDiv);
+
+    return $('.flash-messages').append(JST["templates/shared/msg"]({
+      object: comment
+    }));
+  }
+
 
   $(function() {
-    return $('.new_comment_form_for_question').bind('ajax:error', function(e, xhr, status, error) {
-      var comment;
-      comment = $.parseJSON(xhr.responseText);
-
-      errorsDiv = JST["templates/shared/errors"]({object: comment});
-      $(this).find('.commentMessages').html(errorsDiv);
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
+    $('.new_comment_form_for_question').bind('ajax:error', function(e, xhr, status, error) {
+      return showCommentValidationErrors(xhr.responseText, $(this));
     });
   });
 
+
   $(function() {
-    return $('.new_comment_form_for_answer').bind('ajax:error', function(e, xhr, status, error) {
-      var comment;
-      var errorsDiv;
-      comment = $.parseJSON(xhr.responseText);
-
-      errorsDiv = JST["templates/shared/errors"]({object: comment});
-      $(this).find('.commentMessages').html(errorsDiv);
-
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
+    $('.new_comment_form_for_answer').bind('ajax:error', function(e, xhr, status, error) {
+      return showCommentValidationErrors(xhr.responseText, $(this));
     });
   });
 
