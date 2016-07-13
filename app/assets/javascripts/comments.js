@@ -4,49 +4,47 @@ ready = function() {
   var userId = $('#current_user_meta').data('userId');
   var questionId = $('#answers').data('questionId');
 
-  
+
   function addCommentToCommentable(data){
     var comment = $.parseJSON(data['comment']);
-    var parentType = comment.relationships.commentable.commentable_type
-    var parentId = comment.relationships.commentable.commentable_id
-    var authorId = comment.relationships.author.author_id
+    var parentType = comment.relationships.commentable.commentable_type;
+    var parentId = comment.relationships.commentable.commentable_id;
+    var authorId = comment.relationships.author.author_id;
     var CommentsDiv = $('#'+parentType+'_'+parentId+'_comments');
     authorId == userId ? comment.currentUserIsAuthor = true : comment.currentUserIsAuthor = false;
 
     newCommentDiv = JST["templates/comments/comment"]({object: comment});
     CommentsDiv.find('.'+parentType+'_comments').prepend(newCommentDiv);
     CommentsDiv.find('.commentMessages').html('');
-    if (comment.currentUserIsAuthor) {
-      $('.'+parentType+'_'+parentId+'_comment_content').val('');
-      setTimeout(function(){
-        $('.flash-messages > .alert').fadeOut('slow', function(){
-          $(this).remove();
-        });
-      }, 3500);
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: comment
-      }));
-    }
+
+    removeFlashMessages(comment, parentType, parentId, $(this))
+
   }
 
 
   function removeCommentFromCommentable(data){
     var comment = $.parseJSON(data['comment']);
-    var parentType = comment.relationships.commentable.commentable_type
-    var authorId = comment.relationships.author.author_id
+    var parentType = comment.relationships.commentable.commentable_type;
+    var parentId = comment.relationships.commentable.commentable_id;
+    var authorId = comment.relationships.author.author_id;
     authorId == userId ? comment.currentUserIsAuthor = true : comment.currentUserIsAuthor = false;
 
     $('#'+parentType+'_comment_'+comment.id).fadeOut('fast', function(){
       $(this).remove();
     });
 
+    removeFlashMessages(comment, parentType, parentId, $(this))
+  }
+
+
+  function removeFlashMessages(comment, parentType, parentId, bindedElement) {
     if (comment.currentUserIsAuthor) {
+      $('.'+parentType+'_'+parentId+'_comment_content').val('');
       setTimeout(function(){
         $('.flash-messages > .alert').fadeOut('slow', function(){
-          $(this).remove();
+          bindedElement.remove();
         });
       }, 3500);
-
       return $('.flash-messages').append(JST["templates/shared/msg"]({
         object: comment
       }));
