@@ -34,6 +34,18 @@ RSpec.describe User do
 
   end
 
+  describe '#non_author_of?' do
+
+    it '- non_author_of? returns false if author' do
+      expect(user.non_author_of?(answer)).to be_falsey
+    end
+
+    it '- non_author_of? returns true if not an author' do
+      expect(another_user.non_author_of?(answer)).to be_truthy
+    end
+
+  end
+
   describe '#upvote_for answer' do
     it '- upvote by 1' do
       expect{ user.vote_for(answer, 1) }.to change(answer.votes.upvotes, :count).by(1)
