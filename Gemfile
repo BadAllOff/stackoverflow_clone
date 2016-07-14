@@ -33,6 +33,8 @@ gem 'jquery-ui-rails'
 gem 'private_pub'
 gem 'thin'
 gem 'rack-mini-profiler'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug'
@@ -44,14 +46,12 @@ group :development, :test do
   gem 'capybara-webkit'
 
   gem "codeclimate-test-reporter", require: nil
-
 end
 
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'launchy'
-  gem 'codeclimate-test-reporter', require: nil
   gem 'fuubar'
 end
 
