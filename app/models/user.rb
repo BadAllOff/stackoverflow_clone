@@ -20,6 +20,7 @@
 
 class User < ActiveRecord::Base
   include Omniauthable
+  include UserVotable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -41,19 +42,6 @@ class User < ActiveRecord::Base
 
   def non_author_of?(object)
     !author_of?(object)
-  end
-
-  def vote_for(votable, value)
-    vote = votes.new(votable: votable, value: value)
-    vote.save
-  end
-
-  def unvote_for(votable)
-    votes.where(votable: votable).delete_all
-  end
-
-  def voted_for?(votable)
-    votes.where(votable: votable).any?
   end
 
 end
