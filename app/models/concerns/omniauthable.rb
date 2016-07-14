@@ -10,9 +10,12 @@ module Omniauthable
       return authorization.user if authorization
 
       auth.info.try(:email) ? (email = auth.info[:email]) : (return nil)
-      auth.info.try(:name) ? (username = auth.info[:name]) : (username = 'FuckingUsername')
+      auth.info.try(:name) ? (username = auth.info[:name]) : (username = 'New User')
+
+      username = username + rand(100000).to_s if User.where(username: username).present?
 
       user = User.where(email: email).first
+
       if user
         user.create_authorization(auth)
       else
