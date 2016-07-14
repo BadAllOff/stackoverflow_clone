@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   concern :votable do
     member do
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   end
 
 
-  devise_for :users
   resources :questions, concerns: [:votable, :commentable], shallow: true do
     resources :answers, concerns: [:votable, :commentable], shallow: true do
       patch :set_best, on: :member
