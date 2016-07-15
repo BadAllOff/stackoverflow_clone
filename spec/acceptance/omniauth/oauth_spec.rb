@@ -8,7 +8,9 @@ feature 'OAuth' do
     before { mock_auth_hash(:facebook) }
 
     it 'successfully' do
-      click_on 'Sign in with Facebook'
+      within '#body_container' do
+        click_on 'Sign in with Facebook'.last
+      end
       expect(page).to have_content 'Successfully authenticated from Facebook account.'
     end
 

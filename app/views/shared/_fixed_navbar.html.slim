@@ -27,9 +27,17 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
             li
               a[href="#"] One more separated test link
       ul.nav.navbar-nav.navbar-right
-        li.active
-          -if user_signed_in?
-            =link_to 'Sign out', destroy_user_session_path, method: :delete
-            i id="current_user_meta" data={user_id: current_user.id}
-          -else
-            =link_to 'Sign in', new_user_session_path
+        li.dropdown
+          a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+            | Create account
+            span.caret
+          ul.dropdown-menu
+            -if user_signed_in?
+              li
+                =link_to 'Sign out', destroy_user_session_path, method: :delete
+                i id="current_user_meta" data={user_id: current_user.id}
+            -else
+              li
+                =link_to 'Sign in', new_user_session_path
+              li
+                =link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook)
