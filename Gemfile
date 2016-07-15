@@ -35,6 +35,7 @@ gem 'thin'
 gem 'rack-mini-profiler'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development, :test do
   gem 'byebug'

@@ -23,13 +23,19 @@ module Omniauthable
       if user
         user.create_authorization(auth)
       else
-        password = Devise.friendly_token[0, 20]
-        user = User.create!(email: email, username: username, password: password, password_confirmation: password)
-        if user.save
-          user.create_authorization(auth)
+
+        if email
+          password = Devise.friendly_token[0, 20]
+          user = User.create!(email: email, username: username, password: password, password_confirmation: password)
+          if user.save
+            user.create_authorization(auth)
+          else
+            return nil
+          end
         else
-          return nil
+
         end
+
       end
 
       user
