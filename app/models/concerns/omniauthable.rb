@@ -6,15 +6,19 @@ module Omniauthable
     has_many :authorizations
 
     def self.find_for_oauth(auth)
+      return if auth.nil? || auth.empty?
+      return if auth.provider.nil? || auth.uid.nil?
+      return if auth.provider.empty? || auth.uid.empty?
+
       authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
       return authorization.user if authorization
 
       auth.info.try(:email) ? (email = auth.info[:email]) : (return nil)
-      auth.info.try(:name) ? (username = auth.info[:name]) : (username = 'New User')
-
-      username = username + rand(100000).to_s if User.where(username: username).present?
 
       user = User.where(email: email).first
+
+      auth.info.try(:name) ? (username = auth.info[:name]) : (username = 'New User')
+      username = username + rand(100000).to_s if User.where(username: username).present?
 
       if user
         user.create_authorization(auth)
