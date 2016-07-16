@@ -15,6 +15,18 @@ feature 'Register', %q(
     expect(current_path).to eq root_path
   end
 
+  scenario '- Registered user try to edit profile' do
+    sign_in(user)
+    visit edit_user_registration_path
+
+    fill_in 'Username', with: 'New Username'
+    fill_in 'Current password', with: user.password
+    click_on 'Update'
+
+    expect(page).to have_content 'Your account has been updated successfully.'
+    expect(current_path).to eq root_path
+  end
+
 
   scenario '- Registered user try to sign out' do
     sign_in(user)

@@ -45,6 +45,8 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
           ul.dropdown-menu
             -if user_signed_in?
               li
+                = link_to 'Edit Profile', edit_user_registration_path
+              li
                 =link_to 'Sign out', destroy_user_session_path, method: :delete
                 i id="current_user_meta" data={user_id: current_user.id}
             -else
