@@ -25,11 +25,11 @@ feature 'Remove attachment from Question', %q(
       end
 
       scenario '- removes attachment from his question', js: true do
-        sleep 2
         within('.question_attachments') do
           click_on 'Remove attachment'
         end
 
+        sleep 1
         expect(page).to_not have_link '10x10.jpg', href: '/uploads/attachment/file/1/10x10.jpg'
       end
     end
