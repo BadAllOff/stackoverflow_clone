@@ -21,7 +21,7 @@ ready = function() {
             $('.flash-messages > .alert').fadeOut('slow', function(){
                 $(this).remove();
             });
-        }, 3500);
+        }, 2500);
     }
 
     $(function() {
@@ -128,7 +128,7 @@ ready = function() {
                   $('.flash-messages > .alert').fadeOut('slow', function(){
                       $(this).remove();
                   });
-              }, 3500);
+              }, 2500);
 
               if (!answer.currentUserIsAuthor){
                   answer.msgs.ok_msg = null;

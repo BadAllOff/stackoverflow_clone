@@ -11,7 +11,7 @@ ready = function() {
     $('.flash-messages > .alert').fadeOut('slow', function(){
       $(this).remove();
     });
-  }, 3500);
+  }, 2500);
 
   $(function() {
     return $('#question').bind('ajax:success', function(e, data, status, xhr) {

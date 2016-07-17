@@ -44,7 +44,7 @@ ready = function() {
         $('.flash-messages > .alert').fadeOut('slow', function(){
           bindedElement.remove();
         });
-      }, 3500);
+      }, 2500);
       return $('.flash-messages').append(JST["templates/shared/msg"]({
         object: comment
       }));
