@@ -240,6 +240,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, scope: [:email], info_fields: 'email,name'
   config.omniauth :twitter, Rails.application.secrets.twitter_consumer_key, Rails.application.secrets.twitter_consumer_secret
+  config.omniauth :github, Rails.application.secrets.github_client_id, Rails.application.secrets.github_client_secret, scope: "user"
   config.omniauth :vkontakte, Rails.application.secrets.vkontakte_app_id, Rails.application.secrets.vkontakte_app_secret, {
       :scope => 'email'
   }

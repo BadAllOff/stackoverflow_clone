@@ -14,7 +14,7 @@ module Omniauthable
       return authentication.user if authentication
       auth.info.try(:email) ? (email = auth.info[:email]) : email = nil
       auth.info.try(:name) ? (username = auth.info[:name]) : username = nil
-      user = User.where(email: email).first
+      user = User.where('lower(email) = ?', email.downcase).first if email
 
       if user
         user.create_authentication(auth)
