@@ -9,7 +9,7 @@ feature 'OAuth' do
 
     it 'successfully' do
       within '#body_container' do
-        click_on 'Sign in with Facebook'.last
+        click_on 'Sign in with Facebook'
       end
       expect(page).to have_content 'Successfully authenticated from Facebook account.'
     end
