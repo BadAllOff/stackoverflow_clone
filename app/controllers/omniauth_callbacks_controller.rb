@@ -3,11 +3,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :oauth, except: :failure
 
   def facebook
-
   end
 
   def twitter
+  end
 
+  def vkontakte
   end
 
   def finish_registration
