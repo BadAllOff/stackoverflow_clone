@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/auth/failure' => 'omniauth_callbacks#failure'
     post '/finish_registration' => 'omniauth_callbacks#finish_registration'
+    get '/finish_registration' => 'questions#index'
   end
 
   concern :votable do

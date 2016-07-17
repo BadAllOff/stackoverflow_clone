@@ -28,11 +28,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:provider] = auth.provider
       session[:uid] = auth.uid
-      render 'omniauth/prompt_additional_data', locals: {auth: auth}
+      render 'omniauth/prompt_additional_data', locals: {auth: auth, user: user}
     end
   end
 
   def auth
     request.env['omniauth.auth'] || OmniAuth::AuthHash.new(provider: session[:provider], uid: session[:uid], info: { email: params[:user][:email], name: params[:user][:username] })
   end
+
 end

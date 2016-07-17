@@ -23,6 +23,7 @@ module Omniauthable
         user = User.create(email: email, username: username, password: password, password_confirmation: password)
         if user.save
           user.create_authentication(auth)
+        else
         end
       end
 

@@ -1,11 +1,11 @@
 = form_tag finish_registration_path, method: :post, class: 'form-horizontal col-xs-6' do
-  .div
-    = debug(auth)
+  - if user.errors.any?
+    = render 'shared/errors', object: user
   .form-group.form-group-lg
     = label_tag 'Email'
-    = email_field 'user', :email, placeholder: 'Email', class: 'form-control'
+    = text_field 'user', :email, placeholder: 'Email', class: 'form-control', value: ( auth.info.email ? auth.info.email : 'invalid email' )
   .form-group.form-group-lg
     = label_tag 'Username'
-    = text_field 'user', :username, placeholder: 'Username', class: 'form-control'
+    = text_field 'user', :username, placeholder: 'Username', class: 'form-control', value: ( auth.info.name ? auth.info.name : 'invalid username' )
   .form-group
     = submit_tag 'Submit', class: "btn btn-success"
