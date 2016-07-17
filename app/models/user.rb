@@ -13,8 +13,13 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :authentications, dependent: :destroy
 
-  validates :username, presence: true, uniqueness: {case_sensitive: false}, length: { maximum: 40, minimum: 1 },
-            format: { with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/, message: 'only allows letters and 1 space between' }
+  validates :username, presence: true,
+            uniqueness: {case_sensitive: false},
+            length: { maximum: 40, minimum: 1 },
+            format: {
+                with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/,
+                message: 'only allows letters and 1 space between'
+            }
 
   def author_of?(object)
     id == object.user_id
