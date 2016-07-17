@@ -11,6 +11,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def vkontakte
   end
 
+  def github
+  end
+
   def finish_registration
   end
 
