@@ -1,0 +1,31 @@
+li.list-group-item.text-center class="votes_#{votable.class.name.downcase}"
+  span class=((votable.votes.rating < 0) ? 'text-danger' : 'text-primary')
+    = votable.votes.rating
+    '
+    =icon('star')
+  hr
+  - if can? :vote, votable
+    .btn-group-vertical
+      - if user_signed_in? && current_user.voted_for?(votable)
+        =link_to send("unvote_#{votable.class.name.downcase}_path", votable),
+                method: :patch,
+                remote: true,
+                data: { format: :json },
+                class: 'btn btn-warning vote_unvote'
+          =icon('history')
+          |  Unvote
+      -else
+        =link_to send("upvote_#{votable.class.name.downcase}_path", votable),
+                method: :patch,
+                remote: true,
+                data: { format: :json },
+                class: 'btn btn-info vote_up'
+          =icon('thumbs-o-up')
+          |  Vote Up
+        =link_to send("downvote_#{votable.class.name.downcase}_path", votable),
+                method: :patch,
+                remote: true,
+                data: { format: :json },
+                class: 'btn btn-danger vote_down'
+          =icon('thumbs-o-down fa-flip-horizontal')
+          |  Vote Down

@@ -14,3 +14,9 @@ json.msgs do
   json.error_msg        flash['error']
   json.ok_msg           flash['success']
 end
+
+json.relationships do
+  json.votable do
+    json.classname          @answer.class.name.downcase
+  end
+end

@@ -3,7 +3,7 @@
     .row
       .col-xs-2.col-md-2.vote
         ul.list-group
-          = render partial: 'answers/vote_buttons', locals: {votable: answer}
+          = render partial: 'votes/vote_buttons', locals: {votable: answer}
           = render partial: 'answers/best_answer', locals: {answer: answer}
       .col-xs-8.col-md-9
         div = render partial: 'answers/meta', locals: { answer: answer }

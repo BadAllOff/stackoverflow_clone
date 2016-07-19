@@ -6,25 +6,6 @@ ready = function() {
   userId = $('#current_user_meta').data('userId');
   questionId = $('#answers').data('questionId');
 
-  setTimeout(function(){
-    $('.flash-messages > .alert').fadeOut('slow', function(){
-      $(this).remove();
-    });
-  }, 2500);
-
-  $(function() {
-    return $('#question').bind('ajax:success', function(e, data, status, xhr) {
-      var question;
-      question = $.parseJSON(xhr.responseText);
-      $("#question-" + question.id + " .votes_question").html(JST["templates/votes"]({
-        object: question
-      }));
-      return $('.flash-messages').append(JST["templates/shared/msg"]({
-        object: question
-      }));
-    });
-  });
-  
   $(function() {
     return $('.delete_question_comment').bind('ajax:error', function(e, xhr, status, error) {
       var comment;

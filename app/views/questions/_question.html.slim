@@ -3,7 +3,7 @@ div class='question_container' id="question-#{@question.id}" data-question_id="#
     = @question.title
   hr.colorgraph
   div.col-xs-2 id='question'
-    ul.list-group =render partial: 'questions/vote_buttons', locals: {votable: @question}
+    ul.list-group =render partial: 'votes/vote_buttons', locals: {votable: @question}
   div.col-xs-10
     p = @question.body
     .question_attachments = render 'attachments/attachments', attachable: @question

@@ -25,18 +25,18 @@ ready = function() {
     }
 
     $(function() {
-        return $('.votes_answer').bind('ajax:success', function(e, data, status, xhr) {
-            var answer;
+        return $('.vote_unvote, .vote_up, .vote_down').bind('ajax:success', function(e, data, status, xhr) {
+            var votable;
 
-            answer = $.parseJSON(xhr.responseText);
-            $("#answer-" + answer.id + " .votes_answer").html(JST["templates/votes"]({
-                object: answer
+          votable = $.parseJSON(xhr.responseText);
+            $("#"+votable.relationships.votable.classname+"-" + votable.id + " .votes_"+votable.relationships.votable.classname).html(JST["templates/votes"]({
+                object: votable
             }));
 
             remove_alerts();
 
             return $('.flash-messages').append(JST["templates/shared/msg"]({
-                object: answer
+                object: votable
             }));
         });
     });
