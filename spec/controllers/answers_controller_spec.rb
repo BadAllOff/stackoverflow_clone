@@ -97,7 +97,7 @@ RSpec.describe AnswersController, type: :controller do
       context 'operates with another user answer' do
         sign_in_another_user
         let!(:answer) { create(:answer, question: question, user: @user) }
-        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :jsons }
+        before { patch :update, question_id: question, id: answer, answer: { body: 'This is another user answer' }, format: :json }
 
         it '- does not change answer attributes' do
           answer.reload

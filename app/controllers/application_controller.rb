@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: exception.message
+    respond_to do |format|
+      format.json { render nothing: true, error: exception.message }
+      format.js   { render nothing: true, error: exception.message }
+      format.html { redirect_to root_url, alert: exception.message }
+    end
   end
 end

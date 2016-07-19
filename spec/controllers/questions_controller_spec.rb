@@ -67,8 +67,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     # TODO json
     it '- renders edit view' do
-      expect(response).to redirect_to root_path
-      # expect(response).to render_template :edit
+      expect(response).to have_http_status(:success)
     end
   end
 
