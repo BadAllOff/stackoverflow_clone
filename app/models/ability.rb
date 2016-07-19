@@ -22,7 +22,7 @@ class Ability
   attr_reader :user
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    # user ||= User.new # guest user (not logged in)
     @user = user
 
     alias_action :create, :read, :update, :destroy, to: :crud
@@ -52,7 +52,7 @@ class Ability
     cannot :vote, [Question, Answer], user: user
 
     can :create, Comment
-    can :destroy, Comment, user: user
+    can :manage, Comment, user: user
 
     can :manage, Attachment, attachable: { user: user }
 

@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: questions
-#
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
-#
-
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
@@ -41,28 +29,29 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
-    it '- - builds new attachment for answer' do
+    it '- builds new attachment for answer' do
       expect(assigns(:answer).attachments.first).to be_a_new(Attachment)
     end
 
-    it '- - renders show view' do
+    it '- renders show view' do
       expect(response).to render_template :show
     end
   end
 
   describe 'GET #new' do
     sign_in_user
+    render_views
     before { get :new}
 
-    it '- - assigns a new Question to @question' do
+    it '- assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it '- - builds new attachment for question' do
+    it '- builds new attachment for question' do
       expect(assigns(:question).attachments.first).to be_a_new(Attachment)
     end
 
-    it '- - renders new view' do
+    it '- renders new view' do
       expect(response).to render_template :new
     end
   end
@@ -70,13 +59,16 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'GET #edit' do
     sign_in_user
     before { get :edit, id: question, format: :js}
+    render_views
 
-    it '- - assigns the requested question to @question' do
+    it '- assigns the requested question to @question' do
       expect(assigns(:question)).to eq question
     end
 
-    it '- - renders edit view' do
-      expect(response).to render_template :edit
+    # TODO json
+    it '- renders edit view' do
+      expect(response).to redirect_to root_path
+      # expect(response).to render_template :edit
     end
   end
 
@@ -85,18 +77,18 @@ RSpec.describe QuestionsController, type: :controller do
       sign_in_user
 
       context 'with valid attributes' do
-        it '- - saves new question in the DB' do
+        it '- saves new question in the DB' do
           expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
         end
 
-        it '- - redirects to show view' do
+        it '- redirects to show view' do
           post :create, question: attributes_for(:question)
           expect(response).to redirect_to question_path(assigns(:question))
         end
       end
 
       context 'with invalid attributes' do
-        it '- - does not saves new question in the DB' do
+        it '- does not saves new question in the DB' do
           expect { post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
         end
 
@@ -220,7 +212,7 @@ RSpec.describe QuestionsController, type: :controller do
 
         it '- redirect to question view' do
           delete :destroy, id: question
-          expect(response).to redirect_to question_path(question)
+          expect(response).to redirect_to root_path
         end
       end
     end

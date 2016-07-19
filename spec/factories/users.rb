@@ -11,6 +11,12 @@ FactoryGirl.define do
     email
     password '123456789'
     password_confirmation '123456789'
+
+    factory :admin_user do
+      admin true
+    end
   end
+
+
 
 end

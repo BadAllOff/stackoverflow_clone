@@ -6,7 +6,6 @@ ready = function() {
   userId = $('#current_user_meta').data('userId');
   questionId = $('#answers').data('questionId');
 
-
   setTimeout(function(){
     $('.flash-messages > .alert').fadeOut('slow', function(){
       $(this).remove();
@@ -46,6 +45,8 @@ ready = function() {
     newQuestionDiv = JST["templates/questions/new_question"]({object: question});
     $('.questions_list').prepend(newQuestionDiv);
   });
+
+  $('form#edit_question_'+questionId).data('remote', 'true');
 
 };
 

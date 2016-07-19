@@ -1,24 +1,6 @@
 .col-xs-12 id="#{commentable.class.name.downcase}_#{commentable.id}_comments"
-  - if user_signed_in?
+  - if can? :create, Comment
     =link_to 'add a comment', "##{commentable.class.name.downcase}_#{commentable.id}_comment_form", class: 'btn btn-block', data: {toggle: 'collapse'}
     .collapse id="#{commentable.class.name.downcase}_#{commentable.id}_comment_form"
-      = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.new }
-  .col-xs-12.top-buffer class="#{commentable.class.name.downcase}_comments"
-    - commentable.comments.each do |comment|
-      - if comment.id
-        .media id="#{commentable.class.name.downcase}_comment_#{comment.id}"
-          .media-heading
-            p.text-muted = comment.created_at
-          .media-body
-            p = comment.content
-          - if can? :destroy, comment
-            .media-footer
-              .btn-group.btn-group-xs
-                = link_to comment_path(comment),
-                        method: :delete,
-                        remote: true,
-                        title: "Delete comment",
-                        class: "btn btn-danger delete_#{commentable.class.name.downcase}_comment",
-                        data: {format: :json, id: comment.id}
-                  = icon('trash')
-                  '  Delete comment
+      = render partial: 'comments/form', locals: { commentable: commentable, comment: commentable.comments.new }
+  = render partial: 'comments/list',locals: { commentable: commentable }

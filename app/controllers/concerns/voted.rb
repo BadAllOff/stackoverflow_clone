@@ -6,7 +6,9 @@ module Voted
     before_action :set_vote, :already_voted, only: [:upvote, :downvote, :unvote]
     # before_action :already_voted, only: [:upvote, :downvote]
     after_action :discard_flash, only: [:upvote, :downvote, :unvote]
+    authorize_resource
   end
+
 
   def upvote
     current_user.vote_for(@votable, 1)

@@ -1,13 +1,13 @@
 li.list-group-item.text-center.votes_answer
   span.text-primary
-    = answer.votes.rating
+    = votable.votes.rating
     '
     =icon('star-half-o')
   hr
-  - if cannot? :crud, answer
+  - if can? :vote, votable
     .btn-group-vertical
-      - if current_user.voted_for?(answer)
-        =link_to unvote_answer_path(answer),
+      - if user_signed_in? && current_user.voted_for?(votable)
+        =link_to unvote_answer_path(votable),
                  method: :patch,
                  remote: true,
                  data: { format: :json },
@@ -15,14 +15,14 @@ li.list-group-item.text-center.votes_answer
           =icon('history')
           |  Unvote
       -else
-        =link_to upvote_answer_path(answer),
+        =link_to upvote_answer_path(votable),
                  method: :patch,
                  remote: true,
                  data: { format: :json },
                  class: 'btn btn-info vote_up'
           =icon('thumbs-o-up')
           |  Vote Up
-        =link_to downvote_answer_path(answer),
+        =link_to downvote_answer_path(votable),
                  method: :patch,
                  remote: true,
                  data: { format: :json },
