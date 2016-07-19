@@ -22,10 +22,12 @@ RSpec.describe Ability, type: :model do
     let(:user)                { create :user }
     let(:other_user)          { create :user }
     let(:question)            { create :question, user: user }
-    let(:answer)              { create :answer, question: question, user: user }
-    let(:attachment)          { create(:attachment, attachable: question) }
     let(:other_question)      { create :question, user: other_user }
-    let(:other_answer)        { create :answer, question: question, user: other_user }
+    let(:answer)              { create :answer, question: question, user: user }
+    let(:other_answer)        { create :answer, user: other_user, question: question }
+    let(:attachment)          { create :attachment, attachable: question }
+    let(:comment)             { create :comment, user: user, commentable: question }
+    let(:other_comment)       { create :comment, user: other_user, commentable: question }
 
     #All
     it { should be_able_to :read, :all }
@@ -40,9 +42,12 @@ RSpec.describe Ability, type: :model do
     it { should_not be_able_to :set_best, create(:answer), user: user }
     # Attachment
     it { should be_able_to :manage, attachment, user: user }
+    it { should be_able_to :destroy, attachment, user: user }
     it { should_not be_able_to :manage, create(:attachment), user: other_user }
     # Comment
     it { should be_able_to :create, Comment }
+    it { should be_able_to :destroy, comment, user: user }
+    it { should_not be_able_to :destroy, comment, user: other_user }
     # Vote
     it { should be_able_to :vote, other_question, user: user }
     it { should_not be_able_to :vote, question, user: user }

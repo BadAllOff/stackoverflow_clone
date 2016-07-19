@@ -47,11 +47,14 @@ class Ability
   def user_abilities
     guest_abilities
     can :crud, [Question, Answer], user: user
-    can :create, Comment
-    can :manage, Attachment, attachable: { user: user }
-
     can :set_best, Answer, question: { user: user }
     can :vote, [Question, Answer]
     cannot :vote, [Question, Answer], user: user
+
+    can :create, Comment
+    can :destroy, Comment, user: user
+
+    can :manage, Attachment, attachable: { user: user }
+
   end
 end

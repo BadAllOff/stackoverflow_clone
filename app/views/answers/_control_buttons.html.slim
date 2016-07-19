@@ -1,17 +1,16 @@
--if user_signed_in? && current_user.author_of?(answer)
-  .action.answer_control_btns
-    .btn-group.btn-group-xs
-      =link_to answer,
-               method: :delete,
-               remote: true,
-               class: 'btn btn-danger',
-               data: { confirm: 'Are you sure?'}
-        = icon('trash')
-        '  Delete answer
-      =link_to '#',
-               data: { answer_id: answer.id },
-               class: 'btn btn-warning btn-answer-edit'
-        = icon('pencil')
-        '  Edit answer
-  div class="form_for_answer-#{answer.id}"
-    = render 'answers/form', answer: answer
+.action.answer_control_btns
+  .btn-group.btn-group-xs
+    =link_to answer,
+             method: :delete,
+             remote: true,
+             class: 'btn btn-danger',
+             data: { confirm: 'Are you sure?'}
+      = icon('trash')
+      '  Delete answer
+    =link_to '#',
+             data: { answer_id: answer.id },
+             class: 'btn btn-warning btn-answer-edit'
+      = icon('pencil')
+      '  Edit answer
+div class="form_for_answer-#{answer.id}"
+  = render 'answers/form', answer: answer

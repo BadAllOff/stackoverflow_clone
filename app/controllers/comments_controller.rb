@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_commentable, only: :create
   before_action :load_comment, only: :destroy
   after_action  :discard_flash
+  authorize_resource
 
   def create
     @comment = @commentable.comments.new(comment_params)

@@ -11,7 +11,7 @@
             p.text-muted = comment.created_at
           .media-body
             p = comment.content
-          - if user_signed_in? && current_user.author_of?(comment)
+          - if can? :destroy, comment
             .media-footer
               .btn-group.btn-group-xs
                 = link_to comment_path(comment),

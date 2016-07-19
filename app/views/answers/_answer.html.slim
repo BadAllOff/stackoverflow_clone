@@ -10,7 +10,7 @@
         p.answer-body = answer.body
         - if answer.attachments.any?
           .answer_attachments = render 'attachments/attachments', attachable: answer
-        - if can? :update, @question
+        - if can? :crud, answer
           = render partial: 'answers/control_buttons', locals: {answer: answer}
         = render partial: 'comments/show', locals: {commentable: answer}
       .col-xs-2.col-md-1

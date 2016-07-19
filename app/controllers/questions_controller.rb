@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    @question = Question.includes(:comments, attachments: [:attachable], answers: [:attachments, :user, :comments]).find(params[:id])
+    @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
   end
 
 end

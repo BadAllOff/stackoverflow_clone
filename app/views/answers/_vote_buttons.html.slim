@@ -4,7 +4,7 @@ li.list-group-item.text-center.votes_answer
     '
     =icon('star-half-o')
   hr
-  - if can? :crud, answer
+  - if cannot? :crud, answer
     .btn-group-vertical
       - if current_user.voted_for?(answer)
         =link_to unvote_answer_path(answer),
