@@ -4,8 +4,7 @@ li.list-group-item.text-center.votes_question
     '
     =icon('star-half-o')
   hr
-  - if user_signed_in?
-    - if !current_user.author_of?(@question)
+  - if cannot? :crud, @question
       .btn-group-vertical
         - if current_user.voted_for?(@question)
           =link_to unvote_question_path(@question),

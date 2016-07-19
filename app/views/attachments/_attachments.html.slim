@@ -5,7 +5,7 @@ p.text-info
       li.list-group-item id="attachment-#{a.id}"
         = link_to a.file.filename, a.file.url
         '
-        - if user_signed_in? && current_user.author_of?(attachable)
+        - if can? :crud, a.attachable
           = link_to 'Remove attachment', attachment_path(a),
                     method: :delete,
                     remote: true,

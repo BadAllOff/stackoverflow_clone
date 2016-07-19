@@ -25,18 +25,11 @@ class CommentsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @comment.user == current_user
         @comment.destroy
         format.json do
           flash['success'] = 'Comment deleted'
           PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}
         end
-      else
-        format.json do
-          flash['error'] = "You can't delete the comment. You are not the owner."
-          render 'errors.json.jbuilder', status: 400
-        end
-      end
     end
 
   end

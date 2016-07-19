@@ -38,6 +38,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-github'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'byebug'

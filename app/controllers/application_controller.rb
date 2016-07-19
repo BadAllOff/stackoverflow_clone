@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception unless Rails.env.test?
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  # check_authorization unless: :devise_controller?
 
   # gives ability to use flash helper methods
   add_flash_types :success, :error
@@ -17,4 +18,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :username
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
+  end
 end

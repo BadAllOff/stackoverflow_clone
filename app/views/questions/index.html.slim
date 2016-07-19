@@ -10,7 +10,7 @@ hr.colorgraph
         .media
           .media-left
             = icon('question', class: 'fa-3x')
-            - if user_signed_in? && current_user.author_of?(question)
+            - if can? :crud, question
               =link_to question_path(question),
                        method: :delete,
                        class: 'btn btn-xs btn-danger',

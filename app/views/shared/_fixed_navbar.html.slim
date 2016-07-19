@@ -30,7 +30,10 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
         li.dropdown
           - if user_signed_in?
             a.dropdown-toggle[href="#" style="padding-top: 10px" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
-              img alt="" class="img-rectangle img-responsive pull-left" src="http://placehold.it/30x30"
+              span
+                = current_user.username
+                '
+              img alt="" class="img-rectangle img-responsive" style="display: inline" src="http://placehold.it/30x30"
               span.caret
           - else
             a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]

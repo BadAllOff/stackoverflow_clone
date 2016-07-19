@@ -1,22 +1,9 @@
-# == Schema Information
-#
-# Table name: answers
-#
-#  id           :integer          not null, primary key
-#  body         :text
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  question_id  :integer
-#  user_id      :integer
-#  best_answer  :boolean          default(FALSE)
-#  rating_index :integer          default(0)
-#
-
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create, :set_best]
   before_action :load_answer, except: [:create]
   include Voted
+  authorize_resource
 
   def create
     @answer = @question.answers.build(answer_params)
@@ -38,39 +25,29 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if current_user.author_of?(@answer)
-      respond_to do |format|
-        if @answer.update(answer_params)
-          format.json do
-            flash[:success] = 'Answer successfully updated'
-            PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
-          end
-        else
-          format.json do
-            flash[:error] = 'Answer not updated'
-            render 'errors.json.jbuilder', status: 400
-          end
+    respond_to do |format|
+      if @answer.update(answer_params)
+        format.json do
+          flash[:success] = 'Answer successfully updated'
+          PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
+        end
+      else
+        format.json do
+          flash[:error] = 'Answer not updated'
+          render 'errors.json.jbuilder', status: 400
         end
       end
     end
   end
 
   def destroy
-    if current_user.author_of?(@answer)
-      @answer.destroy
-      flash[:success] = 'Answer successfully deleted'
-    else
-      flash[:error] = "You can't delete the answer. You are not the owner of this answer."
-    end
+    @answer.destroy
+    flash[:success] = 'Answer successfully deleted'
   end
 
   def set_best
-    if current_user.author_of?(@question)
-      @answer.set_best
-      flash[:success] = 'Success'
-    else
-      flash[:error] = "You can't choose best answer. You are not the owner of this question."
-    end
+    @answer.set_best
+    flash[:success] = 'Success'
   end
 
   private
@@ -84,7 +61,7 @@ class AnswersController < ApplicationController
   end
 
   def load_answer
-    @answer = Answer.includes(:attachments, :votes, :comments).find(params[:id])
+    @answer = Answer.includes(:attachments, :votes, :comments, :user).find(params[:id])
     @question = @answer.question
   end
 

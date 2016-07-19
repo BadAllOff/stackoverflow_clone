@@ -4,29 +4,28 @@ li.list-group-item.text-center.votes_answer
     '
     =icon('star-half-o')
   hr
-  - if user_signed_in?
-    - if !current_user.author_of?(answer)
-      .btn-group-vertical
-        - if current_user.voted_for?(answer)
-          =link_to unvote_answer_path(answer),
-                   method: :patch,
-                   remote: true,
-                   data: { format: :json },
-                   class: 'btn btn-warning vote_unvote'
-            =icon('history')
-            |  Unvote
-        -else
-          =link_to upvote_answer_path(answer),
-                   method: :patch,
-                   remote: true,
-                   data: { format: :json },
-                   class: 'btn btn-info vote_up'
-            =icon('thumbs-o-up')
-            |  Vote Up
-          =link_to downvote_answer_path(answer),
-                   method: :patch,
-                   remote: true,
-                   data: { format: :json },
-                   class: 'btn btn-danger vote_down'
-            =icon('thumbs-o-down fa-flip-horizontal')
-            |  Vote Down
+  - if can? :crud, answer
+    .btn-group-vertical
+      - if current_user.voted_for?(answer)
+        =link_to unvote_answer_path(answer),
+                 method: :patch,
+                 remote: true,
+                 data: { format: :json },
+                 class: 'btn btn-warning vote_unvote'
+          =icon('history')
+          |  Unvote
+      -else
+        =link_to upvote_answer_path(answer),
+                 method: :patch,
+                 remote: true,
+                 data: { format: :json },
+                 class: 'btn btn-info vote_up'
+          =icon('thumbs-o-up')
+          |  Vote Up
+        =link_to downvote_answer_path(answer),
+                 method: :patch,
+                 remote: true,
+                 data: { format: :json },
+                 class: 'btn btn-danger vote_down'
+          =icon('thumbs-o-down fa-flip-horizontal')
+          |  Vote Down

@@ -1,4 +1,4 @@
--if user_signed_in? && current_user.author_of?(@question)
+-if can? :crud, @question
   -if answer.best_answer
     li.list-group-item.text-center.text-success class="best-answer-vote-link-id-#{answer.id}"
       =link_to set_best_answer_path(answer, question_id: @question),

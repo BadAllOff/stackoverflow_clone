@@ -1,23 +1,12 @@
-# == Schema Information
-#
-# Table name: questions
-#
-#  id         :integer          not null, primary key
-#  title      :string
-#  body       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
-#
-
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
   include Voted
+  authorize_resource
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:user).all
   end
 
   def show
@@ -47,27 +36,18 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user.author_of?(@question)
-      if @question.update(question_params)
-        flash[:success] = 'Question successfully updated'
-      else
-        flash[:error] = 'Question is not updated'
-        render :edit
-      end
+    if @question.update(question_params)
+      flash[:success] = 'Question successfully updated'
     else
-      flash[:error] = "You can't update the question. You are not the owner."
+      flash[:error] = 'Question is not updated'
+      render :edit
     end
   end
 
   def destroy
-    if current_user.author_of?(@question)
-      @question.destroy
-      flash[:success] = 'Your question successfully deleted.'
-      redirect_to questions_path
-    else
-      flash[:error] = 'You cant delete this question. You are not the owner.'
-      redirect_to @question
-    end
+    @question.destroy
+    flash[:success] = 'Your question successfully deleted.'
+    redirect_to questions_path
   end
 
   private
@@ -77,8 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    # @question = Question.find(params[:id])
-    @question = Question.includes(:attachments, :comments, answers: [:attachments, :user, :comments]).find(params[:id])
+    @question = Question.includes(:comments, attachments: [:attachable], answers: [:attachments, :user, :comments]).find(params[:id])
   end
 
 end

@@ -3,7 +3,7 @@ module Voted
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_vote, :votes_for_own_votable, :already_voted, only: [:upvote, :downvote, :unvote]
+    before_action :set_vote, :already_voted, only: [:upvote, :downvote, :unvote]
     # before_action :already_voted, only: [:upvote, :downvote]
     after_action :discard_flash, only: [:upvote, :downvote, :unvote]
   end
@@ -32,13 +32,6 @@ module Voted
   def set_vote
     @votable = model_klass.find(params[:id])
     instance_variable_set("@#{controller_name.singularize}", @votable)
-  end
-
-  def votes_for_own_votable
-    if current_user.author_of?(@votable)
-      flash[:error] = "You can't vote for your own #{model_klass}"
-      render 'vote'
-    end
   end
 
   def already_voted
