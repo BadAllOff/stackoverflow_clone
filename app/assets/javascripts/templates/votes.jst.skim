@@ -1,7 +1,13 @@
-span.text-primary
-  = @object.vote.rating
-  '
-  i class="fa fa-star-half-o"
+- if @object.vote.rating < 0
+  span.text-danger
+    = @object.vote.rating
+    '
+    i class="fa fa-star"
+- else
+  span.text-primary
+    = @object.vote.rating
+    '
+    i class="fa fa-star"
 hr
 .btn-group-vertical
   - if @object.vote.voted
