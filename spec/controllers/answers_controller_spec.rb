@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: answers
-#
-#  id           :integer          not null, primary key
-#  body         :text
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  question_id  :integer
-#  user_id      :integer
-#  best_answer  :boolean          default(FALSE)
-#  rating_index :integer          default(0)
-#
-
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
@@ -215,9 +201,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #upvote' do
     context 'votes up for his own answer' do
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
       it '- does not keep the vote' do
         expect { patch :upvote, id: answer, format: :json }.to_not change(answer.votes.upvotes, :count)
       end
