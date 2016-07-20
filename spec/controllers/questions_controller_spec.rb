@@ -246,6 +246,11 @@ RSpec.describe QuestionsController, type: :controller do
       it "- keep's the vote" do
         expect { patch :upvote, id: question, format: :json }.to change(question.votes.upvotes, :count).by 1
       end
+
+      it "- can't vote twice" do
+        patch :upvote, id: question, format: :json
+        expect { patch :upvote, id: question, format: :json }.to_not change(question.votes.upvotes, :count)
+      end
     end
   end
 

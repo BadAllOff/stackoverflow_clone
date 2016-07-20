@@ -124,11 +124,7 @@ ready = function() {
               newAnswerDiv = JST["templates/answers/answer"]({object: answer});
               $('.answers').find('ul.answers_list').prepend(newAnswerDiv);
 
-              setTimeout(function(){
-                  $('.flash-messages > .alert').fadeOut('slow', function(){
-                      $(this).remove();
-                  });
-              }, 2500);
+              remove_alerts();
 
               if (!answer.currentUserIsAuthor){
                   answer.msgs.ok_msg = null;
