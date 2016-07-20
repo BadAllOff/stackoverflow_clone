@@ -39,6 +39,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-github'
 gem 'cancancan', '~> 1.10'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'byebug'

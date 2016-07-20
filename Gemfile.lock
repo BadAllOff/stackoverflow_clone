@@ -114,6 +114,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    doorkeeper (4.0.0)
+      railties (>= 4.2)
     em-http-request (1.1.3)
       addressable (>= 2.3.4)
       cookiejar (<= 0.3.0)
@@ -403,6 +405,7 @@ DEPENDENCIES
   database_cleaner
   derailed
   devise (~> 3.5.5)
+  doorkeeper
   factory_girl_rails
   font-awesome-sass (~> 4.5.0)
   fuubar
