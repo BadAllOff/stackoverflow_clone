@@ -58,6 +58,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'fuubar'
+  gem 'json_spec'
 end
 
 group :development do
