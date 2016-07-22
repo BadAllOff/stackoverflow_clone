@@ -1,8 +1,7 @@
-== README
-
 [![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
 [![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
 
+## README
 
 Professional Ruby on Rails Development.
 #### Module 1
@@ -76,9 +75,3 @@ Professional Ruby on Rails Development.
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
