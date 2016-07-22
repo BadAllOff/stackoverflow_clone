@@ -9,6 +9,15 @@ class Api::V1::ProfilesController < ApplicationController
     end
   end
 
+  def index
+    respond_to do |format|
+      format.json do
+        users =  User.where.not(id: current_resource_owner)
+        render json: users, status: 200
+      end
+    end
+  end
+
   protected
 
   def current_resource_owner

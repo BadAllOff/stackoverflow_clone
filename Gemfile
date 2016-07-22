@@ -40,6 +40,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-github'
 gem 'cancancan', '~> 1.10'
 gem 'doorkeeper'
+gem 'responders', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
