@@ -1,64 +1,64 @@
 == README
 
-{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone]
-{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage]
+[![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
+[![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
 
 
 Professional Ruby on Rails Development.
-====== Module 1
+#### Module 1
 * Development process
 
-====== Module 2
+#### Module 2
 * Git Flow
 
-====== Module 3
+#### Module 3
 * Introduction TDD / BDD
 
-====== Module 4
+#### Module 4
 * Testing controllers
 
-====== Module 5
+#### Module 5
 * Acceptance testing
 
-====== Module 6
+#### Module 6
 * Ajax, Part 1
 
-====== Module 7
+#### Module 7
 * Ajax, Part 2
 
-====== Module 8
+#### Module 8
 * Nested forms and Polymorphic Association
 
-====== Module 9
+#### Module 9
 * Different forms of AJA* in Rails
 
-====== Module 10
+#### Module 10
 * Comet and Pub/Sub (Push technology)
 
-====== Module 11
+#### Module 11
 * "Thin" controllers with responders
 
-====== Module 12
+#### Module 12
 * OAuth and Authentification through social networks
 
-====== Module 13
+#### Module 13
 * Authorization in Rails
 
-====== Module 14
+#### Module 14
 * REST-architecture, and the foundations of REST API
 
-====== Module 15
+#### Module 15
 * REST API Development
 
-====== Module 16
-====== Module 17
-====== Module 18
-====== Module 19
-====== Module 20
-====== Module 21
-====== Module 22
-====== Module 23
-====== Module 24
+#### Module 16
+#### Module 17
+#### Module 18
+#### Module 19
+#### Module 20
+#### Module 21
+#### Module 22
+#### Module 23
+#### Module 24
 
 
 
