@@ -61,7 +61,6 @@ Professional Ruby on Rails Development.
 #### Module 24
 
 
-
 * Ruby version
 
 * System dependencies
