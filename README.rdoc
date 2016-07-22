@@ -4,6 +4,52 @@
 {<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage]
 
 
+Professional Ruby on Rails Development.
+
+Module 1
+:   Процесс разработки
+
+Module 2
+:   Git Flow
+
+Module 3
+:   Введение в TDD/BDD
+
+Module 4
+:   Тестирование контроллеров
+
+Module 5
+:   Acceptance testing
+
+Module 6
+:   Ajax, Часть 1
+
+Module 7
+:   Ajax, Часть 2
+
+Module 8
+:   Nested forms и полиморфные ассоциации
+
+Module 9
+:   Различные формы AJA* в rails
+
+Module 10
+:   Comet и Pub/Sub (серверный пуш)
+
+Module 11
+:   "Тонкие" контроллеры с responders
+
+Module 12
+:   OAuth и Аутентификация через соц. сети.
+
+Module 13
+:   OAuth и Аутентификация через соц. сети.
+
+Module 14
+:   REST-архитектура и основы разработки REST API
+
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
