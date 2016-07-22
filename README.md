@@ -1,7 +1,7 @@
 == README
 
-{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone]
-{<img src="https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg" />}[https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage]
+[![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
+[![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
 
 
 Professional Ruby on Rails Development.
