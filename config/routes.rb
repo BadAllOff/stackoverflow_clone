@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         get :me, on: :collection
       end
 
-      resources :questions, constraints: { format: 'json' }
+      resources :questions
     end
   end
 

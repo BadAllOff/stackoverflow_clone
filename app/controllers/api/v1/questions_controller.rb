@@ -1,8 +1,10 @@
 class Api::V1::QuestionsController < Api::V1::BaseController
-  before_action :doorkeeper_authorize! # Require access token for all actions
+
+  respond_to :json
 
   def index
-    render nothing: true
+    @questions = Question.all
+    respond_with @questions.to_json(include: :answers)
   end
 
 end

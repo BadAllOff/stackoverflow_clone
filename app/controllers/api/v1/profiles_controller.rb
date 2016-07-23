@@ -1,20 +1,12 @@
 class Api::V1::ProfilesController < Api::V1::BaseController
 
+  respond_to :json
   def me
-    respond_to do |format|
-      format.json do
-        render json: current_resource_owner, status: 200
-      end
-    end
+    respond_with current_resource_owner
   end
 
   def index
-    respond_to do |format|
-      format.json do
-        users =  User.where.not(id: current_resource_owner)
-        render json: users, status: 200
-      end
-    end
+    respond_with User.where.not(id: current_resource_owner)
   end
 
 
