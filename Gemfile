@@ -41,6 +41,8 @@ gem 'omniauth-github'
 gem 'cancancan', '~> 1.10'
 gem 'doorkeeper'
 gem 'responders', '~> 2.0'
+gem 'active_model_serializers', '~> 0.10.0'
+
 
 group :development, :test do
   gem 'byebug'
