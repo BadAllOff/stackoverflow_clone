@@ -1,4 +1,5 @@
 class Api::V1::AnswersController < Api::V1::BaseController
+  authorize_resource Answer
   respond_to :json
   before_action :set_question, only: [:index, :show, :create]
 
