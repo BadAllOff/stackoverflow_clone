@@ -35,21 +35,21 @@
 
 #### Module 15: REST API Development
 
-#### Module 16: Advanced Rspec
+##### Module 16: Advanced Rspec
 
-#### Module 17: Background Jobs
+##### Module 17: Background Jobs
 
-#### Module 18: Search with sphinx
+##### Module 18: Search with sphinx
 
-#### Module 19: Basic server configuration
+##### Module 19: Basic server configuration
 
-#### Module 20: Deploy with Capistrano
+##### Module 20: Deploy with Capistrano
 
-#### Module 21: Advanced server configuration
+##### Module 21: Advanced server configuration
 
-#### Module 22: Caching and optimization
+##### Module 22: Caching and optimization
 
-#### Module 23: High availability
+##### Module 23: High availability
 
 
 
