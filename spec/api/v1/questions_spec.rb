@@ -122,4 +122,49 @@ describe 'Questions API' do
     end
   end
 
+
+  describe 'POST /create' do
+
+    context 'Not authenticated user' do
+      it '- returns 401 status if there is no access_token' do
+        post '/api/vmmt1/questions', format: :json
+        expect(response.status).to eq 401
+      end
+
+      it '- returns 401 status if access_token is invalid' do
+        post '/api/v1/questions', format: :json, access_token: 123456
+        expect(response.status).to eq 401
+      end
+    end
+
+    context 'Authenticated user' do
+      let(:me) { create :user }
+
+      let(:access_token) { create :access_token, resource_owner_id: me.id }
+      context 'with valid attributes' do
+        it '- returns 200 status' do
+          post "/api/v1/questions", question: attributes_for(:question), format: :json, access_token: access_token.token
+          expect(response).to be_success
+        end
+
+        it '- saved as current user owner' do
+          expect { post "/api/v1/questions", question: attributes_for(:question), format: :json, access_token: access_token.token }.to change(me.questions, :count).by(1)
+        end
+      end
+
+      context 'with invalid attributes' do
+        it '- returns 422 status' do
+          post "/api/v1/questions", question: attributes_for(:invalid_question), format: :json, access_token: access_token.token
+          expect(response.status).to eq 422
+        end
+
+        it '- question quantity should be not change' do
+          expect { post "/api/v1/questions", question: attributes_for(:invalid_question), format: :json, access_token: access_token.token }.to_not change(me.questions, :count)
+        end
+      end
+
+    end
+
+  end
+
 end
