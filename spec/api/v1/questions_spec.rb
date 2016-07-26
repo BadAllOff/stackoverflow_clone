@@ -127,7 +127,7 @@ describe 'Questions API' do
 
     context 'Not authenticated user' do
       it '- returns 401 status if there is no access_token' do
-        post '/api/vmmt1/questions', format: :json
+        post '/api/v1/questions', format: :json
         expect(response.status).to eq 401
       end
 
@@ -139,8 +139,8 @@ describe 'Questions API' do
 
     context 'Authenticated user' do
       let(:me) { create :user }
-
       let(:access_token) { create :access_token, resource_owner_id: me.id }
+
       context 'with valid attributes' do
         it '- returns 200 status' do
           post "/api/v1/questions", question: attributes_for(:question), format: :json, access_token: access_token.token
