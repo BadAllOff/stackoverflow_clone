@@ -23,7 +23,7 @@ RSpec.describe AnswersController, type: :controller do
           expect(response.status).to eq 200
         end
 
-        it_behaves_like "Private_pub" do
+        it_behaves_like "Publishable" do
           let(:channel) { "/questions/#{question.id}/answers" }
           let(:object) { post :create, answer: attributes_for(:answer), question_id: question, format: :json }
         end

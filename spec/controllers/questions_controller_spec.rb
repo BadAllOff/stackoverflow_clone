@@ -85,7 +85,7 @@ RSpec.describe QuestionsController, type: :controller do
           expect(response).to redirect_to question_path(assigns(:question))
         end
 
-        it_behaves_like "Private_pub" do
+        it_behaves_like "Publishable" do
           let(:channel) { '/questions' }
           let(:object) { post :create, question: attributes_for(:question) }
         end

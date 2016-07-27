@@ -11,3 +11,9 @@ shared_examples_for "API Authenticable" do
     end
   end
 end
+
+shared_examples_for 'Status  200, successful' do
+  it 'returns 200 status' do
+    expect(response).to be_success
+  end
+end

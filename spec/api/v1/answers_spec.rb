@@ -38,9 +38,7 @@ describe 'Answer API' do
 
       before { get "/api/v1/questions/#{question.id}/answers/#{answer.id}", format: :json, access_token: access_token.token }
 
-      it '- returns 200 status code' do
-        expect(response).to be_success
-      end
+      it_behaves_like 'Status  200, successful'
 
       %w(id body created_at updated_at best_answer).each do |attr|
         it "- answer object contains #{attr}" do

@@ -12,9 +12,7 @@ describe 'Questions API' do
 
       before { get '/api/v1/questions', format: :json, access_token: access_token.token }
 
-      it '- returns 200 status' do
-        expect(response).to be_success
-      end
+      it_behaves_like 'Status  200, successful'
 
       it '- returns list of questions' do
         expect(response.body).to have_json_size(3)
@@ -62,9 +60,7 @@ describe 'Questions API' do
 
       before { get "/api/v1/questions/#{question.id}", format: :json, access_token: access_token.token }
 
-      it '- returns 200 status code' do
-        expect(response).to be_success
-      end
+      it_behaves_like 'Status  200, successful'
 
       context 'question' do
         %w(id title body created_at updated_at).each do |attr|
