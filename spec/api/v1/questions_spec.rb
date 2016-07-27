@@ -52,10 +52,10 @@ describe 'Questions API' do
 
   describe 'GET /show' do
     it_behaves_like "API Authenticable"
+    let(:question) { create(:question) }
 
     context 'Authenticated user' do
       let(:access_token) { create(:access_token) }
-      let(:question) { create(:question) }
       let!(:answer) { create(:answer, question: question) }
       let!(:comment_question) { create(:comment, commentable: question) }
       let!(:attachment_question) { create(:attachment, attachable: question) }

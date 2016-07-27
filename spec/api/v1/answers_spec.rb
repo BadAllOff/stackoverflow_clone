@@ -29,10 +29,10 @@ describe 'Answer API' do
 
   describe 'GET /show' do
     it_behaves_like "API Authenticable"
+    let!(:answer) { create(:answer, question: question) }
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
-      let!(:answer) { create(:answer, question: question) }
       let!(:comment_answer) { create(:comment, commentable: answer) }
       let!(:attachment_answer) { create(:attachment, attachable: answer) }
 

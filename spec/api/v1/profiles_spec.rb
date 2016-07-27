@@ -47,7 +47,7 @@ describe 'Profile API' do
   describe 'GET /me' do
     it_behaves_like "API Authenticable"
 
-g    context 'authorized' do
+    context 'authorized' do
       let(:me) { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
