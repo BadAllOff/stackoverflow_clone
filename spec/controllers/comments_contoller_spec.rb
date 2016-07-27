@@ -24,6 +24,11 @@ RSpec.describe CommentsController, type: :controller do
           post :create, comment: attributes_for(:comment), question_id: question, format: :json
           expect(response.status).to eq 200
         end
+
+        it_behaves_like "Publishable" do
+          let(:channel) { "/questions/#{question.id}/comments/create" }
+          let(:object) { post :create, comment: attributes_for(:comment), question_id: question, format: :json }
+        end
       end
 
       context 'with invalid attributes' do
@@ -60,6 +65,11 @@ RSpec.describe CommentsController, type: :controller do
         it '- gets status ok to comment view' do
           delete :destroy, id: comment, format: :json
           expect(response.status).to eq 200
+        end
+
+        it_behaves_like "Publishable" do
+          let(:channel) { "/questions/#{question.id}/comments/destroy" }
+          let(:object) { delete :destroy, id: comment, format: :json }
         end
       end
 
