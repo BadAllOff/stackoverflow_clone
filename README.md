@@ -36,6 +36,9 @@
 #### Module 15: REST API Development
 
 ##### Module 16: Advanced Rspec
+- shared examples
+- stubs
+- mockups
 
 ##### Module 17: Background Jobs
 
