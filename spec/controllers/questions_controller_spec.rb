@@ -89,7 +89,7 @@ RSpec.describe QuestionsController, type: :controller do
           expect(response).to redirect_to question_path(assigns(:question))
         end
 
-        it_behaves_like "Publishable" do
+        it_behaves_like 'Publishable' do
           let(:channel) { '/questions' }
           let(:object) { post :create, question: attributes_for(:question) }
         end
@@ -244,7 +244,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   # Voting
 
-  it_behaves_like "Votable", "Question" do
+  it_behaves_like 'Votable', 'Question' do
     let(:object) { create(:question, user: user) }
   end
 

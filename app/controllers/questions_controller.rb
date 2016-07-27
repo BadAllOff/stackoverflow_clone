@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
 
     if @question.save
-      PrivatePub.publish_to "/questions", question: @question.to_json
+      PrivatePub.publish_to '/questions', question: @question.to_json
       flash[:success] = 'Question successfully created'
       redirect_to @question
     else

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Profile API' do
 
   describe 'GET /profiles' do
-    it_behaves_like "API Authenticable"
+    it_behaves_like 'API Authenticable'
 
     context 'authorized' do
       let(:me) { create(:user) }
@@ -43,7 +43,7 @@ describe 'Profile API' do
   end
 
   describe 'GET /me' do
-    it_behaves_like "API Authenticable"
+    it_behaves_like 'API Authenticable'
 
     context 'authorized' do
       let(:me) { create(:user) }

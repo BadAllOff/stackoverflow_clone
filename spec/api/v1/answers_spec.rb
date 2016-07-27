@@ -4,7 +4,7 @@ describe 'Answer API' do
   let!(:question) { create :question }
 
   describe 'GET /index' do
-    it_behaves_like "API Authenticable"
+    it_behaves_like 'API Authenticable'
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
@@ -28,7 +28,7 @@ describe 'Answer API' do
   end
 
   describe 'GET /show' do
-    it_behaves_like "API Authenticable"
+    it_behaves_like 'API Authenticable'
     let!(:answer) { create(:answer, question: question) }
 
     context 'authorized' do
@@ -62,11 +62,11 @@ describe 'Answer API' do
         end
 
         it '- attachment contains url' do
-          expect(response.body).to be_json_eql(attachment_answer.file.url.to_json).at_path("attachments/0/url")
+          expect(response.body).to be_json_eql(attachment_answer.file.url.to_json).at_path('attachments/0/url')
         end
 
         it '- attachment contains name' do
-          expect(response.body).to have_json_path("attachments/0/name")
+          expect(response.body).to have_json_path('attachments/0/name')
         end
       end
 
@@ -79,7 +79,7 @@ describe 'Answer API' do
 
 
   describe 'POST /create' do
-    it_behaves_like "API Authenticable"
+    it_behaves_like 'API Authenticable'
 
     context 'Authenticated user' do
       let(:me) { create :user }
@@ -109,7 +109,7 @@ describe 'Answer API' do
     end
 
     def do_request(options = {})
-       post "/api/v1/questions/#{question.id}/answers", { format: :json }.merge(options)
+      post "/api/v1/questions/#{question.id}/answers", { format: :json }.merge(options)
     end
   end
 

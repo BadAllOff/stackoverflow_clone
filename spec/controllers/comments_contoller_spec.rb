@@ -25,7 +25,7 @@ RSpec.describe CommentsController, type: :controller do
           expect(response.status).to eq 200
         end
 
-        it_behaves_like "Publishable" do
+        it_behaves_like 'Publishable' do
           let(:channel) { "/questions/#{question.id}/comments/create" }
           let(:object) { post :create, comment: attributes_for(:comment), question_id: question, format: :json }
         end
@@ -67,7 +67,7 @@ RSpec.describe CommentsController, type: :controller do
           expect(response.status).to eq 200
         end
 
-        it_behaves_like "Publishable" do
+        it_behaves_like 'Publishable' do
           let(:channel) { "/questions/#{question.id}/comments/destroy" }
           let(:object) { delete :destroy, id: comment, format: :json }
         end

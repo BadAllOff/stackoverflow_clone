@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 
   def destroy
     respond_to do |format|
-        @comment.destroy
+      @comment.destroy
         format.json do
           flash['success'] = 'Comment deleted'
           PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}

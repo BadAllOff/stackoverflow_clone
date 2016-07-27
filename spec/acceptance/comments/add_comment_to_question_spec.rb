@@ -11,17 +11,17 @@ feature 'Add comment question' do
       visit question_path(question)
     end
     context 'creates new comment' do
-      scenario "- show form comment", js: true do
+      scenario '- show form comment', js: true do
         within "#question_#{question.id}_comments" do
           expect(page).to_not have_selector :css, 'form.new_comment'
-          click_on "add a comment"
+          click_on 'add a comment'
           expect(page).to have_selector :css, 'form.new_comment_form_for_question'
         end
       end
 
-      scenario "- create comment", js: true do
+      scenario '- create comment', js: true do
         within "#question_#{question.id}_comments" do
-          click_on "add a comment"
+          click_on 'add a comment'
           within 'form.new_comment_form_for_question' do
             fill_in 'write your comment', with: 'Test question comments'
             click_on 'Create Comment'
@@ -30,7 +30,7 @@ feature 'Add comment question' do
           expect(current_path).to eq question_path(question)
         end
 
-        within ".question_comments" do
+        within '.question_comments' do
           expect(page).to have_content 'Test question comments'
         end
 
@@ -39,7 +39,7 @@ feature 'Add comment question' do
 
       scenario '- with no content', js: true do
         within "#question_#{question.id}_comments" do
-          click_on "add a comment"
+          click_on 'add a comment'
           within 'form.new_comment_form_for_question' do
             click_on 'Create Comment'
           end

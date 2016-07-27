@@ -1,4 +1,4 @@
-shared_examples_for "Votable" do |object_name|
+shared_examples_for 'Votable' do |object_name|
 
   describe 'PATCH #upvote' do
     context "votes up for his own #{object_name}" do

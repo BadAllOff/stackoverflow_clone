@@ -18,7 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    flash['alert'] = "Authentication failed, please check your input and try again."
+    flash['alert'] = 'Authentication failed, please check your input and try again.'
     redirect_to root_url
   end
 

@@ -29,7 +29,7 @@ RSpec.describe Ability, type: :model do
     let(:comment)             { create :comment, commentable: question, user: user }
     let(:other_comment)       { create :comment, commentable: question, user: other_user}
 
-    #All
+    # All
     it { should be_able_to :read, :all }
     it { should_not be_able_to :manage, :all }
     # Question

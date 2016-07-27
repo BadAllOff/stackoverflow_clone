@@ -24,7 +24,7 @@ feature 'Add comment to Answer' do
 
       scenario '- create comment', js: true do
         within "#answer_#{answer.id}_comments" do
-          click_on "add a comment"
+          click_on 'add a comment'
           within 'form.new_comment_form_for_answer' do
             fill_in 'write your comment', with: 'Test answer comments'
             click_on 'Create Comment'
@@ -37,7 +37,7 @@ feature 'Add comment to Answer' do
 
       scenario '- with no content', js: true do
         within "#answer_#{answer.id}_comments" do
-          click_on "add a comment"
+          click_on 'add a comment'
           within 'form.new_comment_form_for_answer' do
             click_on 'Create Comment'
           end

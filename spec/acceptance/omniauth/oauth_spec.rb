@@ -19,7 +19,7 @@ feature 'OAuth' do
       within '#body_container' do
         click_on 'Sign in with Facebook'
       end
-      expect(page).to have_content "Authentication failed, please check your input and try again"
+      expect(page).to have_content 'Authentication failed, please check your input and try again'
     end
   end
 
@@ -34,10 +34,10 @@ feature 'OAuth' do
       expect(page).to have_content "Email can't be blank"
 
       within '#omniauth_add_data_form' do
-        fill_in "Email", with: "test@mail.ru"
+        fill_in 'Email', with: 'test@mail.ru'
         click_on 'Submit'
       end
-      expect(page).to have_content "Successfully authenticated from Github account."
+      expect(page).to have_content 'Successfully authenticated from Github account.'
     end
 
     scenario '- with invalid credentials' do
@@ -45,7 +45,7 @@ feature 'OAuth' do
       within '#body_container' do
         click_on 'Sign in with GitHub'
       end
-      expect(page).to have_content "Authentication failed, please check your input and try again"
+      expect(page).to have_content 'Authentication failed, please check your input and try again'
     end
   end
 
@@ -60,10 +60,10 @@ feature 'OAuth' do
       expect(page).to have_content "Email can't be blank"
 
       within '#omniauth_add_data_form' do
-        fill_in "Email", with: "test@mail.ru"
+        fill_in 'Email', with: 'test@mail.ru'
         click_on 'Submit'
       end
-      expect(page).to have_content "Successfully authenticated from Twitter account."
+      expect(page).to have_content 'Successfully authenticated from Twitter account.'
     end
 
     scenario '- with invalid credentials' do
@@ -71,7 +71,7 @@ feature 'OAuth' do
       within '#body_container' do
         click_on 'Sign in with Twitter'
       end
-      expect(page).to have_content "Authentication failed, please check your input and try again"
+      expect(page).to have_content 'Authentication failed, please check your input and try again'
     end
   end
 
@@ -86,10 +86,10 @@ feature 'OAuth' do
       expect(page).to have_content "Email can't be blank"
 
       within '#omniauth_add_data_form' do
-        fill_in "Email", with: "test@mail.ru"
+        fill_in 'Email', with: 'test@mail.ru'
         click_on 'Submit'
       end
-      expect(page).to have_content "Successfully authenticated from Vkontakte account."
+      expect(page).to have_content 'Successfully authenticated from Vkontakte account.'
     end
 
     scenario '- with invalid credentials' do
@@ -97,7 +97,7 @@ feature 'OAuth' do
       within '#body_container' do
         click_on 'Sign in with Vkontakte'
       end
-      expect(page).to have_content "Authentication failed, please check your input and try again"
+      expect(page).to have_content 'Authentication failed, please check your input and try again'
     end
   end
 
