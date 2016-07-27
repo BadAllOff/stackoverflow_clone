@@ -18,6 +18,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+
   describe 'GET #show' do
     before { get :show, id: question }
 
@@ -38,6 +39,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+
   describe 'GET #new' do
     sign_in_user
     render_views
@@ -56,6 +58,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+
   describe 'GET #edit' do
     sign_in_user
     before { get :edit, id: question, format: :js}
@@ -70,6 +73,7 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
 
   describe 'POST #create' do
     context 'Authenticated user' do
@@ -116,6 +120,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
   end
+
 
   describe 'PATCH #update' do
     context 'Authenticated user' do
@@ -188,6 +193,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   end
 
+
   describe 'DELETE #destroy' do
 
     context 'Authenticated user' do
@@ -238,52 +244,9 @@ RSpec.describe QuestionsController, type: :controller do
 
   # Voting
 
-  describe 'PATCH #upvote' do
-    context 'votes up for his own question' do
-      before { sign_in(user) }
-      it '- does not keep the vote' do
-        expect { patch :upvote, id: question, format: :json }.to_not change(question.votes.upvotes, :count)
-      end
-    end
-
-    context "votes up for other user's question" do
-      before { sign_in(another_user) }
-      it "- keep's the vote" do
-        expect { patch :upvote, id: question, format: :json }.to change(question.votes.upvotes, :count).by 1
-      end
-
-      it "- can't vote twice" do
-        patch :upvote, id: question, format: :json
-        expect { patch :upvote, id: question, format: :json }.to_not change(question.votes.upvotes, :count)
-      end
-    end
+  it_behaves_like "Votable", "Question" do
+    let(:object) { create(:question, user: user) }
   end
 
-  describe 'PATCH #downvote' do
-    context 'votes down for his own question' do
-      before { sign_in(user) }
-      it '- does not keep the vote' do
-        expect { patch :downvote, id: question, format: :json }.to_not change(question.votes.downvotes, :count)
-      end
-    end
-
-    context "votes down for other user's question" do
-      before { sign_in(another_user) }
-      it "- keep's the vote" do
-        expect { patch :downvote, id: question, format: :json }.to change(question.votes.downvotes, :count).by 1
-      end
-    end
-  end
-
-  describe 'PATCH #unvote' do
-    before do
-      sign_in(another_user)
-      patch :upvote, id: question, format: :json
-    end
-
-    it '- deletes vote for votable object (question)' do
-      expect { patch :unvote, id: question, format: :json }.to change(question.votes, :count).by(-1)
-    end
-  end
 
 end
