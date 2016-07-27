@@ -38,7 +38,8 @@
 ##### Module 16: Advanced Rspec
 - shared examples
 - stubs
-- mockups
+- mocks
+- doubles
 
 ##### Module 17: Background Jobs
 
