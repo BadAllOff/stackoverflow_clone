@@ -34,5 +34,7 @@ module QnaThinknetica
                        controller_specs: true
       g.fixtures_replacement :factory_girl, dir: 'spec/factories'
     end
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

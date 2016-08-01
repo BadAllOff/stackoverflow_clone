@@ -35,13 +35,18 @@
 
 #### Module 15: REST API Development
 
-##### Module 16: Advanced Rspec
+#### Module 16: Advanced Rspec
 - shared examples
 - stubs
 - mocks
 - doubles
 
 ##### Module 17: Background Jobs
+- Delayed::Job
+- Sidekiq
+- Sidetiq
+- Active Job
+- Whenever
 
 ##### Module 18: Search with sphinx
 
