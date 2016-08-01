@@ -46,7 +46,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 
 gem 'delayed_job_active_record'
-
+gem 'whenever'
 
 group :development, :test do
   gem 'byebug'
