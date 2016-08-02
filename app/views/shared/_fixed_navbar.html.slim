@@ -41,6 +41,9 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
               span.caret
           ul.dropdown-menu
             -if user_signed_in?
+              - if current_user.admin?
+                li
+                  = link_to "Sidekiq", sidekiq_web_path
               li
                 = link_to 'Edit Profile', edit_user_registration_path
               li
