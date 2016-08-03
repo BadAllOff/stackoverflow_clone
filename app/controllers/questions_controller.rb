@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy, :subscribe]
+  before_action :load_question, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe]
+  before_action :load_subscription, only: [:unsubscribe]
   include Voted
   authorize_resource
 
@@ -51,8 +52,14 @@ class QuestionsController < ApplicationController
   end
 
   def subscribe
-    Subscription.first_or_create(user: current_user, question: @question) unless @question.user == current_user
+    Subscription.find_or_create_by(user: current_user, question: @question) unless @question.user == current_user
     flash[:success] = 'You are successfully subscribed'
+    redirect_to @question
+  end
+
+  def unsubscribe
+    @subscription.delete if @subscription
+    flash[:success] = 'You are successfully unsubscribed'
     redirect_to @question
   end
 
@@ -64,6 +71,10 @@ class QuestionsController < ApplicationController
 
   def load_question
     @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
+  end
+
+  def load_subscription
+    @subscription = Subscription.find_by(user: current_user, question: @question)
   end
 
 end

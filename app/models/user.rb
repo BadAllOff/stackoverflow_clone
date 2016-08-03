@@ -29,9 +29,9 @@ class User < ActiveRecord::Base
     !author_of?(object)
   end
 
-  # TODO refactoring
+
   def subscribed?(object)
-    self.subscriptions.where(question_id: object.id).any?
+    self.subscriptions.where(question_id: object.id).first
   end
 
   def self.send_daily_digest

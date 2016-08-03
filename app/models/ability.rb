@@ -50,6 +50,7 @@ class Ability
     can :set_best, Answer, question: { user: user }
     can :vote, [Question, Answer]
     can :subscribe, [Question]
+    can :unsubscribe, [Question]
     cannot :vote, [Question, Answer], user: user
     cannot :subscribe, [Question], user: user
 

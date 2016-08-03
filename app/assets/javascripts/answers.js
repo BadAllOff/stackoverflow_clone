@@ -15,15 +15,7 @@ ready = function() {
 
     userId = $('#current_user_meta').data('userId');
     questionId = $('#answers').data('questionId');
-
-    function remove_alerts() {
-        setTimeout(function(){
-            $('.flash-messages > .alert').fadeOut('slow', function(){
-                $(this).remove();
-            });
-        }, 2500);
-    }
-
+  
     $(function() {
         return $('.vote_unvote, .vote_up, .vote_down').bind('ajax:success', function(e, data, status, xhr) {
             var votable;

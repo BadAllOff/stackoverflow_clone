@@ -21,14 +21,24 @@
 //   $(this).toggleText('Subscribe', 'Unsubscribe');
 // });
 
+function remove_alerts() {
+  setTimeout(function(){
+    $('.flash-messages > .alert').fadeOut('slow', function(){
+      $(this).remove();
+    });
+  }, 2500);
+}
 
 var ready;
 
 ready = function() {
+  remove_alerts();
+
   var userId;
   var questionId;
   userId = $('#current_user_meta').data('userId');
   questionId = $('#answers').data('questionId');
+
 
   $(function() {
     return $('.delete_question_comment').bind('ajax:error', function(e, xhr, status, error) {
@@ -54,9 +64,6 @@ ready = function() {
   $('form#edit_question_'+questionId).data('remote', 'true');
 
 };
-
-
-
 
 
 $(document).ready(ready);

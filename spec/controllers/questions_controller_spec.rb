@@ -271,33 +271,52 @@ RSpec.describe QuestionsController, type: :controller do
         it '- saves subscription in DB' do
           expect { post :subscribe, id: question }.to change(@user.subscriptions, :count).by(1)
         end
-
       end
-
     end
 
     context 'Non-authenticated user' do
       before { question }
+
       it '- redirects to sign in page' do
         post :subscribe, id: question
         expect(response).to redirect_to new_user_session_path
       end
 
-      # it '- saves new subscription in DB' do
-      #   expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
-      # end
+      it '- does not save subscription in DB' do
+        expect { post :subscribe, id: question }.to_not change(question.subscriptions, :count)
+      end
     end
   end
+
 
   describe 'DELETE #unsubscribe' do
     context 'Authenticated user' do
       sign_in_user
-      before { question }
-      it "- redirects to question" do
-        skip
+      before do
+        question
+        post :subscribe, id: question
       end
-      it "- unsubscribes user" do
-        skip
+
+      it "- redirects to question" do
+        delete :unsubscribe, id: question
+        expect(response).to redirect_to question_path(question)
+      end
+
+      it "- unsubscribes user if subscribed" do
+        expect { delete :unsubscribe, id: question }.to change(question.subscriptions, :count).by(-1)
+      end
+    end
+
+    context 'Non-authenticated user' do
+      before { question }
+
+      it '- redirects to sign in page' do
+        delete :unsubscribe, id: question
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it '- does not make changes to subscription table in DB' do
+        expect { delete :unsubscribe, id: question }.to_not change(question.subscriptions, :count)
       end
     end
   end
