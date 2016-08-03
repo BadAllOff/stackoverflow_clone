@@ -4,6 +4,9 @@ div class='question_container' id="question-#{@question.id}" data-question_id="#
   hr.colorgraph
   div.col-xs-2 id='question'
     ul.list-group =render partial: 'votes/vote_buttons', locals: {votable: @question}
+    div.list-group
+      - if user_signed_in?
+        = link_to 'Subscribe', '#', class: 'list-group-item text-center subscribe_btn', remote: true
   div.col-xs-10
     p = @question.body
     .question_attachments = render 'attachments/attachments', attachable: @question
