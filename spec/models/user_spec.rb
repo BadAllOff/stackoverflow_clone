@@ -8,6 +8,7 @@ RSpec.describe User do
     it { should have_many(:votes).dependent(:destroy)}
     it { should have_many(:comments).dependent(:destroy)}
     it { should have_many(:authentications).dependent(:destroy)}
+    it { should have_many(:subscriptions).dependent(:destroy)}
   end
 
   describe 'Validations' do
@@ -22,6 +23,19 @@ RSpec.describe User do
   let(:another_user) { create(:user) }
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
+  let(:subscription) { create(:subscription, question: question, user: user) }
+
+  describe '#subscribed?' do
+    before { user.subscriptions.create(question: question) }
+
+    it '- subscribed? returns true if subscribed' do
+      expect(user.subscribed?(question)).to be_truthy
+    end
+
+    it '- subscribed? returns false if not subscribed' do
+      expect(another_user.subscribed?(question)).to be_falsey
+    end
+  end
 
   describe '#author_of?' do
     it '- author_of? returns true if author' do

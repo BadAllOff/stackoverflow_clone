@@ -49,7 +49,9 @@ class Ability
     can :crud, [Question, Answer], user: user
     can :set_best, Answer, question: { user: user }
     can :vote, [Question, Answer]
+    can :subscribe, [Question]
     cannot :vote, [Question, Answer], user: user
+    cannot :subscribe, [Question], user: user
 
     can :create, Comment
     can :manage, Comment, user: user

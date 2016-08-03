@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   validates :username, presence: true,
             uniqueness: {case_sensitive: false},
@@ -26,6 +27,11 @@ class User < ActiveRecord::Base
 
   def non_author_of?(object)
     !author_of?(object)
+  end
+
+  # TODO refactoring
+  def subscribed?(object)
+    self.subscriptions.where(question_id: object.id).any?
   end
 
   def self.send_daily_digest

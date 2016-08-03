@@ -242,6 +242,66 @@ RSpec.describe QuestionsController, type: :controller do
 
   end
 
+
+  describe "POST #subscribe" do
+    context 'Authenticated user' do
+      sign_in_user
+
+      context 'operates with his own question' do
+        let!(:question) { create(:question, user: @user) }
+
+        it "- redirects to questions with warning" do
+          post :subscribe, id: question
+          expect(response).to redirect_to root_path
+        end
+
+        it '- does not save subscription in DB' do
+          expect { post :subscribe, id: question }.to_not change(@user.subscriptions, :count)
+        end
+      end
+
+      context "operates with other user's question" do
+        before { question }
+
+        it "- redirects to questions with warning" do
+          post :subscribe, id: question
+          expect(response).to redirect_to question_path(question)
+        end
+
+        it '- saves subscription in DB' do
+          expect { post :subscribe, id: question }.to change(@user.subscriptions, :count).by(1)
+        end
+
+      end
+
+    end
+
+    context 'Non-authenticated user' do
+      before { question }
+      it '- redirects to sign in page' do
+        post :subscribe, id: question
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      # it '- saves new subscription in DB' do
+      #   expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
+      # end
+    end
+  end
+
+  describe 'DELETE #unsubscribe' do
+    context 'Authenticated user' do
+      sign_in_user
+      before { question }
+      it "- redirects to question" do
+        skip
+      end
+      it "- unsubscribes user" do
+        skip
+      end
+    end
+  end
+
   # Voting
 
   it_behaves_like 'Votable', 'Question' do

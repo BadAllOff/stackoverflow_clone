@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :load_question, only: [:show, :edit, :update, :destroy, :subscribe]
   include Voted
   authorize_resource
 
@@ -48,6 +48,12 @@ class QuestionsController < ApplicationController
     @question.destroy
     flash[:success] = 'Your question successfully deleted.'
     redirect_to questions_path
+  end
+
+  def subscribe
+    Subscription.first_or_create(user: current_user, question: @question) unless @question.user == current_user
+    flash[:success] = 'You are successfully subscribed'
+    redirect_to @question
   end
 
   private

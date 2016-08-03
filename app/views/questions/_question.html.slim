@@ -5,8 +5,11 @@ div class='question_container' id="question-#{@question.id}" data-question_id="#
   div.col-xs-2 id='question'
     ul.list-group =render partial: 'votes/vote_buttons', locals: {votable: @question}
     div.list-group
-      - if user_signed_in?
-        = link_to 'Subscribe', '#', class: 'list-group-item text-center subscribe_btn', remote: true
+      - if can? :subscribe, @question
+        - if current_user.subscribed?(@question)
+          = link_to 'Unsubscribe', unsubscribe_question_path(@question), method: :delete, class: 'list-group-item text-center active'
+        -else
+          = link_to 'Subscribe', subscribe_question_path(@question), method: :post, class: 'list-group-item text-center'
   div.col-xs-10
     p = @question.body
     .question_attachments = render 'attachments/attachments', attachable: @question
