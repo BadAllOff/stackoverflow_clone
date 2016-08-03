@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20160803081550) do
     t.integer  "question_id"
   end
 
-  add_index "subscriptions", ["user_id", "question_id"], name: "index_subscriptions_on_user_id_and_question_id", using: :btree
+  add_index "subscriptions", ["user_id", "question_id"], name: "index_subscriptions_on_user_id_and_question_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false

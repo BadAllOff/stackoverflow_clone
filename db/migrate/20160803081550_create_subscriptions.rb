@@ -6,6 +6,6 @@ class CreateSubscriptions < ActiveRecord::Migration
     add_reference :subscriptions, :user, foreign_key: true
     add_reference :subscriptions, :question, foreign_key: true
 
-    add_index :subscriptions, [:user_id, :question_id]
+    add_index :subscriptions, [:user_id, :question_id], unique: true
   end
 end
