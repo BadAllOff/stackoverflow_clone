@@ -14,9 +14,10 @@ feature 'Subscription' do
         visit question_path(question)
       end
 
-      scenario "- can't see subscribe/unsubscribe button" do
-        expect(page).to_not have_selector(:link_or_button, 'Subscribe')
-        expect(page).to_not have_selector(:link_or_button, 'Unsubscribe')
+      scenario "- can see subscribe/unsubscribe button" do
+        expect(page).to have_selector(:link_or_button, 'Unsubscribe')
+        click_on 'Unsubscribe'
+        expect(page).to have_selector(:link_or_button, 'Subscribe')
       end
     end
 

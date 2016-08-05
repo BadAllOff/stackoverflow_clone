@@ -258,13 +258,13 @@ RSpec.describe QuestionsController, type: :controller do
       context 'operates with his own question' do
         let!(:question) { create(:question, user: @user) }
 
-        it '- redirects to questions with warning' do
+        it '- redirects to question' do
           post :subscribe, id: question
-          expect(response).to redirect_to root_path
+          expect(response).to redirect_to question_path(question)
         end
 
-        it '- does not save subscription in DB' do
-          expect { post :subscribe, id: question }.to_not change(@user.subscriptions, :count)
+        it '- saves subscription in DB' do
+          expect { post :subscribe, id: question }.to change(@user.subscriptions, :count).by(1)
         end
       end
 

@@ -18,6 +18,14 @@ RSpec.describe AnswersController, type: :controller do
           expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(question.answers, :count).by(1)
         end
 
+        it '- subscribes author of answer to question' do
+          expect { post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(@user.subscriptions, :count).by(1)
+        end
+
+        it '- creates subscription to question' do
+          expect { post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(Subscription, :count).by(1)
+        end
+
         it '- returns OK status' do
           post :create, answer: attributes_for(:answer), question_id: question, format: :json
           expect(response.status).to eq 200
