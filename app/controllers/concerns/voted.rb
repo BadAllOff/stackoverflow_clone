@@ -54,7 +54,7 @@ module Voted
   end
 
   def render_response
-    render partial: 'votes/vote.json.jbuilder', locals: {votable: @votable}
+    render partial: 'votes/vote.json.jbuilder', locals: { votable: @votable }
   end
 
   def discard_flash

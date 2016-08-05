@@ -36,7 +36,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.around( :each ) do |spec|
+  config.around(:each) do |spec|
     if spec.metadata[:js]
       # JS => doesn't share connections => can't use transactions
       spec.run

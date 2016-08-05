@@ -32,7 +32,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:provider] = auth.provider
       session[:uid] = auth.uid
-      render 'omniauth/prompt_additional_data', locals: {auth: auth, user: user}
+      render 'omniauth/prompt_additional_data', locals: { auth: auth, user: user }
     end
   end
 

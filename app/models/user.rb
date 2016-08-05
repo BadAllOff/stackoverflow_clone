@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
 
   validates :username, presence: true,
-            uniqueness: {case_sensitive: false},
+            uniqueness: { case_sensitive: false },
             length: { maximum: 40, minimum: 1 },
             format: {
                 with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/,

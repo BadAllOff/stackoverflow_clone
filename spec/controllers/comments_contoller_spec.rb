@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   let(:user)          { create(:user) }
   let(:question)      { create(:question, user: user) }
-  let(:comment)       { create(:comment, commentable: question, user: user ) }
+  let(:comment)       { create(:comment, commentable: question, user: user) }
   let(:another_user)  { create :user }
 
 

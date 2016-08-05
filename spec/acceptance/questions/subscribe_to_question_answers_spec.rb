@@ -15,8 +15,8 @@ feature 'Subscription' do
       end
 
       scenario "- can't see subscribe/unsubscribe button" do
-        expect(page).to_not have_selector(:link_or_button, "Subscribe")
-        expect(page).to_not have_selector(:link_or_button, "Unsubscribe")
+        expect(page).to_not have_selector(:link_or_button, 'Subscribe')
+        expect(page).to_not have_selector(:link_or_button, 'Unsubscribe')
       end
     end
 
@@ -26,17 +26,17 @@ feature 'Subscription' do
         visit question_path(question)
       end
       scenario '- subscribes to question' do
-        click_on "Subscribe"
+        click_on 'Subscribe'
 
-        expect(page).to_not have_selector(:link_or_button, "Subscribe")
-        expect(page).to have_selector(:link_or_button, "Unsubscribe")
+        expect(page).to_not have_selector(:link_or_button, 'Subscribe')
+        expect(page).to have_selector(:link_or_button, 'Unsubscribe')
       end
 
       scenario '- unsubscribes from question' do
-        click_on "Subscribe"
-        click_on "Unsubscribe"
-        expect(page).to have_selector(:link_or_button, "Subscribe")
-        expect(page).to_not have_selector(:link_or_button, "Unsubscribe")
+        click_on 'Subscribe'
+        click_on 'Unsubscribe'
+        expect(page).to have_selector(:link_or_button, 'Subscribe')
+        expect(page).to_not have_selector(:link_or_button, 'Unsubscribe')
       end
     end
 
@@ -46,8 +46,8 @@ feature 'Subscription' do
     before { visit question_path(question) }
 
     scenario "- can't see subscribe button" do
-      expect(page).to_not have_selector(:link_or_button, "Subscribe")
-      expect(page).to_not have_selector(:link_or_button, "Unsubscribe")
+      expect(page).to_not have_selector(:link_or_button, 'Subscribe')
+      expect(page).to_not have_selector(:link_or_button, 'Unsubscribe')
     end
   end
 

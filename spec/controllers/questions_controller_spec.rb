@@ -251,14 +251,14 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
 
-  describe "POST #subscribe" do
+  describe 'POST #subscribe' do
     context 'Authenticated user' do
       sign_in_user
 
       context 'operates with his own question' do
         let!(:question) { create(:question, user: @user) }
 
-        it "- redirects to questions with warning" do
+        it '- redirects to questions with warning' do
           post :subscribe, id: question
           expect(response).to redirect_to root_path
         end
@@ -271,7 +271,7 @@ RSpec.describe QuestionsController, type: :controller do
       context "operates with other user's question" do
         before { question }
 
-        it "- redirects to questions with warning" do
+        it '- redirects to questions with warning' do
           post :subscribe, id: question
           expect(response).to redirect_to question_path(question)
         end
@@ -305,12 +305,12 @@ RSpec.describe QuestionsController, type: :controller do
         post :subscribe, id: question
       end
 
-      it "- redirects to question" do
+      it '- redirects to question' do
         delete :unsubscribe, id: question
         expect(response).to redirect_to question_path(question)
       end
 
-      it "- unsubscribes user if subscribed" do
+      it '- unsubscribes user if subscribed' do
         expect { delete :unsubscribe, id: question }.to change(question.subscriptions, :count).by(-1)
       end
     end
