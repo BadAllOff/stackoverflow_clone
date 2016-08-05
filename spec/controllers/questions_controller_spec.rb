@@ -84,6 +84,14 @@ RSpec.describe QuestionsController, type: :controller do
           expect { post :create, question: attributes_for(:question) }.to change(@user.questions, :count).by(1)
         end
 
+        it '- subscribes author to question' do
+          expect { post :create, question: attributes_for(:question) }.to change(@user.subscriptions, :count).by(1)
+        end
+
+        it '- creates subscription to question' do
+          expect { post :create, question: attributes_for(:question) }.to change(Subscription, :count).by(1)
+        end
+
         it '- redirects to show view' do
           post :create, question: attributes_for(:question)
           expect(response).to redirect_to question_path(assigns(:question))
