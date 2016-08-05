@@ -52,7 +52,6 @@ class Ability
     can :subscribe, [Question]
     can :unsubscribe, [Question]
     cannot :vote, [Question, Answer], user: user
-    cannot :subscribe, [Question], user: user
 
     can :create, Comment
     can :manage, Comment, user: user

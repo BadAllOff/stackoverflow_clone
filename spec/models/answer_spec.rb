@@ -33,15 +33,7 @@ RSpec.describe Answer, type: :model do
       end
     end
 
-    # не смог протестировать отмену best_answer по второму клику, так и не понял почему
-    # может записи перетирались а не переписывались...
-    # it 'unset #best to false' do
-    #   answer.set_best
-    #   answer.reload
-    #   answer.set_best
-    #   answer.reload
-    #   expect(answer).to_not be_best_answer
-    # end
+    #TODO unset best_answer
   end
 
 end

@@ -37,7 +37,7 @@ RSpec.describe Ability, type: :model do
     it { should_not be_able_to :crud, create(:question, user: other_user), user: user }
     #Subscription
     it { should be_able_to :subscribe, other_question, user: user }
-    it { should_not be_able_to :subscribe, question, user: user }
+    it { should be_able_to :subscribe, question, user: user }
     it { should be_able_to :unsubscribe, question }
     # Answer
     it { should be_able_to :crud, Answer, user: user }
