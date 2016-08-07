@@ -31,11 +31,11 @@ class User < ActiveRecord::Base
 
 
   def subscribed?(object)
-    self.subscriptions.where(question_id: object.id).first
+    subscriptions.where(question_id: object.id).first
   end
 
   def subscribe_to(object)
-    self.subscriptions.find_or_create_by(question: object)
+    subscriptions.find_or_create_by(question: object)
   end
 
   def self.send_daily_digest
