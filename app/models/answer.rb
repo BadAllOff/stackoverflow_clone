@@ -22,6 +22,8 @@ class Answer < ActiveRecord::Base
 
   validates :body, :user, :question, presence: true
 
+  after_create :notify_subscribers
+
   default_scope -> { order(best_answer: :desc).order(created_at: :desc) }
 
   def set_best
@@ -29,6 +31,10 @@ class Answer < ActiveRecord::Base
       question.answers.update_all(best_answer: false)
       best_answer ? update!(best_answer: false) : update!(best_answer: true)
     end
+  end
+
+  def notify_subscribers
+    NotifySubscribersJob.perform_later(self)
   end
 
 end
