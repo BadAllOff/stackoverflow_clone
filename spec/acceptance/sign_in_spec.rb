@@ -1,10 +1,10 @@
 require 'acceptance/acceptance_helper'
 
-feature 'Register', %q(
+feature 'Register', '
   In order to be able ask questions
   As an user
   I want be able to sign in
- ) do
+ ' do
 
   given(:user) { create(:user) }
 

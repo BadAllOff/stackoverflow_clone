@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Create Answer', %q(
+feature 'Create Answer', '
         In order to give answer to question
         As an authenticated user
         I want be able write answer
-  ) do
+  ' do
 
   given(:user) { create(:user) }
   given(:question) { create(:question) }

@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Update answer attachments', %q{
+feature 'Update answer attachments', "
   In order to illustrate better my answer
   As an answers's author
   I'd like to be able to update attached files
-} do
+" do
 
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }

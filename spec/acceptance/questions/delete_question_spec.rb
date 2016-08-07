@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Delete Question', %q(
+feature 'Delete Question', '
         In order to not look like a spamer
         As an authenticated user
         I want be able to delete my irrelevant question
-  ) do
+  ' do
 
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }

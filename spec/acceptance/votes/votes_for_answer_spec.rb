@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Votes for answer', %q{
+feature 'Votes for answer', "
         In order to express my opinion
         About given answers
         I'd like to be able to vote for them
-} do
+" do
 
     given(:user) { create(:user) }
     given(:another_user) { create(:user) }

@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Edit Answer', %q(
+feature 'Edit Answer', '
         In order to correct my answer to question
         As an authenticated user
         I want be able edit my answer
-  ) do
+  ' do
 
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }

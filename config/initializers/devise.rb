@@ -242,7 +242,7 @@ Devise.setup do |config|
   config.omniauth :twitter, Rails.application.secrets.twitter_consumer_key, Rails.application.secrets.twitter_consumer_secret
   config.omniauth :github, Rails.application.secrets.github_client_id, Rails.application.secrets.github_client_secret, scope: 'user'
   config.omniauth :vkontakte, Rails.application.secrets.vkontakte_app_id, Rails.application.secrets.vkontakte_app_secret, {
-      :scope => 'email'
+      scope: 'email'
   }
 
   # ==> Warden configuration

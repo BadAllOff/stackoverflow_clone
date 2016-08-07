@@ -5,16 +5,16 @@ module UserVotable
     has_many :votes, dependent: :destroy
 
     def vote_for(votable, value)
-      vote = self.votes.new(votable: votable, value: value)
+      vote = votes.new(votable: votable, value: value)
       vote.save
     end
 
     def unvote_for(votable)
-      self.votes.where(votable: votable).delete_all
+      votes.where(votable: votable).delete_all
     end
 
     def voted_for?(votable)
-      self.votes.where(votable: votable).any?
+      votes.where(votable: votable).any?
     end
 
     def klass_name

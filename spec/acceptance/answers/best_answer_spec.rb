@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Best Answer', %q(
+feature 'Best Answer', '
         In order to choose best answer to question
         As an authenticated user
         I want be able vote for answer
-  ) do
+  ' do
 
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }

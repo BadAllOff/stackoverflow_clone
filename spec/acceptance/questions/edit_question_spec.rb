@@ -1,10 +1,10 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'Edit Question', %q(
+feature 'Edit Question', '
         In order to update my question
         As an authenticated user
         I want be able to edit my question
-  ) do
+  ' do
 
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }

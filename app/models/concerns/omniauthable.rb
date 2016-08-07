@@ -31,7 +31,7 @@ module Omniauthable
     end
 
     def create_authentication(auth)
-      self.authentication.create(provider: auth.provider, uid: auth.uid)
+      authentication.create(provider: auth.provider, uid: auth.uid)
     end
   end
 end
