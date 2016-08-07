@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   def index
-    @questions = Question.includes(:user).all
+    return @questions = Question.includes(:user).all if user_signed_in?
+    @questions = Question.all
   end
 
   def show
@@ -59,7 +60,12 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
+    if user_signed_in?
+      @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
+    else
+      @question = Question.includes(:comments, attachments: [:attachable], answers: [:attachments, :user, :comments]).find(params[:id])
+    end
+
   end
 
 
