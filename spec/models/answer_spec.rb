@@ -33,7 +33,7 @@ RSpec.describe Answer, type: :model do
       end
     end
 
-    # TODO unset best_answer
+    # TODO: unset best_answer
   end
 
 end

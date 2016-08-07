@@ -1,2 +1,2 @@
-# TODO subscribeable_spec
+# TODO: subscribeable_spec
 require 'rails_helper'

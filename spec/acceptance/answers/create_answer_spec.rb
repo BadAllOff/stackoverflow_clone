@@ -16,6 +16,7 @@ feature 'Create Answer', %q(
     end
 
     scenario '- creates answer to the given question', js: true do
+      # ajax sometimes glitches, restart this test alone
       fill_in 'Answer body', with: 'My answer to question'
       click_on 'Create Answer'
 

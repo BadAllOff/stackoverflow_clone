@@ -48,8 +48,8 @@ class CommentsController < ApplicationController
   def set_commentable
     params.each do |name, value|
       if name =~ /(question|answer)_id$/
-        @commentable_name = $1
-        @commentable = $1.classify.constantize.find(value)
+        @commentable_name = Regexp.last_match(1)
+        @commentable = @commentable_name.classify.constantize.find(value)
       end
     end
   end
