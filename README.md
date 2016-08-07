@@ -41,7 +41,7 @@
 - mocks
 - doubles
 
-##### Module 17: Background Jobs
+#### Module 17: Background Jobs
 - Delayed::Job
 - Sidekiq
 - Sidetiq

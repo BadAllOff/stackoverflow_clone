@@ -23,7 +23,7 @@ RSpec.describe AnswersController, type: :controller do
         end
 
         it '- creates subscription to question' do
-          expect { post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(Subscription, :count).by(1)
+          expect { post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(question.subscriptions, :count).by(1)
         end
 
         it '- returns OK status' do
