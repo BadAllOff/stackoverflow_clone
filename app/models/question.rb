@@ -14,10 +14,10 @@ class Question < ActiveRecord::Base
   include Attachable
   include Votable
   include Commentable
+  include Subscribable
 
   belongs_to :user
   has_many :answers, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
 
   validates :title, :body, :user, presence: true
 

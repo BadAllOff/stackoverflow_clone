@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        set_subscription
+        current_user.subscribe_to(@question)
         format.json do
           flash[:success] = 'Answer successfully created'
           PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
@@ -64,10 +64,6 @@ class AnswersController < ApplicationController
   def load_answer
     @answer = Answer.includes(:attachments, :votes, :comments, :user).find(params[:id])
     @question = @answer.question
-  end
-
-  def set_subscription
-    @subscription = Subscription.find_or_create_by(user: current_user, question: @question)
   end
 
 end

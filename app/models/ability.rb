@@ -27,6 +27,7 @@ class Ability
 
     alias_action :create, :read, :update, :destroy, to: :crud
     alias_action :upvote, :downvote, :unvote, to: :vote
+    alias_action :subscribe, :unsubscribe, to: :subs
 
 
     if user
@@ -49,8 +50,7 @@ class Ability
     can :crud, [Question, Answer], user: user
     can :set_best, Answer, question: { user: user }
     can :vote, [Question, Answer]
-    can :subscribe, [Question]
-    can :unsubscribe, [Question]
+    can :subs, [Question]
     cannot :vote, [Question, Answer], user: user
 
     can :create, Comment

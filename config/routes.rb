@@ -32,16 +32,19 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :subscribable do
+    member do
+      post :subscribe
+      delete :unsubscribe
+    end
+  end
+
   concern :commentable do
     resources :comments, only: [:create, :destroy]
   end
 
 
-  resources :questions, concerns: [:votable, :commentable], shallow: true do
-    member do
-      post :subscribe
-      delete :unsubscribe
-    end
+  resources :questions, concerns: [:votable, :commentable, :subscribable], shallow: true do
     resources :answers, concerns: [:votable, :commentable], shallow: true do
       patch :set_best, on: :member
     end

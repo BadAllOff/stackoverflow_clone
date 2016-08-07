@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe]
-  before_action :set_subscription, only: [:subscribe, :unsubscribe]
+  before_action :load_question, only: [:show, :edit, :update, :destroy]
   include Voted
+  include Subscribed
   authorize_resource
 
   def index
@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
 
     if @question.save
-      set_subscription
+      current_user.subscribe_to(@question)
       PrivatePub.publish_to '/questions', question: @question.to_json
       flash[:success] = 'Question successfully created'
       redirect_to @question
@@ -52,17 +52,6 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
-  def subscribe
-    flash[:success] = 'You are successfully subscribed'
-    redirect_to @question
-  end
-
-  def unsubscribe
-    @subscription.delete if @subscription
-    flash[:success] = 'You are successfully unsubscribed'
-    redirect_to @question
-  end
-
   private
 
   def question_params
@@ -73,8 +62,5 @@ class QuestionsController < ApplicationController
     @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
   end
 
-  def set_subscription
-    @subscription = Subscription.find_or_create_by(user: current_user, question: @question)
-  end
 
 end

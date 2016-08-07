@@ -37,6 +37,18 @@ RSpec.describe User do
     end
   end
 
+  describe '#subscribe_to' do
+    it '- subscribe_to subscribes user to question' do
+      expect{ user.subscribe_to(question) }.to change(user.subscriptions, :count).by(1)
+    end
+
+    it '- subscribe_to adds subscriber to question' do
+      expect{ user.subscribe_to(question) }.to change(question.subscriptions, :count).by(1)
+    end
+
+
+  end
+
   describe '#author_of?' do
     it '- author_of? returns true if author' do
       expect(user.author_of?(answer)).to be_truthy

@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     self.subscriptions.where(question_id: object.id).first
   end
 
+  def subscribe_to(object)
+    self.subscriptions.find_or_create_by(question: object)
+  end
+
   def self.send_daily_digest
     find_each.each do |user|
       DailyMailer.digest(user).deliver_later
