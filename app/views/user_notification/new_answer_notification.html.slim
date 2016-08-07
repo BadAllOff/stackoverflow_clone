@@ -1,0 +1,7 @@
+p
+  | New answer was just added to the question:
+  |
+  = @answer.question.title
+p
+  = @answer.body
+p = link_to  @answer.question.title, question_url(@answer.question)

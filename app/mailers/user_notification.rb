@@ -1,6 +1,6 @@
 class UserNotification < ApplicationMailer
 
-  def notify(user, answer)
+  def new_answer_notification(user, answer)
     @answer = answer
     mail to: user.email
   end
