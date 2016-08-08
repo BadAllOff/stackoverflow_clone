@@ -9,7 +9,9 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'devise'
 require 'cancan/matchers'
-
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!
+CodeClimate::TestReporter.start
 
 require 'bundler/setup'
 ::Bundler.require(:default, :test)
