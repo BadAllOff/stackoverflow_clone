@@ -82,20 +82,6 @@ ready = function() {
     });
   });
 
-
-  // If needed
-  //
-  // $(function() {
-  //   return $('.delete_answer_comment').bind('ajax:error', function(e, xhr, status, error) {
-  //     var comment;
-  //     comment = $.parseJSON(xhr.responseText);
-  //
-  //     return $('.flash-messages').append(JST["templates/shared/msg"]({
-  //       object: comment
-  //     }));
-  //   });
-  // });
-
 };
 
 $(document).ready(ready);

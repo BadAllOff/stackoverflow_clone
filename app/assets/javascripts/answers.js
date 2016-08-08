@@ -17,19 +17,24 @@ ready = function() {
     questionId = $('#answers').data('questionId');
   
     $(function() {
-        return $('.vote_unvote, .vote_up, .vote_down').bind('ajax:success', function(e, data, status, xhr) {
-            var votable;
+        $('.vote_unvote, .vote_up, .vote_down').unbind().bind('ajax:success', function(e, data, status, xhr) {
+          var votable;
 
           votable = $.parseJSON(xhr.responseText);
-            $("#"+votable.relationships.votable.classname+"-" + votable.id + " .votes_"+votable.relationships.votable.classname).html(JST["templates/votes"]({
-                object: votable
-            }));
 
-            remove_alerts();
+          console.log("class = "+votable.relationships.votable.classname);
 
-            return $('.flash-messages').append(JST["templates/shared/msg"]({
-                object: votable
-            }));
+          $("#"+votable.relationships.votable.classname+"-" + votable.id + " .votes_"+votable.relationships.votable.classname).html(JST["templates/votes"]({
+              object: votable
+          }));
+
+          console.log(votable);
+
+          remove_alerts();
+
+          return $('.flash-messages').append(JST["templates/shared/msg"]({
+              object: votable
+          }));
         });
     });
 
