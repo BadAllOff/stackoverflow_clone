@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
-
-
 gem 'rails', '4.2.7'
+
 gem 'sprockets', '3.6.3'
 gem 'pg', '~> 0.15'
 gem 'sass-rails', '~> 5.0.6'
 gem 'uglifier', '~> 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
-
 gem 'jquery-rails', '~> 4.1.1'
 gem 'turbolinks', '~> 2.5.3'
 gem 'jbuilder', '~> 2.0'
@@ -17,7 +15,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development
-
 
 gem 'slim-rails', '~> 3.0.1'
 gem 'html2slim', '~> 0.2.0'
@@ -45,13 +42,13 @@ gem 'responders', '~> 2.0'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'oj', '~> 2.17.1'
 gem 'oj_mimic_json', '~> 1.0.1'
-
-# gem 'delayed_job_active_record'
+gem 'mysql2'
+gem 'thinking-sphinx'
 gem 'sidekiq', '~> 4.1.4'
-# gem 'sidetiq'
 gem 'sinatra', '~> 1.4.7', require: nil
 gem 'whenever', '~> 0.9.7'
-
+# gem 'sidetiq'
+# gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'byebug', '~> 9.0.5'
@@ -61,7 +58,6 @@ group :development, :test do
   gem 'mailcatcher', '~> 0.6.4'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'capybara-webkit', '~> 1.11.1'
-
   gem "codeclimate-test-reporter", '~> 0.6.0', require: nil
 end
 
