@@ -17,5 +17,4 @@ module OmniauthMacros
     end
     OmniAuth.config.mock_auth[provider] = hash
   end
-
 end

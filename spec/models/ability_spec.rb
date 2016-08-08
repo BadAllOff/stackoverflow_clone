@@ -57,6 +57,5 @@ RSpec.describe Ability, type: :model do
     it { should_not be_able_to :vote, question, user: user }
     it { should be_able_to :vote, other_answer, user: user }
     it { should_not be_able_to :vote, question, user: user }
-
   end
 end

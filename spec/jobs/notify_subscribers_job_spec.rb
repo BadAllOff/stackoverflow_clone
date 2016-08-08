@@ -9,6 +9,7 @@ RSpec.describe NotifySubscribersJob, type: :job do
     question.subscriptions.each do |subscription|
       expect(NotifySubscribersJob).to receive(:new_answer_notification).with(subscription.user, answer).and_call_original
     end
+
     NotifySubscribersJob.perform_now(answer)
   end
 end

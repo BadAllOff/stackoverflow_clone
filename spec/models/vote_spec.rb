@@ -9,32 +9,8 @@ RSpec.describe Vote, type: :model do
 
   describe 'Validations' do
     it { should validate_presence_of :value }
-    # it { should validate_uniqueness_of(:user_id).scoped_to(:votable_type, :votable_id) }
-  end
-
-  describe 'uniqueness validation' do
-    # let!(:user)      { create(:user) }
-    # let!(:question)  { create(:question, user: user) }
-    # let!(:vote) do
-    #   create(:vote,
-    #          user_id: user.id,
-    #          votable_type: question,
-    #          votable_id: question.id,
-    #          value: 1 )
-    # end
-    # let!(:duplicated_vote) do
-    #   create(:vote,
-    #          user_id: user.id,
-    #          votable_type: question,
-    #          votable_id: question.id,
-    #          value: 1 )
-    # end
-
-
-
-    # it do
-    #   subject { create(:vote, user_id: user, votable_type: question, votable_id: question.id) }
-    #   should validate_uniqueness_of(:user).scoped_to(:votable_type, :votable_id)
-    # end
+    it { should validate_presence_of :user_id }
+    it { should validate_presence_of :votable_id }
+    it { should validate_presence_of :votable_type }
   end
 end

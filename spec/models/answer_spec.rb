@@ -25,15 +25,12 @@ RSpec.describe Answer, type: :model do
       expect(answer).to be_best_answer
     end
 
-    it 'sets #best to all other answers to false' do
+    it 'sets #best to false for the rest answers' do
       answer.set_best
       answers.each do |ans|
         ans.reload
         expect(ans).to_not be_best_answer
       end
     end
-
-    # TODO: unset best_answer
   end
-
 end

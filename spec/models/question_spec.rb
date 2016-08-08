@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-
   describe 'Associations' do
     it { should belong_to(:user) }
     it { should have_many(:answers).dependent(:destroy) }
@@ -16,6 +15,4 @@ RSpec.describe Question, type: :model do
     it { should validate_presence_of :body }
     it { should accept_nested_attributes_for :attachments }
   end
-
-
 end

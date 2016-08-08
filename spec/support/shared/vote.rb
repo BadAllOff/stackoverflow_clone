@@ -10,7 +10,7 @@ shared_examples_for 'Votable' do |object_name|
 
     context "votes up for other user's #{object_name}" do
       before { sign_in(another_user) }
-      it "- keep's the vote" do
+      it "- saves the vote" do
         expect { patch :upvote, id: object, format: :json }.to change(object.votes.upvotes, :count).by 1
       end
 
@@ -32,7 +32,7 @@ shared_examples_for 'Votable' do |object_name|
 
     context "votes down for other user's #{object_name}" do
       before { sign_in(another_user) }
-      it "- keep's the vote" do
+      it "- saves the vote" do
         expect { patch :downvote, id: object, format: :json }.to change(object.votes.downvotes, :count).by 1
       end
 
