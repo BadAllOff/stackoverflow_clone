@@ -1,26 +1,3 @@
-// jQuery.fn.extend({
-//   toggleText: function (a, b){
-//     var that = this;
-//     if (that.text() != a && that.text() != b){
-//       that.text(a);
-//     }
-//     else
-//     if (that.text() == a){
-//       that.text(b);
-//     }
-//     else
-//     if (that.text() == b){
-//       that.text(a);
-//     }
-//     return this;
-//   }
-// });
-//
-// $(document).on('click', '.subscribe_btn', function(e) {
-//   $(this).toggleClass('active');
-//   $(this).toggleText('Subscribe', 'Unsubscribe');
-// });
-
 function remove_alerts() {
   setTimeout(function(){
     $('.flash-messages > .alert').fadeOut('slow', function(){

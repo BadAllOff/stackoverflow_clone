@@ -32,7 +32,7 @@ gem 'skim'
 gem 'jquery-ui-rails'
 gem 'private_pub'
 gem 'thin'
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', '~> 0.10.1', require: false
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
