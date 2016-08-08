@@ -42,7 +42,6 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #new' do
     sign_in_user
-    render_views
     before { get :new}
 
     it '- assigns a new Question to @question' do
@@ -60,22 +59,45 @@ RSpec.describe QuestionsController, type: :controller do
 
 
   describe 'GET #edit' do
-    sign_in_user
-    before { get :edit, id: question, format: :js}
-    render_views
 
-    it '- assigns the requested question to @question' do
-      expect(assigns(:question)).to eq question
+    context 'Non-authenticated' do
+      it '- unauthorized to update answer' do
+        get :edit, id: question, format: :js
+        expect(response.status).to eq 401
+      end
     end
 
-    # TODO: json
-    it '- renders edit view' do
-      expect(response).to have_http_status(:success)
+    context 'Authenticated user' do
+      sign_in_user
+      before { get :edit, id: question, format: :js}
+
+      it '- assigns the requested question to @question' do
+        expect(assigns(:question)).to eq question
+      end
+
+      # TODO: json
+      it '- renders edit view' do
+        expect(response).to have_http_status(:success)
+      end
     end
+
   end
 
 
   describe 'POST #create' do
+
+    context 'Non-authenticated user' do
+      before { post :create, question: attributes_for(:question) }
+
+      it '- unauthorized to save new question in the DB' do
+        expect { post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
+      end
+
+      it '- redirects to sign in page' do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
 
@@ -110,23 +132,25 @@ RSpec.describe QuestionsController, type: :controller do
         end
       end
     end
-
-    context 'Non-authenticated user' do
-      it '- fails to save new question in the DB' do
-        post :create, question: attributes_for(:question)
-        expect { post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
-      end
-
-      it '- redirects to sign in page' do
-        post :create, question: attributes_for(:question)
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
   end
 
 
   describe 'PATCH #update' do
+
+    context 'Non-authenticated user' do
+      it '- unauthorized to update question attributes' do
+        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
+        question.reload
+        expect(question.title).to_not eq 'New Title'
+        expect(question.body).to_not eq 'New Body'
+      end
+
+      it '- redirects to sign in page' do
+        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       context 'operates with his own question via ajax' do
@@ -180,25 +204,23 @@ RSpec.describe QuestionsController, type: :controller do
 
 
     end
-
-    context 'Non-authenticated user' do
-      it '- fails to update question attributes' do
-        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
-        question.reload
-        expect(question.title).to_not eq 'New Title'
-        expect(question.body).to_not eq 'New Body'
-      end
-
-      it '- redirects to sign in page' do
-        patch :update, id: question, question: { title: 'New Title', body: 'New Body', format: :js  }
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
   end
 
 
   describe 'DELETE #destroy' do
+
+    context 'Non-authenticated user' do
+      before { question }
+
+      it '- unauthorized to delete question' do
+        expect { delete :destroy, id: question }.to_not change(Question, :count)
+      end
+
+      it '- redirects to sign in page' do
+        delete :destroy, id: question
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
 
     context 'Authenticated user' do
       sign_in_user
@@ -230,24 +252,24 @@ RSpec.describe QuestionsController, type: :controller do
         end
       end
     end
-
-    context 'Non-authenticated user' do
-      before { question }
-
-      it '- fails to delete question' do
-        expect { delete :destroy, id: question }.to_not change(Question, :count)
-      end
-
-      it '- redirects to sign in page' do
-        delete :destroy, id: question
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
   end
 
 
   describe 'POST #subscribe' do
+
+    context 'Non-authenticated user' do
+      before { question }
+
+      it '- redirects to sign in page' do
+        post :subscribe, id: question
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it '- unauthorized to save subscription in DB' do
+        expect { post :subscribe, id: question }.to_not change(question.subscriptions, :count)
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
 
@@ -267,7 +289,7 @@ RSpec.describe QuestionsController, type: :controller do
       context "operates with other user's question" do
         before { question }
 
-        it '- redirects to questions with warning' do
+        it '- redirects to questions' do
           post :subscribe, id: question
           expect(response).to redirect_to question_path(question)
         end
@@ -277,23 +299,24 @@ RSpec.describe QuestionsController, type: :controller do
         end
       end
     end
+  end
+
+
+  describe 'DELETE #unsubscribe' do
 
     context 'Non-authenticated user' do
       before { question }
 
       it '- redirects to sign in page' do
-        post :subscribe, id: question
+        delete :unsubscribe, id: question
         expect(response).to redirect_to new_user_session_path
       end
 
-      it '- does not save subscription in DB' do
-        expect { post :subscribe, id: question }.to_not change(question.subscriptions, :count)
+      it '- does not make changes to subscription table in DB' do
+        expect { delete :unsubscribe, id: question }.to_not change(question.subscriptions, :count)
       end
     end
-  end
 
-
-  describe 'DELETE #unsubscribe' do
     context 'Authenticated user' do
       sign_in_user
       before do
@@ -308,19 +331,6 @@ RSpec.describe QuestionsController, type: :controller do
 
       it '- unsubscribes user if subscribed' do
         expect { delete :unsubscribe, id: question }.to change(question.subscriptions, :count).by(-1)
-      end
-    end
-
-    context 'Non-authenticated user' do
-      before { question }
-
-      it '- redirects to sign in page' do
-        delete :unsubscribe, id: question
-        expect(response).to redirect_to new_user_session_path
-      end
-
-      it '- does not make changes to subscription table in DB' do
-        expect { delete :unsubscribe, id: question }.to_not change(question.subscriptions, :count)
       end
     end
   end

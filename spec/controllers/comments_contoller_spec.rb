@@ -8,10 +8,18 @@ RSpec.describe CommentsController, type: :controller do
 
 
   describe 'POST #create' do
+
+    context 'Non-authenticated user' do
+      it '- unauthorized to create answer' do
+        expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to_not change(Comment, :count)
+        expect(response.status).to eq 401
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
-      context 'with valid attributes' do
 
+      context 'with valid attributes' do
         it '- saves new comment in the DB with correct question identification' do
           expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to change(question.comments, :count).by(1)
         end
@@ -43,26 +51,36 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
 
-    context 'Non-authenticated user try to create answer' do
-      it '- sends back status unauthorized' do
-        expect{ post :create, comment: attributes_for(:comment), question_id: question, format: :json }.to_not change(Comment, :count)
-        expect(response.status).to eq 401
-      end
-    end
+
   end
 
   describe 'DELETE #destroy' do
+
+    context 'Non-authenticated user' do
+      before { comment }
+
+      it '- unauthorized to delete question' do
+        expect{ delete :destroy, id: comment, format: :json }.to_not change(Comment, :count)
+        expect(response.status).to eq 401
+      end
+
+      it '- redirects to sign in page' do
+        delete :destroy, id: comment
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       context 'operates with his own comment' do
         let!(:comment) { create(:comment, commentable: question, user: @user) }
         before { comment }
 
-        it '- deletes his own comment' do
+        it '- deletes comment' do
           expect{ delete :destroy, id: comment, format: :json }.to change(Comment, :count).by(-1)
         end
 
-        it '- gets status ok to comment view' do
+        it '- gets status OK' do
           delete :destroy, id: comment, format: :json
           expect(response.status).to eq 200
         end
@@ -77,7 +95,7 @@ RSpec.describe CommentsController, type: :controller do
         sign_in_another_user
         let!(:comment) { create(:comment, commentable: question, user: another_user) }
 
-        it "- can't delete comment" do
+        it "- unauthorized to delete" do
           expect { delete :destroy, id: comment, format: :json }.to_not change(Comment, :count)
         end
 
@@ -85,18 +103,6 @@ RSpec.describe CommentsController, type: :controller do
 
     end
 
-    context 'Non-authenticated user' do
-      before { comment }
-
-      it '- fails to delete question' do
-        expect{ delete :destroy, id: comment, format: :json }.to_not change(Comment, :count)
-      end
-
-      it '- redirects to sign in page' do
-        delete :destroy, id: comment
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
   end
 
 end

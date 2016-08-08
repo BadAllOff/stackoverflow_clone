@@ -14,7 +14,7 @@ RSpec.describe AttachmentsController, type: :controller do
         let!(:question) { create(:question, user: @user) }
         let!(:attachment) { create(:attachment, attachable: question) }
 
-        it '- deletes attachment to his own attachable' do
+        it '- deletes attachment' do
           expect {delete :destroy, id: attachment, format: :js }.to change(question.attachments, :count).by(-1)
         end
 
@@ -27,16 +27,16 @@ RSpec.describe AttachmentsController, type: :controller do
       context 'operates with other users attachments' do
         sign_in_another_user
 
-        it '- do not deletes attachment to other users attachable' do
+        it '- does not deletes attachment' do
           expect {delete :destroy, id: attachment, format: :js }.to_not change(Attachment, :count)
         end
       end
     end
 
-    context 'Non-authenticated user try to delete answer' do
+    context 'Non-authenticated user' do
       before { attachment }
 
-      it '- should return 401 (unauthorized) status' do
+      it '- unauthorized to delete attachment' do
         delete :destroy, id: attachment, format: :js
         expect(response).to have_http_status(:unauthorized)
       end

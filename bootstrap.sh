@@ -1,3 +1,5 @@
+# This file is used by Vagrant to start the application enviroment.
+
 #!/usr/bin/env bash
 
 GREEN='\033[1;32m'

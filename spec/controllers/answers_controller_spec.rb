@@ -7,6 +7,14 @@ RSpec.describe AnswersController, type: :controller do
   let(:another_user)  { create :user }
 
   describe 'POST #create' do
+
+    context 'Non-authenticated user try to create answer' do
+      it '- unauthorized to create answer' do
+        expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to_not change(question.answers, :count)
+        expect(response.status).to eq 401
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       context 'with valid attributes' do
@@ -18,7 +26,7 @@ RSpec.describe AnswersController, type: :controller do
           expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(question.answers, :count).by(1)
         end
 
-        it '- subscribes author of answer to question' do
+        it '- subscribes author to question' do
           expect { post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to change(@user.subscriptions, :count).by(1)
         end
 
@@ -48,17 +56,18 @@ RSpec.describe AnswersController, type: :controller do
         end
       end
     end
-
-    context 'Non-authenticated user try to create answer' do
-      it '- get\'s status unauthorized' do
-        expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to_not change(question.answers, :count)
-        expect(response.status).to eq 401
-      end
-    end
   end
 
 
   describe 'PATCH #update' do
+
+    context 'Non-authenticated' do
+      it '- unauthorized to update answer' do
+        patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :json
+        expect(response.status).to eq 401
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       context 'operates with his own answer' do
@@ -106,17 +115,19 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
 
-    context 'Non-authenticated' do
-      it '- redirects to question path' do
-        patch :update, question_id: question, id: answer, answer: { body: 'I am SkyNet!' }, format: :json
-        expect(response.status).to eq 401
-      end
-    end
-
   end
 
 
   describe 'PATCH #set_best' do
+
+    context 'Non-authenticated' do
+      before { answer }
+      it '- unauthorized to set best' do
+        patch :set_best, id: answer, question_id: question, format: :js
+        expect(response.status).to eq(401)
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       context 'operates with his own question answers' do
@@ -164,18 +175,19 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
 
-    context 'Non-authenticated' do
-      before { answer }
-      it '- unauthorized' do
-        patch :set_best, id: answer, question_id: question, format: :js
-        expect(response.status).to eq(401)
-      end
-    end
-
   end
 
 
   describe 'DELETE #destroy' do
+
+    context 'Non-authenticated user' do
+      before { answer }
+      it '- unauthorized to delete answer' do
+        expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
+        expect(response.status).to eq 401
+      end
+    end
+
     context 'Authenticated user' do
       sign_in_user
       before { answer }
@@ -201,14 +213,6 @@ RSpec.describe AnswersController, type: :controller do
           expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
         end
 
-      end
-    end
-
-    context 'Non-authenticated user try to delete answer' do
-      before { answer }
-      it '- unauthorized' do
-        expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
-        expect(response.status).to eq 401
       end
     end
   end
