@@ -19,7 +19,7 @@ feature 'Best Answer', '
         visit question_path(question)
       end
 
-      scenario '- selects "Best answer" to his question', js: true do
+      scenario '- can select "Best answer" to his question', js: true do
         first('div.vote').click_link('Accept answer')
         within(first('div.vote')) { expect(page).to have_selector(:link_or_button, 'Best answer') }
       end
@@ -33,7 +33,7 @@ feature 'Best Answer', '
         expect(all('div.vote').first).to have_css('a.vote-accepted-on')
       end
 
-      scenario '- unselects best answer for his question', js: true do
+      scenario '- can unselect best answer for his question', js: true do
         first('div.vote').click_link('Accept answer')
         first('div.vote').click_link('Best answer')
 

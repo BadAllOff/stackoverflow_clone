@@ -19,7 +19,7 @@ feature 'Update answer attachments', "
         visit question_path(question)
       end
 
-      scenario '- add additional files to answer and update', js: true do
+      scenario '- can add additional files to answer and update', js: true do
         within("li#answer-#{answer.id}") do
           click_on 'Edit answer'
           click_on 'Add file'
@@ -30,7 +30,7 @@ feature 'Update answer attachments', "
         within("li#answer-#{answer.id}") { expect(page).to have_link '20x20.jpg' }
       end
 
-      scenario '- add additional files to answer, changes his mind, removes attachment field', js: true do
+      scenario '- can add additional files to answer, changes his mind, removes attachment field', js: true do
         within("li#answer-#{answer.id}") do
           click_on 'Edit answer'
           click_on 'Add file'

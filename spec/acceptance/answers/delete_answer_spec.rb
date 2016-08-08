@@ -18,11 +18,11 @@ feature 'Delete Answer', '
         visit question_path(question)
       end
 
-      scenario '- sees delete btn for his own answer' do
+      scenario '- can see delete btn' do
         within('.answer_control_btns') { expect(page).to have_selector(:link_or_button, 'Delete answer') }
       end
 
-      scenario '- deletes his own answer to the given question', js: true do
+      scenario '- can delete answer', js: true do
         within('.answer_control_btns') { click_on 'Delete answer' }
 
         expect(page).to have_content 'Answer successfully deleted'
@@ -40,9 +40,7 @@ feature 'Delete Answer', '
         expect(page).to_not have_css('.answer_control_btns')
       end
     end
-
   end
-
 
   describe 'Non-Authenticated user' do
     before { visit questions_path }
@@ -51,5 +49,4 @@ feature 'Delete Answer', '
       expect(page).to_not have_css('.answer_control_btns')
     end
   end
-
 end

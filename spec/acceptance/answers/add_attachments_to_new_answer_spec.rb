@@ -10,13 +10,13 @@ feature 'Add files to answer', "
   given(:question) { create(:question, user: user) }
 
   describe 'Authenticated user' do
-    context 'creates new answer' do
+    context ' when creates new answer' do
       before do
         sign_in(user)
         visit question_path(question)
       end
 
-      scenario '- with attachment', js: true do
+      scenario '- can add attachment', js: true do
         within 'form#new_answer' do
           fill_in 'Answer body', with: 'Test answer with attachment'
           click_on 'Add file'
@@ -30,7 +30,7 @@ feature 'Add files to answer', "
         end
       end
 
-      scenario '- with attachment, but changes his mind, deletes file field from form', js: true do
+      scenario '- can add attachment, but changes his mind, deletes file field from form', js: true do
         within 'form#new_answer' do
           fill_in 'Answer body', with: 'Test answer with attachment'
           click_on 'Add file'
@@ -45,21 +45,19 @@ feature 'Add files to answer', "
         end
       end
 
-      scenario '- with several files attached', js: true do
+      scenario '- can attach several files', js: true do
         within 'form#new_answer' do
           fill_in 'Answer body', with: 'Test answer with attachments'
           click_on 'Add file'
           all('input[type="file"]')[0].set "#{Rails.root}/spec/fixtures/20x20.jpg"
           click_on 'Add file'
           all('input[type="file"]')[1].set "#{Rails.root}/spec/fixtures/20x20.jpg"
-          click_on 'Add file'
-          all('input[type="file"]')[2].set "#{Rails.root}/spec/fixtures/20x20.jpg"
           click_on 'Create Answer'
         end
 
         within '.answers_list' do
           expect(page).to have_content 'Test answer with attachments'
-          expect(page).to have_link('20x20.jpg', count: 3)
+          expect(page).to have_link('20x20.jpg', count: 2)
         end
       end
     end

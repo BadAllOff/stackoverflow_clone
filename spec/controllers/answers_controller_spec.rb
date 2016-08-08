@@ -8,7 +8,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'POST #create' do
 
-    context 'Non-authenticated user try to create answer' do
+    context 'Non-authenticated user tries to create answer' do
       it '- unauthorized to create answer' do
         expect{ post :create, answer: attributes_for(:answer), question_id: question, format: :json }.to_not change(question.answers, :count)
         expect(response.status).to eq 401

@@ -18,13 +18,12 @@ feature 'Edit Answer', '
         visit question_path(question)
       end
 
-      scenario '- sees "Edit answer" button for his own answer' do
+      scenario '- can see "Edit answer" button' do
         expect(page).to have_css('.answer_control_btns')
         within('.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
       end
 
-      context 'edits his own answer to the given question' do
-
+      context 'can edit answer' do
         scenario '- with valid attributes', js: true do
           click_on 'Edit answer'
           within(".form_for_answer-#{answer.id}") do
@@ -54,7 +53,7 @@ feature 'Edit Answer', '
     context "operates with other user's answer" do
       before { sign_in(another_user) }
 
-      scenario "- can't see control buttons for other user's answer" do
+      scenario "- can't see control buttons" do
         expect(page).to_not have_css('div.answer_control_btns')
       end
     end

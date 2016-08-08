@@ -13,7 +13,7 @@ feature 'Remove attachment from Question', '
   given!(:attachment) { create(:attachment, attachable: answer) }
 
   describe 'Authenticated user' do
-    context 'operates with own question' do
+    context 'operates with own answer' do
       before do
         sign_in(user)
         question
@@ -21,22 +21,21 @@ feature 'Remove attachment from Question', '
         visit question_path(question)
       end
 
-      scenario '- sees remove button for answer attachments' do
+      scenario '- can see remove button for attachments' do
         within('.answer_attachments') { expect(page).to have_selector(:link_or_button, 'Remove attachment') }
       end
 
-      scenario '- removes attachment from his answer', js: true do
+      scenario '- can remove attachment', js: true do
         within('.answer_attachments') do
           click_on 'Remove attachment'
         end
-
-        sleep 1
+        # sleep 1
         expect(page).to_not have_link '10x10.jpg', href: '/uploads/attachment/file/1/10x10.jpg'
       end
     end
 
 
-    context  "can't operate other users answers attachments" do
+    context  "operate with other users answers attachments" do
       before  do
         sign_in(another_user)
         visit question_path(question)
