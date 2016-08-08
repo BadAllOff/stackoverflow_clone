@@ -35,7 +35,7 @@ feature 'Remove attachment from Question', '
     end
 
 
-    context  "operate with other users answers attachments" do
+    context  'operate with other users answers attachments' do
       before  do
         sign_in(another_user)
         visit question_path(question)

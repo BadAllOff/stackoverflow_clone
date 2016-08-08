@@ -10,6 +10,7 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/**/*'
     - 'db/schema.rb'
+    - 'spec/fixtures/*.jpg'
   DisplayCopNames: true
   DisplayStyleGuide: true
   StyleGuideCopsOnly: true

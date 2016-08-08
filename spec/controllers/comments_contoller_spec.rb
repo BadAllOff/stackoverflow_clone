@@ -95,7 +95,7 @@ RSpec.describe CommentsController, type: :controller do
         sign_in_another_user
         let!(:comment) { create(:comment, commentable: question, user: another_user) }
 
-        it "- unauthorized to delete" do
+        it '- unauthorized to delete' do
           expect { delete :destroy, id: comment, format: :json }.to_not change(Comment, :count)
         end
 

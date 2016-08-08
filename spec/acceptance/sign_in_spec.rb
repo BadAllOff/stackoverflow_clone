@@ -50,7 +50,7 @@ feature 'Register', '
       expect(current_path).to eq new_user_session_path
     end
 
-    scenario "- tries to register new account" do
+    scenario '- tries to register new account' do
       visit root_path
       click_on 'Sign in'
       click_on 'Sign up'
