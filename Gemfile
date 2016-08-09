@@ -45,7 +45,7 @@ gem 'oj_mimic_json', '~> 1.0.1'
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'sidekiq', '~> 4.1.4'
-gem 'sinatra', '~> 1.4.7', require: nil
+gem 'sinatra', '~> 1.4.7', require: false
 gem 'whenever', '~> 0.9.7'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
@@ -58,7 +58,7 @@ group :development, :test do
   gem 'mailcatcher', '~> 0.6.4'
   gem 'database_cleaner', '~> 1.5.3'
   gem 'capybara-webkit', '~> 1.11.1'
-  gem "codeclimate-test-reporter", '~> 0.6.0', require: nil
+  gem "codeclimate-test-reporter", '~> 0.6.0', require: false
 end
 
 group :test do
