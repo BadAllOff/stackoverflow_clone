@@ -57,12 +57,12 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'rubocop', '~> 0.42.0'
   gem 'mailcatcher', '~> 0.6.4'
-  gem 'database_cleaner', '~> 1.5.3'
-  gem 'capybara-webkit', '~> 1.11.1'
   gem "codeclimate-test-reporter", '~> 0.6.0', require: false
 end
 
 group :test do
+  gem 'database_cleaner', '~> 1.5.3'
+  gem 'capybara-webkit', '~> 1.11.1'
   gem 'shoulda-matchers', '~> 3.1.1'
   gem 'capybara', '~> 2.7.1'
   gem 'launchy', '~> 2.4.3'
