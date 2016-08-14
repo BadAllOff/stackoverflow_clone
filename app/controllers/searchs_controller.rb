@@ -26,7 +26,7 @@ class SearchsController < ApplicationController
 
   def index_type
     index_type = params[:search_query][:index_type]
-    index_type == "nil" ? nil : index_type.singularize.constantize
+    index_type == 'nil' ? nil : index_type.singularize.constantize
   end
 
   def query

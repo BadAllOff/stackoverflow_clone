@@ -17,36 +17,36 @@ feature 'Querying the search', "
     context 'can use search' do
 
       scenario 'to find question' do
-        fill_in "search_query[query]", with: question.body
+        fill_in 'search_query[query]', with: question.body
         select('Questions', from: 'search_query_index_type')
-        click_on "Find"
+        click_on 'Find'
         expect(page).to have_content 'This is Question body'
       end
 
       scenario 'to find answer' do
-        fill_in "search_query[query]", with: answer.body
+        fill_in 'search_query[query]', with: answer.body
         select('Answers', from: 'search_query_index_type')
-        click_on "Find"
+        click_on 'Find'
         expect(page).to have_content 'This is the Answer body'
       end
 
       scenario 'to find comment' do
-        fill_in "search_query[query]", with: comment.content
+        fill_in 'search_query[query]', with: comment.content
         select('Comments', from: 'search_query_index_type')
-        click_on "Find"
+        click_on 'Find'
         expect(page).to have_content 'My comment text'
       end
 
       scenario 'to find user' do
-        fill_in "search_query[query]", with: user.username
+        fill_in 'search_query[query]', with: user.username
         select('Users', from: 'search_query_index_type')
-        click_on "Find"
+        click_on 'Find'
         expect(page).to have_content 'username'
       end
 
       scenario 'to find nothing' do
-        fill_in "search_query[query]", with: 'WhereIsMySocks?'
-        click_on "Find"
+        fill_in 'search_query[query]', with: 'WhereIsMySocks?'
+        click_on 'Find'
         expect(page).to have_content 'Sorry, I found nothing. You may try again.'
       end
     end
