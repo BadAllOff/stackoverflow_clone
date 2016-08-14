@@ -1,0 +1,58 @@
+p
+  ' You were searching for:
+  strong
+    = @search_query
+  - if @index_type
+    '  in:
+    strong
+      = @index_type
+
+div
+  = render partial: 'searchs/form'
+hr
+
+- if @results.present?
+  h4.center Search results:
+  - @results.each do |result|
+    .card.center
+      - if result.is_a? User
+        h5.text-muted User found:
+        =< result.username
+        hr
+      - elsif result.is_a? Question
+        div
+          h5.text-muted Question:
+          div.col-xs-2
+            ul.list-group = render partial: 'votes/vote_buttons', locals: {votable: result}
+          div.col-xs-10
+            =< link_to "#{result.title}", result
+            br
+            | Content:
+            =< result.body
+        .clearfix
+        hr
+      - elsif result.is_a? Answer
+        div
+          h5.text-muted Answer:
+          div.col-xs-2
+            ul.list-group = render partial: 'votes/vote_buttons', locals: {votable: result}
+          div.col-xs-10
+            | Content:
+            =< result.body
+            br
+            =< link_to "Go to answer page", question_path(result.question)
+          .clearfix
+          hr
+      - elsif result.is_a? Comment
+        h5.text-muted Comment:
+        .col-xs-12
+          - if result.id
+            .media
+              .media-heading
+                p.text-muted = result.created_at
+              .media-body
+                p = result.content
+        =< link_to "Go to comment page", result.commentable
+        hr
+- else
+  h5.center Sorry, I found nothing. You may try again.

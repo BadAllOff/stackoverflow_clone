@@ -20,6 +20,9 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_attr (0.9.0)
+      activemodel (>= 3.0.2, < 5.1)
+      activesupport (>= 3.0.2, < 5.1)
     active_model_serializers (0.10.2)
       actionpack (>= 4.1, < 6)
       activemodel (>= 4.1, < 6)
@@ -425,6 +428,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr (~> 0.9.0)
   active_model_serializers (~> 0.10.0)
   activerecord-session_store (~> 1.0.0)
   annotate (~> 2.7.1)

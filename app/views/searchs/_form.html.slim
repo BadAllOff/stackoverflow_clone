@@ -1,0 +1,16 @@
+= form_for SearchQuery.new, url: searchs_results_path, html: { class: 'form-horizontal' } do |f|
+  fieldset
+    legend
+      | Find what you need
+  .form-group
+    = f.label :query, 'Search on StackClone', class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :query, class: 'form-control', placeholder: 'write your query'
+  .form-group
+    = f.label :query, 'Choose index', class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.select :index_type, options_for_select(SearchQuery::SEARCH_OPTIONS), {}, { class: 'form-control' }
+  .form-group
+    .col-sm-2
+    .col-sm-10
+      = f.submit 'Find', class: 'btn btn-primary'

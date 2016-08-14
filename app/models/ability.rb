@@ -47,6 +47,7 @@ class Ability
 
   def user_abilities
     guest_abilities
+    can :manage, SearchsController
     can :crud, [Question, Answer], user: user
     can :set_best, Answer, question: { user: user }
     can :vote, [Question, Answer]

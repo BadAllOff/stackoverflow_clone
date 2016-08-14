@@ -9,24 +9,10 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
       = link_to 'QnA', root_path, class: 'navbar-brand'
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
-        li.dropdown
-          a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
-            | Dropdown 
-            span.caret
-          ul.dropdown-menu
-            li
-              a[href="#"] test
-            li
-              a[href="#"] test  test
-            li
-              a[href="#"] test  test  test
-            li.divider[role="separator"]
-            li.dropdown-header test  test
-            li
-              a[href="#"] test  test
-            li
-              a[href="#"] One more separated test link
+        li
+          =link_to 'Search', search_path
       ul.nav.navbar-nav.navbar-right
+
         li.dropdown
           - if user_signed_in?
             a.dropdown-toggle[href="#" style="padding-top: 10px" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
