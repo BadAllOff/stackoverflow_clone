@@ -4,7 +4,7 @@ gem 'rails', '~> 4.2.7'
 gem 'sprockets', '3.6.3'
 gem 'pg', '~> 0.15'
 gem 'sass-rails', '~> 5.0.6'
-gem 'uglifier', '~> 1.3.0'
+gem 'uglifier', '~> 2.7.2'
 gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 4.1.1'
