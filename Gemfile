@@ -14,7 +14,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
-# gem 'capistrano-rails', group: :development
 
 gem 'slim-rails', '~> 3.0.1'
 gem 'html2slim', '~> 0.2.0'
@@ -48,6 +47,8 @@ gem 'thinking-sphinx'
 gem 'sidekiq', '~> 4.1.4'
 gem 'sinatra', '~> 1.4.7', require: false
 gem 'whenever', '~> 0.9.7'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
 
@@ -77,4 +78,8 @@ group :development do
   gem 'bullet', '~> 5.2.0'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'derailed', '~> 0.1.0'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
 end
