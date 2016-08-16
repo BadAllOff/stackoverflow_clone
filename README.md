@@ -82,8 +82,14 @@
 #### Module 18: Search with sphinx
 
 #### Module 19: Basic server configuration
+- Nginx
+- Unicorn
+- Phusion Passenger
+- Redis
+- Sphinx
+- MailServer
 
-Module 20: Deploy with Capistrano
+#### Module 20: Deploy with Capistrano
 
 Module 21: Advanced server configuration
 
