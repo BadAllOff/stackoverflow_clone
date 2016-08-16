@@ -49,6 +49,7 @@ gem 'sinatra', '~> 1.4.7', require: false
 gem 'whenever', '~> 0.9.7'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'therubyracer'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
 
