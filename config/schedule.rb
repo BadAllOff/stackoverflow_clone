@@ -18,7 +18,7 @@ every 1.day do
 end
 
 every 60.minutes do
-  rake "ts:index"
+  rake 'ts:index'
 end
 
 # Learn more: http://github.com/javan/whenever

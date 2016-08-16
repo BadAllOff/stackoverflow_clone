@@ -90,6 +90,7 @@
 - MailServer
 
 #### Module 20: Deploy with Capistrano
+- Capistrano
 
 Module 21: Advanced server configuration
 
