@@ -13,8 +13,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem 'bcrypt', '~> 3.1.7'
-# gem 'unicorn'
-
 gem 'slim-rails', '~> 3.0.1'
 gem 'html2slim', '~> 0.2.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -52,25 +50,7 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
-
-group :development, :test do
-  gem 'byebug', '~> 9.0.5'
-  gem 'rspec-rails', '~> 3.5.1'
-  gem 'factory_girl_rails', '~> 4.7.0'
-  gem 'rubocop', '~> 0.42.0'
-  gem 'mailcatcher', '~> 0.6.4'
-  gem "codeclimate-test-reporter", '~> 0.6.0', require: false
-end
-
-group :test do
-  gem 'database_cleaner', '~> 1.5.3'
-  gem 'capybara-webkit', '~> 1.11.1'
-  gem 'shoulda-matchers', '~> 3.1.1'
-  gem 'capybara', '~> 2.7.1'
-  gem 'launchy', '~> 2.4.3'
-  gem 'fuubar', '~> 2.1.1'
-  gem 'json_spec', '~> 1.1.4'
-end
+gem 'unicorn'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -85,4 +65,24 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.5.3'
+  gem 'capybara-webkit', '~> 1.11.1'
+  gem 'shoulda-matchers', '~> 3.1.1'
+  gem 'capybara', '~> 2.7.1'
+  gem 'launchy', '~> 2.4.3'
+  gem 'fuubar', '~> 2.1.1'
+  gem 'json_spec', '~> 1.1.4'
+end
+
+group :development, :test do
+  gem 'byebug', '~> 9.0.5'
+  gem 'rspec-rails', '~> 3.5.1'
+  gem 'factory_girl_rails', '~> 4.7.0'
+  gem 'rubocop', '~> 0.42.0'
+  gem 'mailcatcher', '~> 0.6.4'
+  gem "codeclimate-test-reporter", '~> 0.6.0', require: false
 end
