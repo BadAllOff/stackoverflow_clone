@@ -50,7 +50,7 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
-gem 'unicorn'
+# gem 'unicorn'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -65,7 +65,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
-  gem 'capistrano3-unicorn', require: false
+  # gem 'capistrano3-unicorn', require: false
 end
 
 group :test do
