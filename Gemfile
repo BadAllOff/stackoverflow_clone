@@ -79,6 +79,7 @@ group :development do
   gem 'bullet', '~> 5.2.0'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'derailed', '~> 0.1.0'
+  gem 'brakeman', '~> 3.3', require: false
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
