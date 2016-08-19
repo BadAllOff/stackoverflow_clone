@@ -97,7 +97,7 @@
 - Processes monitoring
 - Databse backup
 
-Module 22: Caching and optimization
+#### Module 22: Caching and optimization
 
 Module 23: High availability
 
