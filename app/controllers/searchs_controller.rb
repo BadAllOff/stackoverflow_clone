@@ -4,29 +4,24 @@ class SearchsController < ApplicationController
   # more info https://github.com/pat/thinking-sphinx/issues/813
   # to reindex use  rake ts:index
 
-  before_action :load_results, only: [:results]
-
   def index
   end
 
   def results
-    @search_query = params[:search_query][:query]
-    @index_type = index_type
+    @search_query = query
+    @condition = condition
+    @results = SearchQuery.sphinx_search(query, params[:search_query][:condition])
   end
 
   private
 
-  def load_results
-    @results = ThinkingSphinx.search query, classes: [index_type]
-  end
-
   def search_query_params
-    params.require(:search_query).permit(:query, :index_type)
+    params.require(:search_query).permit(:query, :condition)
   end
 
-  def index_type
-    index_type = params[:search_query][:index_type]
-    index_type == 'nil' ? nil : index_type.singularize.constantize
+  def condition
+    condition = params[:search_query][:condition]
+    condition == 'nil' ? nil : condition.to_s.singularize
   end
 
   def query

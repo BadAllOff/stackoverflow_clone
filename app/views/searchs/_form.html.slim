@@ -9,7 +9,7 @@
   .form-group
     = f.label :query, 'Choose index', class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.select :index_type, options_for_select(SearchQuery::SEARCH_OPTIONS), {}, { class: 'form-control' }
+      = f.select :condition, options_for_select(SearchQuery::SEARCH_CONDITIONS), {}, { class: 'form-control' }
   .form-group
     .col-sm-2
     .col-sm-10

@@ -2,10 +2,10 @@ p
   ' You were searching for:
   strong
     = @search_query
-  - if @index_type
+  - if @condition
     '  in:
     strong
-      = @index_type
+      = @condition
 
 div
   = render partial: 'searchs/form'
