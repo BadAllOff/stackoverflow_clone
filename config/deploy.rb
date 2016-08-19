@@ -57,7 +57,53 @@ namespace :private_pub do
     on roles(:app) do
       within current_path do
         with rails_env: fetch(:rails_env) do
-          execute :bundle, 'exec thin -C config/private_pub_thin.yml restart'
+            execute :bundle, 'exec thin -C config/private_pub_thin.yml restart'
+        end
+      end
+    end
+  end
+end
+
+namespace :sphinx do
+  desc 'Reindex sphinx'
+  task :reindex do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:index'
+        end
+      end
+    end
+  end
+
+  desc 'Stop sphinx'
+  task :stop do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:stop'
+        end
+      end
+    end
+  end
+
+  desc 'Start sphinx'
+  task :start do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:start'
+        end
+      end
+    end
+  end
+
+  desc 'Rebuild sphinx'
+  task :rebuild do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:rebuild'
         end
       end
     end
