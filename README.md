@@ -92,7 +92,10 @@
 #### Module 20: Deploy with Capistrano
 - Capistrano
 
-Module 21: Advanced server configuration
+#### Module 21: Advanced server configuration
+- Unicorn
+- Processes monitoring
+- Databse backup
 
 Module 22: Caching and optimization
 
@@ -105,6 +108,7 @@ Module 23: High availability
 
 -------------------------------------------
 * Ruby version
+- 2.3.1
 
 * System dependencies
 
