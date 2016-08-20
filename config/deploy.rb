@@ -110,5 +110,40 @@ namespace :sphinx do
   end
 end
 
+namespace :sphinx do
+  desc 'Reindex sphinx'
+  task :reindex do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:index'
+        end
+      end
+    end
+  end
+
+  desc 'Stop sphinx'
+  task :stop do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:stop'
+        end
+      end
+    end
+  end
+
+  desc 'Start sphinx'
+  task :start do
+    on roles(:app) do
+      within release_path do
+        with rails_env: :production do
+          execute :rake, 'ts:start'
+        end
+      end
+    end
+  end
+end
+
 after 'deploy:restart', 'private_pub:restart'
 after 'deploy:restart', 'sphinx:reindex'
