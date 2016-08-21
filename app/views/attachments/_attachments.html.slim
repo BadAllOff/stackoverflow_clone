@@ -3,8 +3,9 @@ p.text-info
   ul.list-group
     - attachable.attachments.each do |a|
       li.list-group-item id="attachment-#{a.id}"
-        = link_to a.file.filename, a.file.url
-        '
+        - cache a do
+          = link_to a.file.filename, a.file.url
+          '
         - if can? :destroy, a.attachable
           = link_to 'Remove attachment', attachment_path(a),
                     method: :delete,

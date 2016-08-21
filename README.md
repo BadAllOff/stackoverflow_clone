@@ -97,7 +97,9 @@
 - Processes monitoring
 - Databse backup
 
-Module 22: Caching and optimization
+#### Module 22: Caching and optimization
+- Russian Doll caching
+- Redis cache store
 
 Module 23: High availability
 

@@ -6,8 +6,9 @@
           = render partial: 'votes/vote_buttons', locals: {votable: answer}
           = render partial: 'answers/best_answer', locals: {answer: answer}
       .col-xs-8.col-md-9
-        div = render partial: 'answers/meta', locals: { answer: answer }
-        p.answer-body = answer.body
+        - cache answer do
+          div = render partial: 'answers/meta', locals: { answer: answer }
+          p.answer-body = answer.body
         - if answer.attachments.any?
           .answer_attachments = render 'attachments/attachments', attachable: answer
         - if can? :crud, answer

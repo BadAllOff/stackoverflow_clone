@@ -2,10 +2,11 @@
   - commentable.comments.each do |comment|
     - if comment.id
       .media id="#{commentable.class.name.downcase}_comment_#{comment.id}"
-        .media-heading
-          p.text-muted = comment.created_at
-        .media-body
-          p = comment.content
+        - cache comment do
+          .media-heading
+            p.text-muted = comment.created_at
+          .media-body
+            p = comment.content
         - if can? :destroy, comment
           .media-footer
             .btn-group.btn-group-xs

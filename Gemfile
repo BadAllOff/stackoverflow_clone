@@ -51,6 +51,7 @@ gem 'therubyracer'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
 gem 'unicorn'
+gem 'redis-rails', '~> 5.0.1'
 
 group :development do
   gem 'web-console', '~> 2.0'
