@@ -6,6 +6,6 @@ test:
   secret_token: "secret"
 production:
   # TODO enviroment variable
-  server: "http://example.com/faye"
+  server: "https://secure-sierra-31235.herokuapp.com:9292/faye"
   secret_token: "62ed491fee91416745be55f5034c94435c6ed9a0e323c26faa28740275d5baa6"
   signature_expiration: 3600 # one hour
