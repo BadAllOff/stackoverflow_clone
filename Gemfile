@@ -52,6 +52,7 @@ gem 'therubyracer'
 # gem 'delayed_job_active_record'
 gem 'unicorn'
 gem 'redis-rails', '~> 5.0.1'
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'web-console', '~> 2.0'
