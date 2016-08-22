@@ -27,7 +27,6 @@ gem 'skim', '~> 0.10.0'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'private_pub', '~> 1.0.3'
 gem 'thin', '~> 1.5.1'
-gem 'rack-mini-profiler', '~> 0.10.1', require: false
 gem 'omniauth', '~> 1.3.1'
 gem 'omniauth-facebook', '~> 4.0.0'
 gem 'omniauth-twitter', '~> 1.2.1'
@@ -45,15 +44,16 @@ gem 'thinking-sphinx'
 gem 'sidekiq', '~> 4.1.4'
 gem 'sinatra', '~> 1.4.7', require: false
 gem 'whenever', '~> 0.9.7'
-gem 'dotenv'
+gem 'dotenv', '~> 1.0.2'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
-gem 'therubyracer'
+gem 'therubyracer', '~> 0.12'
 # gem 'sidetiq'
 # gem 'delayed_job_active_record'
 gem 'unicorn'
 gem 'redis-rails', '~> 5.0.1'
 gem 'rails_12factor', group: :production
 gem 'newrelic_rpm'
+gem 'rack-mini-profiler', '~> 0.10.1', require: false
 
 group :development do
   gem 'web-console', '~> 2.0'

@@ -106,11 +106,11 @@
 #### Module 23: High availability and scalability
 - NewRelic
 - Load balancer
+    - Failover IP
+    - Heartbeat
 - App servers
 - DB servers
-- Failover IP
-- Heartbeat
-- pgPool
+    - pgPool
 
 
 -------------------------------------------

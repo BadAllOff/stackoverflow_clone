@@ -9,46 +9,34 @@ class AnswersController < ApplicationController
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
 
-    respond_to do |format|
       if @answer.save
         current_user.subscribe_to(@question)
-        format.json do
-          flash[:success] = 'Answer successfully created'
-          PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
-        end
+        flash_success('created')
+        PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
       else
-        format.json do
-          flash[:error] = 'Answer not created. Please correct your input'
-          render 'errors.json.jbuilder', status: 400
-        end
+        flash[:error] = 'Answer not created. Please correct your input'
+        render 'errors.json.jbuilder', status: 400
       end
-    end
   end
 
   def update
-    respond_to do |format|
       if @answer.update(answer_params)
-        format.json do
-          flash[:success] = 'Answer successfully updated'
-          PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
-        end
+        flash_success('updated')
+        PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
       else
-        format.json do
-          flash[:error] = 'Answer not updated'
-          render 'errors.json.jbuilder', status: 400
-        end
+        flash[:error] = 'Answer not updated'
+        render 'errors.json.jbuilder', status: 400
       end
-    end
   end
 
   def destroy
     @answer.destroy
-    flash[:success] = 'Answer successfully deleted'
+    flash_success('destroyed')
   end
 
   def set_best
     @answer.set_best
-    flash[:success] = 'Success'
+    flash_success('set as best')
   end
 
   private
@@ -64,6 +52,10 @@ class AnswersController < ApplicationController
   def load_answer
     @answer = Answer.includes(:attachments, :votes, :comments, :user).find(params[:id])
     @question = @answer.question
+  end
+
+  def flash_success(action_performed)
+    flash[:success] = "Answer successfully #{action_performed}"
   end
 
 end

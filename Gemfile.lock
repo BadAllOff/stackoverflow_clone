@@ -517,7 +517,7 @@ DEPENDENCIES
   derailed (~> 0.1.0)
   devise (~> 3.5.5)
   doorkeeper (~> 4.2)
-  dotenv
+  dotenv (~> 1.0.2)
   dotenv-deployment
   factory_girl_rails (~> 4.7.0)
   font-awesome-sass (~> 4.5.0)
@@ -559,7 +559,7 @@ DEPENDENCIES
   slim-rails (~> 3.0.1)
   spring (~> 1.7.2)
   sprockets (= 3.6.3)
-  therubyracer
+  therubyracer (~> 0.12)
   thin (~> 1.5.1)
   thinking-sphinx
   turbolinks (~> 2.5.3)

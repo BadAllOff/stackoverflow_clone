@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
     if @question.save
       current_user.subscribe_to(@question)
       PrivatePub.publish_to '/questions', question: @question.to_json
-      flash[:success] = 'Question successfully created'
+      flash_success('created')
       redirect_to @question
     else
       flash[:error] = 'Question is not created'
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      flash[:success] = 'Question successfully updated'
+      flash_success('updated')
     else
       flash[:error] = 'Question is not updated'
       render :edit
@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    flash[:success] = 'Your question successfully deleted.'
+    flash_success('deleted')
     redirect_to questions_path
   end
 
@@ -65,8 +65,10 @@ class QuestionsController < ApplicationController
     else
       @question = Question.includes(:comments, attachments: [:attachable], answers: [:attachments, :user, :comments]).find(params[:id])
     end
-
   end
 
+  def flash_success(action_performed)
+    flash[:success] = "Question successfully #{action_performed}"
+  end
 
 end

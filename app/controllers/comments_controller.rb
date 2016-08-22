@@ -9,30 +9,19 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
 
-    respond_to do |format|
       if @comment.save
-        format.json do
-          flash[:success] = 'Comment successfully created'
-          PrivatePub.publish_to set_chanel(@comment, 'create'), comment: render {template 'create.json.jbuilder'}
-        end
+        flash[:success] = 'Comment successfully created'
+        PrivatePub.publish_to set_chanel(@comment, 'create'), comment: render {template 'create.json.jbuilder'}
       else
-        format.json do
-          flash['error'] = 'Please, check your input and try again'
-          render 'errors.json.jbuilder', status: 400
-        end
+        flash['error'] = 'Please, check your input and try again'
+        render 'errors.json.jbuilder', status: 400
       end
-    end
   end
 
   def destroy
-    respond_to do |format|
-      @comment.destroy
-        format.json do
-          flash['success'] = 'Comment deleted'
-          PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}
-        end
-    end
-
+    @comment.destroy
+    flash['success'] = 'Comment deleted'
+    PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}
   end
 
   private

@@ -25,7 +25,7 @@ feature 'Delete Answer', '
       scenario '- can delete answer', js: true do
         within('.answer_control_btns') { click_on 'Delete answer' }
 
-        expect(page).to have_content 'Answer successfully deleted'
+        expect(page).to have_content 'Answer successfully destroyed'
         expect(page).to_not have_content answer.body
       end
     end
