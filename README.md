@@ -1,7 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
 [![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
 
-https://stack-over-pillow.herokuapp.com/
+[Link to working project on Heroku (needs some awesome styling :D)](https://stack-over-pillow.herokuapp.com/)
 
 ## README
 
@@ -103,28 +103,30 @@ https://stack-over-pillow.herokuapp.com/
 - Russian Doll caching
 - Redis cache store
 
-#### Module 23: High availability
-- 
-
-
-
-
+#### Module 23: High availability and scalability
+- NewRelic
+- Load balancer
+- App servers
+- DB servers
+- Failover IP
+- Heartbeat
+- pgPool
 
 
 -------------------------------------------
-* Ruby version
-- 2.3.1
+<!--* Ruby version-->
+<!--- 2.3.1-->
 
-* System dependencies
+<!--* System dependencies-->
 
-* Configuration
+<!--* Configuration-->
 
-* Database creation
+<!--* Database creation-->
 
-* Database initialization
+<!--* Database initialization-->
 
-* How to run the test suite
+<!--* How to run the test suite-->
 
-* Services (job queues, cache servers, search engines, etc.)
+<!--* Services (job queues, cache servers, search engines, etc.)-->
 
-* Deployment instructions
+<!--* Deployment instructions-->

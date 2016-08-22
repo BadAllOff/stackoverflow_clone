@@ -6,5 +6,5 @@ test:
   secret_token: "secret"
 production:
   server: "https://priv-pub-heroku.herokuapp.com/faye"
-  secret_token: <%= ENV["SECRET_KEY_FOR_PRIV_PUB"] %>
+  secret_token: <%= Rails.application.secrets.secret_key_for_priv_pub %>
   signature_expiration: 3600 # one hour

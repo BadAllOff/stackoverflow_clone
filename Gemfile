@@ -53,6 +53,7 @@ gem 'therubyracer'
 gem 'unicorn'
 gem 'redis-rails', '~> 5.0.1'
 gem 'rails_12factor', group: :production
+gem 'newrelic_rpm'
 
 group :development do
   gem 'web-console', '~> 2.0'
