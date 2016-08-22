@@ -1,6 +1,8 @@
 [![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
 [![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
 
+https://stack-over-pillow.herokuapp.com/
+
 ## README
 
 ### Professional Ruby on Rails Development.
@@ -101,7 +103,8 @@
 - Russian Doll caching
 - Redis cache store
 
-Module 23: High availability
+#### Module 23: High availability
+- 
 
 
 
