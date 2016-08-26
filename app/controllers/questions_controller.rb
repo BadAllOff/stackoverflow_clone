@@ -1,56 +1,43 @@
 class QuestionsController < ApplicationController
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :build_answer, only: :show
+  after_action :publish_question, only: :create
+  after_action :subscribe_author, only: [:create, :update]
+
   include Voted
   include Subscribed
+
+  respond_to :js, :json
+
   authorize_resource
 
   def index
-    return @questions = Question.includes(:user).all if user_signed_in?
-    @questions = Question.all
+    respond_with (@questions = Question.includes(:user).all)
   end
 
   def show
-    @answer = @question.answers.build
-    @answer.attachments.build
+    respond_with @question
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
+    respond_with(@question = Question.new)
   end
 
   def edit
   end
 
   def create
-    @question = current_user.questions.new(question_params)
-
-    if @question.save
-      current_user.subscribe_to(@question)
-      PrivatePub.publish_to '/questions', question: @question.to_json
-      flash_success('created')
-      redirect_to @question
-    else
-      flash[:error] = 'Question is not created'
-      render :new
-    end
+    respond_with(@question = current_user.questions.create(question_params))
   end
 
   def update
-    if @question.update(question_params)
-      flash_success('updated')
-    else
-      flash[:error] = 'Question is not updated'
-      render :edit
-    end
+    @question.update(question_params)
+    respond_with @question
   end
 
   def destroy
-    @question.destroy
-    flash_success('deleted')
-    redirect_to questions_path
+    respond_with(@question.destroy)
   end
 
   private
@@ -60,15 +47,19 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    if user_signed_in?
-      @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
-    else
-      @question = Question.includes(:comments, attachments: [:attachable], answers: [:attachments, :user, :comments]).find(params[:id])
-    end
+    @question = Question.includes(comments: [:user], attachments: [:attachable], answers: [:attachments, :user, comments: [:user]]).find(params[:id])
   end
 
-  def flash_success(action_performed)
-    flash[:success] = "Question successfully #{action_performed}"
+  def publish_question
+    PrivatePub.publish_to '/questions', question: @question.to_json
+  end
+
+  def subscribe_author
+    current_user.subscribe_to(@question)
+  end
+
+  def build_answer
+    @answer = @question.answers.build
   end
 
 end

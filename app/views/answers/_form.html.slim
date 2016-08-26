@@ -11,6 +11,6 @@
     .form-group
       = f.label :body, 'Answer body'
       = f.text_area :body, id: 'answer_body', class: 'form-control'
-    = render 'attachments/add_attachment', f: f
+    = render partial: 'attachments/add_attachment', locals: { f: f, object: answer }
     =f.submit class: 'btn btn-info', data: {answer_id: answer.id}
     =f.submit class: 'btn btn-default cancel_update', value: 'Cancel update', data: {answer_id: answer.id} if answer.persisted?

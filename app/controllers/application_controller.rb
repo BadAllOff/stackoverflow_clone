@@ -1,4 +1,9 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception unless Rails.env.test?
@@ -8,6 +13,8 @@ class ApplicationController < ActionController::Base
 
   # gives ability to use flash helper methods
   add_flash_types :success, :error
+  # TODO delete success and error later
+   Responders::FlashResponder.flash_keys = [ :success, :error ]
 
   protected
 
