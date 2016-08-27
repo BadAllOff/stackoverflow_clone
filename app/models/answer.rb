@@ -2,14 +2,13 @@
 #
 # Table name: answers
 #
-#  id           :integer          not null, primary key
-#  body         :text
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  question_id  :integer
-#  user_id      :integer
-#  best_answer  :boolean          default(FALSE)
-#  rating_index :integer          default(0)
+#  id          :integer          not null, primary key
+#  body        :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  question_id :integer
+#  user_id     :integer
+#  best_answer :boolean          default(FALSE)
 #
 
 class Answer < ActiveRecord::Base
@@ -31,6 +30,10 @@ class Answer < ActiveRecord::Base
       question.answers.update_all(best_answer: false)
       best_answer ? update!(best_answer: false) : update!(best_answer: true)
     end
+  end
+
+  def best?
+    best_answer
   end
 
   def notify_subscribers

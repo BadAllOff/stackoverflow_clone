@@ -1,4 +1,4 @@
-require "application_responder"
+require 'application_responder'
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
 
   # gives ability to use flash helper methods
   add_flash_types :success, :error
-  # TODO delete success and error later
-   Responders::FlashResponder.flash_keys = [ :success, :error ]
+  # TODO: delete success and error later
+   Responders::FlashResponder.flash_keys = [:success, :error]
 
   protected
 

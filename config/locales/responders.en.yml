@@ -12,5 +12,9 @@ en:
         error: '%{resource_name} could not be destroyed.'
     questions:
       create:
-        success: 'Question successfully created'
-        error: 'Question successfully created'
+        success: 'Question successfully created.'
+        error: 'Question could not be created.'
+    answers:
+      set_best:
+        success: 'Answer successfully set as best.'
+        error: 'Answer could not be set as best.'

@@ -22,7 +22,7 @@ feature 'Best Answer', '
       scenario '- can select "Best answer" to his question', js: true do
         first('div.vote').click_link('Accept answer')
         within(first('div.vote')) { expect(page).to have_selector(:link_or_button, 'Best answer') }
-        expect(page).to have_content 'Answer successfully set as best'
+        expect(page).to have_content 'Answer successfully set as best.'
       end
 
       scenario '- "Best answer" can be only one, and it appears first in the list of answers after reload', js: true do

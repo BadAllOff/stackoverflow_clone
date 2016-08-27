@@ -1,45 +1,47 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create, :set_best]
+  before_action :build_answer, only: [:create]
   before_action :load_answer, except: [:create]
+  after_action  :subscribe_author, only: [:create, :update]
+
   include Voted
+
+  respond_to :js, :json
+
   authorize_resource
 
   def create
-    @answer = @question.answers.build(answer_params)
-    @answer.user = current_user
-
-      if @answer.save
-        current_user.subscribe_to(@question)
-        flash_success('created')
-        PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'create.json.jbuilder'}
-      else
-        flash[:error] = 'Answer not created. Please correct your input'
-        render 'errors.json.jbuilder', status: 400
-      end
+    @answer.save ? publish_answer : render_errors
   end
 
   def update
-      if @answer.update(answer_params)
-        flash_success('updated')
-        PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template 'update.json.jbuilder'}
-      else
-        flash[:error] = 'Answer not updated'
-        render 'errors.json.jbuilder', status: 400
-      end
+    @answer.update(answer_params) ? publish_answer : render_errors
   end
 
   def destroy
-    @answer.destroy
-    flash_success('destroyed')
+    respond_with(@answer.destroy)
   end
 
   def set_best
     @answer.set_best
-    flash_success('set as best')
+    flash[:success] = 'Answer successfully set as best.'
   end
 
   private
+
+  def build_answer
+    @answer = @question.answers.build(answer_params)
+    @answer.user = current_user
+  end
+
+  def publish_answer
+    PrivatePub.publish_to "/questions/#{@question.id}/answers", answer: render {template "#{action_name}.json.jbuilder"}
+  end
+
+  def render_errors
+    render 'errors.json.jbuilder', status: 400
+  end
 
   def answer_params
     params.require(:answer).permit(:body, attachments_attributes: [:file])
@@ -54,8 +56,7 @@ class AnswersController < ApplicationController
     @question = @answer.question
   end
 
-  def flash_success(action_performed)
-    flash[:success] = "Answer successfully #{action_performed}"
+  def subscribe_author
+    current_user.subscribe_to(@question)
   end
-
 end

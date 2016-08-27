@@ -2,8 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
   before_action :build_answer, only: :show
-  after_action :publish_question, only: :create
-  after_action :subscribe_author, only: [:create, :update]
+  after_action  :publish_question, only: :create
+  after_action  :subscribe_author, only: [:create, :update]
 
   include Voted
   include Subscribed
@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   def index
-    respond_with (@questions = Question.includes(:user).all)
+    respond_with(@questions = Question.includes(:user).all)
   end
 
   def show

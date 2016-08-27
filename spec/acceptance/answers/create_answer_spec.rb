@@ -22,7 +22,6 @@ feature 'Create Answer', '
 
       sleep 1
       expect(current_path).to eq question_path(question)
-      expect(page).to have_content 'Answer successfully created'
       expect(page).to have_content 'My answer to question'
     end
   end

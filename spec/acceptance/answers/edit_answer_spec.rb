@@ -17,13 +17,12 @@ feature 'Edit Answer', '
         sign_in user
         visit question_path(question)
       end
-
-      scenario '- can see "Edit answer" button' do
-        expect(page).to have_css('.answer_control_btns')
-        within('.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
-      end
-
       context 'can edit answer' do
+        scenario '- can see "Edit answer" button' do
+          expect(page).to have_css('.answer_control_btns')
+          within('.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
+        end
+
         scenario '- with valid attributes', js: true do
           click_on 'Edit answer'
           within(".form_for_answer-#{answer.id}") do
@@ -33,18 +32,17 @@ feature 'Edit Answer', '
 
           expect(current_path).to eq question_path(question)
           expect(page).to have_content('Edited answer body')
-          expect(page).to have_content('Answer successfully updated')
         end
 
         scenario '- with invalid attributes', js: true do
           click_on 'Edit answer'
+
           within(".form_for_answer-#{answer.id}") do
             fill_in 'Answer body', with: nil
             click_on 'Update Answer'
           end
 
           expect(current_path).to eq question_path(question)
-          expect(page).to have_content('Answer not updated')
           expect(answer.body).to eq answer.body
         end
       end

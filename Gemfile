@@ -22,7 +22,6 @@ gem 'activerecord-session_store', '~> 1.0.0'
 gem 'carrierwave', '~> 0.11.2'
 gem 'remotipart', '~> 1.2'
 gem 'cocoon', '~> 1.2.9'
-gem 'annotate', '~> 2.7.1'
 gem 'skim', '~> 0.10.0'
 gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'private_pub', '~> 1.0.3'
@@ -56,6 +55,7 @@ gem 'newrelic_rpm'
 gem 'rack-mini-profiler', '~> 0.10.1', require: false
 
 group :development do
+  gem 'annotate', '~> 2.7.1'
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.7.2'
   gem 'pry-rails', '~> 0.3.4'
