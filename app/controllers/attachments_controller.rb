@@ -3,9 +3,10 @@ class AttachmentsController < ApplicationController
   before_action :load_attachment, only: [:destroy]
   authorize_resource
 
+  respond_to :js
+
   def destroy
-    @attachment.destroy
-    flash[:success] = 'Attachment successfully removed'
+    respond_with(@attachment.destroy)
   end
 
   private

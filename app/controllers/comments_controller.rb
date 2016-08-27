@@ -1,30 +1,36 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable, only: :create
+  before_action :build_comment, only: :create
   before_action :load_comment, only: :destroy
   after_action  :discard_flash
+
+  respond_to :json
+
   authorize_resource
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
-
-      if @comment.save
-        flash[:success] = 'Comment successfully created'
-        PrivatePub.publish_to set_chanel(@comment, 'create'), comment: render {template 'create.json.jbuilder'}
-      else
-        flash['error'] = 'Please, check your input and try again'
-        render 'errors.json.jbuilder', status: 400
-      end
+    @comment.save ? publish_comment : render_errors
   end
 
   def destroy
-    @comment.destroy
-    flash['success'] = 'Comment deleted'
-    PrivatePub.publish_to set_chanel(@comment, 'destroy'), comment: render {template 'destroy.json.jbuilder'}
+    @comment.destroy ? publish_comment : render_errors
   end
 
   private
+
+  def build_comment
+    @comment = @commentable.comments.build(comment_params)
+    @comment.user = current_user
+  end
+
+  def publish_comment
+    PrivatePub.publish_to set_chanel(@comment, "#{action_name}"), comment: render {template "#{action_name}.json.jbuilder"}
+  end
+
+  def render_errors
+    render 'errors.json.jbuilder', status: 400
+  end
 
   def set_chanel(comment, method)
     if comment.commentable_type == 'Question'

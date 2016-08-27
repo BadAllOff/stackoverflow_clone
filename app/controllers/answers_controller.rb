@@ -7,7 +7,8 @@ class AnswersController < ApplicationController
 
   include Voted
 
-  respond_to :js, :json
+  respond_to :js, only: [:destroy, :set_best]
+  respond_to :json, only: [:create, :update]
 
   authorize_resource
 

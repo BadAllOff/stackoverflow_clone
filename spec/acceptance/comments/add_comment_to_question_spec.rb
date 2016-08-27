@@ -33,8 +33,6 @@ feature 'Add comment question' do
         within '.question_comments' do
           expect(page).to have_content 'Test question comments'
         end
-
-        expect(page).to have_content 'Comment successfully created'
       end
 
       scenario '- with no content', js: true do
@@ -45,7 +43,6 @@ feature 'Add comment question' do
           end
           expect(page).to have_content "Content can't be blank"
         end
-        expect(page).to have_content 'Please, check your input and try again'
       end
     end
   end
