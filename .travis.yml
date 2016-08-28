@@ -10,17 +10,14 @@ notifications:
 addons:
   postgresql: "9.3"
   apt:
-      sources:
-        - ubuntu-sdk-team
-      packages:
-        - libqt5webkit5-dev
-        - qtdeclarative5-dev
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt4-dev
+      - libqtwebkit-dev
+      - xvfb
 
-env:
-  global:
-    - BUNDLE_JOBS=4
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-    - QMAKE=/usr/lib/x86_64-linux-gnu/qt4/bin/qmake
+
 
 services:
   - redis-server
@@ -47,7 +44,7 @@ before_script:
   - sleep 3
 
 script:
-  - bundle exec rspec --tag ~feature
+  - DISPLAY=localhost:1.0 xvfb-run bundle exec rspec --tag
 
 gemfile:
   - Gemfile
