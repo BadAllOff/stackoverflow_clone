@@ -17,7 +17,9 @@ addons:
       - libqtwebkit-dev
       - xvfb
 
-
+branches:
+  only:
+    - master
 
 services:
   - redis-server
