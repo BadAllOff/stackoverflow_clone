@@ -44,7 +44,7 @@ before_script:
   - sleep 3
 
 script:
-  - DISPLAY=localhost:1.0 xvfb-run bundle exec rspec --tag
+  - DISPLAY=localhost:1.0 xvfb-run bundle exec rspec
 
 gemfile:
   - Gemfile
