@@ -1,6 +1,6 @@
 require_relative '../../acceptance/acceptance_helper'
 
-feature 'OAuth' do
+feature 'OAuth', tag: 'oauth' do
   before { OmniAuth.config.test_mode = true }
   before { visit new_user_session_path }
 

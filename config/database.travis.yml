@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: qna_thinknetica_test
+  username: postgres

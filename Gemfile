@@ -59,7 +59,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.7.2'
   gem 'pry-rails', '~> 0.3.4'
-  gem 'bullet', '~> 5.2.0'
+  gem 'bullet', '~> 5.2'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'derailed', '~> 0.1.0'
   gem 'brakeman', '~> 3.3', require: false
@@ -87,7 +87,7 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 9.0.5'
-  gem 'rspec-rails', '~> 3.5.1'
+  gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'rubocop', '~> 0.42.0'
   gem 'mailcatcher', '~> 0.6.4'

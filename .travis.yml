@@ -1,0 +1,41 @@
+language: ruby
+rvm:
+  - 2.3.1
+
+# Если Travis пишет вам слишком часто, то отключаем email уведомления
+notifications:
+  email: false
+
+# Указываем базу данных
+addons:
+  postgresql: "9.3"
+
+services:
+  - redis-server
+
+# Аргументы для bundler
+bundler_args: --without development --deployment --jobs=3 --retry=3
+
+# Кэшируем гемы, чтобы не устанавливать каждый раз все заново
+cache: bundler
+
+before_script:
+  - sudo service postgresql stop
+  - sudo service postgresql start
+  # Создаем базу
+  - psql -c 'create database qna_thinknetica_test;' -U postgres
+  # Копируем конфиги
+  - cp config/database.travis.yml config/database.yml
+  - cp config/secrets.travis.yml config/secrets.yml
+  # Формируем структуру базы
+  - bundle exec rake db:setup
+  # Запускаем PrivatePub
+  - 'bundle exec rackup private_pub.ru -s thin -E production &'
+  # Ждем, пока PrivatePub проинициализируется
+  - sleep 3
+
+script:
+  - bundle exec rspec --tag ~oauth
+
+gemfile:
+  - Gemfile
