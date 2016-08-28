@@ -9,6 +9,18 @@ notifications:
 # Указываем базу данных
 addons:
   postgresql: "9.3"
+  apt:
+      sources:
+        - ubuntu-sdk-team
+      packages:
+        - libqt5webkit5-dev
+        - qtdeclarative5-dev
+
+env:
+  global:
+    - BUNDLE_JOBS=4
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - QMAKE=/usr/lib/x86_64-linux-gnu/qt4/bin/qmake
 
 services:
   - redis-server
