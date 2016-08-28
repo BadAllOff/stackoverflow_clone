@@ -69,6 +69,11 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'capistrano3-unicorn', require: false
+  gem 'guard-rspec', '~> 4.7.3', require: false
+  gem 'guard-bundler', '~> 2.1.0', require: false
+  gem 'guard-rails', '~> 0.8.0', require: false
+  gem 'guard-spring', '~> 1.1.1', require: false
+  gem 'terminal-notifier-guard', require: false
 end
 
 group :test do

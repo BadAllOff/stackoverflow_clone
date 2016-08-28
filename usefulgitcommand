@@ -11,4 +11,5 @@
 rspec -e 'invalid' -f d --dry-run
 rspec --fail-fast
 rspec --tag-focus (fdescribe, fcontext, fit, :focus)
-rspec --only-failures / --next-failure
+rspec --only-failures
+rspec --next-failure

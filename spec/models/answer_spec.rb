@@ -46,4 +46,20 @@ RSpec.describe Answer, type: :model do
       end
     end
   end
+
+  describe '#best?' do
+    it 'if answer is not best' do
+      expect(answer.best?).to be_falsey
+    end
+
+    it 'if answer set to best' do
+      answer.set_best
+      answer.reload
+      expect(answer.best?).to be_truthy
+    end
+  end
 end
+
+
+
+
