@@ -1,5 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/gpa.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone)
 [![Test Coverage](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/badges/coverage.svg)](https://codeclimate.com/github/BadAllOff/stackoverflow_clone/coverage)
+[![Build Status](https://travis-ci.org/BadAllOff/stackoverflow_clone.svg?branch=master)](https://travis-ci.org/BadAllOff/stackoverflow_clone)
 
 [Link to working project on Heroku (needs some awesome styling :D)](https://stack-over-pillow.herokuapp.com/)
 
