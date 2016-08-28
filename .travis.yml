@@ -35,7 +35,7 @@ before_script:
   - sleep 3
 
 script:
-  - bundle exec rspec --tag ~oauth
+  - xvfb-ru bundle exec rspec
 
 gemfile:
   - Gemfile
