@@ -6,3 +6,9 @@
   hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   type = cat-file -t
   dump = cat-file -p
+
+[rspec]
+rspec -e 'invalid' -f d --dry-run
+rspec --fail-fast
+rspec --tag-focus (fdescribe, fcontext, fit, :focus)
+rspec --only-failures / --next-failure

@@ -61,7 +61,7 @@ feature 'Votes for answer', "
           expect(page).to have_content(-1)
         end
 
-        scenario "- user can't vote twice positively for one answer", js: true do
+        scenario "- can't vote twice positively for one answer", js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_up').click
 
@@ -71,7 +71,7 @@ feature 'Votes for answer', "
           end
         end
 
-        scenario "- user can't vote twice negatively for one answer", js: true do
+        scenario "- can't vote twice negatively for one answer", js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_down').click
 
@@ -81,7 +81,7 @@ feature 'Votes for answer', "
           end
         end
 
-        scenario '- user can cancel his vote and re-vote', js: true do
+        scenario '- can cancel his vote and re-vote', js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_down').click
             sleep 1
@@ -96,7 +96,7 @@ feature 'Votes for answer', "
           end
         end
 
-        scenario '- the user sees the result of their vote in the form of answers ranking', js: true do
+        scenario '- sees the result of their vote in the form of answers ranking', js: true do
           within("#answer-#{answer.id}") do
             find('a.vote_down').click
 
