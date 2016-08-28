@@ -213,10 +213,6 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    guard-spring (1.1.1)
-      guard (~> 2.0)
-      guard-compat (~> 1.1)
-      spring
     hashie (3.4.4)
     heapy (0.1.2)
     hpricot (0.8.6)
@@ -485,7 +481,6 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.7.7)
-    terminal-notifier-guard (1.7.0)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -567,7 +562,6 @@ DEPENDENCIES
   guard-bundler (~> 2.1.0)
   guard-rails (~> 0.8.0)
   guard-rspec (~> 4.7.3)
-  guard-spring (~> 1.1.1)
   html2slim (~> 0.2.0)
   jbuilder (~> 2.0)
   jquery-rails (~> 4.1.1)
@@ -605,7 +599,6 @@ DEPENDENCIES
   slim-rails (~> 3.0.1)
   spring (~> 1.7.2)
   sprockets (= 3.6.3)
-  terminal-notifier-guard
   therubyracer (~> 0.12)
   thin (~> 1.5.1)
   thinking-sphinx

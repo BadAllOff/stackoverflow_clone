@@ -13,3 +13,5 @@ rspec --fail-fast
 rspec --tag-focus (fdescribe, fcontext, fit, :focus)
 rspec --only-failures
 rspec --next-failure
+
+bundle exec guard -g specs
