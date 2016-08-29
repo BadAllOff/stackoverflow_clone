@@ -53,6 +53,7 @@ gem 'redis-rails', '~> 5.0.1'
 gem 'rails_12factor', group: :production
 gem 'newrelic_rpm'
 gem 'rack-mini-profiler', '~> 0.10.1', require: false
+gem 'high_voltage', '~> 3.0.0'
 
 group :development do
   gem 'annotate', '~> 2.7.1'
@@ -72,7 +73,7 @@ group :development do
   gem 'guard-rspec', '~> 4.7.3', require: false
   gem 'guard-bundler', '~> 2.1.0', require: false
   gem 'guard-rails', '~> 0.8.0', require: false
-
+  gem 'better_errors', '~> 2.1.1'
 end
 
 group :test do
@@ -83,13 +84,18 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'fuubar', '~> 2.1.1'
   gem 'json_spec', '~> 1.1.4'
+  gem 'nyan-cat-formatter'
+  gem 'rspec-retry', '~> 0.5.0'
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do
+  gem 'jazz_fingers'
   gem 'byebug', '~> 9.0.5'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'rubocop', '~> 0.42.0'
   gem 'mailcatcher', '~> 0.6.4'
   gem "codeclimate-test-reporter", '~> 0.6.0', require: false
+  gem 'parallel_tests', '~> 2.7.1'
 end

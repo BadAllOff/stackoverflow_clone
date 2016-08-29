@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # gives ability to use flash helper methods
   add_flash_types :success, :error
   # TODO: delete success and error later
-   Responders::FlashResponder.flash_keys = [:success, :error]
+  Responders::FlashResponder.flash_keys = [:success, :error]
 
   protected
 

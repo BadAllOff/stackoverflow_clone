@@ -3,7 +3,7 @@ div class='question_container' id="question-#{@question.id}" data-question_id="#
     = @question.title
   hr.colorgraph
   div.col-xs-2 id='question'
-    ul.list-group =render partial: 'votes/vote_buttons', locals: {votable: @question}
+    ul.list-group =render partial: 'votes/vote_buttons', locals: { votable: @question }
     div.list-group
       - if can? :subscribe, @question
         - if current_user.subscribed?(@question)
@@ -28,4 +28,4 @@ div class='question_container' id="question-#{@question.id}" data-question_id="#
             = icon('pencil')
             '  Edit question
         div class="form_for_question-#{@question.id} top-buffer"
-    = render partial: 'comments/show', locals: {commentable: @question}
+    = render partial: 'comments/show', locals: { commentable: @question }

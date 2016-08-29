@@ -5,8 +5,8 @@ feature 'Update question attachments', "
   I'd like to be able to update attached files
 " do
 
-  given(:user) { create(:user) }
-  given(:another_user) { create(:user) }
+  given!(:user) { create(:user) }
+  given!(:another_user) { create(:user) }
   given!(:question) { create(:question, user: user) }
   given!(:attachment) { create(:attachment, attachable: question) }
 

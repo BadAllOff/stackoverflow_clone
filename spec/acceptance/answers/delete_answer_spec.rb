@@ -6,9 +6,9 @@ feature 'Delete Answer', '
         I want be able delete answer
   ' do
 
-  given(:user)          { create(:user) }
+  given!(:user)          { create(:user) }
   given(:another_user)  { create(:user) }
-  given(:question)      { create(:question, user: user) }
+  given!(:question)      { create(:question, user: user) }
   given!(:answer)       { create(:answer, question: question, user: user) }
 
   describe 'Authenticated user' do

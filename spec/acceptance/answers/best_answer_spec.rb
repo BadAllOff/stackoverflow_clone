@@ -6,9 +6,9 @@ feature 'Best Answer', '
         I want be able vote for answer
   ' do
 
-  given(:user) { create(:user) }
-  given(:another_user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  given!(:user) { create(:user) }
+  given!(:another_user) { create(:user) }
+  given!(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
   given!(:another_answer) { create(:answer, question: question, user: user) }
 

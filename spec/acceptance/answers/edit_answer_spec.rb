@@ -6,18 +6,32 @@ feature 'Edit Answer', '
         I want be able edit my answer
   ' do
 
-  given(:user) { create(:user) }
+  given!(:user) { create(:user) }
   given(:another_user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  given!(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
   describe 'Authenticated user' do
     context 'operates with his own answer' do
-      before do
-        sign_in user
-        visit question_path(question)
-      end
       context 'can edit answer' do
+        before do
+          sign_in user
+          visit question_path(question)
+        end
+
+        # Works ok -just FAILS ALWAYS in test.... stupid AR
+        scenario '- with invalid attributes', js: true do
+          click_on 'Edit answer'
+
+          within(".form_for_answer-#{answer.id}") do
+            fill_in 'Answer body', with: nil
+            click_on 'Update Answer'
+          end
+
+          expect(current_path).to eq question_path(question)
+          expect(answer.body).to eq answer.body
+        end
+
         scenario '- can see "Edit answer" button' do
           expect(page).to have_css('.answer_control_btns')
           within('.answer_control_btns div.btn-group') { expect(page).to have_selector(:link_or_button, 'Edit answer') }
@@ -34,17 +48,6 @@ feature 'Edit Answer', '
           expect(page).to have_content('Edited answer body')
         end
 
-        scenario '- with invalid attributes', js: true do
-          click_on 'Edit answer'
-
-          within(".form_for_answer-#{answer.id}") do
-            fill_in 'Answer body', with: nil
-            click_on 'Update Answer'
-          end
-
-          expect(current_path).to eq question_path(question)
-          expect(answer.body).to eq answer.body
-        end
       end
     end
 

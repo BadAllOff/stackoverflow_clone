@@ -1,7 +1,15 @@
 scope groups: [:specs]
 
+rspec_options = {
+    cmd: "bundle exec rspec",
+    run_all: {
+        cmd: "bundle exec parallel_rspec -o '",
+        cmd_additional_args: "'"
+    }
+}
+
 group 'specs' do
-  guard :rspec, cmd: "bundle exec rspec" do
+  guard :rspec, rspec_options do
     require "guard/rspec/dsl"
     dsl = Guard::RSpec::Dsl.new(self)
 
