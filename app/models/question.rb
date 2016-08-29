@@ -11,6 +11,8 @@
 #
 
 class Question < ActiveRecord::Base
+  default_scope -> { order(created_at: :desc) }
+
   include Attachable
   include Votable
   include Commentable
@@ -21,5 +23,4 @@ class Question < ActiveRecord::Base
 
   validates :title, :body, :user, presence: true
 
-  default_scope -> { order(created_at: :desc) }
 end

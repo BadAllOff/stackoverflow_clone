@@ -22,11 +22,6 @@
 class User < ActiveRecord::Base
   include Omniauthable
   include UserVotable
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,  omniauth_providers: [:github, :facebook, :twitter, :vkontakte]
-
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -41,6 +36,11 @@ class User < ActiveRecord::Base
                 with: /\A[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)?\z/,
                 message: 'only allows letters and 1 space between'
             }
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,  omniauth_providers: [:github, :facebook, :twitter, :vkontakte]
 
   def author_of?(object)
     id == object.user_id

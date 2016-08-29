@@ -12,6 +12,8 @@
 #
 
 class Answer < ActiveRecord::Base
+  default_scope -> { order(best_answer: :desc).order(created_at: :desc) }
+
   include Attachable
   include Votable
   include Commentable
@@ -23,7 +25,6 @@ class Answer < ActiveRecord::Base
 
   after_create :notify_subscribers
 
-  default_scope -> { order(best_answer: :desc).order(created_at: :desc) }
 
   def set_best
     ActiveRecord::Base.transaction do
