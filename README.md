@@ -113,10 +113,17 @@
 - DB servers
     - pgPool
 
+Additionally used gems:
+- Guard
+- Parralel tests
+- High Voltage
+- Jazz Fingers
+- Rspec::Retry
+- Nyan Cat (<3)
 
--------------------------------------------
-<!--* Ruby version-->
-<!--- 2.3.1-->
+----------------------
+* Ruby version
+- 2.3.1
 
 <!--* System dependencies-->
 
