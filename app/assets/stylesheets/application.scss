@@ -52,6 +52,7 @@ div[class^='form_for_answer-'], div[class*=' form_for_answer-']{
 .field_with_errors {
   @extend .form-group;
   @extend .has-error;
+  margin-bottom: 0px;
 }
 
 .top-buffer { margin-top:20px; }
