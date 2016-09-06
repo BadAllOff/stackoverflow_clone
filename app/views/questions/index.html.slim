@@ -8,12 +8,15 @@ hr.colorgraph
     - if @questions
        - @questions.each do |question|
         .media
-          .media-left
-            = icon('question', class: 'fa-3x')
+          .media-left.text-center.col-xs-1
+            div class=((question.votes.rating < 0) ? 'text-danger' : 'text-primary')
+              = question.votes.rating
+              '
+              = icon('star')
             - if can? :crud, question
               =link_to question_path(question),
                        method: :delete,
-                       class: 'btn btn-xs btn-danger',
+                       class: 'btn btn-xs btn-block btn-danger',
                        data: {confirm: "Are you sure?"}
                 = icon('trash')
           .media-body
