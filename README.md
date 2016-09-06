@@ -4,8 +4,6 @@
 
 [Link to working project on Heroku (needs some awesome styling :D)](https://stack-over-pillow.herokuapp.com/)
 
-## README
-
 ### Professional Ruby on Rails Development.
 
 #### Module 1: Development processi
