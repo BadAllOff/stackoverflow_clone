@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 4.2.10'
 
 gem 'sprockets', '3.6.3'
 gem 'pg', '~> 0.15'
