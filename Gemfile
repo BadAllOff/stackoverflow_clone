@@ -85,7 +85,7 @@ group :test do
   gem 'fuubar', '~> 2.1.1'
   gem 'json_spec', '~> 1.1.4'
   gem 'nyan-cat-formatter'
-  gem 'rspec-retry', '~> 0.5.0'
+  gem 'rspec-retry', '~> 0.6.0'
   gem 'simplecov', :require => false
 end
 
@@ -94,7 +94,7 @@ group :development, :test do
   gem 'byebug', '~> 9.0.5'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.7.0'
-  gem 'rubocop', '~> 0.42.0'
+  gem 'rubocop', '~> 0.57.0'
   gem 'mailcatcher', '~> 0.6.4'
   gem "codeclimate-test-reporter", '~> 0.6.0', require: false
   gem 'parallel_tests', '~> 2.7.1'
