@@ -98,6 +98,6 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'rubocop', '~> 0.57.0'
   gem 'mailcatcher', '~> 0.6.4'
-  gem "codeclimate-test-reporter", '~> 0.6.0', require: false
+  gem 'simplecov', require: false, group: :test
   gem 'parallel_tests', '~> 2.21.3'
 end

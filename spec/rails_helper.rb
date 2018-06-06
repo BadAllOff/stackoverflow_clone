@@ -1,4 +1,5 @@
-require 'codeclimate-test-reporter'
+require 'simplecov'
+SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -11,7 +12,6 @@ require 'devise'
 require 'cancan/matchers'
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
-CodeClimate::TestReporter.start
 
 require 'bundler/setup'
 ::Bundler.require(:default, :test)
