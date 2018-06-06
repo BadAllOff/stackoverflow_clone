@@ -11,7 +11,7 @@
 #  best_answer :boolean          default(FALSE)
 #
 
-class Answer < ActiveRecord::Base
+class Answer < ApplicationRecord
   default_scope -> { order(best_answer: :desc).order(created_at: :desc) }
 
   include Attachable

@@ -11,7 +11,7 @@
 #  votable_id   :integer
 #
 
-class Vote < ActiveRecord::Base
+class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :votable, polymorphic: true, touch: true
 

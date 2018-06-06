@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class Authentication < ActiveRecord::Base
+class Authentication < ApplicationRecord
   belongs_to :user
   validates :provider, :uid, presence: true
 end

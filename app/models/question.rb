@@ -10,7 +10,7 @@
 #  user_id    :integer
 #
 
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
 
   include Attachable

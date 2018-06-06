@@ -11,7 +11,7 @@
 #  user_id          :integer
 #
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   default_scope -> { order(id: :asc) }
 
   belongs_to :user

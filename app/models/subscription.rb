@@ -9,7 +9,7 @@
 #  question_id :integer
 #
 
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :question, touch: true
 

@@ -19,7 +19,7 @@
 #  admin                  :boolean          default(FALSE)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Omniauthable
   include UserVotable
 
