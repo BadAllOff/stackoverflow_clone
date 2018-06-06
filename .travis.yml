@@ -11,11 +11,12 @@ addons:
   postgresql: "9.3"
   apt:
     sources:
-      - ubuntu-sdk-team
+      - ubuntu-sdk-teamac
     packages:
       - libqt4-dev
       - libqtwebkit-dev
       - xvfb
+      - sphinxsearch
 
 branches:
   only:
@@ -44,6 +45,9 @@ before_script:
   - 'bundle exec rackup private_pub.ru -s thin -E production &'
   # Ждем, пока PrivatePub проинициализируется
   - sleep 3
+  - sudo add-apt-repository ppa:builds/sphinxsearch-rel22 -y
+  - sudo apt-get update
+  - sudo apt-get install sphinxsearch
 
 script:
   - DISPLAY=localhost:1.0 xvfb-run bundle exec rspec
