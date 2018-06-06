@@ -593,7 +593,7 @@ DEPENDENCIES
   database_cleaner (~> 1.7.0)
   derailed (~> 0.1.0)
   devise (~> 3.5.5)
-  doorkeeper (~> 4.2)
+  doorkeeper (~> 4.3.2)
   dotenv (~> 1.0.2)
   dotenv-deployment
   factory_girl_rails (~> 4.7.0)
