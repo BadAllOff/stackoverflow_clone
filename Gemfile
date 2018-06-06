@@ -78,9 +78,11 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.7.0'
-  gem 'capybara-webkit', '~> 1.11.1'
+  # follow master branch to silence deprecation
+  # DEPRECATED: Capybara::Helpers::normalize_whitespace is deprecated, please update your driver
+  gem 'capybara-webkit', :github => 'thoughtbot/capybara-webkit', :branch => 'master'#, '~> 1.15.0'
   gem 'shoulda-matchers', '~> 3.1.1'
-  gem 'capybara', '~> 2.7.1'
+  gem 'capybara', '~> 3.2.1'
   gem 'launchy', '~> 2.4.3'
   gem 'fuubar', '~> 2.1.1'
   gem 'json_spec', '~> 1.1.4'
