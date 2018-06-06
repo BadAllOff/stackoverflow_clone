@@ -135,7 +135,7 @@ GEM
       unicode_utils (~> 1.4)
     crass (1.0.4)
     daemons (1.2.6)
-    database_cleaner (1.5.3)
+    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     derailed (0.1.0)
       derailed_benchmarks
@@ -582,7 +582,7 @@ DEPENDENCIES
   cocoon (~> 1.2.9)
   codeclimate-test-reporter (~> 0.6.0)
   coffee-rails (~> 4.1.0)
-  database_cleaner (~> 1.5.3)
+  database_cleaner (~> 1.7.0)
   derailed (~> 0.1.0)
   devise (~> 3.5.5)
   doorkeeper (~> 4.2)

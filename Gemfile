@@ -77,7 +77,7 @@ group :development do
 end
 
 group :test do
-  gem 'database_cleaner', '~> 1.5.3'
+  gem 'database_cleaner', '~> 1.7.0'
   gem 'capybara-webkit', '~> 1.11.1'
   gem 'shoulda-matchers', '~> 3.1.1'
   gem 'capybara', '~> 2.7.1'
