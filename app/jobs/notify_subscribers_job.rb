@@ -1,4 +1,4 @@
-class NotifySubscribersJob < ActiveJob::Base
+class NotifySubscribersJob < ApplicationJob
   queue_as :default
 
   def perform(answer)

@@ -1,4 +1,4 @@
-class DailyDigestJob < ActiveJob::Base
+class DailyDigestJob < ApplicationJob
   queue_as :default
 
   def perform
